@@ -2,7 +2,7 @@
 *3D Reconstruction Framework from Multi-View Images*
 <hr/>
 
-** Betreuung: **
+**Betreuung:**
 
 Bastian Erdnüß - <bastien.erdnuess@iosb.fraunhofer.de> <br>
 Boitumelo Ruf - <boitumelo.ruf@iosb.fraunhofer.de> <br>
