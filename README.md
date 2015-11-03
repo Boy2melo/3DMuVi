@@ -9,6 +9,12 @@ Boitumelo Ruf - <boitumelo.ruf@iosb.fraunhofer.de> <br>
 Fraunhofer Institut für Optronik, Systemtechnik und Bildauswertung (IOSB) - Abteilung Videoauswertesysteme (VID)
 <hr/>
 
+## \*\*\* NEWS \*\*\* ##
+
+- Zur Terminfindung für das erste Treffen bitte in Doodle eintragen: http://doodle.com/poll/xs6rtf234xue76g5 <br/>Termin wird dann hier bekannt gegeben.
+
+<hr/>
+
 ## Kurzbeschriebung ##
 In der bildbasierten 3D-Datenverarbeitung werden aus 2D-Bildmaterial (Foto/Video) 3D-Informationen gewonnen und verarbeitet. Hierzu soll eine intuitiv bedienbare GUI (C++/Qt5) mit Plugin System erstellt werden, die es erlaubt, die Zusammenarbeit verschiedener Algorithmen untereinander zu evaluieren.
 <hr/>
