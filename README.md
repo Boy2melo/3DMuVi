@@ -11,7 +11,8 @@ Fraunhofer Institut für Optronik, Systemtechnik und Bildauswertung (IOSB) - Abt
 
 ## \*\*\* NEWS \*\*\* ##
 
-- Zur Terminfindung für das erste Treffen bitte in Doodle eintragen: http://doodle.com/poll/xs6rtf234xue76g5 <br/>Termin wird dann hier bekannt gegeben.
+- 04.11.2015: Das erste Treffen findet am Donnerstag (05.11.2015) um 9:00 Uhr am Fraunhofer IOSB (Fraunhoferstr. 1) statt. BITTE bringen Sie ihre Ausweise mit und melden Sie sich bei Ankunft an der Pforte. Sie werden dann Besucherausweise erhalten.<br/><br/>
+- 03.11.2015: Zur Terminfindung für das erste Treffen bitte in Doodle eintragen: http://doodle.com/poll/xs6rtf234xue76g5 <br/>Termin wird dann hier bekannt gegeben.
 
 <hr/>
 
