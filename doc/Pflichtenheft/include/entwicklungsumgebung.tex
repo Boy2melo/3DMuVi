@@ -2,19 +2,30 @@
 
 \section{Allgemein}
 	\begin{itemize}
-		\item \LaTeX
-		\item Versionskontrolle (Git)
+		\item \LaTeX\ zur Erstellung von Dokumenten
+		\item TeXstudio zum Schreiben der \LaTeX-Dokumente (Teammitglieder können, falls gewünscht, davon abweichen, da die \LaTeX-Datei unabhängig von dem Editor ist.)
+		\item Git als Versionskontrolle
+		\item Der aktuelle Entwicklungsstand ist auf github abrufbar
+		\newline(\href{https://github.com/boitumeloruf/3DMuVi}{https://github.com/boitumeloruf/3DMuVi})
+		\item Das Fraunhofer-Institut stellt uns einen FTP-Server bereitet, auf dem wir nicht-öffentliche Dateien austauschen können.
 	\end{itemize}
 \section{Implementierung}
+	Anwendungen zur Umsetzung des Projektes:
 	\begin{itemize}
-		\item Qt Creator
-		\item ...
+		\item Die Anwendung wird in der Sprache C++ umgesetzt. Wenn sinnvoll, sind Funktionen aus C++11 und C++14 zu verwenden.
+		\item Als Compiler wird Clang verwendet um die Entwicklung durch bessere Fehlermeldungen des Compilers zu erleichtern.
+		\item Als integrierte Entwicklungsumgebung ist Qt Creator zu verwenden. Auch darin integrierte Tools, wie bspw. Qt Designer zur grafischen Erstellung von Oberflächen, soll verwendet werden.
+	\end{itemize}
+\section{Hilfsbibliotheken}
+	Hilfsbibliotheken dienen der einfacheren Implementierung durch die Nutzung von bereits durch Dritte implementierte Funktionen.
+	\begin{itemize}
+		\item Qt soll zur Umsetzung der grafischen Benutzeroberfläche verwendet werden. Dabei soll Qt Widgets verwendet werden, um eine native Darstellung der Oberfläche zu erreichen. Außerdem kann Qt für Funktionen genutzt werden, die dort aber nicht in C++ enthalten sind.
+		\item PCL enthält Funktionen zur 3D Rekonstruktion von Bildern und Anzeige der Ergebnisse. Außerdem sind in PCL bereits Datenstrukturen definiert wie sie für den Austausch von Daten mit Plug-Ins benötigt werden.
 	\end{itemize}
 \section{Validierung}
+	Tools zur Überprüfung auf vorhersehbare Fehler:
 	\begin{itemize}
-		\item QtUnit
+		\item Qt Test für automatisierte Tests von einzelnen Einheiten der Anwendung.
 	\end{itemize}
-\section{???}
-	\begin{itemize}
-		\item Bla
-	\end{itemize}
+\section{Erstellung von Grafiken}
+	Anwendungen um Grafiken erstellen zu können werden individuell von dem erstellenden Teammitglied gewählt. Einzige Anforderung dabei ist, dass es eine Datei exportieren kann, die in \LaTeX\ eingebunden werden kann.
