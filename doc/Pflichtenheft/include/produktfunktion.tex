@@ -3,20 +3,123 @@
 Die Beschreibung der Funktionalität gliedert sich in Grundfunktionen und optionale Funktionen.
 
 \section{Grundfunktionen}
-\subsection{Funktional}
-\begin{enumerate}[ align=left, label={\textbf{\textbackslash F10\arabic*0\textbackslash}} ]
-	\item \textbf{Auswahl der Algorithmen} 
-	Blablabla.
+\section{Funktional}
+\subsection{Obligatorische Funktionen}
+\textbf{Modul: Workflow}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash FM1\arabic*0\textbackslash}} ]
+	\item Standardisierter 4-Phase-Workflow bestehend aus:
+\begin{enumerate}[ align=left, label={\textbf{\arabic*}} ]
+	\item [Einlesen von Bildern]
+	\item Feature Extraktion / Matching
+	\item Posenschätzung
+	\item Tiefenschätzung
+	\item 3D Fusion
+	\item [Fertiges Modell]
+	\end{enumerate}
+	sollte ausgewertet werden.
+	\item Auswahl verschiedener Algorithmen für jede Phase
+\end{enumerate}
+\textbf{Modul: I/O}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash FM2\arabic*0\textbackslash}} ]
+	\item Einlesen und Übergabe von Einzelbildern
+	\item Abspeicherung der (Zwischen-) Ergebnisse
+	\item Speicherort in verschiedenen Verzeichnissen: Ein Hauptverzeichnis, darunter für jede Phase
+	ein Unterverzeichnis (Auswählbar)
+\end{enumerate}
+\textbf{Modul: Visualisierung}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash FM3\arabic*0\textbackslash}} ]
+	\item Visualisierung der (Zwischen-) Ergebnisse
+	\item Einzeichnen der Features in Einzelbildern
+	\item Einzeichnen der Kamerposen und -orientierungen im 3D Modell (Kamerapyramide)
+	\item Anzeigen der Tiefenkarten
+	\item Anzeigen des 3D-Modells (PCL)
+\end{enumerate}
+\textbf{Modul: Logger}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash FM4\arabic*0\textbackslash}} ]
+	\item Aufzeichnung, Anzeige und Abspeichern eines Logs zur Nachverfolgung von
+	\begin{enumerate}[ align=left, label={\textbf{\arabic*}} ]
+		\item Allgemeine Informationen
+		\item Warnungen
+		\item Fehlermeldungen
+		\item Debugging
+	\end{enumerate}
+\end{enumerate}
+\textbf{Modul: Einstellung}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash FM5\arabic*0\textbackslash}} ]
+	\item Abspeichern und Laden von Einstellungen der einzelnen Verfahren
+	\item Abspeichern und Laden von globale Einstellungen
+\end{enumerate}
+\textbf{Modul: Interaktion}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash FM6\arabic*0\textbackslash}} ]
+	\item Starten und Stoppen der Verarbeitung
+	\item Stopp => keine Weitergabe der Daten, aktuelle Verarbeitung läuft zu Ende.
+	\item Globaler Arbeitsindikator
 \end{enumerate}	
 
-\subsection{Nichtunktionalität}
-\begin{enumerate}[ align=left, label={\textbf{\textbackslash F20\arabic*0\textbackslash}}]
-	\item \textbf{Blub}
-	Blaaa
+\subsection{Optionale Funktionen}
+
+\textbf{Modul: Visualisierung}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash FK1\arabic*0\textbackslash}} ]
+ \item Manipulation und Interaktion mit (Zwischen-) Ergebnissen, wie beispielsweise
+Ein-, Ausblenden und Entfernen einzelner Punkte/Kameras/Matches, sollte gegeben sein
+ \item Schalter zur Auswahl der Darstellung des 3D-Modells
+Point Cloud, Mesh, Texturiert
+Auch hier: Daten werden geliefert, lediglich Auswahl welche Daten angezeigt werden
+\end{enumerate}
+\textbf{Modul: Workflows}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash FK2\arabic*0\textbackslash}} ]
+ \item Weitere (feste) Workflows
+ \item Variable Workflow-Definition als Plugin
+ \item Abspeichern und Laden der Workflow-Konfiguration
+\end{enumerate}
+\textbf{Modul: Interaktion}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash FK3\arabic*0\textbackslash}} ]
+\item Starten einzelner Schritte,
+ Laden vorhergegangener (Zwischen-) Ergebnisse
+\item Automatisierte, wiederholte Ausführung von einzelnen Algorithmen auf verschiedene Datensätze
+\item Auswahl der Workflow-Konfiguration und Verzeichnis mit Eingangsdaten durch Command-Line-Optionen beim Programmstart (versteckte Ausführung)
+\item Daten neu Sortieren / Ausführung auf Untergruppe der Daten
+\item Arbeitsindikator für jeden Schritt
+\end{enumerate}
+\textbf{Modul: Einstellung}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash FK4\arabic*0\textbackslash}} ]
+\item Abspeichern und Laden von globale Einstellungen
 \end{enumerate}
 
-\section{Optionale Funktionen}
-\begin{enumerate}[ align=left, label={\textbf{\textbackslash F30\arabic*0\textbackslash}}]
-	\item \textbf{???}
-	Blaaa
+\subsection{Nichtunktionalität}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash NF1\arabic*0\textbackslash}} ]
+\item Entwicklung für Linux aber möglichst Plattform-unabhängig (Qt)
+\item Responsive Oberfläche während der Ausführung
+\item Läuft auf einzelnen Rechnern
+\item Zielgruppe sind durchschnittliche PC-Benutzer, die sich mit den Algorithmen und den damit
+verbundenen Workflows auskennen
+\item Folgen der Coding Conventions der Abteilung VID (siehe Anhang)
+\item Alle Namen und Kommentare im Quellcode in Englisch
+\item Quellcode Dokumentation in Doxygen
+\item Methoden und Klassen eine Dokumentation
+\item Gui-Sprache: Englisch
+\end{enumerate}
+
+
+\subsection{Abgrenzungskriterien}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash AK1\arabic*0\textbackslash}}]
+\item Videos liegen als sortierte Einzelbilder vor
+\item Algorithmen müssen nicht Implementiert werden
+(Bereitstellung von Schnittstellen zur Einbindung)
+\item Eine Änderung der Eingabe erfordert eine erneute Ausführung der Algorithmen
+\end{enumerate}
+
+\subsection{Daten}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash D1\arabic*0\textbackslash}}]
+\item Parameter für Algorithmen
+\item Parameter der Workflows
+\item (Zwischen-) Ergebnisse zum Austausch zwischen den Algorithmen (Datenaustausch)
+\item (Zwischen-) Ergebnisse zum Visualisieren und Abspeichern
+\end{enumerate}
+
+\subsection{Schnittstellen}
+\begin{enumerate}[ align=left, label={\textbf{\textbackslash S1\arabic*0\textbackslash}}]
+\item (Funktionale-) Schnittstellen zum Aufrufen und Datenaustausch der Algorithmen
+\item  Schnittstelle zum Einstellen der Algorithmen
+Angabe der Config Datei und direkte Angabe eines Parameter-Trees
 \end{enumerate}
