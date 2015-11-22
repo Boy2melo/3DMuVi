@@ -2,22 +2,79 @@
 % o Musskriterien: Mindestanforderungen. 
 % o Kannkriterien: Zusätzliche Funktionalität. 
 % o Abgrenzungskriterien: Was gehört nicht zum Funktionsumfang? (vgl. auch Produkteinsatz) 
+Die Zielbestimmung definiert die Kriterien des Programms. Zum einen die Musskriterien, also die Funktionen die das Programm mindestens bereit stellen muss und zum anderen die Kannkriterien also mit welchen Funktionen das Programm sinnvoll erweitert werden könnte. Zusätzlich wird in den Abgrenzungskriterien explizit ausgeschlossen was das Programm nicht leisten muss. Die Muss- und Kannkriterien untergliedern sich jeweils in sechs logische Module des Programms. Bei diesen Modulen handelt es sich um:
+\begin{enumerate}
+	\item \textbf{Workflow} Abstrahiert die Anordnung der Algorithmen.
+	\item \textbf{Input/Output} Eingabe, Übergabe, Speichern und Laden von Daten.
+	\item \textbf{Visualisierung} Art der Darstellung der Ergebnisse.
+	\item \textbf{Logger} Aufzeichnen von relevanten Ereignissen und Meldungen der Algorithmen.
+	\item \textbf{Einstellungen} Konfigurationsmöglichkeiten der Software.
+	\item \textbf{Interaktion} Bedienung und Rückmeldung des Programms.
+\end{enumerate}
 
 \section{Musskriterien}
+\subsection{Modul: Workflow}
 \begin{itemize}
-	\item Standard 3-Workflow(Posenbestimmung, Tiefenschätzung, Fusion), mit verschiedenen Algorithmen pro Schritt
-	\item Übergabe von Einzelbildern
-	\item ...
+	\item Die Software soll einen standardisierten 4-Phase-Workflow bereitstellen, bestehend aus:
+	\begin{enumerate}
+		\item Feature Extraktion / Matching
+		\item Posenschätzung
+		\item Tiefenschätzung
+		\item 3D Fusion
+	\end{enumerate}
+	\item Für jede Phase dieses Workflows sollen verschiedene Algorithmen ausgewählt werden können.
+\end{itemize}
+\subsection{Modul: Input/Output}
+\begin{itemize}
+	\item Das Programm soll eine Menge von Einzelbildern einlesen und diese an die Algorithmen zur Bearbeitung übergeben können.
+	\item Ergebnisse bzw. Zwischenergebnisse sollen gespeichert werden können.
+\end{itemize}
+\subsection{Modul: Visualisierung}
+Darstellung der Ergebnisse:
+\begin{itemize}
+	\item Features die durch die Algorithmen erkannt wurden, sollen in Einzelbildern eingezeichnet werden.
+	\item Kameraposen und -orientierungen sollen im 3D Modell als Kamerapyramide eingezeichnet werden .
+	\item Anzeigen der Tiefenkarten
+	\item Anzeige des 3D Modells als Piont Cloud.
+\end{itemize}
+\subsection{Modul: Logger}
+Aufzeichnen, Anzeigen und Abspeichern von Informationen, Warnungen, Fehlern und Debugmeldungen die von den Algorithmen ausgeworfen werden.
+\subsection{Modul: Einstellungen}
+Einstellungen der einzelnen Verfahren können abgespeichert und geladen werden.
+\subsection{Modul: Interaktion}
+\begin{itemize}
+	\item Der Workflow soll gestartet und gestoppt werden können.\\Das Stoppen der Verarbeitung bewirkt, dass keine Daten weitergegeben werden und lediglich die restliche Berechnung der Workflowstufe ausgeführt wird.
+	\item Ein globaler Arbeitsindikator soll die andauernde Verarbeitung der Verfahren anzeigen.
 \end{itemize}
 
 \section{Kannkriterien}
+\subsection{Modul: Workflow}
 \begin{itemize}
-	\item fünf verschiedene Workflows
-	\item ...
+	\item Es sollen mehrere fest implementierte Workflows zu Verfügung stehen.
+	\item Workflows können variable erstellt und verändert werden.
+	\item Abspeichern und laden der Workflow-Konfiguration.
+\end{itemize}
+\subsection{Modul: Visualisierung}
+\begin{itemize}
+	\item Manipulation und Interaktion mit (Zwischen-) Ergebnisse.\\(z.B. Ein-, Ausblenden und Entfernen einzelner Punkte, Kameras, Matches etc.).
+	\item Darstellung des 3D Modells in Form von Point Cloud, Mesh und Texturiert.
+\end{itemize}
+\subsection{Modul: Einstellungen}
+Abspeichern und laden von globalen Einstellungen.
+\subsection{Modul: Interaktion}
+\begin{itemize}
+	\item Einzelne Schritte sollen gestartet werden können.
+	\item Laden vorhergegangener (Zwischen-) Ergebnisse.
+	\item Automatisierte wiederholte Ausführung von einzelnen Algorithmen auf verschiedenen Datensätze.
+	\item Auswahl der Workflow-Konfiguration und Verzeichnis mit Eingangsdaten durch Commandline-Optionen beim Programmstart.
+	\item Daten neu Sortieren / Ausführen auf Untergruppen der Daten.
+	\item Arbeitsindikatoren für jeden einzelnen Verarbeitungsschritt.
 \end{itemize}
 
 \section{Abgrenzungskriterien}
 \begin{itemize}
-	\item Algorithmen müssen nicht implementiert, nur eingebunden werden
-	\item ...
+	\item Videos liegen als sortierte Einzelbilder vor.
+	\item Algorithmen müssen nicht implementiert werden.
+	\item Eine Änderung der Eingabe erfordert eine erneute Ausführung der Algorithmen.
+	\item Die Benutzeroberfläche beschränkt sich auf englisch Sprache.
 \end{itemize}
