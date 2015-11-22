@@ -1,9 +1,109 @@
 % Testfälle  für  die  einzelnen  Produktfunktionen,  die  alle  abgedeckt  sein müssen. Testszenarien für typische Anwendungsszenarien.
+Die Testfälle und Testszenarien dienen der Überprüfung der Software bezüglich ihrer Funktionalität und Konsistenz. Testfälle unterscheiden sich von den Testszenarien darin, dass diese automatisierte, somit atomare Funktionstests darstellen, während Testszenarien manuelle Testanweisungen sind, die durch eine ungeschulte Testperson durchgeführt werden sollen.
 
 \section{Testfälle}
-	\begin{enumerate}[align=left, leftmargin=4em, label={\textbf{\textbackslash T10\arabic*0\textbackslash}} ]
-		\item Start des Programms
-		\item ...
+Die Testfälle sind alle Automatisiert und werden mit der in Qt integrierten Test-Suite durchgeführt.
+\subsection{Funktionstests}
+Zuerst wird jede Klasse einzeln bearbeitet. Jede Öffentliche Methode wird mit zwei Testfällen getestet. Der erste Testfall testet das Verhalten einer Funktion im normalen Umfeld mit gewöhnlichen Parametern. Dieser Test dient dazu, Fehler in Berechnungsvorschriften und Implementierungen zu finden. Der zweite Testfall ruft die Funktion mit ungewöhnlichen Parametern auf, eventuell auch mit falschen Datentypen. Diese Tests dienen dazu, die Robustheit der Funktionen zu garantieren. Die Argumente, die an eine Funktion übergeben werden, sind so weit wie möglich Zufällig verteilt zu wählen. Für das nachvollziehen von Fehlern werden die getesteten Parameter zusätzlich zu der Fehlerbeschreibung ausgegeben.
+\subsection{Komponententests}
+Komponententests testen das Verhalten eines isolierten Moduls der Anwendung. Viele der Tests lassen sich allerdings erst nach der Entwurfsphase festlegen, weshalb dieser Abschnitt bis zum Vollständigen Entwurf der Anwendung noch nicht vollständig sein wird.
+
+	\begin{enumerate}[align=left, leftmargin=4em, label={\textbf{\textbackslash T2.\arabic*0\textbackslash}} ]
+		\item \begin{tabular}{|c|c|}
+			\hline Modul & Funktion \\ 
+			\hline I\textbackslash O & FM210 \\ 
+			\hline 
+		\end{tabular}\\ 
+		\subitem \textbf{Ziel:}\\ Testen der Funktionalität Laden und Weitergeben von Eingabebildern.
+		\subitem \textbf{Dummies:} \begin{itemize}
+			\item Algorithmus, der die empfangenen Bilder an den Test meldet.
+			\item Interaktion, die das Modul mit vordefinierten Bildern versorgt.
+		\end{itemize}
+		\subitem \textbf{Erwartetes Verhalten:}\\
+		Die vom Algorithmus gemeldeten Bilder entsprechen den Bildern, die dem Modul übergeben wurden.
+		
+		\item \begin{tabular}{|c|c|}
+			\hline Modul & Funktion \\
+			\hline I\textbackslash O & FM220 \& FM230 \\
+			\hline
+		\end{tabular}\\
+		\subitem \textbf{Ziel:}\\ Testen der Fähigkeit, Zwischenergebnisse strukturiert abzuspeichern.
+		\subitem \textbf{Dummies:} \begin{itemize}
+			\item Algorithmen, die Zufällig verteilte Zwischenergebnisse liefern, deren Art und Typ nicht weiter Definiert ist.
+		\end{itemize}
+		\subitem \textbf{Erwartetes Verhalten:}\\
+		Es wird eine Ordnerstruktur in dem vom Test vorgegebenen Verzeichnis angelegt mit den gespeicherten Daten.
+		\item \begin{tabular}{|c|c|}
+			\hline Modul & Funktion \\
+			\hline Logger & FM410 \\
+			\hline
+		\end{tabular}\\
+		\subitem \textbf{Ziel:} \\ Testen der Logfunktionalität
+		\subitem \textbf{Dummies:} \begin{itemize}
+			\item Generator von Lognachrichten
+		\end{itemize}
+		\subitem \textbf{Erwartetes Verhalten:}\\
+		Nach dem Anlegen der Logs und dem auswählen der einzelnen Loglevel werden nur Nachrichten des gewählten Loglevels zurückgegeben.
+		\item \begin{tabular}{|c|c|}
+			\hline Modul & Funktion \\
+			\hline Logger & FM410 \\
+			\hline
+		\end{tabular}\\
+		\subitem \textbf{Ziel:} \\ Testen der Speicherfunktionalität
+		\subitem \textbf{Dummies:} \begin{itemize}
+			\item Generator von Lognachrichten
+		\end{itemize}
+		\subitem \textbf{Erwartetes Verhalten:}\\
+		Nach dem Anlegen der Logs und dem Abspeichern wird eine Datei an dem spezifizierten Pfad vorgefunden.
+		\item \begin{tabular}{|c|c|}
+			\hline Modul & Funktion \\
+			\hline Einstellungen & FM510 \\
+			\hline
+		\end{tabular}\\
+		\subitem \textbf{Ziel:} \\ Test der Einstellungen für Algorithmen
+		\subitem \textbf{Dummies:} \begin{itemize}
+			\item Algorithmus, der eine Liste von Einstellungen bereitstellt, welche alle Datentypen abdeckt und bei Variationsmöglichkeiten der Typen bzw. Wertebereiche diese Stichprobenartig vorhanden sind.
+		\end{itemize}
+		\subitem \textbf{Erwartetes Verhalten:}\\
+		Nach dem Abspeichern findet sich eine Datei an dem spezifizierten Pfad. Nach dem Laden dieser Datei enthält ein neu Instantiierter Algorithmus dieselben Einstellungen wie der erste Algorithmus, welcher zur Speicherung verwendet wurde.
+		\item \begin{tabular}{|c|c|}
+			\hline Modul & Funktion \\
+			\hline Einstellungen & FK410 \\
+			\hline
+		\end{tabular}\\
+		\subitem \textbf{Ziel:} \\ Test der Einstellungen für Globale Parameter
+		\subitem \textbf{Dummies:} \begin{itemize}
+			\item Keine
+		\end{itemize}
+		\subitem \textbf{Erwartetes Verhalten:}\\
+		Nach dem Sichern globaler Einstellungen findet sich eine Datei an dem spezifizierten Pfad. Nach dem Lesen dieser Datei in eine neue Einstellungs-Instanz enthält diese dieselben Daten wie die Instanz, die zur Speicherung verwendet wurde.
+		\item \begin{tabular}{|c|c|}
+			\hline Modul & Funktion \\
+			\hline Workflows & FK230 \\
+			\hline
+		\end{tabular}\\
+		\subitem \textbf{Ziel:}\\ Testen des Abspeicherns von Workflow-Konfigurationen
+		\subitem \textbf{Dummies:} \begin{itemize}
+			\item Keine
+		\end{itemize}
+		\subitem \textbf{Erwartetes Verhalten:}\\ Nach dem zufälligen Zusammenbau eines Workflows kann dieser in eine Datei gesichert werden und entspricht nach dem laden dem gesicherten Workflow.
+		\item \begin{tabular}{|c|c|}
+			\hline Modul & Funktion \\
+			\hline Interaktion & FK310 \\
+			\hline
+		\end{tabular}\\
+		\subitem \textbf{Ziel:}\\ Testen des Ladens von Zwischenergebnissen
+		\subitem \textbf{Hinweis:}\\ Wenn die Funktionalität implementiert wird, muss dieser Test mit dem Test \textbackslash T2.20\textbackslash zusammengeführt werden.
+		\subitem \textbf{Dummies (Ergänzung):}\begin{itemize}
+			\item Ein Algorithmus, der die Ausgabe des ersten Algorithmus als Eingabe nimmt und ihre Validität prüft.
+		\end{itemize}
+		\subitem \textbf{Erwartetes Verhalten (Ergänzung):}\\ Nach dem Laden der Zwischenergebnisse kann der zweite Algorithmus die Daten erfolgreich Validieren.
+		\item \begin{tabular}{|c|c|}
+			\hline Modul & Funktion \\
+			\hline Foo & Bar \\
+			\hline
+		\end{tabular}\\
+		\subitem Platzhalter für weitere Komponententests
 	\end{enumerate}
 
 \section{Testszenarien}
