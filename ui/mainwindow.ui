@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -28,6 +28,13 @@
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QListWidget" name="listWidget"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Running...</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="buttonStart">
@@ -234,26 +241,12 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>Finished</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QComboBox" name="comboBox"/>
       </item>
       <item>
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Pose estimation</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>Running...</string>
         </property>
        </widget>
       </item>
@@ -268,26 +261,12 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="label_7">
-        <property name="text">
-         <string>Not started yet</string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QComboBox" name="comboBox_3"/>
       </item>
       <item>
        <widget class="QLabel" name="label_4">
         <property name="text">
          <string>3D fusion</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_8">
-        <property name="text">
-         <string>Not started yet</string>
         </property>
        </widget>
       </item>
@@ -332,12 +311,6 @@
     <addaction name="separator"/>
     <addaction name="actionLoad_images"/>
    </widget>
-   <widget class="QMenu" name="menuSettings">
-    <property name="title">
-     <string>Options</string>
-    </property>
-    <addaction name="actionSettings"/>
-   </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
@@ -345,7 +318,6 @@
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuFile"/>
-   <addaction name="menuSettings"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -372,11 +344,6 @@
   <action name="actionSave_results_As">
    <property name="text">
     <string>Save results As...</string>
-   </property>
-  </action>
-  <action name="actionSettings">
-   <property name="text">
-    <string>Settings...</string>
    </property>
   </action>
   <action name="actionAbout">

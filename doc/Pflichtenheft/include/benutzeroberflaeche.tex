@@ -16,7 +16,7 @@ In diesem Kapitel werden die Anforderungen an die Benutzeroberfläche genannt un
 	\item \textbf{Bilderinput} Über den Eintrag „File → Load images...“ in der Menüleiste können Bilder als Eingabe der Algorithmen ausgewählt werden.
 	\item \textbf{Bildervorschau} \label{B10Bildervorschau} Die Bilder, die als Eingabe für die Algorithmen gewählt worden sind, werden in einer Vorschau als Thumbnails angezeigt. In der Vorschau können einzelne oder mehrere Bilder ausgewählt werden, so dass sie in \ref{B10AnsichtsauswahlFeatures} dargestellt werden.
 	\item \textbf{Starten} \label{B10Starten} Ein Button soll den Start der Ausführung der ausgewählten Algorithmen ermöglichen.
-	\item \textbf{Arbeitsindikator} Pro Algorithmus wird dem Benutzer durch ein Symbol oder einen Text angezeigt, ob der Algorithmus gerade läuft.
+	\item \textbf{Arbeitsindikator} \label{B10Arbeitsindikator} Ein globaler Arbeitsindikator in der Form eines Symbols oder Texts zeigt dem Nutzer an, ob gerade Algorithmen in Ausführung sind.
 	\item \textbf{Stoppen} Über ein Button kann der Nutzer die Ausführung der Algorithmen anhalten.
 	\item \textbf{Ergebnisanzeige} Die Ergebnisse werden nach Möglichkeit zentral und groß dargestellt.
 	\item \textbf{Ansichtsauswahl} Der Nutzer soll zwischen folgenden Ansichten wählen können:
@@ -53,4 +53,6 @@ Hinzugekommen ist:
 			\item \textbf{Textured} stellt das Mesh [\ref{B203DMesh}] inklusive der auf die Oberfläche gezeichneten Texturen da.
 		\end{enumerate}
 	\item \textbf{Mehrere Datensätze} Über eine Liste können mehrere Datensätze innerhalb einer Sitzung genutzt und verwaltet werden. Der Nutzer wird so in die Lage versetzt einen Workflow auf verschiedenen Eingabedaten zu evaluieren, ohne für jeden Test die Daten neu laden zu müssen.
+	\item \textbf{Arbeitsindikator pro Algorithmus} Pro Schritt eines Workflows stellt ein Symbol oder ein Text dar, ob der für den Schritt gewählte Algorithmus gerade ausgeführt wird. Die Implementierung dieses Punktes ersetzt \ref{B10Arbeitsindikator}.
+	\item \textbf{Globale Einstellungen} Über den Menüpunkt „Options → Settings...“ können globale Einstellungen gesetzt werden, falls sich solche im Laufe des Projektes ergeben. Globale Einstellungen sind Einstellungen, die für die gesamte Anwendung gelten und über das Ende der Sitzung gültig bleiben.
 \end{enumerate}
