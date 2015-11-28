@@ -1,10 +1,14 @@
 % Grobe  Architekturbeschreibung  durch  Bausteine/Komponenten  (Kein  detailliertes Klassendiagramm).
 \section{Systemübersicht}
-Die Systemarchitektur wird durch einen Modularen Ansatz umgesetzt.
-Die einzelnen Module sind durch ihre Aufgabenbereiche getrennt.
-Bei den einzelnen Modulen wird intern zwischen Steuerung, Anzeige und Daten aufgeteilt.
-Es wird in folgende 6 Module aufgeteilt:
 
+Dieses Kapitel bietet zunächst eine grobe Übersicht des Systems und der Abgrenzung von Benutzer Algorithmen und Modulen des 3DMuVi-Programms. Außerdem wird die Interaktion der Module durch ein Datenflussdiagramm veranschaulicht. Im Anschluss werden die Anwendungsfälle vorgestellt und mittels eine Sequenzdiagramms visualisiert. Schlussendlich werden Typische Nutzungsabläufe vorgestellt die die Software umsetzen muss.
+\subsection{Architektur}
+
+Aufgrund der Komplexität und Größe, wird das 3DMuVi-Programm nicht durch ein einzelnes Entwurfsmuster wie beispielsweise Modell-View-Controll (MVC) umgesetzt. Stattdessen wird es zunächst in einzelene Module aufgeteilt.
+Durch die einzelnen Module, die aufgabenspezifisch getrennt werden, wird eine bessere Übersicht und Struktur des Programms gewährleistet. Außerdem kann der Arbeitsaufwand somit effektiver aufgeteilt werden.\newline
+Die einzelnen Module werden im Entwurf weiter aufgeteilt. Nach Möglichkeit wird das Entwurfsmuster MVC verwendet.\newline Da 3DMuVi nur ein Framework anbietet, werden zusätzliche Algorithmen benötigt.
+Die benötigten Algorithmen werden durch eine Plugin-Struktur an das Programm gegeben.\newline \newline
+Es wird in folgende 6 Module aufgeteilt:
 \begin{itemize}
 \item Workflow
 \item I/O
@@ -13,11 +17,14 @@ Es wird in folgende 6 Module aufgeteilt:
 \item Einstellungen
 \item Interaktion
 \end{itemize}
-\includegraphics[scale=0.35]{img/Uebersicht.jpg} 
 
-\newpage 
+\subsection{Übersicht}
+Im Folgenden Diagramm wird die Abgrenzung von 3DMuVi, Benutzer und Algorithmen veranschaulicht.
+Der Benutzer liefert die Algorithmen und interagiert jeweils mit den Schnittstellen der einzelnen Modulen.\newline
+\includegraphics[width=1\textwidth]{img/SUebersicht.pdf}
+
 \section{Module}
-Im weiteren folgt eine kurze Definition der Module.
+Im weiteren folgt eine kurze Zusammenfassung der Module.
 
 \subsection{Workflow}
 Das Modul Workflow bietet mindestens einen Workflow an und bündelt alle workflowspezifischen
@@ -42,8 +49,7 @@ Das Modul I/O bietet Funktionen für die Ein- und Ausgabedaten an, inklusive:
 Das Modul Visualisierung bietet Anzeigen der (Zwischen-) Endergebnissen  an, inklusive:
 
 \begin{itemize}
-\item Anzeigen der Ausgabedaten der (Zwischen-) Ergebnisse
-\item optional, Manipulation der Ausgangsdaten der (Zwischen-) Ergebnisse
+\item Anzeigen der Ausgabedaten der (Zwischen-) Ergebniss
 \end{itemize}
 
 \subsection{Logger}
@@ -66,9 +72,9 @@ Das Modul Interaktion behandelt Benutzereingaben innerhalb des Programms, inklus
 
 \begin{itemize}
 \item Starten und Stoppen, Arbeitsindikator 
+\item optional, Manipulation der Ausgangsdaten der (Zwischen-) Ergebnisse
 \end{itemize}
 
-\newpage
 \section{Produktdaten}
 Im folgenden werden alle Daten gelistet, welche abgespeichert werden.
 \subsection{Daten der obligatorischen Funktionen}
@@ -100,31 +106,36 @@ Diese sind nur als grobe Orientierung anzusehen und werden im Entwurf und in der
 
 \end{normalsize}
 \includegraphics[scale=0.28]{img/Datenflussuebersicht.jpg} 
-\newpage 
-\section{Anwendugsfälle mit Sequenzdiagramm}
+\newpage
+ 
+\section{Anwendugsfälle}
+
 \subsection{Anwendugsfall: Rekonstruktion aus unzusammenhängenden Einzelbilder}
-Gegeben: Vielzahl an Einzelbilder einer Szene die nicht von der selben Kamera oder Position aufgenommen wurden.
-Ziel: Rekonstruktion der Szene oder eines einzelnen Objektes.
-Vorgehen:
-\begin{itemize}
-\item 1. Feature Detektor: In den Bildern wird automatisch nach „markanten“ Punkten gesucht, die hohen Wiedererkennungswert haben.\item 2. Feature Matching: Die gefundenen „markanten Punkte“ in zwei Bildern werden verglichen und einander zugeordnet.\item 3. Posenschätzung: Aus den Punktzuordnungen von zwei oder mehr Bildern werden die Positionen der Kameras ermittelt, von denen aus die Bilder aufgenommen wurden.\item 4. Tiefenschätzung: Mit Hilfe der Kamerapositionen werden die Tiefen in den Bildern trianguliert. Dadurch werden die Entfernungen der Objekte auf den Bildern bestimmt.\item 5. Modellerzeugung: Die Einzelansichten werden zu einem kompletten 3D Modell zusammengesetzt.
-\end{itemize}
-Stellschrauben:
-\begin{itemize}
-\item 1. Der Feature Detektor kann ausgewechselt werden (z. B. SIFT oder SURF)\item 2. Das Feature Matching kann auf verschiedene Arten durchgeführt werden (z. B. RANSAC oder MLESAC, jeweils mit verschiedener Initialisierungen)
-\end{itemize}
-%\includegraphics[scale=0.5]{img/Sequez_RauE.jpg} 
+
+\textbf{Gegeben:}\newline
+Vielzahl an Einzelbilder einer Szene die nicht von der selben Kamera oder Position aufgenommen wurden.\newline
+\textbf{Ziel:}\newline
+Rekonstruktion der Szene oder eines einzelnen Objektes.\newline
+\textbf{Vorgehen:}
+\begin{enumerate}
+\item Feature Detektor: In den Bildern wird automatisch nach „markanten“ Punkten gesucht, die hohen Wiedererkennungswert haben.\item Feature Matching: Die gefundenen „markanten Punkte“ in zwei Bildern werden verglichen und einander zugeordnet.\item Posenschätzung: Aus den Punktzuordnungen von zwei oder mehr Bildern werden die Positionen der Kameras ermittelt, von denen aus die Bilder aufgenommen wurden.\item Tiefenschätzung: Mit Hilfe der Kamerapositionen werden die Tiefen in den Bildern trianguliert. Dadurch werden die Entfernungen der Objekte auf den Bildern bestimmt.\item Modellerzeugung: Die Einzelansichten werden zu einem kompletten 3D Modell zusammengesetzt.
+\end{enumerate}
+\textbf{Stellschrauben:}
+\begin{enumerate}
+\item Der Feature Detektor kann ausgewechselt werden (z. B. SIFT oder SURF)\item Das Feature Matching kann auf verschiedene Arten durchgeführt werden (z. B. RANSAC oder MLESAC, jeweils mit verschiedener Initialisierungen)
+\end{enumerate}
+
+ 
 \subsection{Anwendugsfall: Structure-from-Motion (SfM)}
 
-Gegeben: Videosequenz einer Szene, mit eigenbewegung der Kamera.
-Ziel: Rekonstruktion der Szene oder eines einzelnen Objektes.
-
-Structure-from-Motion (SfM) ist ein Verfahren zur 3D-Rekonstruktion mit nur einer Kamera. Dabei wird bei SfM das 3D-Modell aus einem Video, also einer Reihe von Einzelbildern rekonstruiert. Dabei ist es wichtig, dass das Video nicht von einer statischen Position aus aufgenommen wird, vielmehr sollte die Kamera sich dabei mit Blick auf die zu rekonstruierende Szene bewegen. Bei der Rekonstruktion mittels SfM werden zwei oder mehr Einzelbilder der Eingangssequenz herangezogen, für die angenommen wird, dass sie dieselbe Szene aus verschiedenen Blickrichtungen betrachten und die Szene zwischen den Einzelbildern statisch (unverändert) geblieben ist.
-Vorgehen:
-\begin{itemize}
-\item 1. Feature Detection: Ermitteln leicht verfolgbarer markanter Bildpunkte\item 2. Feature Tracking: Verfolgen der markanten Bildpunkte\item 3. Posenschätzung: Bestimmen der Aufnahmepunkte, Verfolgen der Kamerafahrt\item 4. Tiefenschätzung: Bestimmen der Tiefe mit lokalen Optimierungsverfahren\item 5. Modellerzeugung: Die Einzelansichten werden zu einem kompletten 3D Modell zusammengesetzt
-\end{itemize}
-%\includegraphics[scale=0.5]{img/Sequez_SfM.jpg} 
+\textbf{Gegeben:}\newline
+Videosequenz einer Szene, mit eigenbewegung der Kamera.\newline
+\textbf{Ziel:}\newline
+Rekonstruktion der Szene oder eines einzelnen Objektes.\newline Structure-from-Motion (SfM) ist ein Verfahren zur 3D-Rekonstruktion mit nur einer Kamera. Dabei wird bei SfM das 3D-Modell aus einem Video, also einer Reihe von Einzelbildern rekonstruiert. Dabei ist es wichtig, dass das Video nicht von einer statischen Position aus aufgenommen wird, vielmehr sollte die Kamera sich dabei mit Blick auf die zu rekonstruierende Szene bewegen. Bei der Rekonstruktion mittels SfM werden zwei oder mehr Einzelbilder der Eingangssequenz herangezogen, für die angenommen wird, dass sie dieselbe Szene aus verschiedenen Blickrichtungen betrachten und die Szene zwischen den Einzelbildern statisch (unverändert) geblieben ist.\newline
+\textbf{Vorgehen:}
+\begin{enumerate}
+\item Feature Detection: Ermitteln leicht verfolgbarer markanter Bildpunkte\item Feature Tracking: Verfolgen der markanten Bildpunkte\item Posenschätzung: Bestimmen der Aufnahmepunkte, Verfolgen der Kamerafahrt\item Tiefenschätzung: Bestimmen der Tiefe mit lokalen Optimierungsverfahren\item Modellerzeugung: Die Einzelansichten werden zu einem kompletten 3D Modell zusammengesetzt
+\end{enumerate}
 
 \section{Typische Nutzungsabläufe}
 \label{ch:usecases}
