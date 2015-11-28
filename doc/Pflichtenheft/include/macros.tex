@@ -1,0 +1,91 @@
+\newcommand{\usecase}[1]{
+	\IfEqCase{#1}{
+		{1}{
+			\textbf{Vorbedingung:}\\
+			Das Programm wurde gestartet
+			\\\textbf{Ablauf:}
+			\begin{enumerate}
+				\item Auswählen der "{}Lade Bilder" im Menü
+				\item Suchen und Öffnen eines oder mehrerer Bilder
+			\end{enumerate}
+		}
+		{2}{
+			\textbf{Vorbedingung:}\\
+			Das Programm wurde gestartet
+			\\\textbf{Ablauf:}
+			\begin{enumerate}
+				\item Auswahl der Algorithmen für die einzelnen Schritte im rechten Bereich der
+				GUI
+			\end{enumerate}
+		}
+		{3}{\textbf{Vorbedingung:}\\
+			Es wurden für die einzelnen Schritte entsprechende Algorithmen ausgewählt.
+			\\\textbf{Ablauf:}
+			\begin{enumerate}
+				\item Im linken Bereich der GUI können die einzelnen Einstellungen für die Algorithmen geändert werden
+			\end{enumerate}
+		}
+		{4}{
+			\textbf{Vorbedingung:}\\
+			Es wurden Algorithmen für die einzelnen Schritte ausgewählt
+			\\\textbf{Ablauf:}
+			\begin{enumerate}
+				\item Der Benutzer wählt im Menü die Option "{}Speichern"
+				\item Es wird eine Zieldatei gewählt, in die das Setup gespeichert werden soll
+				\item Durch Klick auf "{}Speichern" werden die selektierten Algorithmen und deren Einstellungen gespeichert.
+			\end{enumerate}
+		}
+		{5}{
+			\textbf{Vorbedingung:}\\
+			Das Programm wurde gestartet
+			\\\textbf{Ablauf:}
+			\begin{enumerate}
+				\item Der Benutzer wählt im Menü die Option "{}Laden"
+				\item Im folgenden Dialog sucht der Nutzer eine passende Datei
+				\item Durch Klick auf "{}Öffnen" werden die Algorithmen und ihre Einstellungen geladen
+			\end{enumerate}
+		}
+		{6}{
+			\textbf{Vorbedingung:}\\
+			Das Programm wurde gestartet
+			\\\textbf{Ablauf:}
+			\begin{enumerate}
+				\item Der Benutzer wählt im Menü "{}Hilfe" aus
+			\end{enumerate}
+		}
+		{7}{
+			\textbf{Vorbedingung:}\\
+			Das Logfenster zeigt bereits ein paar Nachrichten an
+			\\\textbf{Ablauf:}
+			\begin{enumerate}
+				\item Der Benutzer wählt ein oder mehrere Loglevel aus
+			\end{enumerate}
+		}
+		{8}{
+			\textbf{Vorbedingung:}\\
+			Es wurden Algorithmen und Bilder ausgewählt und geladen.
+			\\\textbf{Ablauf:}
+			\begin{enumerate}
+				\item Der Benutzer wählt "{}Start"
+				\item Die Abarbeitung der Algorithmen auf den Eingabedaten beginnt nun
+			\end{enumerate}
+		}
+		{9}{
+			\textbf{Vorbedingung:}\\
+			Die Verarbeitung wurde erfolgreich gestartet
+			\\\textbf{Ablauf:}
+			\begin{enumerate}
+				\item Durch die Anwahl von "{}Stop" wird das weiterreichen der Daten angehalten
+				\item Nach dem Abschluss des aktuell laufenden Algorithmus kommt die Abarbeitung zum Stillstand
+			\end{enumerate}
+		}
+		{10}{
+			\textbf{Vorbedingung:}\\
+			Die Algorithmen wurden erfolgreich ausgeführt
+			\\\textbf{Ablauf:}
+			\begin{enumerate}
+				\item Durch Auswählen der einzelnen Vorschaumodi in der Mitte der GUI wählt der Benutzer die Daten, die er sehen möchte.
+			\end{enumerate}
+		}
+	}	
+}

@@ -113,7 +113,7 @@ Stellschrauben:
 \begin{itemize}
 \item 1. Der Feature Detektor kann ausgewechselt werden (z. B. SIFT oder SURF)\item 2. Das Feature Matching kann auf verschiedene Arten durchgeführt werden (z. B. RANSAC oder MLESAC, jeweils mit verschiedener Initialisierungen)
 \end{itemize}
-\includegraphics[scale=0.5]{img/Sequez_RauE.jpg} 
+%\includegraphics[scale=0.5]{img/Sequez_RauE.jpg} 
 \subsection{Anwendugsfall: Structure-from-Motion (SfM)}
 
 Gegeben: Videosequenz einer Szene, mit eigenbewegung der Kamera.
@@ -124,12 +124,44 @@ Vorgehen:
 \begin{itemize}
 \item 1. Feature Detection: Ermitteln leicht verfolgbarer markanter Bildpunkte\item 2. Feature Tracking: Verfolgen der markanten Bildpunkte\item 3. Posenschätzung: Bestimmen der Aufnahmepunkte, Verfolgen der Kamerafahrt\item 4. Tiefenschätzung: Bestimmen der Tiefe mit lokalen Optimierungsverfahren\item 5. Modellerzeugung: Die Einzelansichten werden zu einem kompletten 3D Modell zusammengesetzt
 \end{itemize}
-\includegraphics[scale=0.5]{img/Sequez_SfM.jpg} 
+%\includegraphics[scale=0.5]{img/Sequez_SfM.jpg} 
 
 \section{Typische Nutzungsabläufe}
-
+\label{ch:usecases}
 In diesem Abschnitt werden typische Abläufe von Aktionen dargestellt, die ein Anwender mit der Software durchführt.
+\subsection{Laden von Einzelbildern}
+\label{usecase:1}
+\usecase{1}
+\subsection{Auswählen von Algorithmen}
+\label{usecase:2}
+\usecase{2}
+\subsection{Ändern von Einstellungen}
+\label{usecase:3}
+\usecase{3}
+\subsection{Speichern der Einstellungen}
+\label{usecase:4}
+\usecase{4}
+\subsection{Laden von Einstellungen}
+\label{usecase:5}
+\usecase{5}
+\subsection{Öffnen der Hilfe}
+\label{usecase:6}
+\usecase{6}
+\subsection{Filtern der Logs}
+\label{usecase:7}
+\usecase{7}
+\subsection{Ausführen von Algorithmen}
+\label{usecase:8}
+\usecase{8}
+\subsection{Unterbrechen der Verarbeitung}
+\label{usecase:9}
+\usecase{9}
+\subsection{Vorschau der Ergebnisse}
+\label{usecase:10}
+\usecase{10}
 
+
+\iffalse
 \subsection{Erzeugung eines 3D-Modells}
 \textbf{Vorbedingung:} Bilder des Modells wurden erstellt. \newline
 \textbf{Ergebnis:} Fertiges 3D-Modell liegt zur weiteren Verarbeitung in anderer Software vor. \newline
@@ -244,3 +276,4 @@ Der Nutzer führt folgende Schritte aus (Alle Schritte ab \ref{TNOEvalAlgoBilder
 	\item Datensatz von Modell1 wird gewählt.
 	\item Betrachtung der Ergebnisse.
 \end{enumerate}
+\fi
