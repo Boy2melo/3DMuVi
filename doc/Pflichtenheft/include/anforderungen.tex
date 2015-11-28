@@ -1,66 +1,61 @@
-Anforderungen
-
-Kriterien
-
-\subsection{Abgrenzungskriterien}
-\begin{enumerate}[ align=left, label={\textbf{\textbackslash AK1\arabic*0\textbackslash}}]
-\item Videos liegen als sortierte Einzelbilder vor
-\item Algorithmen müssen nicht Implementiert werden
-(Bereitstellung von Schnittstellen zur Einbindung)
-\item Eine Änderung der Eingabe erfordert eine erneute Ausführung der Algorithmen
-\end{enumerate}
-
-\section{Abgrenzungskriterien}
-\begin{itemize}
-	\item Videos liegen als sortierte Einzelbilder vor.
-	\item Algorithmen müssen nicht implementiert werden.
-	\item Eine Änderung der Eingabe erfordert eine erneute Ausführung der Algorithmen.
-	\item Die Benutzeroberfläche beschränkt sich auf englisch Sprache.
-\end{itemize}
 
 \section{Musskriterien}
 \subsection{Modul: Workflow}
-\begin{itemize}
-	\item Die Software soll einen standardisierten 4-Phase-Workflow bereitstellen, bestehend aus:
-	\begin{enumerate}
+Die Software soll einen standardisierten 4-Phase-Workflow bereitstellen, bestehend aus:
+
+\begin{enumerate}
 		\item Feature Extraktion / Matching
 		\item Posenschätzung
 		\item Tiefenschätzung
 		\item 3D Fusion
-	\end{enumerate}
-	\item Für jede Phase dieses Workflows sollen verschiedene Algorithmen ausgewählt werden können.
-\end{itemize}
+\end{enumerate}
+Für jede Phase dieses Workflows sollen verschiedene Algorithmen ausgewählt werden können.
+%\begin{itemize}
+%	\item Die Software soll einen standardisierten 4-Phase-Workflow bereitstellen, bestehend aus:
+%	\begin{enumerate}
+%		\item Feature Extraktion / Matching
+%		\item Posenschätzung
+%		\item Tiefenschätzung
+%		\item 3D Fusion
+%	\end{enumerate}
+%	\item Für jede Phase dieses Workflows sollen verschiedene Algorithmen ausgewählt werden können.
+%\end{itemize}
 \subsection{Modul: Input/Output}
-\begin{itemize}
-	\item Das Programm soll eine Menge von Einzelbildern einlesen und diese an die Algorithmen zur Bearbeitung übergeben können.
-	\item Ergebnisse bzw. Zwischenergebnisse sollen gespeichert werden können.
-\end{itemize}
+Das Programm soll eine Menge von Einzelbildern einlesen und diese an die Algorithmen zur Bearbeitung übergeben können. Außerdem muss es möglich sein die Ergebnisse bzw. Zwischenergebnisse abzuspeichern.
+%\begin{itemize}
+%	\item Das Programm soll eine Menge von Einzelbildern einlesen und diese an die Algorithmen zur Bearbeitung übergeben können.
+%	\item Ergebnisse bzw. Zwischenergebnisse sollen gespeichert werden können.
+%\end{itemize}
 \subsection{Modul: Visualisierung}
-Darstellung der Ergebnisse:
-\begin{itemize}
-	\item Features die durch die Algorithmen erkannt wurden, sollen in Einzelbildern eingezeichnet werden.
-	\item Kameraposen und -orientierungen sollen im 3D Modell als Kamerapyramide eingezeichnet werden .
-	\item Anzeigen der Tiefenkarten
-	\item Anzeige des 3D Modells als Piont Cloud.
-\end{itemize}
+Die Ergebnisse nach dem Ausführen des Workflows sind auf verschiedene Arten darstellbar. So wird das berechnete 3D Modell als Point Cloud visualisiert. In dieses Modell sollen Kameraposen und -orientierungen als Kamerapyramide eingezeichnet werden können. Zusätzlich soll eine Tiefenkarte der Ergebnisse als mögliche Visualisierung zur Verfügung stehen. Zuletzt soll es eine Ansicht geben, in der die berechneten Features die durch die Algorithmen erkannt wurden, in Einzelbildern eingezeichnet sind. 
+%Darstellung der Ergebnisse:
+%\begin{itemize}
+%	\item Features die durch die Algorithmen erkannt wurden, sollen in Einzelbildern eingezeichnet werden.
+%	\item Kameraposen und -orientierungen sollen im 3D Modell als Kamerapyramide eingezeichnet werden .
+%	\item Anzeigen der Tiefenkarten
+%	\item Anzeige des 3D Modells als Piont Cloud.
+%\end{itemize}
 \subsection{Modul: Logger}
-Aufzeichnen, Anzeigen und Abspeichern von Informationen, Warnungen, Fehlern und Debugmeldungen die von den Algorithmen ausgeworfen werden.
+Informationen, Warnungen, Fehler und Debugmeldungen die von den Algorithmen ausgeworfen werden, soll das Programm Aufzeichnen, Anzeigen und Abspeichern können.
 \subsection{Modul: Einstellungen}
-Einstellungen der einzelnen Verfahren können abgespeichert und geladen werden.
+Die Einstellungen der einzelnen Verfahren können abgespeichert und geladen werden.
 \subsection{Modul: Interaktion}
-\begin{itemize}
-	\item Der Workflow soll gestartet und gestoppt werden können.\\Das Stoppen der Verarbeitung bewirkt, dass keine Daten weitergegeben werden und lediglich die restliche Berechnung der Workflowstufe ausgeführt wird.
-	\item Ein globaler Arbeitsindikator soll die andauernde Verarbeitung der Verfahren anzeigen.
-\end{itemize}
+Der Workflow soll gestartet und gestoppt werden können.\\Das Stoppen der Verarbeitung bewirkt, dass keine Daten weitergegeben werden und lediglich die restliche Berechnung der Workflowstufe ausgeführt wird. Zudem soll ein globaler Arbeitsindikator die andauernde Verarbeitung der Verfahren anzeigen.
+%\begin{itemize}
+%	\item Der Workflow soll gestartet und gestoppt werden können.\\Das Stoppen der Verarbeitung bewirkt, dass keine Daten weitergegeben werden und lediglich die restliche Berechnung der Workflowstufe ausgeführt wird.
+%	\item Ein globaler Arbeitsindikator soll die andauernde Verarbeitung der Verfahren anzeigen.
+%\end{itemize}
 
 \section{Kannkriterien}
 \subsection{Modul: Workflow}
-\begin{itemize}
-	\item Es sollen mehrere fest implementierte Workflows zu Verfügung stehen.
-	\item Workflows können variable erstellt und verändert werden.
-	\item Abspeichern und laden der Workflow-Konfiguration.
-\end{itemize}
+Zu dem bereits zu Verfügung stehenden 4-Phase-Workflow sollen weitere fest implementierte Workflows zu Verfügung stehen. Die Konfiguration dieser Workflows soll abgespeichert und geladen werden können. Zusätzlich soll es möglich sein Workflows dynamisch zu erstellen und zu verändern. 
+%\begin{itemize}
+%	\item Es sollen mehrere fest implementierte Workflows zu Verfügung stehen.
+%	\item Workflows können variable erstellt und verändert werden.
+%	\item Abspeichern und laden der Workflow-Konfiguration.
+%\end{itemize}
 \subsection{Modul: Visualisierung}
+
 \begin{itemize}
 	\item Manipulation und Interaktion mit (Zwischen-) Ergebnisse.\\(z.B. Ein-, Ausblenden und Entfernen einzelner Punkte, Kameras, Matches etc.).
 	\item Darstellung des 3D Modells in Form von Point Cloud, Mesh und Texturiert.
@@ -69,10 +64,19 @@ Einstellungen der einzelnen Verfahren können abgespeichert und geladen werden.
 Abspeichern und laden von globalen Einstellungen.
 \subsection{Modul: Interaktion}
 \begin{itemize}
+	\item Manipulation und Interaktion mit (Zwischen-) Ergebnisse.\\(z.B. Ein-, Ausblenden und Entfernen einzelner Punkte, Kameras, Matches etc.).
 	\item Einzelne Schritte sollen gestartet werden können.
 	\item Laden vorhergegangener (Zwischen-) Ergebnisse.
 	\item Automatisierte wiederholte Ausführung von einzelnen Algorithmen auf verschiedenen Datensätze.
 	\item Auswahl der Workflow-Konfiguration und Verzeichnis mit Eingangsdaten durch Commandline-Optionen beim Programmstart.
 	\item Daten neu Sortieren / Ausführen auf Untergruppen der Daten.
 	\item Arbeitsindikatoren für jeden einzelnen Verarbeitungsschritt.
+\end{itemize}
+
+\section{Abgrenzungskriterien}
+\begin{itemize}
+	\item Videos liegen als sortierte Einzelbilder vor.
+	\item Algorithmen müssen nicht Implementiert werden. (Bereitstellung von Schnittstellen zur Einbindung)
+	\item Eine Änderung der Eingabe erfordert eine erneute Ausführung der Algorithmen.
+	\item Die Benutzeroberfläche beschränkt sich auf englisch Sprache.
 \end{itemize}
