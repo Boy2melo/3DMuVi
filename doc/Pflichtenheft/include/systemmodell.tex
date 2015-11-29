@@ -1,7 +1,7 @@
 % Grobe  Architekturbeschreibung  durch  Bausteine/Komponenten  (Kein  detailliertes Klassendiagramm).
 \section{Systemübersicht}
 
-Dieses Kapitel bietet zunächst eine grobe Übersicht des Systems und der Abgrenzung von Benutzer Algorithmen und Modulen des 3DMuVi-Programms. Außerdem wird die Interaktion der Module durch ein Datenflussdiagramm veranschaulicht. Im Anschluss werden die Anwendungsfälle vorgestellt und mittels eine Sequenzdiagramms visualisiert. Schlussendlich werden Typische Nutzungsabläufe vorgestellt die die Software umsetzen muss.
+Dieses Kapitel bietet zunächst eine grobe Übersicht des Systems und der Abgrenzung von Benutzer Algorithmen und Modulen des 3DMuVi-Programms. Außerdem wird die Interaktion der Module durch ein Datenflussdiagramm veranschaulicht. Im Anschluss werden die Anwendungsfälle vorgestellt. Schlussendlich werden Typische Nutzungsabläufe vorgestellt die die Software umsetzen muss. Diese werden jeweils mit einem  Sequenzdiagramm visualisiert.
 \subsection{Architektur}
 
 Aufgrund der Komplexität und Größe, wird das 3DMuVi-Programm nicht durch ein einzelnes Entwurfsmuster wie beispielsweise Model-View-Controller (MVC) umgesetzt. Stattdessen wird es zunächst in einzelne Module aufgeteilt.
@@ -138,41 +138,8 @@ Rekonstruktion der Szene oder eines einzelnen Objektes.\newline Structure-from-M
 \end{enumerate}
 
 \section{Typische Nutzungsabläufe}
-\label{ch:usecases}
-In diesem Abschnitt werden typische Abläufe von Aktionen dargestellt, die ein Anwender mit der Software durchführt.
-\subsection{Laden von Einzelbildern}
-\label{usecase:1}
-\usecase{1}
-\subsection{Auswählen von Algorithmen}
-\label{usecase:2}
-\usecase{2}
-\subsection{Ändern von Einstellungen}
-\label{usecase:3}
-\usecase{3}
-\subsection{Speichern der Einstellungen}
-\label{usecase:4}
-\usecase{4}
-\subsection{Laden von Einstellungen}
-\label{usecase:5}
-\usecase{5}
-\subsection{Öffnen der Hilfe}
-\label{usecase:6}
-\usecase{6}
-\subsection{Filtern der Logs}
-\label{usecase:7}
-\usecase{7}
-\subsection{Ausführen von Algorithmen}
-\label{usecase:8}
-\usecase{8}
-\subsection{Unterbrechen der Verarbeitung}
-\label{usecase:9}
-\usecase{9}
-\subsection{Vorschau der Ergebnisse}
-\label{usecase:10}
-\usecase{10}
+In diesem Abschnitt werden typische Abläufe von Aktionen dargestellt, die ein Anwender mit der Software durchführt. Jeder Ablauf wird mit Hilfe eines Sequenzdiagramms visualisiert. Die Diagramme stellen nur eine Übersicht auf Modulebene dar, speziellere und ggf. angepasste Sequenzdiagramme sind dem Entwurfsdokument zu entnehmen.
 
-
-\iffalse
 \subsection{Erzeugung eines 3D-Modells}
 \textbf{Vorbedingung:} Bilder des Modells wurden erstellt. \newline
 \textbf{Ergebnis:} Fertiges 3D-Modell liegt zur weiteren Verarbeitung in anderer Software vor. \newline
@@ -191,6 +158,7 @@ Der Nutzer führt folgende Schritte aus (Schritte \ref{TN3DModellBilderauswahl} 
 	\item \label{TN3DModellSpeichern} Ergebnisdaten werden abgespeichert.
 	\item Kopieren des 3D-Modells aus dem Verzeichnisbaum der Ergebnisse an den gewünschten Ort.
 \end{enumerate}
+\includegraphics[width=1.05\textwidth]{img/871_Seqz.png} 
 
 \subsection{Evaluierung von Algorithmen für Feature Extraktion / Matching}
 \label{TNEvalAlgo}
@@ -213,6 +181,7 @@ Der Nutzer führt folgende Schritte aus (Alle Schritte ab \ref{TNEvalAlgoBilderA
 	\item Button zum Starten der Verarbeitung wird gedrückt.
 	\item Erneute Betrachtung der Ergebnisse.
 \end{enumerate}
+\includegraphics[width=1.05\textwidth]{img/872_Seqz.png}
 
 \subsection{Überprüfen des Logs von Algorithmen}
 \textbf{Vorbedingung:} Bilder eines Modells wurden erstellt. \newline
@@ -233,6 +202,7 @@ Der Nutzer führt folgende Schritte aus (Schritte \ref{TNLogBilderAuswahl} bis \
 	\item \label{TNLogSuchen} Auffälligkeiten in den Meldungen des Logs werden gesucht.
 	\item Algorithmen werden bei Bedarf überarbeitet.
 \end{enumerate}
+\includegraphics[width=1.05\textwidth]{img/873_Seqz.png}
 
 \section{Typische Nutzungsabläufe mit optionalen Funktionen}
 
@@ -259,6 +229,7 @@ Der Nutzer führt folgende Schritte aus (Alle Schritte ab \ref{TNOFeatureEntfBil
 	\item Button zum Starten der Verarbeitung ab dem Schritt Posenschätzung wird gedrückt.
 	\item Erneute Betrachtung der Ergebnisse.
 \end{enumerate}
+\includegraphics[width=1.05\textwidth]{img/881_Seqz.png}
 
 \subsection{Evaluierung von Algorithmen für Feature Extraktion / Matching auf mehreren Datensätzen}
 Dieser Nutzungsablauf ist eine Erweiterung von \ref{TNEvalAlgo}. Sinn der Erweiterung ist es dem Nutzer die Möglichkeit zu geben, Workflows schnell auf mehreren Sätzen von Bildern zu evaluieren. Als optionale Funktion muss das Erstellen und Auswählen mehrerer Datensätze umgesetzt sein.\newline
@@ -287,4 +258,41 @@ Der Nutzer führt folgende Schritte aus (Alle Schritte ab \ref{TNOEvalAlgoBilder
 	\item Datensatz von Modell1 wird gewählt.
 	\item Betrachtung der Ergebnisse.
 \end{enumerate}
-\fi
+\includegraphics[width=1.05\textwidth]{img/872_Seqz.png}
+%\label{ch:usecases}
+%In diesem Abschnitt werden typische Abläufe von Aktionen dargestellt, die ein Anwender mit der Software durchführt.
+%\subsection{Laden von Einzelbildern}
+%\label{usecase:1}
+%\usecase{1}
+%\subsection{Auswählen von Algorithmen}
+%\label{usecase:2}
+%\usecase{2}
+%\subsection{Ändern von Einstellungen}
+%\label{usecase:3}
+%\usecase{3}
+%\subsection{Speichern der Einstellungen}
+%\label{usecase:4}
+%\usecase{4}
+%\subsection{Laden von Einstellungen}
+%\label{usecase:5}
+%\usecase{5}
+%\subsection{Öffnen der Hilfe}
+%\label{usecase:6}
+%\usecase{6}
+%\subsection{Filtern der Logs}
+%\label{usecase:7}
+%\usecase{7}
+%\subsection{Ausführen von Algorithmen}
+%\label{usecase:8}
+%\usecase{8}
+%\subsection{Unterbrechen der Verarbeitung}
+%\label{usecase:9}
+%\usecase{9}
+%\subsection{Vorschau der Ergebnisse}
+%\label{usecase:10}
+%\usecase{10}
+%
+%
+%\iffalse
+%\fi
+
