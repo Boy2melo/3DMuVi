@@ -2,17 +2,8 @@
 % o Musskriterien: Mindestanforderungen. 
 % o Kannkriterien: Zusätzliche Funktionalität. 
 % o Abgrenzungskriterien: Was gehört nicht zum Funktionsumfang? (vgl. auch Produkteinsatz) 
-Die Zielbestimmung definiert die Kriterien des Programms. Zum einen die Musskriterien, also die Funktionen die das Programm mindestens bereit stellen muss und zum anderen die Kannkriterien also mit welchen Funktionen das Programm sinnvoll erweitert werden könnte. Zusätzlich wird in den Abgrenzungskriterien explizit ausgeschlossen was das Programm nicht leisten muss. Die Muss- und Kannkriterien untergliedern sich jeweils in sechs logische Module des Programms. Bei diesen Modulen handelt es sich um:
-\begin{enumerate}
-	\item \textbf{Workflow} Abstrahiert die Anordnung der Algorithmen.
-	\item \textbf{Input/Output} Eingabe, Übergabe, Speichern und Laden von Daten.
-	\item \textbf{Visualisierung} Art der Darstellung der Ergebnisse.
-	\item \textbf{Logger} Aufzeichnen von relevanten Ereignissen und Meldungen der Algorithmen.
-	\item \textbf{Einstellungen} Konfigurationsmöglichkeiten der Software.
-	\item \textbf{Interaktion} Bedienung und Rückmeldung des Programms.
-\end{enumerate}
 
-\section{Abgrenzungskriterien}
+$\section{Abgrenzungskriterien}
 Das Ziel dieses Projektes ist die Entwicklung eines Frameworks. Dieses Framework soll in der Lage sein, vorderfinierte Workflows mit ausgewählten Algorithmen zu verwenden, um eine 3D Konstruktion zu erstellen. \textit{Die Algorithmen selbst sind nicht Teil des Projekts und werden bereitgestellt.} Die notwendigen Schnittstellen für die Workflow und Algorithmen sind sicherzustellen. \newline
 Falls eine Workflowkonfiguration gewählt wurde und die Berechnung gestartet ist, ist es nicht mehr möglich, Veränderungen in den Workflowkonfiigurationen vorzunehmen. Alle Einstellungen sind \textit{vor} Beginn der Berechnung feszulegen. Beim vorzeitigen, manuellen Abbruch wird nicht sichergestellt, dass die bis zu den Punkt berechneten Daten verwendbar sind. \newline
 Das Framework soll eine 3D Konstruktion mithilfe eines Workflows mit Workflowkonfigurationen erstellen. Dazu steht standardgemäß ein 4-Phasen-Workflow bestehend aus Feature Extraktion / Matching, Posenschätzung, Tiefenschätzung und 3D Fusion zur Verfügung. Je nach Realisierbarkeit können auch andere Workflows in Betracht gezogen werden.
@@ -23,4 +14,12 @@ Diese Abhängigkeiten erschweren die Realisierung eines dynmischen Workflowbuild
 Die Benutzeroberfläche wird nur auf englischer Sprache umgesetzt. \newline
 Das Framework wird erst auf eine festgelegte Anzahl an Algorithmen getestet und sichergestellt, dass der 4-Phasen-Workflow mit diesen Algorithmen funktioniert. Idealerweise sollte es später den Benutzer möglich sein die Algorithmenbibliothek selbständig erweitern können. Dabei sollte man auf die Ein- und Ausgabe der Algorithmen beachten. \newline
 Beim vorzeitigen Abgebrochen ist es unter Umständen schwierig brauchbare Daten von unbrauchbaren zu trennen. Deshalb wird erstmal darauf geachtet, dass es möglich ist, überhaupt den Prozess sicher zu beenden, dass keine unbrauchbare Artefakte entstehen. Optional sollten dann, falls ALgorithmen ihre Berechnungen auf kompletten Datensatz berechnet haben, das Ergebnis der Algorithmen als Zwischenergebnis zu speichern.
-\newline Außerdem werden fest definierte Workflows erstellt, um Probleme mit unrealisierbaren Workflows zu vermeiden. 
+\newline Außerdem werden fest definierte Workflows erstellt, um Probleme mit unrealisierbaren Workflows zu vermeiden. $
+
+\section{Problemabgrenzung}
+Aus einer Menge von Bildern eines Objektes wie z.B. eines Gebäudes soll eine digitale 3D-Rekonstruktion berechnet werden.\newline
+Da es keinen einzelnen Algorithmus gibt, der für dieses Problem eine gute Lösung bietet werden Algorithmen der Feature Extraktion / Matching, der Posenschätzung, der Tiefenschätzung und 3D Fusion kombiniert und parametrisiert. Die Kombinationen der Algorithmen ergeben einen mehrstufigen Worfklow. Wenn nun eine solche Kombination von Algorithmen getestet wird, ist es erforderlich die Eingangsdaten und Parameter pro Algorithmus manuell einzustellen, um sie auszuführen. Anschließend muss mit spezieller Software das entstandene 3D-Modell visualisiert werden, um die Ergebnisse validieren zu können.\newline
+Diese Umstände resultieren in einem wenig intuitiven und effektiven Umfeld zur Testung von Workflows.
+
+\section{Lösungsansatz}
+Um diesen zähen Prozess zu beschleunigen, soll ein Framework entwickelt werden, das den Großteil der Schritte automatisiert, wodurch der Anwender sich lediglich um die Komposition und Konfiguration der Algorithmen kümmern muss. Dazu sollen zunächst Bilder geladen werden können, die anschließend mit dem Start des Workflows an diesen übergeben werden. Dieser Workflow ist in Verarbeitungsschritte unterteilt, die als Plugins geladen und anschließend schnell ausgetauscht und konfiguriert werden können. Die daraus entstanden Workflow-Konfiugrationen können gespeichert und geladen werden, um z.B. ein Testen des Workflows auf eine anderen Bildermenge zu einem späteren Zeitpunkt zu erleichtern. Abschließend sollen die Ergebnisse im Programm visualisiert werden.
