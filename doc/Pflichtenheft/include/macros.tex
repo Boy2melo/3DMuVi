@@ -1,3 +1,18 @@
+\newcommand{\usecaseTitle}[1]{
+	\IfEqCase{#1}{
+		{1}{Laden von Einzelbildern}
+		{2}{Auswählen von Algorithmen}
+		{3}{Ändern von Einstellungen}
+		{4}{Speichern der Einstellungen}
+		{5}{Laden von Einstellungen}
+		{6}{Öffnen der Hilfe}
+		{7}{Filtern der Logs}
+		{8}{Ausführen von Algorithmen}
+		{9}{Unterbrechung der Verarbeitung}
+		{10}{Vorschau der Ergebnisse}
+	}
+}
+
 \newcommand{\usecase}[1]{
 	\IfEqCase{#1}{
 		{1}{

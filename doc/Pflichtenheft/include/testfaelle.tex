@@ -8,7 +8,7 @@ Zuerst wird jede Klasse einzeln bearbeitet. Jede Öffentliche Methode wird mit z
 \subsection{Komponententests}
 Komponententests testen das Verhalten eines isolierten Moduls der Anwendung. Viele der Tests lassen sich allerdings erst nach der Entwurfsphase festlegen, weshalb dieser Abschnitt bis zum Vollständigen Entwurf der Anwendung noch nicht vollständig sein wird.
 
-	\begin{enumerate}[align=left, leftmargin=4em, label={\textbf{\textbackslash T2.\arabic*0\textbackslash}} ]
+	\begin{enumerate}[align=left, leftmargin=4em, label={\textbf{\textbackslash T2.\arabic*\textbackslash}} ]
 		\item \begin{tabular}{|c|c|}
 			\hline Modul & Funktion \\ 
 			\hline I\textbackslash O & FM210 \\ 
@@ -107,7 +107,7 @@ Komponententests testen das Verhalten eines isolierten Moduls der Anwendung. Vie
 	\end{enumerate}
 \subsection{Oberflächentests}
 Die Oberflächentests lassen sich mit der Qt Test-Suite ebenfalls automatisieren, eventuell muss allerdings bei der Designphase daran gedacht werden, gerade was das Laden von Dateien angeht.
-\begin{enumerate}[align=left, leftmargin=4em, label={\textbf{\textbackslash T3.\arabic*0\textbackslash}} ]
+\begin{enumerate}[align=left, leftmargin=4em, label={\textbf{\textbackslash T3.\arabic*\textbackslash}} ]
 	\item \textbf{Tab Log}\\
 	\subitem\textbf{Dummies:} \begin{itemize}
 		\item Nachrichtengenerator, der für jedes Loglevel eine Nachricht in den Log schreibt
@@ -135,9 +135,9 @@ Die Oberflächentests lassen sich mit der Qt Test-Suite ebenfalls automatisieren
 \end{enumerate}
 \section{Testszenarien}
 Die Testszenarien orientieren sich an den in Kapitel \ref{ch:usecases}: \nameref{ch:usecases} definierten Abläufen. Die Testszenarien sind von einem Benutzer durchzuführen, der idealerweise wenig bis gar keine Kenntnis über das Programm hat.
-\begin{itemize}
+\begin{enumerate}[align=left, leftmargin=4em, label={\textbf{\textbackslash T4.\arabic*\textbackslash}} ]
 \newcommand{\testsz}[1]{
-	\item \textbf{\ref{usecase:#1}: \nameref{usecase:#1}}\\
+	\item \textbf{\usecaseTitle{#1}}\\
 	\usecase{#1}
 	\textbf{Nachbedingung:}\\
 }
@@ -153,4 +153,4 @@ werden Algorithmen und Einstellungen so übernommen, wie sie abgespeichert wurde
 \testsz{8} Die Ausführung der Algorithmen wurde erfolgreich beendet und die Ergebnisse können angesehen und manipuliert werden. Es wird in dem eingestellten Verzeichnis eine Ordnerstruktur mit den Zwischenergebnissen angelegt.
 \testsz{9} Es liegen Anzeigedaten bis zum letzten ausgeführten Algorithmus vor. Das eingestellte Verzeichnis enthält Zwischenergebnisse bis zum letzten ausgeführten Algorithmus.
 \testsz{10} Nach Anwahl einer Ansicht werden die entsprechenden Ergebnisse dort Visualisiert.
-\end{itemize}
+\end{enumerate}
