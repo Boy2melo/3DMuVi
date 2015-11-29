@@ -3,19 +3,6 @@
 % o Kannkriterien: Zusätzliche Funktionalität. 
 % o Abgrenzungskriterien: Was gehört nicht zum Funktionsumfang? (vgl. auch Produkteinsatz) 
 
-$\section{Abgrenzungskriterien}
-Das Ziel dieses Projektes ist die Entwicklung eines Frameworks. Dieses Framework soll in der Lage sein, vorderfinierte Workflows mit ausgewählten Algorithmen zu verwenden, um eine 3D Konstruktion zu erstellen. \textit{Die Algorithmen selbst sind nicht Teil des Projekts und werden bereitgestellt.} Die notwendigen Schnittstellen für die Workflow und Algorithmen sind sicherzustellen. \newline
-Falls eine Workflowkonfiguration gewählt wurde und die Berechnung gestartet ist, ist es nicht mehr möglich, Veränderungen in den Workflowkonfiigurationen vorzunehmen. Alle Einstellungen sind \textit{vor} Beginn der Berechnung feszulegen. Beim vorzeitigen, manuellen Abbruch wird nicht sichergestellt, dass die bis zu den Punkt berechneten Daten verwendbar sind. \newline
-Das Framework soll eine 3D Konstruktion mithilfe eines Workflows mit Workflowkonfigurationen erstellen. Dazu steht standardgemäß ein 4-Phasen-Workflow bestehend aus Feature Extraktion / Matching, Posenschätzung, Tiefenschätzung und 3D Fusion zur Verfügung. Je nach Realisierbarkeit können auch andere Workflows in Betracht gezogen werden.
-Jeder Algorithmus des Workflows braucht ggf. als Eingabe das Ergebnis eines anderen Teilschritts des Workflows. So kann es sein dass die Posenschätzung Extraktion / Matching braucht, die Tiefenschätzung die Posenschätzung usw.
-Diese Abhängigkeiten erschweren die Realisierung eines dynmischen Workflowbuilders. 
-
-\section{Lösungsansatz}
-Die Benutzeroberfläche wird nur auf englischer Sprache umgesetzt. \newline
-Das Framework wird erst auf eine festgelegte Anzahl an Algorithmen getestet und sichergestellt, dass der 4-Phasen-Workflow mit diesen Algorithmen funktioniert. Idealerweise sollte es später den Benutzer möglich sein die Algorithmenbibliothek selbständig erweitern können. Dabei sollte man auf die Ein- und Ausgabe der Algorithmen beachten. \newline
-Beim vorzeitigen Abgebrochen ist es unter Umständen schwierig brauchbare Daten von unbrauchbaren zu trennen. Deshalb wird erstmal darauf geachtet, dass es möglich ist, überhaupt den Prozess sicher zu beenden, dass keine unbrauchbare Artefakte entstehen. Optional sollten dann, falls ALgorithmen ihre Berechnungen auf kompletten Datensatz berechnet haben, das Ergebnis der Algorithmen als Zwischenergebnis zu speichern.
-\newline Außerdem werden fest definierte Workflows erstellt, um Probleme mit unrealisierbaren Workflows zu vermeiden. $
-
 \section{Problemabgrenzung}
 Aus einer Menge von Bildern eines Objektes wie z.B. eines Gebäudes soll eine digitale 3D-Rekonstruktion berechnet werden.\newline
 Da es keinen einzelnen Algorithmus gibt, der für dieses Problem eine gute Lösung bietet werden Algorithmen der Feature Extraktion / Matching, der Posenschätzung, der Tiefenschätzung und 3D Fusion kombiniert und parametrisiert. Die Kombinationen der Algorithmen ergeben einen mehrstufigen Worfklow. Wenn nun eine solche Kombination von Algorithmen getestet wird, ist es erforderlich die Eingangsdaten und Parameter pro Algorithmus manuell einzustellen, um sie auszuführen. Anschließend muss mit spezieller Software das entstandene 3D-Modell visualisiert werden, um die Ergebnisse validieren zu können.\newline
