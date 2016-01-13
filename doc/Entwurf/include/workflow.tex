@@ -22,11 +22,11 @@ Die Konkrete Implementierung eines Algorithmus.
 
 \subsubsection{EAlgorithmType}
 Eine Klasse, die string-Konstanten enthält, welche den Typ des benutzen \hyperref[Workflow:IAlgorithm]{Algorithmus} in einem \hyperref[Workflow:APlugin]{Plugin} angeben.
-\beginMembersSmall
-\newMemberSmall{FeatureMatcher}{Beschreibt ein Plugin zum Feature Matching.}
-\newMemberSmall{DetphMapper}{Beschreibt ein Plugin zum schätzen von Tiefenkarten.}
-\newMemberSmall{PoseEstimator}{Beschreibt ein Plugin zum schätzen von Posen.}
-\newMemberSmall{PclReconstructor}{beschreibt ein Plugin zur Rekonstruktion von PCL Daten.}
+\beginAttributes
+\newAttribute{FeatureMatcher}{Beschreibt ein Plugin zum Feature Matching.}
+\newAttribute{DetphMapper}{Beschreibt ein Plugin zum schätzen von Tiefenkarten.}
+\newAttribute{PoseEstimator}{Beschreibt ein Plugin zum schätzen von Posen.}
+\newAttribute{PclReconstructor}{beschreibt ein Plugin zur Rekonstruktion von PCL Daten.}
 \closeMembers
 
 \subsubsection{AContextDataStore}\label{Workflow:AContextDataStore}
@@ -50,8 +50,8 @@ Abstrahiert den Zugriff zu den Daten, die von einem bestimmten \hyperref[Workflo
 
 \subsubsection{SDataChanged}
 Wird gesendet, sobald sich die Daten innerhalb eines \hyperref[Workflow:AContextDataStore]{DataStores} ändern.
-\beginMembersSmall
-\newMemberSmall{DataStore: *AContextDataStore}{Enthält den DataStore, der sich geändert hat}
+\beginAttributes
+\newAttribute{DataStore: *AContextDataStore}{Enthält den DataStore, der sich geändert hat}
 \closeMembers
 
 \subsubsection{IDataPacket}
@@ -70,12 +70,12 @@ Ein Template, dass Zugriff zu einem einzelnen Typ von Daten ermöglicht.
 
 \subsubsection{EDataTypes}
 Eine Klasse, die string-Konstanten enthält, die den Typ eines Datenpakets definieren.
-\beginMembersSmall
-\newMemberSmall{Images}{Die Eingabebilder}
-\newMemberSmall{FeatureMatches}{Eine Liste an FeatureMatches}
-\newMemberSmall{DepthMaps}{Eine Liste von Tiefenkarten}
-\newMemberSmall{PoseEstimations}{Eine Liste von Posenschätzungen}
-\newMemberSmall{PointCloud}{Ein PointCloud-Datensatz}
+\beginAttributes
+\newAttribute{Images}{Die Eingabebilder}
+\newAttribute{FeatureMatches}{Eine Liste an FeatureMatches}
+\newAttribute{DepthMaps}{Eine Liste von Tiefenkarten}
+\newAttribute{PoseEstimations}{Eine Liste von Posenschätzungen}
+\newAttribute{PointCloud}{Ein PointCloud-Datensatz}
 \closeMembers
 
 \subsubsection{IDataView}
@@ -84,21 +84,21 @@ Eine Schnittstelle zum Anwenden der zugrundeliegenden Daten auf die Oberfläche.
 
 \subsubsection{EExecutionState}
 Eine Enumeration mit verschiedenen möglichen Ausführungszuständen eines einzelnen Schrittes.
-\beginMembersSmall
-\newMemberSmall{Ready}{Der Schritt ist bereit}
-\newMemberSmall{Running}{Der Schritt wird gerade ausgeführt}
-\newMemberSmall{Finished}{Der Schritt hat die Ausführung beendet}
-\newMemberSmall{Error}{Der Schritt wurde mit einem Fehler beendet}
+\beginAttributes
+\newAttribute{Ready}{Der Schritt ist bereit}
+\newAttribute{Running}{Der Schritt wird gerade ausgeführt}
+\newAttribute{Finished}{Der Schritt hat die Ausführung beendet}
+\newAttribute{Error}{Der Schritt wurde mit einem Fehler beendet}
 \closeMembers
 
 \subsubsection{SExecutionStateChanged}
 Das Signal wird gesendet, sobald sich der Ausführungszustand eines Datensatzes ändert.
-\beginMembersSmall
-\newMemberSmall{AlgorithmState: EExecutionState}{Der neue Ausführungszustand des Schrittes}
-\newMemberSmall{ParentWorkflow: *AWorkflow}{Der Workflow, der die Meldung gesendet hat}
-\newMemberSmall{DataStore: *AContextDataStore}{Der DataStore, der den neuen Zustand angenommen hat}
-\newMemberSmall{Algorithm: *APlugin}{Der Betroffene Algorithmus}
-\newMemberSmall{Step: uint32}{Der Schritt, in dem sich der DataStore befindet}
+\beginAttributes
+\newAttribute{AlgorithmState: EExecutionState}{Der neue Ausführungszustand des Schrittes}
+\newAttribute{ParentWorkflow: *AWorkflow}{Der Workflow, der die Meldung gesendet hat}
+\newAttribute{DataStore: *AContextDataStore}{Der DataStore, der den neuen Zustand angenommen hat}
+\newAttribute{Algorithm: *APlugin}{Der Betroffene Algorithmus}
+\newAttribute{Step: uint32}{Der Schritt, in dem sich der DataStore befindet}
 \closeMembers
 
 \subsubsection{APlugin}\label{Workflow:APlugin}
