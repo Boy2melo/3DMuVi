@@ -40,10 +40,14 @@
 \newcommand{\beginSlots}{\\ \textbf{Slots:} \begin{itemize} }
 %% Liste ein paar einzelne Attribute auf
 \newcommand{\beginAttributes}{\\ \textbf{Attribute:} \begin{itemize} }
+	
+\newcommand{\beginSignals}{\\ \textbf{Signale:} \begin{itemize} }
 %% Ein neuer Member. Zuerst Name, dann Argumente + evtl Docs, Dann rückgabe, dann beschreibung
 \newcommand{\newMember}[4] {\item \textbf{#1} \\ #4 \\Übergabeparameter: #2 \\ Rückgabetyp: #3}
 %% Ein neuer Slot. Zuerst name, dann passendes Signal, dann beschreibung
 \newcommand{\newSlot}[3]{\item \textbf{#1} \\ #3 \\Signal: #2}
+%% Ein neues Signal. Zuerst name, dann parameter, dann beschreibung
+\newcommand{\newSignal}[3]{\item \textbf{#1} \\ #3 \\Übergabeparameter: #2 \\ Rückgabetyp: Signal}
 %% Ein neues Attribut. Zuerst Name inkl Typ, dann beschreibung
 \newcommand{\newAttribute}[2]{ \item \textbf{#1} \\ #2}
 %% Ein neuer Abstrakter Member. Siehe \newMember

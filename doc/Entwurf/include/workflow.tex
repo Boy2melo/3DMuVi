@@ -32,8 +32,8 @@ Eine Klasse, die string-Konstanten enthält, welche den Typ des benutzen \hyperr
 \subsubsection{AContextDataStore}\label{Workflow:AContextDataStore}
 Enthält die Daten, welche für einen Bestimmten \hyperref[Workflow:AWorkflow]{Workflow} zur Verfügung gestellt werden. Jeder Datentyp kann genau einmal im Store vorkommen. Für mehrere gleiche Daten an unterschiedlichen Schritten sind unterschiedliche Klassen anzulegen.
 \beginMembers
-\newMemberAbstract{getSupported-DataTypes}{void}{const vector<string>}{Gibt eine Liste aller Datentypen in dem Data Store für den Workflow zurück.}
-\newMemberAbstract{InitializeFrom-Storage}{*DataSet}{void}{Initialisiere den Container aus einem Storage heraus.}
+\newMemberAbstract{getSupportedDataTypes}{void}{const vector<string>}{Gibt eine Liste aller Datentypen in dem Data Store für den Workflow zurück.}
+\newMemberAbstract{InitializeFromStorage}{*DataSet}{void}{Initialisiere den Container aus einem Storage heraus.}
 \newMemberAbstract{<typename t> getData}{void}{*TDataPacket <t>}{Gibt Daten eines bestimmten Typs zurück, falls vorhanden, null sonst.}
 \newMember{getId}{void}{string}{Gibt eine eindeutige ID für den Data Store zurück für Verwaltungszwecke.}
 \newMember{Serialize}{void}{void}{Befiehlt dem Data Store, alle Ergebnisse an das DataSet und damit die Festplatte zu übermitteln}
@@ -44,8 +44,8 @@ Enthält die Daten, welche für einen Bestimmten \hyperref[Workflow:AWorkflow]{W
 Abstrahiert den Zugriff zu den Daten, die von einem bestimmten \hyperref[Workflow:APlugin]{Plugin} benötigt werden und liefert Informationen zu den Verbrauchten und Produzierten Datentypen.
 \beginMembers
 \newMemberAbstract{bindTo-DataStore}{*AContext-DataStore}{void}{Lade die Daten für den Algorithmus von gegebenem DataStore}
-\newMemberAbstract{getInput-DataTypes}{void}{const vector<string>}{Eine Liste aller Daten, die als Eingabe benötigt werden.}
-\newMemberAbstract{getOutput-DataTypes}{void}{const vector<string>}{Eine Liste aller Daten, die als Ausgabe erzeugt werden.}
+\newMemberAbstract{getInputDataTypes}{void}{const vector<string>}{Eine Liste aller Daten, die als Eingabe benötigt werden.}
+\newMemberAbstract{getOutputDataTypes}{void}{const vector<string>}{Eine Liste aller Daten, die als Ausgabe erzeugt werden.}
 \closeMembers
 
 \subsubsection{SDataChanged}
@@ -78,7 +78,7 @@ Eine Klasse, die string-Konstanten enthält, die den Typ eines Datenpakets defin
 \newAttribute{PointCloud}{Ein PointCloud-Datensatz}
 \closeMembers
 
-\subsubsection{IDataView}
+\subsubsection{IDataView} \label{Workflow:IDataView}
 Eine Schnittstelle zum Anwenden der zugrundeliegenden Daten auf die Oberfläche.
 
 
@@ -111,7 +111,7 @@ Beschreibt ein einzelnes Plugin, welches einen einzelnen \hyperref[Workflow:IAlg
 \newMember{Version}{void}{uin32}{Gibt die Version des Plugins zurück}
 \closeMembers 
 
-\subsubsection{CPluginManager}
+\subsubsection{CPluginManager} \label{Workflow:CPluginManager}
 Verwaltet alle \hyperref[Workflow:APlugin]{Plugins}, die vom System gefunden wurden.
 \beginMembers
 \newMember{Initialize}{void}{int32}{Initialisiert den Manager und lädt alle Plugins. Liefert einen Standard Returncode.}
@@ -159,7 +159,12 @@ Das Packet Workflow enthält Klassen, die für einen einzelnen Workflow nötig s
 %....
 \section{Entwurfsmuster}
 % verwendete Entwurfsmuster aufzählen erklären etc mit verinfachtem Diagramm (Klassen ohne Inhalt nur die Namen)
-
+\begin{itemize}
+	\item \textbf{Singleton}
+	\\ Der \hyperref[Workflow:CPluginManager]{Plugin Manager} benutzt dieses Pattern, damit Plugins nicht mehrmals geladen werden können, was zu Zugriffsfehlern führen kann.
+	\item \textbf{Visitor Pattern}
+	\\ Das \hyperref[Workflow:IDataView]{DataView} benutzt das Visitorpattern, um Downcasts von Datenpacketen zu vermeiden.
+\end{itemize}
 \section{Klassendiagramm}
 % Klassendiagramm des Moduls
 
