@@ -1,14 +1,161 @@
 %Einleitungstext zum Modul
 \section{Klassen}
+
+\subsection{Grundgerüst}
+Alle Klassen, die für die Funktionen benötigt werden, ohne spezifische Implementierungen zu nennen.
 %Bild der Klasse aus dem Klassendiagramm (nur die Klasse jeweils)
 %Dokumentation zur Klasse, öffentlichen Methoden und Konstruktor sowie:
 %Signal und Slots als Methoden mit Rückgabewert Sigal bzw Slot (zur kenntlichkeit) 
+\subsubsection{IAlgorithm}\label{Workflow:IAlgorithm}
+Ein Interface, dass die Funktionen der Algorithmen verallgemeinert und unabhängig von Typen macht, wodurch das Template \hyperref[Workflow:TAlgorithm]{TAlgorithm} polymorph wird.
+\beginMembers
+\newMemberAbstract{{setLogger}}{*Logger}{void}{Initialisiert einen Logger für den Algorithmus}
+\newMemberAbstract{{setParameter}}{*???}{void}{Setze die Parameter für den Algorithmus}
+\newMemberAbstract{{run}}{void}{void}{Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.}
+\closeMembers
+
+\subsubsection{TAlgorithm}\label{Workflow:TAlgorithm}
+Die Konkrete Implementierung eines Algorithmus.
+\beginMembers
+\newMemberAbstract{setData}{*T}{void}{Setze die Daten, die der Algorithmus benutzen soll.}
+\closeMembers
+
+\subsubsection{EAlgorithmType}
+Eine Klasse, die string-Konstanten enthält, welche den Typ des benutzen \hyperref[Workflow:IAlgorithm]{Algorithmus} in einem \hyperref[Workflow:APlugin]{Plugin} angeben.
+\beginMembersSmall
+\newMemberSmall{FeatureMatcher}{Beschreibt ein Plugin zum Feature Matching.}
+\newMemberSmall{DetphMapper}{Beschreibt ein Plugin zum schätzen von Tiefenkarten.}
+\newMemberSmall{PoseEstimator}{Beschreibt ein Plugin zum schätzen von Posen.}
+\newMemberSmall{PclReconstructor}{beschreibt ein Plugin zur Rekonstruktion von PCL Daten.}
+\closeMembers
+
+\subsubsection{AContextDataStore}\label{Workflow:AContextDataStore}
+Enthält die Daten, welche für einen Bestimmten \hyperref[Workflow:AWorkflow]{Workflow} zur Verfügung gestellt werden. Jeder Datentyp kann genau einmal im Store vorkommen. Für mehrere gleiche Daten an unterschiedlichen Schritten sind unterschiedliche Klassen anzulegen.
+\beginMembers
+\newMemberAbstract{getSupported-DataTypes}{void}{const vector<string>}{Gibt eine Liste aller Datentypen in dem Data Store für den Workflow zurück.}
+\newMemberAbstract{InitializeFrom-Storage}{*DataSet}{void}{Initialisiere den Container aus einem Storage heraus.}
+\newMemberAbstract{<typename t> getData}{void}{*TDataPacket <t>}{Gibt Daten eines bestimmten Typs zurück, falls vorhanden, null sonst.}
+\newMember{getId}{void}{string}{Gibt eine eindeutige ID für den Data Store zurück für Verwaltungszwecke.}
+\newMember{Serialize}{void}{void}{Befiehlt dem Data Store, alle Ergebnisse an das DataSet und damit die Festplatte zu übermitteln}
+\newMember{getCurrentCalculationStep}{void}{uint32}{Gibt den aktuellen Ausführungsschritt auf diesem Datensatz an.}
+\closeMembers
+
+\subsubsection{IDataAccess}
+Abstrahiert den Zugriff zu den Daten, die von einem bestimmten \hyperref[Workflow:APlugin]{Plugin} benötigt werden und liefert Informationen zu den Verbrauchten und Produzierten Datentypen.
+\beginMembers
+\newMemberAbstract{bindTo-DataStore}{*AContext-DataStore}{void}{Lade die Daten für den Algorithmus von gegebenem DataStore}
+\newMemberAbstract{getInput-DataTypes}{void}{const vector<string>}{Eine Liste aller Daten, die als Eingabe benötigt werden.}
+\newMemberAbstract{getOutput-DataTypes}{void}{const vector<string>}{Eine Liste aller Daten, die als Ausgabe erzeugt werden.}
+\closeMembers
+
+\subsubsection{SDataChanged}
+Wird gesendet, sobald sich die Daten innerhalb eines \hyperref[Workflow:AContextDataStore]{DataStores} ändern.
+\beginMembersSmall
+\newMemberSmall{DataStore: *AContextDataStore}{Enthält den DataStore, der sich geändert hat}
+\closeMembers
+
+\subsubsection{IDataPacket}
+Ein Interface, dass dem Template \hyperref[Workflow:TDataPacket]{TDataPacket} Polymorphismus verleiht.
+\beginMembers
+\newMember{getId}{void}{string}{Gibt die ID des Datenpackets zurück}
+\newMember{setId}{string}{void}{Setzt die ID des Datenpackets}
+\newMemberAbstract{getType}{void}{const string}{Gibt den Typ der enthaltenen Daten zurück}
+\closeMembers
+
+\subsubsection{TDataPacket}\label{Workflow:TDataPacket}
+Ein Template, dass Zugriff zu einem einzelnen Typ von Daten ermöglicht.
+\beginMembers
+\newMember{<typename t> getData}{void}{*t}{Gibt die Daten des Packets zurück}
+\closeMembers
+
+\subsubsection{EDataTypes}
+Eine Klasse, die string-Konstanten enthält, die den Typ eines Datenpakets definieren.
+\beginMembersSmall
+\newMemberSmall{Images}{Die Eingabebilder}
+\newMemberSmall{FeatureMatches}{Eine Liste an FeatureMatches}
+\newMemberSmall{DepthMaps}{Eine Liste von Tiefenkarten}
+\newMemberSmall{PoseEstimations}{Eine Liste von Posenschätzungen}
+\newMemberSmall{PointCloud}{Ein PointCloud-Datensatz}
+\closeMembers
+
+\subsubsection{IDataView}
+Eine Schnittstelle zum Anwenden der zugrundeliegenden Daten auf die Oberfläche.
+
+
+\subsubsection{EExecutionState}
+Eine Enumeration mit verschiedenen möglichen Ausführungszuständen eines einzelnen Schrittes.
+\beginMembersSmall
+\newMemberSmall{Ready}{Der Schritt ist bereit}
+\newMemberSmall{Running}{Der Schritt wird gerade ausgeführt}
+\newMemberSmall{Finished}{Der Schritt hat die Ausführung beendet}
+\newMemberSmall{Error}{Der Schritt wurde mit einem Fehler beendet}
+\closeMembers
+
+\subsubsection{SExecutionStateChanged}
+Das Signal wird gesendet, sobald sich der Ausführungszustand eines Datensatzes ändert.
+\beginMembersSmall
+\newMemberSmall{AlgorithmState: EExecutionState}{Der neue Ausführungszustand des Schrittes}
+\newMemberSmall{ParentWorkflow: *AWorkflow}{Der Workflow, der die Meldung gesendet hat}
+\newMemberSmall{DataStore: *AContextDataStore}{Der DataStore, der den neuen Zustand angenommen hat}
+\newMemberSmall{Algorithm: *APlugin}{Der Betroffene Algorithmus}
+\newMemberSmall{Step: uint32}{Der Schritt, in dem sich der DataStore befindet}
+\closeMembers
+
+\subsubsection{APlugin}\label{Workflow:APlugin}
+Beschreibt ein einzelnes Plugin, welches einen einzelnen \hyperref[Workflow:IAlgorithm]{Algorithmus} kapselt.
+\beginMembers
+\newMemberAbstract{DataAccess}{void}{*IDataAccess}{Gibt Zugriff auf eine, für das Plugin passende, implementierung von IDataAccess}
+\newMemberAbstract{GetAlgorithm}{void}{*IAlgorithm}{Gibt einen Zugriff auf den Konkreten Algorithmus des Plugins}
+\newMember{Autor}{void}{string}{Gibt den Namen des Autors des Plugins zurück}
+\newMember{Date}{void}{string}{Gibt das Datum der letzten Änderung an dem Plugincode zurück}
+\newMember{Version}{void}{uin32}{Gibt die Version des Plugins zurück}
+\closeMembers 
+
+\subsubsection{CPluginManager}
+Verwaltet alle \hyperref[Workflow:APlugin]{Plugins}, die vom System gefunden wurden.
+\beginMembers
+\newMember{Initialize}{void}{int32}{Initialisiert den Manager und lädt alle Plugins. Liefert einen Standard Returncode.}
+\newMember{getPlugins}{void}{const vector<*APlugin>}{Gibt eine Liste aller Plugins zurück}
+\newMember{getPlugins}{const string}{vector <*APlugin>}{Gibt einer Liste aller Plugins von einem gegebenen Typ zurück.}
+\closeMembers
+
+\subsubsection{AWorkflow}\label{Workflow:AWorkflow}
+Verwaltet \hyperref[Workflow:IAlgorithm]{Algorithmen} und \hyperref[Workflow:AContextDataStore]{Daten}, die für eine bestimmte Problemstellung und Herangehensweise benötigt werden.
+\beginMembers
+\newMemberAbstract{getStepCount}{void}{const uint32}{Gibt die Anzahl der Schritte im Workflow zurück}
+\newMemberAbstract{getStepType}{const uint32}{string}{Gibt den Typ eines Algorithmus für einen bestimmten Schritt zurück}
+\newMemberAbstract{trySetStep}{const uint32, *APlugin}{bool}{Versucht, ein Plugin einem Schritt zuzuweisen. True, wenn das Plugin kompatibel war.}
+\newMemberAbstract{getStep}{const uint32}{*APlugin}{Liefert das gesetzte Plugin für einen bestimmten Schritt}
+\newMemberAbstract{getDataStores}{void}{vector<*AContextDataStore>}{Liefert alle registrierten DataStores für diesen Workflow}
+\newMemberAbstract{addDataStore}{void}{*AContextDataStore}{Gibt eine Instanz eines DataStores für diesen Workflow zurück und fügt ihn in die Verwaltung ein.}
+\newMemberAbstract{removeDataStore}{const string}{void}{Entfernt einen DataStore anhand seiner ID}
+\newMember{run}{const string}{void}{Startet die Ausführung eines bestimmten DataStores}
+\newMember{getState}{const string}{uin3232}{Gibt den aktuellen Schritt eines DataStores an, -1 für ende, < -10 für Fehler bei schritt -n-10}
+\newMember{checkAvailableDataTypes}{void}{bool}{Prüft, ob die Algorithmen alle benötigten Daten auch produzieren}
+\closeMembers
+
+\subsection{Konkrete Umsetzungen}
+Implementationen der oben genannten Konstrukte nach den Forderungen im Pflichtenheft exemplarisch für jeweils eine Implementierung pro Klasse, da sich einiges Wiederholt und keinen Mehrwert bieten kann, vor allem da das Programm in diese Richtungen erweiterbar ist.
+\subsubsection{CFourPhaseWorkflow} \label{Workflow:CFourPhaseWorkflow}
+Implementiert \hyperref[Workflow:AWorkflow]{AWorkflow} und stellt einen vier Phasen Workflow zur Verfügung, der das einstellen von vier Algorithmen erlaubt.
+\subsubsection{CFourPhaseDataStore}
+Stellt den Datenspeicher für den \hyperref[Workflow:CFourPhaseWorkflow]{vier Phasen Workflow} bereit.
+\subsubsection{CStereoRectificationPlugin}
+Ein Beispiel Plugin für den Algorithmus Stereo Rectification.
+\subsubsection{CStereoRectificationData}
+Ein Datenadapter für den Algorithmus Stereo Rectification
+\subsubsection{CStereoRectificationAlgorithm}
+Die Konkrete Implementierung des Stereo Rectification Algorithmus.
+
 \section{Pakete}
 %Einteilung der Teilmodule in Pakete 
-\subsection{Paket 1}
+Das Modul Workflow kann in zwei größere Pakete eingeteilt werden.
+\subsection{Plugin}
+Das Packet Plugin beinhaltet alle Klassen, die in eine Bibliothek ausgelagert werden und mit \hyperref[Workflow:APlugin]{APlugin} zusammenhängen.
 %Bild des Pakets mit vereinfachter Klassendarstellung
 %Begründung / Dokumentation / Erklärung zum Paket
-\subsection{Paket 2}
+\subsection{Workflow}
+Das Packet Workflow enthält Klassen, die für einen einzelnen Workflow nötig sind und später eventuell auch ausgelagert werden können.
 %....
 \section{Entwurfsmuster}
 % verwendete Entwurfsmuster aufzählen erklären etc mit verinfachtem Diagramm (Klassen ohne Inhalt nur die Namen)

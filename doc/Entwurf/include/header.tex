@@ -4,7 +4,8 @@
 
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern}					% Schönere Schriftart
+\usepackage{lmodern}			% Schönere Schriftart		
+\usepackage{hyperref}
 
 %\usepackage[ansinew]{inputenc}
 %\usepackage[utf8]{inputenc}   % wegen deutschen Umlauten & UTF-8
@@ -30,3 +31,14 @@
 \subtitle{Entwurfsdokument}
 \author{Grigori Schapoval\and Nathanael Schneider\and Tim Brodbeck\and Stefan Wolf\and Jens Manig\and Laurenz Thiel}
 \date{\includegraphics[width=.3\textwidth]{img/logo.pdf}\\\vspace{3mm}WS 2015/16}
+
+
+% Ein paar makros (Nathanael)
+\newcommand{\beginMembers}{\\ \begin{tabular}{|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{7cm}|} \hline
+		Methode & Argumente & Rückgabetyp & Beschreibung \\ \hline}
+\newcommand{\beginMembersSmall}{\\ \begin{tabular}{|p{7.5cm}|p{8cm}|} \hline
+		Feld & Beschreibung \\ \hline}
+\newcommand{\newMember}[4] {#1 & #2 & #3 & #4 \\ \hline}
+\newcommand{\newMemberSmall}[2]{ #1 & #2 \\ \hline}
+\newcommand{\newMemberAbstract}[4]{\textit{#1} & #2 & #3 & #4 \\ \hline}
+\newcommand{\closeMembers}{\end{tabular}}
