@@ -1,10 +1,38 @@
-% vollständige Beschreibung der Aufgabenstellung.
-Die Welt wird digital - und mit ihr viele Prozesse. Die Kommunikation läuft heutzutage größtenteils mit digitalen Hilfsmitteln. Auch Geschäftsprozesse werden immer mehr Digital abgewickelt, soweit möglich. Um dies zu bewerkstelligen, müssen die Daten aus der Realen Welt allerdings erstmal digitalisiert werden. Viel ist in dieser Richtung geschehen, wie z.B. Kameras, die Digitalisierung ganzer Bibliotheken und das erfassen von Echtzeitdaten über Sensornetze sind nur ein Bruchteil. Doch das einlesen komplexer Daten ist bis heute ein nicht-triviales Problem.
+\section{Einleitung}
 
-Viele Arbeitsbereiche erfordern eine Speicherung und Übertragung von Daten, wie sie im echten Leben vorzufinden sind - z.B. Dreidimensionale Bilder. In der Medizin werden sie benutzt, um Knochen und Skelette platzsparend verfügbar zu haben, in der Automobilindustrie benötigt man sie, um Prototypen schon vor dem ersten tatsächlichen Fertigungsschritt vor Augen zu haben. Besonders die Spielindustrie steigert ihre Anforderungen nach immer besseren und realistischeren Modellen.
+Ziel des 3D-MuVi Projekts ist es, die Kombination von Algorithmen und das damit
+verbundene Suchen nach dem bestmöglichen Ergebnis zu vereinfachen. 
+Der Benutzer bekommt die Möglichkeit, verschiedene Algorithmen für die einzelnen Schritte auszuwählen
+und sich die Ergebnisse anzusehen, um somit das bestmögliche Resultat zu erzielen.  \linebreak 
+ - Zitat: Pflichtenheft
+\\\\
+Dieses Dokument stellt nun den Softwaretechnischen Entwurf des 3D-MuVi Prgramms nach den Musskriterien da.
+Der Entwurf ist in UML Form dargestellt und kann somit leicht von der späteren Implementierung in der Programmiersprache C++ mit QT 5 abweichen. 
+Sofern es in der Implementierungsphase zur Umsetzung von Kannkriterien kommt, kann und muss dieser Entwurf stellenweise erweitert oder verändert werden.
+\\\\
+Es folgt zunächst eine Liste der Kannkriterien nach deren Priorisierung. 
+Anschließend wird der Architekturstil der Software vorgestellt.
+Darauf Folgt der Entwurf der einzelnen Module mit ihren Paketen und Klassen.
+Im Anschluss folgen Sequenzdiagramme und Klassendiagramme des Projekts.
 
-Für viele dieser Anforderungen gibt es eine einfach erscheinende Lösung. Man nehme ein reales Objekt und digitalisiere seinen dreidimensionalen Aufbau. Doch leider ist das Problem nicht so einfach, wie es sich zuerst anhört. Es gibt viele verschiedene Verfahren um diese Aufgabenstellung und jedes einzelne bewährt sich besonders in einem spezifischen Problemfeld. Ein Beispiel ist Motion Capture, das besonders für die Rekonstruktion von Bewegungen im Dreidimensionalen Raum über die Zeit genutzt wird, Laserscanner können schnell und zuverlässig Personen vermessen. Dieses Projekt beschäftigt sich gezielt mit der Rekonstruktion von digitalen Repräsentationen der Objekte über zweidimensionale Aufnahmen des gewünschten Gegenstandes oder einer kompletten Szene.
 
-Die für den Prozess verwendeten Algorithmen sind jedoch sehr spezialisiert und decken meist nur einen bestimmten Anwendungsfall ab. Zudem lassen sich für die einzelnen Schritte auch unterschiedliche Algorithmen kombinieren, was die Zusammenstellung für ein perfektes Ergebnis umso schwerer macht. So macht es z.B. einen Unterschied, ob man eine Szene aus einem Videoclip rekonstruieren möchte, ob man einzelne Fotos aus verschiedenen Blickrichtungen hat oder ob es sich um eine Luftaufnahme handelt.
+\section{Ergänzung Anforderungen}
+Im Folgenden werden die Kannkriterien erweitert und in 2 Prioritätsklassen unterschieden.
+Falls im Ramen der Implementierung ein odere mehrere Kannkriterien umgesetzt werden können, so werden zunächst die hoch priorisierten Kannkriterien umgesetzt.
+\subsection{Hoch Priorisierte Kannkriterien}
+Kannkriterien die möglicherweise umgesetzt werden.
+\subsubsection{Modul Workflow}
+\subsubsection{Modul I/O}
+\subsubsection{Modul Visualisierung}
+\subsubsection{Modul Interaktion}
+\subsubsection{Modul Logger}
+\subsubsection{Modul Einstellungen}
 
-Ziel des 3D-MuVi Projekts ist es, die Kombination von Algorithmen und das damit verbundene Suchen nach dem bestmöglichen Ergebnis zu vereinfachen. Der Benutzer bekommt die Möglichkeit, verschiedene Algorithmen für die einzelnen Schritte auszuwählen und sich die Ergebnisse anzusehen, um somit das bestmögliche Resultat zu erzielen.
+\subsection{Niedrig Priorisierte Kannkriterien}
+Kannkriterien die vermutlich nicht umgesetzt werden können.
+\subsubsection{Modul Workflow}
+\subsubsection{Modul I/O}
+\subsubsection{Modul Visualisierung}
+\subsubsection{Modul Interaktion}
+\subsubsection{Modul Logger}
+\subsubsection{Modul Einstellungen}
