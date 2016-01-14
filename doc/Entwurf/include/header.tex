@@ -35,13 +35,13 @@
 
 % Ein paar makros (Nathanael)
 %% Liste ein paar Methoden auf
-\newcommand{\beginMembers}{\\ \textbf{Methoden:} \begin{itemize} }
+\newcommand{\beginMembers}{~\\ \textbf{Methoden:} \begin{itemize} }
 %% Liste ein paar Slots auf
-\newcommand{\beginSlots}{\\ \textbf{Slots:} \begin{itemize} }
+\newcommand{\beginSlots}{~\\ \textbf{Slots:} \begin{itemize} }
 %% Liste ein paar einzelne Attribute auf
-\newcommand{\beginAttributes}{\\ \textbf{Attribute:} \begin{itemize} }
+\newcommand{\beginAttributes}{~\\ \textbf{Attribute:} \begin{itemize} }
 	
-\newcommand{\beginSignals}{\\ \textbf{Signale:} \begin{itemize} }
+\newcommand{\beginSignals}{~\\ \textbf{Signale:} \begin{itemize} }
 %% Ein neuer Member. Zuerst Name, dann Argumente + evtl Docs, Dann rückgabe, dann beschreibung
 \newcommand{\newMember}[4] {\item \textbf{#1} \\ #4 \\Übergabeparameter: #2 \\ Rückgabetyp: #3}
 %% Ein neuer Slot. Zuerst name, dann passendes Signal, dann beschreibung
@@ -52,5 +52,7 @@
 \newcommand{\newAttribute}[2]{ \item \textbf{#1} \\ #2}
 %% Ein neuer Abstrakter Member. Siehe \newMember
 \newcommand{\newMemberAbstract}[4]{\item \textbf{\textit{#1}} \\ #4 \\Übergabeparameter: #2 \\ Rückgabetyp: #3}
+%% Ein neuer Statischer Member. Siehe \newMember
+\newcommand{\newMemberStatic}[4]{\item \underline{\textit{#1}} \\ #4 \\Übergabeparameter: #2 \\ Rückgabetyp: #3}
 %% Beendet die Memberdeklaration
 \newcommand{\closeMembers}{\end{itemize} }

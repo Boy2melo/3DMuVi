@@ -1,12 +1,13 @@
 %Einleitungstext zum Modul
 \section{Klassen}
-
+\graphicspath{{./img/workflow/}}
 \subsection{Grundgerüst}
 Alle Klassen, die für die Funktionen benötigt werden, ohne spezifische Implementierungen zu nennen.
 %Bild der Klasse aus dem Klassendiagramm (nur die Klasse jeweils)
 %Dokumentation zur Klasse, öffentlichen Methoden und Konstruktor sowie:
 %Signal und Slots als Methoden mit Rückgabewert Sigal bzw Slot (zur kenntlichkeit) 
 \subsubsection{IAlgorithm}\label{Workflow:IAlgorithm}
+\includegraphics[scale=1, resolution=100]{IAlgorithm}\\
 Ein Interface, dass die Funktionen der Algorithmen verallgemeinert und unabhängig von Typen macht, wodurch das Template \hyperref[Workflow:TAlgorithm]{TAlgorithm} polymorph wird.
 \beginMembers
 \newMemberAbstract{{setLogger}}{*Logger}{void}{Initialisiert einen Logger für den Algorithmus}
@@ -15,12 +16,14 @@ Ein Interface, dass die Funktionen der Algorithmen verallgemeinert und unabhäng
 \closeMembers
 
 \subsubsection{TAlgorithm}\label{Workflow:TAlgorithm}
+\includegraphics[scale=1, resolution=100]{TAlgorithm}\\
 Die Konkrete Implementierung eines Algorithmus.
 \beginMembers
 \newMemberAbstract{setData}{*T}{void}{Setze die Daten, die der Algorithmus benutzen soll.}
 \closeMembers
 
 \subsubsection{EAlgorithmType}
+\includegraphics[scale=1, resolution=100]{EAlgorithmType}\\
 Eine Klasse, die string-Konstanten enthält, welche den Typ des benutzen \hyperref[Workflow:IAlgorithm]{Algorithmus} in einem \hyperref[Workflow:APlugin]{Plugin} angeben.
 \beginAttributes
 \newAttribute{FeatureMatcher}{Beschreibt ein Plugin zum Feature Matching.}
@@ -30,6 +33,7 @@ Eine Klasse, die string-Konstanten enthält, welche den Typ des benutzen \hyperr
 \closeMembers
 
 \subsubsection{AContextDataStore}\label{Workflow:AContextDataStore}
+\includegraphics[scale=1, resolution=100]{AContextDataStore}\\
 Enthält die Daten, welche für einen Bestimmten \hyperref[Workflow:AWorkflow]{Workflow} zur Verfügung gestellt werden. Jeder Datentyp kann genau einmal im Store vorkommen. Für mehrere gleiche Daten an unterschiedlichen Schritten sind unterschiedliche Klassen anzulegen.
 \beginMembers
 \newMemberAbstract{getSupportedDataTypes}{void}{const vector<string>}{Gibt eine Liste aller Datentypen in dem Data Store für den Workflow zurück.}
@@ -38,6 +42,9 @@ Enthält die Daten, welche für einen Bestimmten \hyperref[Workflow:AWorkflow]{W
 \newMember{getId}{void}{string}{Gibt eine eindeutige ID für den Data Store zurück für Verwaltungszwecke.}
 \newMember{Serialize}{void}{void}{Befiehlt dem Data Store, alle Ergebnisse an das DataSet und damit die Festplatte zu übermitteln}
 \newMember{getCurrentCalculationStep}{void}{uint32}{Gibt den aktuellen Ausführungsschritt auf diesem Datensatz an.}
+\closeMembers
+\beginSignals
+\newSignal{DataChanged}{*SDataChanged}{Wird aufgerufen, sobald sich Daten geändert haben.}
 \closeMembers
 
 \subsubsection{IDataAccess}
@@ -49,12 +56,14 @@ Abstrahiert den Zugriff zu den Daten, die von einem bestimmten \hyperref[Workflo
 \closeMembers
 
 \subsubsection{SDataChanged}
+\includegraphics[scale=1, resolution=100]{SDataChanged}\\
 Wird gesendet, sobald sich die Daten innerhalb eines \hyperref[Workflow:AContextDataStore]{DataStores} ändern.
 \beginAttributes
 \newAttribute{DataStore: *AContextDataStore}{Enthält den DataStore, der sich geändert hat}
 \closeMembers
 
 \subsubsection{IDataPacket}
+\includegraphics[scale=1, resolution=100]{IDataPacket}\\
 Ein Interface, dass dem Template \hyperref[Workflow:TDataPacket]{TDataPacket} Polymorphismus verleiht.
 \beginMembers
 \newMember{getId}{void}{string}{Gibt die ID des Datenpackets zurück}
@@ -63,12 +72,14 @@ Ein Interface, dass dem Template \hyperref[Workflow:TDataPacket]{TDataPacket} Po
 \closeMembers
 
 \subsubsection{TDataPacket}\label{Workflow:TDataPacket}
+\includegraphics[scale=1, resolution=100]{TDataPacket}\\
 Ein Template, dass Zugriff zu einem einzelnen Typ von Daten ermöglicht.
 \beginMembers
 \newMember{<typename t> getData}{void}{*t}{Gibt die Daten des Packets zurück}
 \closeMembers
 
 \subsubsection{EDataTypes}
+\includegraphics[scale=1,resolution=100]{EDataTypes}\\
 Eine Klasse, die string-Konstanten enthält, die den Typ eines Datenpakets definieren.
 \beginAttributes
 \newAttribute{Images}{Die Eingabebilder}
@@ -79,10 +90,14 @@ Eine Klasse, die string-Konstanten enthält, die den Typ eines Datenpakets defin
 \closeMembers
 
 \subsubsection{IDataView} \label{Workflow:IDataView}
+\includegraphics[scale=1,resolution=100]{IDataView}\\
 Eine Schnittstelle zum Anwenden der zugrundeliegenden Daten auf die Oberfläche.
-
+\beginMembers
+\newMemberAbstract{<typename T> applyData}{*T}{void}{Bekommt ein Datenpacket und wendet dieses dann auf der Oberfläche an.}
+\closeMembers
 
 \subsubsection{EExecutionState}
+\includegraphics[scale=1,resolution=100]{EExecutionState}\\
 Eine Enumeration mit verschiedenen möglichen Ausführungszuständen eines einzelnen Schrittes.
 \beginAttributes
 \newAttribute{Ready}{Der Schritt ist bereit}
@@ -92,6 +107,7 @@ Eine Enumeration mit verschiedenen möglichen Ausführungszuständen eines einze
 \closeMembers
 
 \subsubsection{SExecutionStateChanged}
+\includegraphics[scale=1,resolution=100]{SExecutionStateChanged}\\
 Das Signal wird gesendet, sobald sich der Ausführungszustand eines Datensatzes ändert.
 \beginAttributes
 \newAttribute{AlgorithmState: EExecutionState}{Der neue Ausführungszustand des Schrittes}
@@ -102,6 +118,7 @@ Das Signal wird gesendet, sobald sich der Ausführungszustand eines Datensatzes 
 \closeMembers
 
 \subsubsection{APlugin}\label{Workflow:APlugin}
+\includegraphics[scale=1,resolution=100]{APlugin}\\
 Beschreibt ein einzelnes Plugin, welches einen einzelnen \hyperref[Workflow:IAlgorithm]{Algorithmus} kapselt.
 \beginMembers
 \newMemberAbstract{DataAccess}{void}{*IDataAccess}{Gibt Zugriff auf eine, für das Plugin passende, implementierung von IDataAccess}
@@ -112,14 +129,17 @@ Beschreibt ein einzelnes Plugin, welches einen einzelnen \hyperref[Workflow:IAlg
 \closeMembers 
 
 \subsubsection{CPluginManager} \label{Workflow:CPluginManager}
+\includegraphics[scale=1,resolution=100]{CPluginManager}\\
 Verwaltet alle \hyperref[Workflow:APlugin]{Plugins}, die vom System gefunden wurden.
 \beginMembers
+\newMemberStatic{Instance}{void}{*CPluginManager}{Gibt die Instanz des Plugin Managers zurück}
 \newMember{Initialize}{void}{int32}{Initialisiert den Manager und lädt alle Plugins. Liefert einen Standard Returncode.}
 \newMember{getPlugins}{void}{const vector<*APlugin>}{Gibt eine Liste aller Plugins zurück}
 \newMember{getPlugins}{const string}{vector <*APlugin>}{Gibt einer Liste aller Plugins von einem gegebenen Typ zurück.}
 \closeMembers
 
 \subsubsection{AWorkflow}\label{Workflow:AWorkflow}
+\includegraphics[scale=1,resolution=100]{AWorkflow}\\
 Verwaltet \hyperref[Workflow:IAlgorithm]{Algorithmen} und \hyperref[Workflow:AContextDataStore]{Daten}, die für eine bestimmte Problemstellung und Herangehensweise benötigt werden.
 \beginMembers
 \newMemberAbstract{getStepCount}{void}{const uint32}{Gibt die Anzahl der Schritte im Workflow zurück}
@@ -132,6 +152,9 @@ Verwaltet \hyperref[Workflow:IAlgorithm]{Algorithmen} und \hyperref[Workflow:ACo
 \newMember{run}{const string}{void}{Startet die Ausführung eines bestimmten DataStores}
 \newMember{getState}{const string}{uin3232}{Gibt den aktuellen Schritt eines DataStores an, -1 für ende, < -10 für Fehler bei schritt -n-10}
 \newMember{checkAvailableDataTypes}{void}{bool}{Prüft, ob die Algorithmen alle benötigten Daten auch produzieren}
+\closeMembers
+\beginSignals
+\newSignal{ExecutionStateChanged}{*SExecutionStateChanged}{Wird aufgerufen, sobald sich der Ausführungszustand eines Algorithmus ändert.}
 \closeMembers
 
 \subsection{Konkrete Umsetzungen}
@@ -164,8 +187,18 @@ Das Packet Workflow enthält Klassen, die für einen einzelnen Workflow nötig s
 	\\ Der \hyperref[Workflow:CPluginManager]{Plugin Manager} benutzt dieses Pattern, damit Plugins nicht mehrmals geladen werden können, was zu Zugriffsfehlern führen kann.
 	\item \textbf{Visitor Pattern}
 	\\ Das \hyperref[Workflow:IDataView]{DataView} benutzt das Visitorpattern, um Downcasts von Datenpacketen zu vermeiden.
+	\item \textbf{Factory Pattern}
+	\\ Alle Referenzen zu \hyperref[Workflow:IDataAccess]{IDataAccess} und \hyperref[Workflow:AContextDataStore]{AContextDataStore} werden über das Factory Pattern innerhalb des Behälters erzeugt.
+	\item \textbf{Bridge Pattern}
+	\\ Das Bridge Pattern wird durchgängig bei den allermeisten Klassen im Workflow angewendet. Ausnahmen sind \hyperref[Workflow:CPluginManager]{CPluginManager} und \hyperref[Workflow:IDataView]{IDataView}.
+	\item \textbf{Adapter Pattern}
+	\\ Das Adapter Pattern wird bei \hyperref[Workflow:IDataAccess]{IDataAccess} und den spezifischen Implementierungen in den Algorithmen angewendet, damit die Algorithmen von dem Datenzugriff entkoppelt werden.
+	\item \textbf{Observer Pattern}
+	\\ Die Qt-Signale in den Klassen \hyperref[Workflow:AWorkflow]{AWorkflow} und \hyperref[Workflow:AContextDataStore]{AContextDataStore} implmentieren das Observer Pattern.
 \end{itemize}
 \section{Klassendiagramm}
+\subsection{Übersicht}
 % Klassendiagramm des Moduls
-
-%Bitte jeweils kleine Einleitungstexte usw in Unterkapitel gerne auch in Textform Erklärungen zufügen und auf mögliche erweiterungen durch die kann Kriterien eingehen soweit nötig !
+\includegraphics[width=\linewidth]{overview.png}
+\subsection{Beispiel: Plugin}
+\includegraphics[width=\linewidth]{Plugin.png}
