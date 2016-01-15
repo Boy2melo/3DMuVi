@@ -158,42 +158,54 @@ Verwaltet \hyperref[Workflow:IAlgorithm]{Algorithmen} und \hyperref[Workflow:ACo
 \closeMembers
 
 \subsection{Konkrete Umsetzungen}
-Implementationen der oben genannten Konstrukte nach den Forderungen im Pflichtenheft exemplarisch für jeweils eine Implementierung pro Klasse, da sich einiges Wiederholt und keinen Mehrwert bieten kann, vor allem da das Programm in diese Richtungen erweiterbar ist.
+Hier werden Implementierungen der oben genannten Konstrukte nach den Forderungen im Pflichtenheft exemplarisch für jeweils eine Implementierung pro Klasse gezeigt, da sich einiges Wiederholt und keinen Mehrwert bieten kann, vor allem da das Programm in diese Richtungen erweiterbar ist.
 \subsubsection{CFourPhaseWorkflow} \label{Workflow:CFourPhaseWorkflow}
+\includegraphics[scale=1,resolution=100]{CFourPhaseWorkflow}\\
 Implementiert \hyperref[Workflow:AWorkflow]{AWorkflow} und stellt einen vier Phasen Workflow zur Verfügung, der das einstellen von vier Algorithmen erlaubt.
-\subsubsection{CFourPhaseDataStore}
+\subsubsection{CFourPhaseWorkflowDataStore}
+\includegraphics[scale=1, resolution=100]{CFourPhaseWorkflowDataStore}\\
 Stellt den Datenspeicher für den \hyperref[Workflow:CFourPhaseWorkflow]{vier Phasen Workflow} bereit.
 \subsubsection{CStereoRectificationPlugin}
+\includegraphics[scale=1,resolution=100]{CStereoRectificationPlugin}\\
 Ein Beispiel Plugin für den Algorithmus Stereo Rectification.
 \subsubsection{CStereoRectificationData}
+\includegraphics[scale=1,resolution=100]{CStereoRectificationData}\\
 Ein Datenadapter für den Algorithmus Stereo Rectification
 \subsubsection{CStereoRectificationAlgorithm}
+\includegraphics[scale=1,resolution=100]{CStereoRectificationAlgorithm}\\
 Die Konkrete Implementierung des Stereo Rectification Algorithmus.
 
 \section{Pakete}
 %Einteilung der Teilmodule in Pakete 
 Das Modul Workflow kann in zwei größere Pakete eingeteilt werden.
 \subsection{Plugin}
-Das Packet Plugin beinhaltet alle Klassen, die in eine Bibliothek ausgelagert werden und mit \hyperref[Workflow:APlugin]{APlugin} zusammenhängen.
+Das Paket Plugin beinhaltet alle Klassen, die in eine Bibliothek ausgelagert werden und mit \hyperref[Workflow:APlugin]{APlugin} zusammenhängen.
+\\\includegraphics[scale=1,resolution=100]{PluginSimple}
 %Bild des Pakets mit vereinfachter Klassendarstellung
 %Begründung / Dokumentation / Erklärung zum Paket
 \subsection{Workflow}
-Das Packet Workflow enthält Klassen, die für einen einzelnen Workflow nötig sind und später eventuell auch ausgelagert werden können.
-%....
+Das Paket Workflow enthält Klassen, die für einen einzelnen Workflow nötig sind und später eventuell auch ausgelagert werden können.
+\\\includegraphics[scale=1,resolution=100]{WorkflowSimple}
 \section{Entwurfsmuster}
 % verwendete Entwurfsmuster aufzählen erklären etc mit verinfachtem Diagramm (Klassen ohne Inhalt nur die Namen)
 \begin{itemize}
 	\item \textbf{Singleton}
+	\\\includegraphics[scale=1, resolution=100]{SingletonPattern}
 	\\ Der \hyperref[Workflow:CPluginManager]{Plugin Manager} benutzt dieses Pattern, damit Plugins nicht mehrmals geladen werden können, was zu Zugriffsfehlern führen kann.
 	\item \textbf{Visitor Pattern}
+	\\\includegraphics[scale=1,resolution=120]{VisitorPattern}
 	\\ Das \hyperref[Workflow:IDataView]{DataView} benutzt das Visitorpattern, um Downcasts von Datenpacketen zu vermeiden.
 	\item \textbf{Factory Pattern}
+	\\\includegraphics[scale=1,resolution=100]{FactoryPattern}
 	\\ Alle Referenzen zu \hyperref[Workflow:IDataAccess]{IDataAccess} und \hyperref[Workflow:AContextDataStore]{AContextDataStore} werden über das Factory Pattern innerhalb des Behälters erzeugt.
 	\item \textbf{Bridge Pattern}
+	\\\includegraphics[scale=1, resolution=100]{BridgePattern}
 	\\ Das Bridge Pattern wird durchgängig bei den allermeisten Klassen im Workflow angewendet. Ausnahmen sind \hyperref[Workflow:CPluginManager]{CPluginManager} und \hyperref[Workflow:IDataView]{IDataView}.
 	\item \textbf{Adapter Pattern}
+	\\\includegraphics[scale=1, resolution=100]{AdapterPattern}
 	\\ Das Adapter Pattern wird bei \hyperref[Workflow:IDataAccess]{IDataAccess} und den spezifischen Implementierungen in den Algorithmen angewendet, damit die Algorithmen von dem Datenzugriff entkoppelt werden.
 	\item \textbf{Observer Pattern}
+	\\\includegraphics[scale=1, resolution=100]{ObserverPattern}
 	\\ Die Qt-Signale in den Klassen \hyperref[Workflow:AWorkflow]{AWorkflow} und \hyperref[Workflow:AContextDataStore]{AContextDataStore} implmentieren das Observer Pattern.
 \end{itemize}
 \section{Klassendiagramm}
@@ -202,3 +214,5 @@ Das Packet Workflow enthält Klassen, die für einen einzelnen Workflow nötig s
 \includegraphics[width=\linewidth]{overview.png}
 \subsection{Beispiel: Plugin}
 \includegraphics[width=\linewidth]{Plugin.png}
+\subsection{Beispiel: Workflow}
+\includegraphics[width=\linewidth]{Workflow.png}
