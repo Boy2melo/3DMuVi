@@ -1,4 +1,5 @@
 %Einleitungstext zum Modul
+Hier fehlt noch die Einleitung :) + Bilder
 \section{Klassen}
 \graphicspath{{./img/logger/}}
 %Bild der Klasse aus dem Klassendiagramm (nur die Klasse jeweils)
@@ -33,16 +34,38 @@ Initialisierungsklasse für den Logger erzeugt bei Objekterzeugung die  otextstr
 \newMember{{closeLog}}{void}{void}{schließt das aktuelle Log ab. Muss nach Ende des Algorithmendurchlaufs ausgeführt werden}
 \closeMembers
 \beginSignals
-\newSignal{newLogMessage}{message: QString, time: QString}{Wird aufgerufen, wenn eine neue Lognachricht vorhanden ist}
+\newSignal{newLogMessage}{message: QString, time: QString, type: QString}{Wird aufgerufen, wenn eine neue Lognachricht vorhanden ist}
 \closeMembers
+\subsection{CLogHistory}\label{Logger: CLogHistory}
+%\includegraphics[scale=1, resolution=100]{}\\
+temporäre History der Log Nachrichten für die Oberfläche 
+\beginMembers
+\newMember{{addHistory}}{message: QString, time: QString, type: QString}{void}{fügt neue Lognachrichten der History hinzu mit Nachricht, Zeit, Typ der Nachricht}
+\newMember{{getHistory}}{}{<vector<tuple<Qstring,QString,QString>>}{gibt die momentane History zurück mit Nachricht,Zeit,Typ der Nachricht als Vektor zurück}
+\closeMembers
+\subsection{QSLog}\label{Logger: QSLog}
+%\includegraphics[scale=1, resolution=100]{}\\
+Die QS Log Bibliothek stellt einen Logger bereit der durch CLogInit initialisiert und durch CLogController verwedendet wird um Log Dateien zu füllen.
+
+\subsection{otextstream}\label{Logger: otextstream}
+%\includegraphics[scale=1, resolution=100]{}\\
+Standard C++ Klasse die verwendet wird um 4 einfache Streamobjekte zu verfügung zu stellen, in welche die Algorithmen Plugins ihre Nachrichten schreiben können.
 \section{Pakete}
 %Einteilung der Teilmodule in Pakete 
-\subsection{Paket 1}
+\subsection{QSLog}
 %Bild des Pakets mit vereinfachter Klassendarstellung
 %Begründung / Dokumentation / Erklärung zum Paket
-\subsection{Paket 2}
+QSLog Bibliothek zur Speicherung der Logs auf der Festplatte
+\subsection{LogController}
+Stellt das Bindeglied zwischen den Algorithmen und der QSLog Bibliothek bereit.
+Stellt Log Funktionalitäten für die GUI bereit und speichert die Nachrichten temporär für die GUI ab.
 %....
 \section{Entwurfsmuster}
+<Singleton>
+\\die Klasse CLogInit stellt ein Singleton dar. Sie darf nur einmal erzeugt und verwendet werden.
+\\<Adapter>
+\\Die Klasse CLogController stellt einen Adapter zwischen den ostreamObjekten und den Stream Objekten der QSLog Bibliothek dar.
+
 % verwendete Entwurfsmuster aufzählen erklären etc mit verinfachtem Diagramm (Klassen ohne Inhalt nur die Namen)
 
 \section{Klassendiagramm}
