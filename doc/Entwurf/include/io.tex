@@ -1,8 +1,37 @@
 %Einleitungstext zum Modul
 \section{Klassen}
+\graphicspath{{./img/io/}}
+Alle Klassen, die für die Funktionen benötigt werden, ohne spezifische Implementierungen zu nennen.
 %Bild der Klasse aus dem Klassendiagramm (nur die Klasse jeweils)
 %Dokumentation zur Klasse, öffentlichen Methoden und Konstruktor sowie:
 %Signal und Slots als Methoden mit Rückgabewert Sigal bzw Slot (zur kenntlichkeit) 
+\subsection{InputDataSet}\label{IO:InputDataSet}
+\includegraphics[scale=1, resolution=100]{InputDataSet}\\
+Stellt Bilder aus einem Ordner für den Workflow als Eingabedaten bereit. 
+\beginMembers
+\newMemberAbstract{{InputDataSet}}{string path}{void}{Lädt alle Bilder die aus "path", versieht diese mit einer ID und generiert zu jedem Bild ein Thumbnail.}
+\newMemberAbstract{{getInputImages}}{void}{vector<tuple<uint32, QImage, QImage>>}{Gibt die vom Konstruktor erzeugten Daten als Tripel zurück. Die erste Komponente ist die ID, die zweite ein Bild in originaler Auflösung und die dritte ein Thumbnail des Bildes für das Vorschaufenster.}
+\closeMembers
+
+\subsection{ResultContext}\label{IO:ResultContext}
+\includegraphics[scale=1, resolution=100]{ResultContext}\\
+Erzeugt und repräsentiert den Ergebniskontext auf der Festplatte. Der dabei erzeugte Ordner wird an dem in den Einstellungen definierten Pfad gespeichert. In dem Ordner werden folgende Dateien und Ordner angelegt:
+\begin{itemize}
+\item globale Einstellungen
+\item Einstellungen des Workflows
+\item Einstellungen der Algorithmen
+\item Log Datei
+\item Ergebnisse in je einem Ordner pro Datentyp
+\end{itemize}
+Die IDs im folgenden korrespondieren mit der in \hyperref[Workflow:IDataPacket]{IDataPacket} definierten ID.
+\beginMembers
+\newMemberAbstract{{ResultContext}}{string path}{void}{Erstellt den ResultContext aus vorangegangenen Ergenissen welche im Ordner "path" liegen. }
+\newMemberAbstract{{addDataPacket}}{\hyperref[Workflow:TDataPacket]{TDataPacket} data}{void}{Das übergebene Datenpaket wird serialisiert und entsprechend seines \hyperref[Workflow:EDataType]{EDataType} in den Ergebnisordner geschrieben. Benannt wird die Datei nach ihrer ID.}
+%todo Darauf hinweisen das Bilder in einem extra Ordner pro DataPacket abgelegt werden.
+\newMemberAbstract{{getDataPacketIDs}}{void}{vector<string>}{Liefert eine Liste mit IDs von allen im Ergebnisordner gefundenen Dateien zurück.}
+\newMemberAbstract{{getDataPacket}}{string id}{\hyperref[Workflow:TDataPacket]{TDataPacket}}{Deserielisiert die Datei mit der ID "id" und gib das Ergebnis als \hyperref[Workflow:TDataPacket]{TDataPacket} zurück.}
+\closeMembers
+
 \section{Pakete}
 %Einteilung der Teilmodule in Pakete 
 \subsection{Paket 1}
@@ -11,9 +40,10 @@
 \subsection{Paket 2}
 %....
 \section{Entwurfsmuster}
+Lazy Loading
 % verwendete Entwurfsmuster aufzählen erklären etc mit verinfachtem Diagramm (Klassen ohne Inhalt nur die Namen)
 
 \section{Klassendiagramm}
-% Klassendiagramm des Moduls
 
+\includegraphics[width=\linewidth]{overview.png}
 %Bitte jeweils kleine Einleitungstexte usw in Unterkapitel gerne auch in Textform Erklärungen zufügen und auf mögliche erweiterungen durch die kann Kriterien eingehen soweit nötig !
