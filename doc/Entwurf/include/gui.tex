@@ -1,8 +1,170 @@
 %Einleitungstext zum Modul
+Die GUI stellt dem Benutzer eine grafische Oberfläche bereit, über die er die Anwendung bedienen kann. Dazu werden dem Nutzer verschiedene Einstellungsoptionen und Möglichkeiten zur Kontrolle der Ausführung angeboten. Des Weiteren stellt dieses Modul die Ergebnisse visuell dar.
 \section{Klassen}
 %Bild der Klasse aus dem Klassendiagramm (nur die Klasse jeweils)
 %Dokumentation zur Klasse, öffentlichen Methoden und Konstruktor sowie:
 %Signal und Slots als Methoden mit Rückgabewert Sigal bzw Slot (zur kenntlichkeit) 
+Nachfolgend werden alle Klassen des Moduls aufgelistet und beschrieben.
+\subsection{CMainWindow}
+Diese Klasse ist das Hauptfenster und beinhaltet verschiedene Widgets.
+%TODO: \includegraphics
+\beginSlots
+\item \textbf{onSaveWorkflow} \\Speichert die Workflowkonfiguration. \\Übergabeparameter: checked: bool
+\item \textbf{onSaveWorkflowAs} \\Öffnet einen Dateiauswahldialog und speichert die Workflowkonfiguration. \\Übergabeparameter: checked: bool
+\item \textbf{onLoadImages} \\Öffnet einen Ordnerauswahldialog und lädt die Eingabebilder. \\Übergabeparameter: checked: bool
+\item \textbf{onAdvancedLoadFiles} \\Öffnet einen Ordnerauswahldialog und lädt alte Ergebnisdaten. \\Übergabeparameter: checked: bool
+\item \textbf{onWorkflowSelected} \\Wählt einen Workflow aus. \\Übergabeparameter: checked: bool
+\item \textbf{onSettings} \\Öffnet einen Einstellungsdialog. \\Übergabeparameter: checked: bool
+\item \textbf{onAbout} \\Öffnet einen „Über“-Dialog. \\Übergabeparameter: checked: bool
+\closeMembers
+
+\subsection{CAlgorithmSettingsView}
+Zeigt die Einstellungen für die Algorithmen in einem Baum an.
+\beginMembers
+\item \textbf{CAlgorithmSettingsView} \\ Speichert übergebene Parameter. \\Übergabeparameter: workflow: AWorkflow\&
+\newMember{setWorkflow}{workflow: AWorkflow\&}{void}{Setzt den Workflow.}
+\closeMembers
+
+\subsection{CAlgorithmSettingsSaveLoadWidget}
+Widget mit zwei Buttons zum Speichern und Laden von Einstellungen eines Algorithmus.
+\beginMembers
+\item \textbf{CAlgorithmSettingsSaveLoadWidget} \\ Speichert übergebene Parameter. \\Übergabeparameter: row: int, model: CAlgorithmSettingsModel\&
+\closeMembers
+
+\subsection{CSettingsDialog}
+Dialog, um globale Einstellungen zu ändern.
+\beginSlots
+\item \textbf{accept} \\Setzt die Einstellungen in CGlobalSettingsController.
+\item \textbf{onResultDirectoryButtonClicked} \\Öffnet einen Ordnerauswahldialog, um das Ausgabeverzeichnis festzulegen. \\Übergabeparameter: checked: bool
+\closeMembers
+
+\subsection{CAlgorithmSelector}
+Widget, um die einzelnen Algorithmen für die Workflowschritte auszuwählen.
+\beginMembers
+\item \textbf{CAlgorithmSelector} \\Speichert übergebene Parameter. \\Übergabeparameter: workflow: AWorkflow\&
+\newMember{setWorkflow}{workflow: AWorkflow\&}{void}{Setzt den Workflow.}
+\closeMembers
+
+\subsection{CDataViewTabContainer}
+Container für verschiedene Ergebnisansichten. Die einzelnen Ansichten werden per Tabs ausgewählt.
+\beginMembers
+\item \textbf{CDataViewTabContainer} \\Speichert übergebene Parameter. \\Übergabeparameter: imagePreview: CImagePreviewWidget*
+\closeMembers
+\beginSlots
+\item \textbf{onCurrentChanged} \\Legt den aktuellen Tab fest. \\Übergabeparameter: index: int
+\closeMembers
+
+\subsection{IGuiDataView}
+Bietet dem Container für die Ergebnisdarstellungen eine einheitliche Schnittstelle, um auf diese zuzugreifen.
+\beginMembers
+\newMemberAbstract{activate}{}{void}{Aktiviert die View. Sollte aufgerufen werden, wenn die View sichtbar wird.}
+\closeMembers
+
+\subsection{CImageView}
+Widget, das mehrere Bilder mit Markierungen darstellt.
+\beginMembers
+\newMember{paintEvent}{event: QPaintEvent*}{void}{Zeichnet die Bilder und Markierungen.}
+\newMember{wheelEvent}{event: QWheelEvent*}{void}{Wertet event aus und zoomt die Ansicht entsprechend rein oder raus.}
+\newMember{mouseMoveEvent}{event: QMouseEvent*}{void}{Verschiebt die Ansicht, wenn entsprechende Maustaste gedrückt.}
+\newMember{mousePressEvent}{event: QMouseEvent*}{void}{Überprüft gedrückte Maustasten und initialisiert Startwert für nachfolgende Mausverschiebungen.}
+\newMember{mouseReleaseEvent}{event: QMouseEvent*}{void}{Überprüft losgelassene Maustasten.}
+\newMember{showImages}{images:vector<tuple<uint64;QImage\&> >}{void}{Setzt die anzuzeigenden Bilder.}
+\newMember{addConnectedMarkers}{positions:vector<tuple<uint64;QVector2D> > (Liste von Tupeln aus Image-ID und 2D-Koordinate)}{void}{Zeichnet Markierungen auf dem per Image-ID angegeben Bild an der Koordinate und verbindet alle Markierungen mit Linien.}
+\closeMembers
+
+\subsection{CInputImageView}
+Zeigt die ausgewählten Eingabebilder unverändert an.
+\beginMembers
+\newMember{applyData}{packet:*CImageDataPacket}{void}{Setzt die Bilder, um ausgewählte davon anzeigen zu können. Siehe: onImagesSelected}
+\newMember{activate}{}{void}{Emittiert relevantImagesChanged.}
+\closeMembers
+\beginSlots
+\item \textbf{onImagesSelected} \\Zeigt die in images angegeben Bilder an. \\Übergabeparameter: images:vector<uint64>\&
+\closeMembers
+\beginSignals
+\item \textbf{relevantImagesChanged} \\ Sendet alle verfügbaren Bilder als aktuell relevante Bilder. \\Übergabeparameter: images:vector<uint64>\&
+\closeMembers
+
+\subsection{CDepthMapView}
+Zeigt die ausgewählten Tiefenkarten an.
+\beginMembers
+\newMember{applyData}{packet:*CDepthMapDataPacket}{void}{Setzt die Tiefenkarten, um ausgewählte davon anzeigen zu können. Siehe: onImagesSelected}
+\newMember{activate}{}{void}{Emittiert relevantImagesChanged.}
+\closeMembers
+\beginSlots
+\item \textbf{onImagesSelected} \\Zeigt die Tiefenkarten zu den in images angegeben Bilder an. \\Übergabeparameter: images:vector<uint64>\&
+\closeMembers
+\beginSignals
+\item \textbf{relevantImagesChanged} \\ Sendet alle verfügbaren Bilder, zu denen eine Tiefenkarte existiert, als aktuell relevante Bilder. \\Übergabeparameter: images:vector<uint64>\&
+\closeMembers
+
+\subsection{CFeatureView}
+Zeigt die ausgewählten Bilder mit Features und Matches an.
+\beginMembers
+\newMember{applyData}{packet:*CImageDataPacket}{void}{Setzt die Bilder, um ausgewählte davon anzeigen zu können. Siehe: onImagesSelected}
+\newMember{applyData}{packet:*CFeatureDataPacket}{void}{Setzt die Features, die auf den Bildern angezeigt werden sollen.}
+\newMember{activate}{}{void}{Emittiert relevantImagesChanged.}
+\closeMembers
+\beginSlots
+\item \textbf{onImagesSelected} \\Zeigt die in images angegeben Bilder an. \\Übergabeparameter: images:vector<uint64>\&
+\closeMembers
+\beginSignals
+\item \textbf{relevantImagesChanged} \\ Sendet alle verfügbaren Bilder, zu denen es Features gibt, als aktuell relevante Bilder. \\Übergabeparameter: images:vector<uint64>\&
+\closeMembers
+
+\subsection{C3dView}
+Widget zur Darstellung von 3D-Daten wie Point-Clouds, Meshes und Posen.
+\beginMembers
+\item \textbf{C3dView} \\ Speichert übergebene Parameter. \\Übergabeparameter: modelTypeComboBox: QComboBox\&
+\newMember{activate}{}{void}{Leere Implementierung.}
+\newMember{applyData}{packet:*CPclDataPacket}{void}{Setzt die anzuzeigende Point-Cloud.}
+\newMember{applyData}{packet:*CPoseDataPacket}{void}{Setzt die anzuzeigenden Posen.}
+\closeMembers
+\beginSlots
+\item \textbf{onCurrentIndexChangedModelType} \\Zeigt den per index definierten Modelltyp an. \\Übergabeparameter: index: int
+\closeMembers
+\subsubsection{E3dModelType}
+%TODO: \includegraphics
+Definiert die möglichen Darstellungen des Modells.
+
+\subsection{CImagePreviewWidget}
+Widget zur Vorschau der Eingabebilder.
+\beginMembers
+\item \textbf{CImagePreviewWidget} \\Zeigt eine Vorschau der angegeben Bilder an. \\Übergabeparameter: images: vector<tuple<uint64;QIcon\&> >
+\newMember{setImages}{images: vector<tuple<uint64;QIcon\&> >}{void}{Zeigt eine Vorschau der angegebenen Bilder an.}
+\closeMembers
+\beginSlots
+\item \textbf{onRelevantImagesChanged} \\Filtert die angezeigten Bilder, so dass nur noch die in images angegebenen Bilder angezeigt werden. \\Übergabeparameter: images: vector<uint64>\&
+\closeMembers
+\beginSignals
+\item \textbf{imagesSelected} \\Sendet alle ausgewählten Bilder. \\Übergabeparameter: images:vector<uint64>\&
+\closeMembers
+
+\subsection{CImagePreviewItem}
+Ein Item, das eine Image-ID speichert, und nur zusammen mit CImagePreviewWidget verwendet werden sollte.
+\beginMembers
+\item \textbf{CImagePreviewItem} \\Speichert die übergebenen Parameter. \\Übergabeparameter:  icon: QIcon\&, text: QString\&, imageId: uint64)
+\closeMembers
+
+\subsection{CLogWidget}
+Dieses Widget stellt das Log in der Benutzeroberfläche dar.
+\beginSlots
+\item \textbf{onNewLogMessage} \\Fügt die Nachricht an das Log an. \\Übergabeparameter: message: string, time: string
+\item \textbf{onStateChangedDebug} \\Legt fest, ob Debug Meldungen angezeigt werden. \\Übergabeparameter: state: int
+\item \textbf{onStateChangedInfo} \\Legt fest, ob Info Meldungen angezeigt werden. \\Übergabeparameter: state: int
+\item \textbf{onStateChangedWarning} \\Legt fest, ob Warning Meldungen angezeigt werden. \\Übergabeparameter: state: int
+\item \textbf{onStateChangedError} \\Legt fest, ob Error Meldungen angezeigt werden. \\Übergabeparameter: state: int
+\closeMembers
+
+\subsection{CDatasetSelector}
+Diese Klasse dient der Umsetzung des Kann-Kriteriums zur Unterstützung der Ausführung mehrerer Datensätze mit dem gleichen Workflow. Der Entwurf der Klasse wird, falls das Kriterium umgesetzt wird, während der Implementierung ausgearbeitet.
+
+\subsection{CWorkflowManager}
+\beginMembers
+\newMember{getAvailableWorkflows}{}{vector<string>}{Gibt den Namen aller verfügbaren Workflows zurück.}
+\newMember{getWorkflow}{name: string}{AWorkflow*}{Gibt eine Instanz des Workflows mit dem angegeben Namen zurück. Der Aufrufer ist für das Löschen des Workflows zuständig.}
+\closeMembers
+
 \section{Pakete}
 %Einteilung der Teilmodule in Pakete 
 \subsection{Paket 1}
