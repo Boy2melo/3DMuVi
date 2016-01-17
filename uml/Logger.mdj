@@ -127184,7 +127184,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getInfostream (): ostringstream",
+											"text": "+getInfostream (): *ostringstream",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -127212,7 +127212,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getErrorstream(): ostringstream",
+											"text": "+getErrorstream(): *ostringstream",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -127240,7 +127240,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getDebugstream(): ostringstream",
+											"text": "+getDebugstream(): *ostringstream",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -127268,7 +127268,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getWarningstream(): ostringstream",
+											"text": "+getWarningstream(): *ostringstream",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										}
@@ -127610,7 +127610,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setLog(dest: String)",
+											"text": "+setLog(dest: QUrl)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -130858,9 +130858,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": {
-										"$ref": "AAAAAAFSQzqmEze7Mm0="
-									},
+									"type": "*ostringstream",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -130891,9 +130889,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": {
-										"$ref": "AAAAAAFSQzqmEze7Mm0="
-									},
+									"type": "*ostringstream",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -130924,9 +130920,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": {
-										"$ref": "AAAAAAFSQzqmEze7Mm0="
-									},
+									"type": "*ostringstream",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -130957,9 +130951,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": {
-										"$ref": "AAAAAAFSQzqmEze7Mm0="
-									},
+									"type": "*ostringstream",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -131112,7 +131104,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "String",
+									"type": "QUrl",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
