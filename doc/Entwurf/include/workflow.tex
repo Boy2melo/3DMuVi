@@ -11,7 +11,7 @@ Alle Klassen, die für die Funktionen benötigt werden, ohne spezifische Impleme
 Ein Interface, dass die Funktionen der Algorithmen verallgemeinert und unabhängig von Typen macht, wodurch das Template \hyperref[Workflow:TAlgorithm]{TAlgorithm} polymorph wird.
 \beginMembers
 \newMemberAbstract{{setLogger}}{*Logger}{void}{Initialisiert einen Logger für den Algorithmus}
-\newMemberAbstract{{setParameter}}{*???}{void}{Setze die Parameter für den Algorithmus}
+\newMemberAbstract{{setParameter}}{*CAlgorithmSettingsModel}{void}{Setze die Parameter für den Algorithmus}
 \newMemberAbstract{{run}}{void}{void}{Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.}
 \closeMembers
 
@@ -22,7 +22,7 @@ Die Konkrete Implementierung eines Algorithmus.
 \newMemberAbstract{setData}{*T}{void}{Setze die Daten, die der Algorithmus benutzen soll.}
 \closeMembers
 
-\subsubsection{EAlgorithmType}
+\subsubsection{EAlgorithmType}\label{Workflow:EAlgorithmType}
 \includegraphics[scale=1, resolution=100]{EAlgorithmType}\\
 Eine Klasse, die string-Konstanten enthält, welche den Typ des benutzen \hyperref[Workflow:IAlgorithm]{Algorithmus} in einem \hyperref[Workflow:APlugin]{Plugin} angeben.
 \beginAttributes
@@ -33,7 +33,7 @@ Eine Klasse, die string-Konstanten enthält, welche den Typ des benutzen \hyperr
 \closeMembers
 
 \subsubsection{AContextDataStore}\label{Workflow:AContextDataStore}
-\includegraphics[scale=1, resolution=100]{AContextDataStore}\\
+\includegraphics[width=\linewidth]{AContextDataStore}\\
 Enthält die Daten, welche für einen Bestimmten \hyperref[Workflow:AWorkflow]{Workflow} zur Verfügung gestellt werden. Jeder Datentyp kann genau einmal im Store vorkommen. Für mehrere gleiche Daten an unterschiedlichen Schritten sind unterschiedliche Klassen anzulegen.
 \beginMembers
 \newMemberAbstract{getSupportedDataTypes}{void}{const vector<string>}{Gibt eine Liste aller Datentypen in dem Data Store für den Workflow zurück.}
@@ -47,7 +47,7 @@ Enthält die Daten, welche für einen Bestimmten \hyperref[Workflow:AWorkflow]{W
 \newSignal{DataChanged}{*SDataChanged}{Wird aufgerufen, sobald sich Daten geändert haben.}
 \closeMembers
 
-\subsubsection{IDataAccess}
+\subsubsection{IDataAccess}\label{Workflow:IDataAccess}
 Abstrahiert den Zugriff zu den Daten, die von einem bestimmten \hyperref[Workflow:APlugin]{Plugin} benötigt werden und liefert Informationen zu den Verbrauchten und Produzierten Datentypen.
 \beginMembers
 \newMemberAbstract{bindTo-DataStore}{*AContext-DataStore}{void}{Lade die Daten für den Algorithmus von gegebenem DataStore}
@@ -139,7 +139,7 @@ Verwaltet alle \hyperref[Workflow:APlugin]{Plugins}, die vom System gefunden wur
 \closeMembers
 
 \subsubsection{AWorkflow}\label{Workflow:AWorkflow}
-\includegraphics[scale=1,resolution=100]{AWorkflow}\\
+\includegraphics[width=\linewidth]{AWorkflow}\\
 Verwaltet \hyperref[Workflow:IAlgorithm]{Algorithmen} und \hyperref[Workflow:AContextDataStore]{Daten}, die für eine bestimmte Problemstellung und Herangehensweise benötigt werden.
 \beginMembers
 \newMemberAbstract{getStepCount}{void}{const uint32}{Gibt die Anzahl der Schritte im Workflow zurück}
@@ -156,6 +156,16 @@ Verwaltet \hyperref[Workflow:IAlgorithm]{Algorithmen} und \hyperref[Workflow:ACo
 \beginSignals
 \newSignal{ExecutionStateChanged}{*SExecutionStateChanged}{Wird aufgerufen, sobald sich der Ausführungszustand eines Algorithmus ändert.}
 \closeMembers
+
+\subsubsection{CWorkflowManager}\label{Workflow:CWorkflowManager}
+\includegraphics[scale=1,resolution=100]{CWorkflowManager}\\
+Verwaltet eine Liste aller Verfügbaren Workflows und Instanziiert diese.
+\beginMembers
+\newMemberStatic{Instance}{void}{void}{Die Instanz des Singletons}
+\newMember{getAvailableWorkflows}{void}{vector<string>}{Gibt eine Liste aller Verfügbaren Workflows aus.}
+\newMember{checkAvailableDataTypes}{string}{*AWorkflow}{Instanziiert einen bestimmten Workflow}
+\closeMembers
+
 
 \subsection{Konkrete Umsetzungen}
 Hier werden Implementierungen der oben genannten Konstrukte nach den Forderungen im Pflichtenheft exemplarisch für jeweils eine Implementierung pro Klasse gezeigt, da sich einiges Wiederholt und keinen Mehrwert bieten kann, vor allem da das Programm in diese Richtungen erweiterbar ist.
@@ -191,7 +201,7 @@ Das Paket Workflow enthält Klassen, die für einen einzelnen Workflow nötig si
 \begin{itemize}
 	\item \textbf{Singleton}
 	\\\includegraphics[scale=1, resolution=100]{SingletonPattern}
-	\\ Der \hyperref[Workflow:CPluginManager]{Plugin Manager} benutzt dieses Pattern, damit Plugins nicht mehrmals geladen werden können, was zu Zugriffsfehlern führen kann.
+	\\ Der \hyperref[Workflow:CPluginManager]{Plugin Manager} und der \hyperref[Workflow:CWorkflowManager]{Workflow Manager} benutzten dieses Pattern, damit Plugins nicht mehrmals geladen werden können, was zu Zugriffsfehlern führen kann und es eine zentrale Stelle für Workflows gibt.
 	\item \textbf{Visitor Pattern}
 	\\\includegraphics[scale=1,resolution=120]{VisitorPattern}
 	\\ Das \hyperref[Workflow:IDataView]{DataView} benutzt das Visitorpattern, um Downcasts von Datenpacketen zu vermeiden.
@@ -202,7 +212,7 @@ Das Paket Workflow enthält Klassen, die für einen einzelnen Workflow nötig si
 	\\\includegraphics[scale=1, resolution=100]{BridgePattern}
 	\\ Das Bridge Pattern wird durchgängig bei den allermeisten Klassen im Workflow angewendet. Ausnahmen sind \hyperref[Workflow:CPluginManager]{CPluginManager} und \hyperref[Workflow:IDataView]{IDataView}.
 	\item \textbf{Adapter Pattern}
-	\\\includegraphics[scale=1, resolution=100]{AdapterPattern}
+	\\\includegraphics[width=\linewidth]{AdapterPattern}
 	\\ Das Adapter Pattern wird bei \hyperref[Workflow:IDataAccess]{IDataAccess} und den spezifischen Implementierungen in den Algorithmen angewendet, damit die Algorithmen von dem Datenzugriff entkoppelt werden.
 	\item \textbf{Observer Pattern}
 	\\\includegraphics[scale=1, resolution=100]{ObserverPattern}
@@ -211,8 +221,8 @@ Das Paket Workflow enthält Klassen, die für einen einzelnen Workflow nötig si
 \section{Klassendiagramm}
 \subsection{Übersicht}
 % Klassendiagramm des Moduls
-\includegraphics[width=\linewidth]{overview.png}
+\includegraphics[width=\linewidth]{Overview}
 \subsection{Beispiel: Plugin}
-\includegraphics[width=\linewidth]{Plugin.png}
+\includegraphics[width=\linewidth]{Plugin}
 \subsection{Beispiel: Workflow}
-\includegraphics[width=\linewidth]{Workflow.png}
+\includegraphics[width=\linewidth]{Workflow}
