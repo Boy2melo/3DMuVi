@@ -1,5 +1,5 @@
 %Einleitungstext zum Modul
-Hier fehlt noch die Einleitung :) + Bilder
+Der Logger verwendet die Biblothek QsLog und stellt Funktionalitäten für die GUI bereit.
 \section{Klassen}
 \graphicspath{{./img/logger/}}
 %Bild der Klasse aus dem Klassendiagramm (nur die Klasse jeweils)
@@ -15,6 +15,7 @@ Initialisierungsklasse für den Logger erzeugt bei Objekterzeugung die  otextstr
 \newAttribute{private warningstream}{Objekt Referenz auf das otextstream-Objekt zum loggen der Warningnachrichten}
 \closeMembers
 \beginMembers
+\newMember{{ClogInit}}{void}{void}{Konstruktor: erzeugt 4 otextstreamobjekte und speichert diese ab}
 \newMember{{getInfostream}}{void}{otextstream}{Gibt eine Objektreferenz auf das Infostream Objekt zurück}
 \newMember{{getErrorstream}}{void}{otextstream}{Gibt eine Objektreferenz auf das Errorstream Objekt zurück}
 \newMember{{getDebugstream}}{void}{otextstream}{Gibt eine Objektreferenz auf das Debugstream Objekt zurück}
@@ -43,32 +44,33 @@ temporäre History der Log Nachrichten für die Oberfläche
 \newMember{{addHistory}}{message: QString, time: QString, type: QString}{void}{fügt neue Lognachrichten der History hinzu mit Nachricht, Zeit, Typ der Nachricht}
 \newMember{{getHistory}}{}{<vector<tuple<Qstring,QString,QString>>}{gibt die momentane History zurück mit Nachricht,Zeit,Typ der Nachricht als Vektor zurück}
 \closeMembers
-\subsection{QSLog}\label{Logger: QSLog}
+\subsection{QsLog}\label{Logger: QsLog}
 \includegraphics[scale=0.9, resolution=100]{qslog}\\
-Die QS Log Bibliothek stellt einen Logger bereit der durch CLogInit initialisiert und durch CLogController verwedendet wird um Log Dateien zu füllen.
+Die QsLog Bibliothek stellt einen Logger bereit der durch CLogInit initialisiert und durch CLogController verwedendet wird um Log Dateien zu füllen.Weitere Erläuterungen: siehe Paket QsLog
 
 \subsection{otextstream}\label{Logger: otextstream}
 %\includegraphics[scale=1, resolution=100]{}\\
 Standard C++ Klasse die verwendet wird um 4 einfache Streamobjekte zu verfügung zu stellen, in welche die Algorithmen Plugins ihre Nachrichten schreiben können.
 \section{Pakete}
 %Einteilung der Teilmodule in Pakete 
-\subsection{QSLog}
+\subsection{QsLog}
 %Bild des Pakets mit vereinfachter Klassendarstellung
 %Begründung / Dokumentation / Erklärung zum Paket
-QSLog Bibliothek zur Speicherung der Logs auf der Festplatte
+QsLog Bibliothek zur Speicherung der Logs auf der Festplatte.
+QsLog biete 6 Loglevel und ist Thread-safe. Es ist eine einfach zu nutzende Bibliothek.
+QsLog kann in Projekten mit MIT oder strengeren Lizenzen verwendet werden und muss ensprenchend gekennzeichnet werden.
+Weitere Informationen und Quellcode sowie Dokumentation ist auf github.com/victronenergy/QsLog zu finden.
 \subsection{LogController}
-Stellt das Bindeglied zwischen den Algorithmen und der QSLog Bibliothek bereit.
+Stellt das Bindeglied zwischen den Algorithmen und der QsLog Bibliothek bereit.
 Stellt Log Funktionalitäten für die GUI bereit und speichert die Nachrichten temporär für die GUI ab.
 %....
 \section{Entwurfsmuster}
 <Singleton>
 \\die Klasse CLogInit stellt ein Singleton dar. Sie darf nur einmal erzeugt und verwendet werden.
 \\<Adapter>
-\\Die Klasse CLogController stellt einen Adapter zwischen den ostreamObjekten und den Stream Objekten der QSLog Bibliothek dar.
-
-% verwendete Entwurfsmuster aufzählen erklären etc mit verinfachtem Diagramm (Klassen ohne Inhalt nur die Namen)
-
+\\Die Klasse CLogController stellt einen Adapter zwischen den otextstream Objekten und den Streamobjekten der QsLog Bibliothek dar.
+\newpage
 \section{Klassendiagramm}
-% Klassendiagramm des Moduls
-\includegraphics[width=\linewidth]{Klassendiagramm}
+%\includegraphics[width=\linewidth]{Klassendiagramm}
+\includegraphics[scale=0.6]{Klassendiagramm.pdf}
 %Bitte jeweils kleine Einleitungstexte usw in Unterkapitel gerne auch in Textform Erklärungen zufügen und auf mögliche erweiterungen durch die kann Kriterien eingehen soweit nötig !

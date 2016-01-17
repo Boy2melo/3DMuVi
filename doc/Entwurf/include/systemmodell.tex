@@ -5,12 +5,6 @@ Durch die einzelnen Module, die aufgabenspezifisch getrennt werden, wird eine be
 \\\\
 Es folgt eine kurze Systemübersicht
 \subsection{Übersicht}
-\includegraphics[width=1\textwidth]{img/SUebersicht.pdf}
-\newpage
-Dieses Diagramm stellt eine Grobübersicht über den Datenfluss zwischen den einzelnen Modulen dar.
-\\
-\includegraphics[width=0.87\textwidth]{img/Datenflussuebersicht.pdf}
-\newpage
 Das Projekt wurde in 6 logische Module eingeteilt:
 \begin{itemize}
 \item Workflow
@@ -20,6 +14,12 @@ Das Projekt wurde in 6 logische Module eingeteilt:
 \item Einstellungen
 \item Interaktion
 \end{itemize}
+Dieses Diagramm stellt eine Grobübersicht über den Datenfluss zwischen den einzelnen Modulen dar.
+Der Benutzer stellt dem Framework die Algorithmen per Plugins zur Verfügung.
+Der Workflow bildet das Zentrum des Frameworks. Er verwendet die Algorithmen und tauscht die Daten mit den Modulen aus.
+Die Interaktion und die Visualisierung stellen die spätere GUI da, mit welcher der Benutzer Interagieren kann.\\
+\includegraphics[width=0.87\textwidth]{img/Datenflussuebersicht.pdf}
+\newpage
 \section{Architektur}
 Die Architektur orientiert sich am Systemodell. 5 der 6 Module bleiben bestehen und werden in Pakete weiter aufgeteilt. Als Hauptentwurfsmuster wird MVC verwendet.
 Aufgrund der starken Abhängigkeit von Interaktion und Visualisierung wird dies in das gemeinsame Modul GUI fusioniert. 
