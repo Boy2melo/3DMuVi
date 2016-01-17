@@ -6,7 +6,7 @@ Hier fehlt noch die Einleitung :) + Bilder
 %Dokumentation zur Klasse, öffentlichen Methoden und Konstruktor sowie:
 %Signal und Slots als Methoden mit Rückgabewert Sigal bzw Slot (zur kenntlichkeit) 
 \subsubsection{CLogInit}\label{Logger: CLogInit}
-%\includegraphics[scale=1, resolution=100]{}\\
+\includegraphics[scale=0.4, resolution=100]{cloginit}\\
 Initialisierungsklasse für den Logger erzeugt bei Objekterzeugung die  otextstream-Objekte und gibt über die Schnittstellen Objektreferenzen weiter. 
 \beginAttributes
 \newAttribute{private infostream}{Objekt Referenz auf das otextstream-Objekt zum loggen der Infonachrichten}
@@ -26,7 +26,7 @@ Initialisierungsklasse für den Logger erzeugt bei Objekterzeugung die  otextstr
 
 
 \subsection{CLogController}\label{Logger: CLogController}
-%\includegraphics[scale=1, resolution=100]{}\\
+\includegraphics[scale=0.8, resolution=100]{clogcontroller}\\
 Überprüft die otextstream-Objekte und stellt das Bindeglied zwischen der QSLog Biblothek, GUI und otextstream Objekte da. 
 \beginMembers
 \newMember{{refreshLog}}{void}{void}{Überprüft die otextstreamobjekte auf neue Nachrichten ud gibt diese an die GUI(per Signal) an den QSLogger und an die History weiter}
@@ -37,14 +37,14 @@ Initialisierungsklasse für den Logger erzeugt bei Objekterzeugung die  otextstr
 \newSignal{newLogMessage}{message: QString, time: QString, type: QString}{Wird aufgerufen, wenn eine neue Lognachricht vorhanden ist}
 \closeMembers
 \subsection{CLogHistory}\label{Logger: CLogHistory}
-%\includegraphics[scale=1, resolution=100]{}\\
+\includegraphics[scale=1, resolution=100]{cloghistory}\\
 temporäre History der Log Nachrichten für die Oberfläche 
 \beginMembers
 \newMember{{addHistory}}{message: QString, time: QString, type: QString}{void}{fügt neue Lognachrichten der History hinzu mit Nachricht, Zeit, Typ der Nachricht}
 \newMember{{getHistory}}{}{<vector<tuple<Qstring,QString,QString>>}{gibt die momentane History zurück mit Nachricht,Zeit,Typ der Nachricht als Vektor zurück}
 \closeMembers
 \subsection{QSLog}\label{Logger: QSLog}
-%\includegraphics[scale=1, resolution=100]{}\\
+\includegraphics[scale=0.9, resolution=100]{qslog}\\
 Die QS Log Bibliothek stellt einen Logger bereit der durch CLogInit initialisiert und durch CLogController verwedendet wird um Log Dateien zu füllen.
 
 \subsection{otextstream}\label{Logger: otextstream}
