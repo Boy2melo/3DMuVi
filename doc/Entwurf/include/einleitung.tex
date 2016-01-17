@@ -19,20 +19,49 @@ Im Anschluss folgen Sequenzdiagramme und Klassendiagramme des Projekts.
 \section{Ergänzung Anforderungen}
 Im Folgenden werden die Kannkriterien erweitert und in 2 Prioritätsklassen unterschieden.
 Falls im Ramen der Implementierung ein odere mehrere Kannkriterien umgesetzt werden können, so werden zunächst die hoch priorisierten Kannkriterien umgesetzt.
+
 \subsection{Hoch Priorisierte Kannkriterien}
 Kannkriterien die möglicherweise umgesetzt werden.
+
 \subsubsection{Modul Workflow}
+\begin{itemize}
+\item Zu dem bereits existierenden 4-Phasen-Workflow sollen weitere fest implementierte Workflows zu Verfügung stehen.
+\item Die Konfiguration dieser Workflows soll abgespeichert und geladen werden können.
+\end{itemize}
 \subsubsection{Modul I/O}
+\begin{itemize}
+\item temporäres Arbeitsverzeichnis für Algorithmen zu Verfügung stellen
+\end{itemize}
 \subsubsection{Modul Visualisierung}
+\begin{itemize}
+\item Neben der Point Cloud als Darstellungsvariante gibt es die Möglichkeit das 3D Modell als Mesh bzw. texturiert zu visualisieren.
+\item Originalbild Tab, markierte Thumbnails für Bilder mit Tiefenkarte
+\end{itemize}
 \subsubsection{Modul Interaktion}
-\subsubsection{Modul Logger}
+\begin{itemize}
+\item Auswahl der Workflow-Konfiguration und Verzeichnis mit Eingangsdaten durch Commandline-Optionen beim Programmstart.
+\item Laden vorhergegangener (Zwischen-) Ergebnisse.
+\item Einzelne Schritte sollen gestartet werden können.
+\item Arbeitsindikatoren für jeden einzelnen Verarbeitungsschritt.
+\item Interaktion mit (Zwischen-) Ergebnisse(z.B. Ein-, Ausblenden einzelner Punkte, Kameras, Matches).
+\end{itemize}
 \subsubsection{Modul Einstellungen}
+\begin{itemize}
+\item QJason der verendeten Algorithmen in das Ergebnisverzeichnis 
+\item Die globalen Einstellungen des Programms können abgespeichert und geladen werden.
+\end{itemize}
 
 \subsection{Niedrig Priorisierte Kannkriterien}
 Kannkriterien die vermutlich nicht umgesetzt werden können.
+
 \subsubsection{Modul Workflow}
-\subsubsection{Modul I/O}
-\subsubsection{Modul Visualisierung}
+\begin{itemize}
+\item Workflows dynamisch erstellen und verändern.
+\item Workflows als eigenständige Plugins
+\end{itemize} 
 \subsubsection{Modul Interaktion}
-\subsubsection{Modul Logger}
-\subsubsection{Modul Einstellungen}
+\begin{itemize}
+\item Daten neu Sortieren / Ausführen auf Untergruppen der Daten.
+\item Automatisierte wiederholte Ausführung von einzelnen Algorithmen auf verschiedenen Datensätze.
+\item Manipulation(Zwischen-) Ergebnisse(z.B. Entfernen einzelner Punkte, Kameras, Matches).
+\end{itemize}
