@@ -9,8 +9,8 @@ Alle Klassen, die für die Funktionen benötigt werden, ohne spezifische Impleme
 \includegraphics[scale=1, resolution=100]{CAlgorithmSettingController}\\
 Verwaltet die Einstellungen der Algorithmen.
 \beginMembers
-\newMember{{getSetting}}{QString name}{CAlgorithmItemModel}{Gibt die aktuellen Parameter des Algorithmus "name" als ItemModel zurück.}
-\newMember{{setSetting}}{QString name, CAlgorithmItemModel data}{bool}{Setzt die Parameter des Algorithmus "name"  gemäß dem ItemModel "data". true, falls erfolgreich, sonst false}
+\newMember{{getSetting}}{QString name}{QJsonobject}{Gibt die aktuellen Parameter des Algorithmus "name" als QJsonobject zurück.}
+\newMember{{setSetting}}{QString name, QJsonobject data}{bool}{Setzt die Parameter des Algorithmus "name"  gemäß dem QJsonobject "data". true, falls erfolgreich, sonst false}
 \newMember{{import}}{QUrl directory, QString name}{void}{Importiert die Datei "name" mit den Algorithmenparametern aus dem verzeichnis "directory".Die Datei muss im Json-Format vorliegen}
 \newMember{{export}}{QUrl directory}{void}{Exportiert die Einstellungen aller Algorithmen in das Verzeichnis "directory".}
 \closeMembers
