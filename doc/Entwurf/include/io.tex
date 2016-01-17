@@ -25,11 +25,27 @@ Erzeugt und repräsentiert den Ergebniskontext auf der Festplatte. Der dabei erz
 \end{itemize}
 Die Ids im folgenden korrespondieren mit der in \hyperref[Workflow:IDataPacket]{IDataPacket} definierten Id.
 \beginMembers
-\newMemberAbstract{{ResultContext}}{QUrl path}{void}{Erstellt den ResultContext aus vorangegangenen Ergenissen welche im Ordner "path" liegen. }
+\newMemberAbstract{{ResultContext}}{QUrl path}{void}{Ist der Konstruktor der Klasse. Erstellt den ResultContext aus vorangegangenen Ergenissen welche im Ordner "path" liegen. }
 \newMemberAbstract{{addDataPacket}}{\hyperref[Workflow:TDataPacket]{TDataPacket} data}{void}{Das übergebene Datenpaket wird serialisiert und entsprechend seines \hyperref[Workflow:EDataType]{EDataType} in den Ergebnisordner geschrieben. Benannt wird die Datei nach ihrer Id.}
 %todo Darauf hinweisen das Bilder in einem extra Ordner pro DataPacket abgelegt werden.
 \newMemberAbstract{{getDataPacketIDs}}{void}{vector<QString>}{Liefert eine Liste mit Ids von allen im Ergebnisordner gefundenen Dateien zurück.}
 \newMemberAbstract{{getDataPacket}}{QString id}{\hyperref[Workflow:TDataPacket]{TDataPacket}}{Deserielisiert die Datei mit der Id "id" und gib das Ergebnis als \hyperref[Workflow:TDataPacket]{TDataPacket} zurück.}
+\closeMembers
+
+\subsection{ImageIo}\label{IO:ImageIo}
+\includegraphics[scale=1, resolution=100]{ImageIO}\\
+Stellt die Möglichkeit bereit Bilder zu speichern und zu laden.
+\beginMembers
+\newMemberAbstract{{save}}{QImage image, QUrl path}{void}{Speichert ein QImage im png-Format an dem in path spezifizierten Ort.}
+\newMemberAbstract{{load}}{QUrl path}{QImage}{Lädt ein Bild aus dem in path spezifizierten Ort.}
+\closeMembers
+
+\subsection{TextIo}\label{IO:TextIo}
+\includegraphics[scale=1, resolution=100]{TextIo}\\
+Stellt die Möglichkeit bereit Texte zu speichern und zu laden.
+\beginMembers
+\newMemberAbstract{{save}}{QUrl path, QString text}{void}{Speichert einen Text in einer in path spezifizierten Datei.}
+\newMemberAbstract{{load}}{QUrl path}{QString}{Lädt den Text aus einer in path spezifizierten Datei.}
 \closeMembers
 
 \section{Pakete}
