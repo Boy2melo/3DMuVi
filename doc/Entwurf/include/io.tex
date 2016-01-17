@@ -12,7 +12,7 @@ Stellt Bilder aus einem Ordner für den Workflow als Eingabedaten bereit.
 \newMemberAbstract{{InputDataSet}}{QUrl path}{void}{Ist der Konstruktor der Klasse. Lädt alle Bilder die aus "path", versieht diese mit einer Id und generiert zu jedem Bild ein Thumbnail.}
 \newMemberAbstract{{getInputImages}}{void}{vector<tuple<uint32\_t, QImage, QListWidgetItem>>}{Gibt die vom Konstruktor erzeugten Daten als Tripel zurück. Die erste Komponente ist die Id, die zweite ein Bild in originaler Auflösung und die dritte ein Objekt vom Typ QListWidgetItem. Darin enthalten ist ein Thumbnail des Bildes welches auf der GUI durch ein QListWidget angezeigt werden kann.}
 \closeMembers
-
+\newpage
 \subsection{ResultContext}\label{IO:ResultContext}
 \includegraphics[scale=1, resolution=100]{ResultContext}\\
 Erzeugt und repräsentiert den Ergebniskontext auf der Festplatte. Der dabei erzeugte Ordner wird an dem in den Einstellungen definierten Pfad gespeichert. In dem Ordner werden folgende Dateien und Ordner angelegt:
@@ -51,6 +51,7 @@ Stellt die Möglichkeit bereit Texte zu speichern und zu laden.
 \section{Pakete}
 Alle genannten Klassen liegen im Paket IO.
 %....
+\newpage
 \section{Entwurfsmuster}
 <Lazy Loading>
 Die Klasse \hyperref[IO:ResultContext]{ResultContext} nutzt das Entwurfsmuster Lazy Loading. Sie stellt eine die Liste aller gefundenen Daten zunächst nur als Liste von Ids zur Verfügung. Die einzelnen Datenpakete werden allerdings erst geladen wenn es zu einer konkreten Anfrage kommt.

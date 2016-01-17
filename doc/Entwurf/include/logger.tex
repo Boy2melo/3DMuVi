@@ -32,6 +32,7 @@ Initialisierungsklasse für den Logger erzeugt bei Objekterzeugung die  otextstr
 \beginMembers
 \newMember{{refreshLog}}{void}{void}{Überprüft die otextstreamobjekte auf neue Nachrichten ud gibt diese an die GUI(per Signal) an den QSLogger und an die History weiter}
 \newMember{{setLog}}{dest : QUrl}{void}{setzt den Datenpfad für ein Log auf den momentanen Ergebnissordner. Muss beim Start des Algorithmendurchlaufs gesetzt werden}
+\newpage
 \newMember{{closeLog}}{void}{void}{schließt das aktuelle Log ab. Muss nach Ende des Algorithmendurchlaufs ausgeführt werden}
 \closeMembers
 \beginSignals
@@ -44,6 +45,7 @@ temporäre History der Log Nachrichten für die Oberfläche
 \newMember{{addHistory}}{message: QString, time: QString, type: QString}{void}{fügt neue Lognachrichten der History hinzu mit Nachricht, Zeit, Typ der Nachricht}
 \newMember{{getHistory}}{}{vector<tuple<Qstring,QString,QString> >}{gibt die momentane History zurück mit Nachricht,Zeit,Typ der Nachricht als Vektor zurück}
 \closeMembers
+\newpage
 \subsection{QsLog}\label{Logger: QsLog}
 \includegraphics[scale=0.6, resolution=100]{qslog}\\
 Die QsLog Bibliothek stellt einen Logger bereit der durch CLogInit initialisiert und durch CLogController verwedendet wird um Log Dateien zu füllen.Weitere Erläuterungen: siehe Paket QsLog
