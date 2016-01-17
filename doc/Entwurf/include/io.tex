@@ -49,14 +49,11 @@ Stellt die Möglichkeit bereit Texte zu speichern und zu laden.
 \closeMembers
 
 \section{Pakete}
-%Einteilung der Teilmodule in Pakete 
-\subsection{Paket 1}
-%Bild des Pakets mit vereinfachter Klassendarstellung
-%Begründung / Dokumentation / Erklärung zum Paket
-\subsection{Paket 2}
+Alle genannten Klassen liegen im Paket IO.
 %....
 \section{Entwurfsmuster}
-Lazy Loading
+<Lazy Loading>
+Die Klasse \hyperref[IO:ResultContext]{ResultContext} nutzt das Entwurfsmuster Lazy Loading. Sie stellt eine die Liste aller gefundenen Daten zunächst nur als Liste von Ids zur Verfügung. Die einzelnen Datenpakete werden allerdings erst geladen wenn es zu einer konkreten Anfrage kommt.
 % verwendete Entwurfsmuster aufzählen erklären etc mit verinfachtem Diagramm (Klassen ohne Inhalt nur die Namen)
 
 \section{Klassendiagramm}
