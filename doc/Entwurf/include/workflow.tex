@@ -36,10 +36,10 @@ Eine Klasse, die string-Konstanten enthält, welche den Typ des benutzen \hyperr
 \includegraphics[width=\linewidth]{AContextDataStore}\\
 Enthält die Daten, welche für einen Bestimmten \hyperref[Workflow:AWorkflow]{Workflow} zur Verfügung gestellt werden. Jeder Datentyp kann genau einmal im Store vorkommen. Für mehrere gleiche Daten an unterschiedlichen Schritten sind unterschiedliche Klassen anzulegen.
 \beginMembers
-\newMemberAbstract{getSupportedDataTypes}{void}{const vector<string>}{Gibt eine Liste aller Datentypen in dem Data Store für den Workflow zurück.}
+\newMemberAbstract{getSupportedDataTypes}{void}{const vector<QString>}{Gibt eine Liste aller Datentypen in dem Data Store für den Workflow zurück.}
 \newMemberAbstract{InitializeFromStorage}{*DataSet}{void}{Initialisiere den Container aus einem Storage heraus.}
 \newMemberAbstract{<typename t> getData}{void}{*TDataPacket <t>}{Gibt Daten eines bestimmten Typs zurück, falls vorhanden, null sonst.}
-\newMember{getId}{void}{string}{Gibt eine eindeutige ID für den Data Store zurück für Verwaltungszwecke.}
+\newMember{getId}{void}{QString}{Gibt eine eindeutige ID für den Data Store zurück für Verwaltungszwecke.}
 \newMember{Serialize}{void}{void}{Befiehlt dem Data Store, alle Ergebnisse an das DataSet und damit die Festplatte zu übermitteln}
 \newMember{getCurrentCalculationStep}{void}{uint32}{Gibt den aktuellen Ausführungsschritt auf diesem Datensatz an.}
 \closeMembers
@@ -50,9 +50,9 @@ Enthält die Daten, welche für einen Bestimmten \hyperref[Workflow:AWorkflow]{W
 \subsubsection{IDataAccess}\label{Workflow:IDataAccess}
 Abstrahiert den Zugriff zu den Daten, die von einem bestimmten \hyperref[Workflow:APlugin]{Plugin} benötigt werden und liefert Informationen zu den Verbrauchten und Produzierten Datentypen.
 \beginMembers
-\newMemberAbstract{bindTo-DataStore}{*AContext-DataStore}{void}{Lade die Daten für den Algorithmus von gegebenem DataStore}
-\newMemberAbstract{getInputDataTypes}{void}{const vector<string>}{Eine Liste aller Daten, die als Eingabe benötigt werden.}
-\newMemberAbstract{getOutputDataTypes}{void}{const vector<string>}{Eine Liste aller Daten, die als Ausgabe erzeugt werden.}
+\newMemberAbstract{bindToDataStore}{*AContext-DataStore}{void}{Lade die Daten für den Algorithmus von gegebenem DataStore}
+\newMemberAbstract{getInputDataTypes}{void}{const vector<QString>}{Eine Liste aller Daten, die als Eingabe benötigt werden.}
+\newMemberAbstract{getOutputDataTypes}{void}{const vector<QString>}{Eine Liste aller Daten, die als Ausgabe erzeugt werden.}
 \closeMembers
 
 \subsubsection{SDataChanged}
@@ -66,9 +66,9 @@ Wird gesendet, sobald sich die Daten innerhalb eines \hyperref[Workflow:AContext
 \includegraphics[scale=1, resolution=100]{IDataPacket}\\
 Ein Interface, dass dem Template \hyperref[Workflow:TDataPacket]{TDataPacket} Polymorphismus verleiht.
 \beginMembers
-\newMember{getId}{void}{string}{Gibt die ID des Datenpackets zurück}
-\newMember{setId}{string}{void}{Setzt die ID des Datenpackets}
-\newMemberAbstract{getType}{void}{const string}{Gibt den Typ der enthaltenen Daten zurück}
+\newMember{getId}{void}{QString}{Gibt die ID des Datenpackets zurück}
+\newMember{setId}{QString}{void}{Setzt die ID des Datenpackets}
+\newMemberAbstract{getType}{void}{const QString}{Gibt den Typ der enthaltenen Daten zurück}
 \closeMembers
 
 \subsubsection{TDataPacket}\label{Workflow:TDataPacket}
@@ -123,8 +123,8 @@ Beschreibt ein einzelnes Plugin, welches einen einzelnen \hyperref[Workflow:IAlg
 \beginMembers
 \newMemberAbstract{DataAccess}{void}{*IDataAccess}{Gibt Zugriff auf eine, für das Plugin passende, implementierung von IDataAccess}
 \newMemberAbstract{GetAlgorithm}{void}{*IAlgorithm}{Gibt einen Zugriff auf den Konkreten Algorithmus des Plugins}
-\newMember{Autor}{void}{string}{Gibt den Namen des Autors des Plugins zurück}
-\newMember{Date}{void}{string}{Gibt das Datum der letzten Änderung an dem Plugincode zurück}
+\newMember{Autor}{void}{QString}{Gibt den Namen des Autors des Plugins zurück}
+\newMember{Date}{void}{QString}{Gibt das Datum der letzten Änderung an dem Plugincode zurück}
 \newMember{Version}{void}{uin32}{Gibt die Version des Plugins zurück}
 \closeMembers 
 
@@ -135,7 +135,7 @@ Verwaltet alle \hyperref[Workflow:APlugin]{Plugins}, die vom System gefunden wur
 \newMemberStatic{Instance}{void}{*CPluginManager}{Gibt die Instanz des Plugin Managers zurück}
 \newMember{Initialize}{void}{int32}{Initialisiert den Manager und lädt alle Plugins. Liefert einen Standard Returncode.}
 \newMember{getPlugins}{void}{const vector<*APlugin>}{Gibt eine Liste aller Plugins zurück}
-\newMember{getPlugins}{const string}{vector <*APlugin>}{Gibt einer Liste aller Plugins von einem gegebenen Typ zurück.}
+\newMember{getPlugins}{const QString}{vector <*APlugin>}{Gibt einer Liste aller Plugins von einem gegebenen Typ zurück.}
 \closeMembers
 
 \subsubsection{AWorkflow}\label{Workflow:AWorkflow}
@@ -143,14 +143,14 @@ Verwaltet alle \hyperref[Workflow:APlugin]{Plugins}, die vom System gefunden wur
 Verwaltet \hyperref[Workflow:IAlgorithm]{Algorithmen} und \hyperref[Workflow:AContextDataStore]{Daten}, die für eine bestimmte Problemstellung und Herangehensweise benötigt werden.
 \beginMembers
 \newMemberAbstract{getStepCount}{void}{const uint32}{Gibt die Anzahl der Schritte im Workflow zurück}
-\newMemberAbstract{getStepType}{const uint32}{string}{Gibt den Typ eines Algorithmus für einen bestimmten Schritt zurück}
+\newMemberAbstract{getStepType}{const uint32}{QString}{Gibt den Typ eines Algorithmus für einen bestimmten Schritt zurück}
 \newMemberAbstract{trySetStep}{const uint32, *APlugin}{bool}{Versucht, ein Plugin einem Schritt zuzuweisen. True, wenn das Plugin kompatibel war.}
 \newMemberAbstract{getStep}{const uint32}{*APlugin}{Liefert das gesetzte Plugin für einen bestimmten Schritt}
 \newMemberAbstract{getDataStores}{void}{vector<*AContextDataStore>}{Liefert alle registrierten DataStores für diesen Workflow}
 \newMemberAbstract{addDataStore}{void}{*AContextDataStore}{Gibt eine Instanz eines DataStores für diesen Workflow zurück und fügt ihn in die Verwaltung ein.}
-\newMemberAbstract{removeDataStore}{const string}{void}{Entfernt einen DataStore anhand seiner ID}
-\newMember{run}{const string}{void}{Startet die Ausführung eines bestimmten DataStores}
-\newMember{getState}{const string}{uin3232}{Gibt den aktuellen Schritt eines DataStores an, -1 für ende, < -10 für Fehler bei schritt -n-10}
+\newMemberAbstract{removeDataStore}{const QString}{void}{Entfernt einen DataStore anhand seiner ID}
+\newMember{run}{const QString}{void}{Startet die Ausführung eines bestimmten DataStores}
+\newMember{getState}{const QString}{uin3232}{Gibt den aktuellen Schritt eines DataStores an, -1 für ende, < -10 für Fehler bei schritt -n-10}
 \newMember{checkAvailableDataTypes}{void}{bool}{Prüft, ob die Algorithmen alle benötigten Daten auch produzieren}
 \closeMembers
 \beginSignals
@@ -162,8 +162,8 @@ Verwaltet \hyperref[Workflow:IAlgorithm]{Algorithmen} und \hyperref[Workflow:ACo
 Verwaltet eine Liste aller Verfügbaren Workflows und Instanziiert diese.
 \beginMembers
 \newMemberStatic{Instance}{void}{void}{Die Instanz des Singletons}
-\newMember{getAvailableWorkflows}{void}{vector<string>}{Gibt eine Liste aller Verfügbaren Workflows aus.}
-\newMember{checkAvailableDataTypes}{string}{*AWorkflow}{Instanziiert einen bestimmten Workflow}
+\newMember{getAvailableWorkflows}{void}{vector<QString>}{Gibt eine Liste aller Verfügbaren Workflows aus.}
+\newMember{checkAvailableDataTypes}{QString}{*AWorkflow}{Instanziiert einen bestimmten Workflow}
 \closeMembers
 
 
