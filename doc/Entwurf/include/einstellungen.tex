@@ -19,8 +19,8 @@ Verwaltet die Einstellungen der Algorithmen.
 \includegraphics[scale=1, resolution=100]{CGlobalSettingController}\\
 Verwaltet die globalen Einstellungen.
 \beginMembers
-\newMember{{getSetting}}{QString name}{QString}{Gibt die Einstellung "name" als QString zurück.}
-\newMember{{setSetting}}{QString name, QString value}{bool}{Setzt den Wert "value" für die globalen Einstellung "name". true, falls erfolgreich, sonst false}
+\newMember{{getGlobal}}{QString name}{QString}{Gibt die Einstellung "name" als QString zurück.}
+\newMember{{setGlobal}}{QString name, QString value}{bool}{Setzt den Wert "value" für die globalen Einstellung "name". true, falls erfolgreich, sonst false}
 \newMember{{import}}{QUrl directory, QString name}{void}{Importiert die Datei "name" mit globalen Einstellungen aus dem Verzeichnis "directory".Die Datei muss im Json-Format vorliegen}
 \newMember{{export}}{QUrl directory}{void}{Exportiert die globalen Einstellungen in das Verzeichnis "directory".}
 \newMember{{resettoDefault}}{void}{void}{Stellt die Standardeinstellungen wieder her.}
