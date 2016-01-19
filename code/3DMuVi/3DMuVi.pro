@@ -12,9 +12,34 @@ TARGET = 3DMuVi
 TEMPLATE = app
 
 
-SOURCES += gui/main.cpp\
-        gui/main.cpp
+SOURCES +=\
+    workflow/plugin/idataaccess.cpp \
+    gui/mainwindow.cpp \
+    main.cpp \
+    workflow/plugin/aplugin.cpp \
+    workflow/plugin/ialgorithm.cpp \
+    workflow/plugin/talgorithm.cpp \
+    workflow/workflow/acontextdatastore.cpp \
+    workflow/workflow/idatapacket.cpp \
+    workflow/workflow/tdatapacket.cpp \
+    workflow/workflow/idataview.cpp \
+    workflow/plugin/cpluginmanager.cpp \
+    workflow/workflow/cworkflowmanager.cpp \
+    workflow/workflow/aworkflow.cpp
 
-HEADERS  += gui/main.h
+HEADERS  += \
+    workflow/plugin/idataaccess.h \
+    gui/mainwindow.h \
+    workflow/plugin/aplugin.h \
+    workflow/plugin/ialgorithm.h \
+    workflow/plugin/talgorithm.h \
+    workflow/workflow/acontextdatastore.h \
+    workflow/workflow/idatapacket.h \
+    workflow/workflow/tdatapacket.h \
+    workflow/workflow/idataview.h \
+    workflow/plugin/cpluginmanager.h \
+    workflow/workflow/cworkflowmanager.h \
+    workflow/workflow/aworkflow.h
 
-FORMS    += gui/main.ui
+FORMS    += \
+    gui/mainwindow.ui
