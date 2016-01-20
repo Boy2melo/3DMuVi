@@ -9,7 +9,7 @@ class AWorkflow
 {
 public:
     AWorkflow();
-    const quint32 getStepCount();
+    quint32 getStepCount() const;
     QString getAlgorithmType(const quint32 step);
     bool trySetStep(const quint32 step, APlugin* plugin);
     APlugin* getStep(const quint32 step);

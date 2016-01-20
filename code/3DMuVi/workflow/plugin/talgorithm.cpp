@@ -1,5 +1,6 @@
 #include "talgorithm.h"
 
-TAlgorithm::TAlgorithm()
-{
+template<typename T>
+void TAlgorithm<T>::setData(T *data){
+    mData = data;
 }

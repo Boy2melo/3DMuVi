@@ -5,34 +5,31 @@
 #include "workflow/workflow/acontextdatastore.h"
 
 /*!
+   \class IDataAccess
  * \brief The IDataAccess class
+ * \author Nathanael Schneider
  *
- * Abstrahiert den Zugriff zu den Daten, die von einem bestimmten Plugin benötigt werden und liefert Informationen zu den Verbrauchten und Produzierten Datentypen.
+ * Abstrahiert den Zugriff zu den Daten, die von einem bestimmten [Plugin](@ref APlugin) benötigt werden und liefert Informationen zu den Verbrauchten und Produzierten Datentypen.
  */
 class IDataAccess
 {
 public:
     IDataAccess();
     /*!
-     * \brief getInputDataTypes
+     * \brief Eine Liste aller Daten, die als Eingabe benötigt werden.
      * \return Eine Liste aller Daten, die als Eingabe benötigt werden.
-     *
-     * Eine Liste aller Daten, die als Eingabe benötigt werden.
      */
-    QVector<QString> getInputDataTypes();
+    virtual QVector<QString> getInputDataTypes() const = 0;
     /*!
-     * \brief getOutputDataTypes
+     * \brief Eine Liste aller Daten, die als Ausgabe erzeugt werden.
      * \return Eine Liste aller Daten, die als Ausgabe erzeugt werden.
-     *
-     * Eine Liste aller Daten, die als Ausgabe erzeugt werden.
      */
-    QVector<QString> getOutputDataTypes();
+    virtual QVector<QString> getOutputDataTypes() const = 0;
     /*!
-     * \brief bindToDataStore
+     * \brief Lade die Daten für den Algorithmus von gegebenem DataStore
      * \param dataStore Der DataStore für den nächsten Durchlauf
-     * Lade die Daten für den Algorithmus von gegebenem DataStore
      */
-    void bindToDataStore(AContextDataStore* dataStore);
+    virtual void bindToDataStore(AContextDataStore* dataStore) = 0;
 };
 
 #endif // IDATAACCESS_H

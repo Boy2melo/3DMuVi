@@ -1,5 +1,6 @@
 #include "tdatapacket.h"
 
-TDataPacket::TDataPacket()
+template<typename T>
+TDataPacket<T>::TDataPacket()
 {
 }

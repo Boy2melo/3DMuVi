@@ -2,31 +2,28 @@
 #define IALGORITHM_H
 
 /*!
+   \class IAlgorithm
  * \brief The IAlgorithm class
+ * \author Nathanael Schneider
  *
- * Ein Interface, dass die Funktionen der Algorithmen verallgemeinert und unabhängig von Typen macht, wodurch das Template TAlgorithm polymorph wird.
+ * Ein Interface, dass die Funktionen der Algorithmen verallgemeinert und unabhängig von Typen macht, wodurch das Template [TAlgorithm](@ref TAlgorithm) polymorph wird.
  */
 class IAlgorithm
 {
 public:
     IAlgorithm();
     /*!
-     * \brief setLogger (Logger Instance)
-     * Initialisiert einen Logger für den Algorithmus
+     * \brief Initialisiert einen Logger für den Algorithmus
      */
     void setLogger(/*TODO &*/);
     /*!
-     * \brief setParameters (Parameter Instance)
-     *
-     * Setze die Parameter für den Algorithmus
+     * \brief Setze die Parameter für den nächsten Durchlauf
      */
     void setParameters(/*TODO &*/);
     /*!
-     * \brief run
-     *
-     * Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
+     * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */
-    void run();
+    virtual void run() = 0;
 };
 
 #endif // IALGORITHM_H

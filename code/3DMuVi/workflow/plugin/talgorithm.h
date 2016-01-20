@@ -4,18 +4,20 @@
 #include "ialgorithm.h"
 
 /*!
- * Die Konkrete Implementierung eines Algorithmus.
+   \class TAlgorithm
+ * \brief Die Konkrete Implementierung eines [Algorithmus](@ref IAlgorithm).
+ * \author Nathanael Schneider
  */
 template<typename T>
 class TAlgorithm : IAlgorithm
 {
+protected:
+    T* mData;
+
 public:
-    TAlgorithm();
     /*!
-     * \brief setData
+     * \brief Setze die Daten, die der Algorithmus benutzen soll.
      * \param data Der Datencontainer für den Algorithmus
-     *
-     * Setze die Daten, die der Algorithmus benutzen soll.
      */
     void setData(T* data);
 };

@@ -13,19 +13,17 @@ TEMPLATE = app
 
 
 SOURCES +=\
-    workflow/plugin/idataaccess.cpp \
     gui/mainwindow.cpp \
     main.cpp \
     workflow/plugin/aplugin.cpp \
-    workflow/plugin/ialgorithm.cpp \
-    workflow/plugin/talgorithm.cpp \
     workflow/workflow/acontextdatastore.cpp \
     workflow/workflow/idatapacket.cpp \
     workflow/workflow/tdatapacket.cpp \
     workflow/workflow/idataview.cpp \
     workflow/plugin/cpluginmanager.cpp \
     workflow/workflow/cworkflowmanager.cpp \
-    workflow/workflow/aworkflow.cpp
+    workflow/workflow/aworkflow.cpp \
+    workflow/plugin/talgorithm.cpp
 
 HEADERS  += \
     workflow/plugin/idataaccess.h \
