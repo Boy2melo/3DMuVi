@@ -14,7 +14,6 @@ TEMPLATE = app
 CONFIG += c++11
 
 SOURCES +=\
-    gui/mainwindow.cpp \
     main.cpp \
     workflow/plugin/aplugin.cpp \
     workflow/workflow/acontextdatastore.cpp \
@@ -43,7 +42,6 @@ SOURCES +=\
 
 HEADERS  += \
     workflow/plugin/idataaccess.h \
-    gui/mainwindow.h \
     workflow/plugin/aplugin.h \
     workflow/plugin/ialgorithm.h \
     workflow/plugin/talgorithm.h \
@@ -73,4 +71,5 @@ HEADERS  += \
     workflow/plugin/ealgorithmtype.h
 
 FORMS    += \
-    gui/mainwindow.ui
+    gui/forms/CMainWindow.ui \
+    gui/forms/CSettingsDialog.ui
