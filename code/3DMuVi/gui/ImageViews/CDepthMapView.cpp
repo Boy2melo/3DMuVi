@@ -27,12 +27,3 @@ void CDepthMapView::activate()
 void CDepthMapView::onImagesSelected(std::vector<uint32_t>& images)
 {
 }
-
-//============================================================
-/*!
-@param images
-*/
-//============================================================
-void CDepthMapView::relevantImagesChanged(std::vector<uint32_t>& images)
-{
-}
