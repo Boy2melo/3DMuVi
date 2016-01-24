@@ -38,7 +38,10 @@ SOURCES +=\
     gui/CImagePreviewWidget.cpp \
     gui/CLogWidget.cpp \
     gui/CMainWindow.cpp \
-    gui/CSettingsDialog.cpp
+    gui/CSettingsDialog.cpp \
+    settings/CAlgorithmSettingController.cpp \
+    settings/CGlobalSettingController.cpp \
+    settings/CAlgorithmSettingsModel.cpp
 
 HEADERS  += \
     workflow/plugin/idataaccess.h \
@@ -68,7 +71,10 @@ HEADERS  += \
     gui/CMainWindow.h \
     gui/CSettingsDialog.h \
     gui/IGuiDataView.h \
-    workflow/plugin/ealgorithmtype.h
+    workflow/plugin/ealgorithmtype.h \
+    settings/CAlgorithmSettingController.h \
+    settings/CGlobalSettingController.h \
+    settings/CAlgorithmSettingsModel.h
 
 FORMS    += \
     gui/forms/CMainWindow.ui \
