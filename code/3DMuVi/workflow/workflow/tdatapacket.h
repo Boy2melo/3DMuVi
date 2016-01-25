@@ -8,7 +8,7 @@ class TDataPacket : IDataPacket
 {
 public:
     TDataPacket();
-    T* getData();
+    T* getData() const;
 };
 
 #endif // TDATAPACKET_H

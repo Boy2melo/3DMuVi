@@ -1,6 +1,9 @@
 #ifndef IALGORITHM_H
 #define IALGORITHM_H
 
+#include <QVector>
+#include "workflow/workflow/acontextdatastore.h"
+
 /*!
    \class IAlgorithm
  * \brief The IAlgorithm class
@@ -23,7 +26,18 @@ public:
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */
-    virtual void run() = 0;
+    virtual void run(AContextDataStore* dataStore) = 0;
+
+    /*!
+    * \brief Eine Liste aller Daten, die als Eingabe benötigt werden.
+    * \return Eine Liste aller Daten, die als Eingabe benötigt werden.
+    */
+    virtual QVector<QString> getInputDataTypes() const = 0;
+    /*!
+    * \brief Eine Liste aller Daten, die als Ausgabe erzeugt werden.
+    * \return Eine Liste aller Daten, die als Ausgabe erzeugt werden.
+    */
+    virtual QVector<QString> getOutputDataTypes() const = 0;
 };
 
 #endif // IALGORITHM_H

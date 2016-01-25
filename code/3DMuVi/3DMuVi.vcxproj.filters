@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;cxx;c;def</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Header Files\gui">
+      <UniqueIdentifier>{15b1ae38-d309-457a-979e-3b16968b9b46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\workflow">
+      <UniqueIdentifier>{deae2a5e-10e5-4947-832b-05498f97f3b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\workflow\plugin">
+      <UniqueIdentifier>{e28e5cbc-173c-4a8d-b359-25f698938baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui">
+      <UniqueIdentifier>{9161b345-0cd3-4771-b691-54743a4479db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\workflow">
+      <UniqueIdentifier>{dc9bdd9e-a8d7-4c23-83ff-afac24eca19c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\workflow\plugin">
+      <UniqueIdentifier>{907be458-a6c0-404f-8a74-70deb89072b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{576fe361-e030-43e5-b85d-64ef642fe93d}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{6919c35c-eba3-4ab0-b561-cab855f2d78f}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\acontextdatastore.cpp">
+      <Filter>Source Files\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\aworkflow.cpp">
+      <Filter>Source Files\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\cworkflowmanager.cpp">
+      <Filter>Source Files\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\idatapacket.cpp">
+      <Filter>Source Files\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\tdatapacket.cpp">
+      <Filter>Source Files\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\plugin\cpluginmanager.cpp">
+      <Filter>Source Files\workflow\plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\idataview.cpp">
+      <Filter>Source Files\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_C3dView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_C3dView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CDepthMapView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CDepthMapView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CFeatureView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CFeatureView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CMainWindow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CMainWindow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\3dView\C3dView.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CAlgorithmSelector.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\AlgorithmSettings\CAlgorithmSettingsSaveLoadWidget.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\AlgorithmSettings\CAlgoritmSettingsView.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CDatasetSelector.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CDataViewTabContainer.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ImageViews\CDepthMapView.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ImageViews\CFeatureView.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CImagePreviewItem.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CImagePreviewWidget.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ImageViews\CImageView.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\ImageViews\CInputImageView.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CLogWidget.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CMainWindow.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CSettingsDialog.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="gui\3dView\C3dView.h">
+      <Filter>Header Files\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\ImageViews\CDepthMapView.h">
+      <Filter>Header Files\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\ImageViews\CFeatureView.h">
+      <Filter>Header Files\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\CMainWindow.h">
+      <Filter>Header Files\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\forms\CMainWindow.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\forms\CSettingsDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="3DMuVi.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="workflow\workflow\acontextdatastore.h">
+      <Filter>Header Files\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\aworkflow.h">
+      <Filter>Header Files\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\cworkflowmanager.h">
+      <Filter>Header Files\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\idatapacket.h">
+      <Filter>Header Files\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\idataview.h">
+      <Filter>Header Files\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\tdatapacket.h">
+      <Filter>Header Files\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\plugin\cpluginmanager.h">
+      <Filter>Header Files\workflow\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\plugin\ialgorithm.h">
+      <Filter>Header Files\workflow\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\plugin\iplugin.h">
+      <Filter>Header Files\workflow\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CAlgorithmSelector.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\AlgorithmSettings\CAlgorithmSettingsSaveLoadWidget.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\AlgorithmSettings\CAlgoritmSettingsView.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CDatasetSelector.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CDataViewTabContainer.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CImagePreviewItem.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CImagePreviewWidget.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ImageViews\CImageView.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\ImageViews\CInputImageView.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CLogWidget.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\CSettingsDialog.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\IGuiDataView.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_CMainWindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_CSettingsDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

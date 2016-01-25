@@ -11,7 +11,7 @@ QString AContextDataStore::getId() const{
     return mContextId;
 }
 
-qint32 AContextDataStore::getCurrentCalculationStep(){
+qint32 AContextDataStore::getCurrentCalculationStep() const{
     return mCalculationStep;
 }
 

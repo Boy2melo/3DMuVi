@@ -11,8 +11,8 @@ private:
 
 public:
     static CWorkflowManager* Instance();
-    QVector<QString> getAvailableWorkflows();
-    AWorkflow* getWorkflow(QString workflow);
+    QVector<QString> getAvailableWorkflows() const;
+    AWorkflow* getWorkflow(QString workflow) const;
 };
 
 #endif // CWORKFLOWMANAGER_H

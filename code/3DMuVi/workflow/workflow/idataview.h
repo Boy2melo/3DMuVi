@@ -6,8 +6,7 @@ class IDataView
 public:
     IDataView();
 
-    template<typename T>
-    void ApplyData(T& data);
+    //TODO set datapackages. Templates cant be virtual
 };
 
 #endif // IDATAVIEW_H

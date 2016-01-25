@@ -1,6 +1,0 @@
-#ifndef EALGORITHMTYPE_H
-#define EALGORITHMTYPE_H
-
-
-
-#endif // EALGORITHMTYPE_H

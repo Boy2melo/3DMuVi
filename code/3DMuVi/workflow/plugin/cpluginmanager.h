@@ -2,7 +2,9 @@
 #define CPLUGINMANAGER_H
 
 #include <QVector>
-#include "workflow/plugin/aplugin.h"
+#include <QDir>
+#include <QPluginLoader>
+#include "iplugin.h"
 
 /*!
    \class CPluginManager
@@ -17,7 +19,8 @@ private:
     CPluginManager();
 
     static CPluginManager* mInstance;
-    QVector<APlugin*> mPlugins;
+    QVector<IPlugin*> mPlugins;
+    QDir mPluginsDir;
 
 public:
     /*!
@@ -34,13 +37,31 @@ public:
      * \brief Gibt eine Liste aller Plugins zurück
      * \return Eine Liste aller Plugins
      */
-    QVector<APlugin*> getPlugins();
+    QVector<IPlugin*> getPlugins() const;
     /*!
      * \brief Gibt einer Liste aller Plugins von einem gegebenen Typ zurück.
      * \param type Der Typ von Plugins, der gesucht wird
      * \return Alle Plugins vom spezifizierten Typ
      */
-    QVector<APlugin*> getPlugins(QString type);
+    QVector<IPlugin*> getPlugins(QString type) const;
+
+    // Plugin Types:
+    /*!
+    * \brief Feature Matcher Plugin
+    */
+    static const QString PT_FeatureMatcher;
+    /*!
+    * \brief Tiefenschätzer Plugin
+    */
+    static const QString PT_DepthMapper;
+    /*!
+    * \brief Posenschätzung Plugin
+    */
+    static const QString PT_PoseEstimator;
+    /*!
+    * \brief PCL Rekonstruktionsplugin
+    */
+    static const QString PT_PclReconstructor;
 };
 
 #endif // CPLUGINMANAGER_H

@@ -1,10 +1,11 @@
 #ifndef APLUGIN_H
 #define APLUGIN_H
 
-#include "idataaccess.h"
 #include "ialgorithm.h"
 #include <QDate>
+#include <QtPlugin>
 
+#define IPlugin_iid "org.qt-project.Qt.Fraunhofer.3DMuVi.IPlugin"
 /*!
  * \class APlugin
  * \brief The APlugin class
@@ -12,16 +13,9 @@
  *
  * Beschreibt ein einzelnes Plugin, welches einen einzelnen [Algorithmus](@ref IAlgorithm) kapselt.
  */
-class APlugin
+class IPlugin
 {    
 public:
-    /*!
-     * \brief DataAccess
-     * \return Instanz auf eine Implementierung von [IDataAccess](@ref IDataAccess)
-     *
-     * Gibt Zugriff auf eine, für das Plugin passende, implementierung von [IDataAccess](@ref IDataAccess)
-     */
-    virtual IDataAccess* DataAccess() const = 0;
     /*!
      * \brief getAlgorithm
      * \return Der [Algorithmus](@ref IAlgorithm) des Plugins
@@ -29,6 +23,8 @@ public:
      * Gibt einen Zugriff auf den Konkreten [Algorithmus](@ref IAlgorithm) des Plugins
      */
     virtual IAlgorithm* getAlgorithm() const = 0;
+
+    virtual ~IPlugin() {}
     /*!
      * \brief Autor
      * \return Der Autor des Plugins
@@ -51,23 +47,12 @@ public:
      */
     virtual qint32 Version() const = 0;
 
-    // Plugin Types:
     /*!
-     * \brief Feature Matcher Plugin
-     */
-    static const QString PT_FeatureMatcher;
-    /*!
-     * \brief Tiefenschätzer Plugin
-     */
-    static const QString PT_DepthMapper;
-    /*!
-     * \brief Posenschätzung Plugin
-     */
-    static const QString PT_PoseEstimator;
-    /*!
-     * \brief PCL Rekonstruktionsplugin
-     */
-    static const QString PT_PclReconstructor;
+    \brief Gibt den Typ des Plugins an
+    \return Der Typ des Plugins wie in [CPluginManager](@ref CPluginManager) definiert
+    */
+    virtual QString GetPluginType() const = 0;
 };
 
+Q_DECLARE_INTERFACE(IPlugin, IPlugin_iid)
 #endif // APLUGIN_H
