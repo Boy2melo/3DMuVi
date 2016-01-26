@@ -18,14 +18,14 @@ public:
     CTextIo();
     /*!
      * \brief Speichert einen Text in einer in path spezifizierten Datei.
-     * \param path Pfad zur Speicherort.
+     * \param path Pfad zum Speicherort.
      * \param text Inhalt der zu speichernden Datei.
      * \return void
      */
     void save(QUrl path,QString text);
     /*!
      * \brief Lädt den Text aus einer in path spezifizierten Datei.
-     * \param path Pfad zur Ladeort.
+     * \param path Pfad zum Ladeort.
      * \return Text aus der Datei.
      */
     QString load(QUrl path);
