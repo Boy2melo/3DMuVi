@@ -5,9 +5,8 @@
 @param images
 */
 //============================================================
-CImagePreviewWidget::CImagePreviewWidget(std::vector<CImagePreviewItem*> images)
+CImagePreviewWidget::CImagePreviewWidget(QWidget* parent) : QListWidget(parent)
 {
-
 }
 
 //============================================================

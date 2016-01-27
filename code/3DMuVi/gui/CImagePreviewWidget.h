@@ -8,7 +8,7 @@
 class CImagePreviewWidget : public QListWidget
 {
 public: 
-    CImagePreviewWidget(std::vector<CImagePreviewItem*> images);
+    CImagePreviewWidget(QWidget* parent = nullptr);
     void setImages(std::vector<CImagePreviewItem*> images);
 
 public slots:
