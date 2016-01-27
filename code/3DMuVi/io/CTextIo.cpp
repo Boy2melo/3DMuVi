@@ -1,4 +1,4 @@
-#include "ctextio.h"
+#include "CTextIo.h"
 
 CTextIo::CTextIo()
 {

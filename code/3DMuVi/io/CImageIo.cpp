@@ -1,4 +1,4 @@
-#include "cimageio.h"
+#include "CImageIo.h"
 
 CImageIo::CImageIo()
 {
