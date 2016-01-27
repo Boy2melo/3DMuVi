@@ -45,7 +45,8 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
     ./gui/CSettingsDialog.h \
     ./gui/IGuiDataView.h \
     ./io/CImageIo.h \
-    ./io/CTextIo.h
+    ./io/CTextIo.h \
+    ./io/CInputDataSet.h
 SOURCES += ./main.cpp \
     ./workflow/workflow/acontextdatastore.cpp \
     ./workflow/workflow/aworkflow.cpp \
@@ -71,5 +72,7 @@ SOURCES += ./main.cpp \
     ./gui/CSettingsDialog.cpp \
     ./io/CImageIo.cpp \
     ./io/CTextIo.cpp \
+    ./io/CInputDataSet.cpp
 FORMS += ./gui/forms/CMainWindow.ui \
     ./gui/forms/CSettingsDialog.ui \
+
