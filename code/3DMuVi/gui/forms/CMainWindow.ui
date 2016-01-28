@@ -27,7 +27,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QListWidget" name="listWidget"/>
+       <widget class="CAlgorithmSettingsView" name="listView"/>
       </item>
       <item>
        <widget class="QTabWidget" name="tabWidget_2">
@@ -376,6 +376,11 @@
    <class>CImagePreviewWidget</class>
    <extends>QListWidget</extends>
    <header location="global">gui/CImagePreviewWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CAlgorithmSettingsView</class>
+   <extends>QListView</extends>
+   <header location="global">gui/AlgorithmSettings/CAlgorithmSettingsView.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
