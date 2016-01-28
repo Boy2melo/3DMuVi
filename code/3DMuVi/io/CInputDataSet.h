@@ -2,7 +2,7 @@
 #define INPUTDATASET_H
 #include <QUrl>
 #include <QImage>
-#include <QListWidgetItem>
+#include <../gui/CImagePreviewItem.h>
 #include <tuple>
 #include <QIcon>
 #include <QDir>
@@ -31,12 +31,12 @@ public:
      * \brief Gibt die vom Konstruktor erzeugten Daten als Tripel zurück.
      * \return Es wird ein Pointer auf einen Vector zurückgegeben. Jeder Vektor enthält ein Triple. Die erste Komponente
      * ist die Id, die zweite ein Bild in originaler Auflösung und die dritte ein Objekt
-     * vom Typ QListWidgetItem. Darin enthalten ist ein Thumbnail des Bildes welches
+     * vom Typ CImagePreviewItem. Darin enthalten ist ein Thumbnail des Bildes welches
      * auf der GUI durch ein QListWidget angezeigt werden kann.
      */
-    std::vector<std::tuple<u_int32_t, QImage, QListWidgetItem>>* getInputImages();
+    std::vector<std::tuple<u_int32_t, QImage, CImagePreviewItem>>* getInputImages();
 private:
-    std::vector<std::tuple<u_int32_t, QImage, QListWidgetItem>> inputData;
+    std::vector<std::tuple<u_int32_t, QImage, CImagePreviewItem>> inputData;
 };
 
 #endif // INPUTDATASET_H

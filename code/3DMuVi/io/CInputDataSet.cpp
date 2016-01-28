@@ -1,7 +1,7 @@
 #include "CInputDataSet.h"
 #include "CImageIo.h"
 
-std::vector<std::tuple<uint32_t, QImage, QListWidgetItem>> inputData;
+std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> inputData;
 
 CInputDataSet::CInputDataSet(QUrl path)
 {
@@ -21,8 +21,8 @@ CInputDataSet::CInputDataSet(QUrl path)
     {
         QUrl imagePath(path.toString().append(file));
         QImage imageCache = iio.load(imagePath);
-        QListWidgetItem qlwiCache(QIcon(QPixmap::fromImage(imageCache)), file);
-        std::tuple<uint32_t, QImage, QListWidgetItem> item(id,imageCache,qlwiCache);
+        CImagePreviewItem qlwiCache(QIcon(QPixmap::fromImage(imageCache)), file, id);
+        std::tuple<uint32_t, QImage, CImagePreviewItem> item(id,imageCache,qlwiCache);
         inputData.push_back(item);
         id++;
     }
