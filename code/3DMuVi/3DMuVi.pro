@@ -43,6 +43,7 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
     ./gui/CLogWidget.h \
     ./gui/CMainWindow.h \
     ./gui/CSettingsDialog.h \
+    ./gui/CStepComboBox.h \
     ./gui/IGuiDataView.h \
     ./io/CImageIo.h \
     ./io/CTextIo.h \
@@ -70,6 +71,7 @@ SOURCES += ./main.cpp \
     ./gui/CLogWidget.cpp \
     ./gui/CMainWindow.cpp \
     ./gui/CSettingsDialog.cpp \
+    ./gui/CStepComboBox.cpp \
     ./io/CImageIo.cpp \
     ./io/CTextIo.cpp \
     ./io/CInputDataSet.cpp
