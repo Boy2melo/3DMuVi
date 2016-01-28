@@ -11,6 +11,12 @@ namespace Ui {
   class CMainWindow;
 }
 
+/*!
+\brief 3D-MuVis MainWindow.
+\author Stefan Wolf
+
+This class is the programs MainWindow and contains all Widgets.
+*/
 class CMainWindow : public QMainWindow
 {
   Q_OBJECT
