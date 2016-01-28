@@ -43,7 +43,12 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
     ./gui/CLogWidget.h \
     ./gui/CMainWindow.h \
     ./gui/CSettingsDialog.h \
-    ./gui/IGuiDataView.h
+    ./gui/IGuiDataView.h\
+    ./settings/CGlobalSettingController.h\
+    ./settings/CAlgorithmSettingController.h\
+    ./settings/CAlgorithmSettingsModel.h\
+    ./settings/CQJsonModel.h\
+    ./settings/CQJsonItem.h
 SOURCES += ./main.cpp \
     ./workflow/workflow/acontextdatastore.cpp \
     ./workflow/workflow/aworkflow.cpp \
@@ -66,6 +71,11 @@ SOURCES += ./main.cpp \
     ./gui/CImagePreviewWidget.cpp \
     ./gui/CLogWidget.cpp \
     ./gui/CMainWindow.cpp \
-    ./gui/CSettingsDialog.cpp
+    ./gui/CSettingsDialog.cpp\
+    ./settings/CGlobalSettingController.cpp\
+    ./settings/CAlgorithmSettingController.cpp\
+    ./settings/CAlgorithmSettingsModel.cpp\
+    ./settings/CQJsonModel.cpp\
+    ./settings/CQJsonItem.cpp
 FORMS += ./gui/forms/CMainWindow.ui \
     ./gui/forms/CSettingsDialog.ui

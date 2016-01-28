@@ -32,14 +32,62 @@ QJsonModel::QJsonModel(AWorkflow& workflow, CAlgorithmSettingController& control
     mHeaders.append("key");
     mHeaders.append("value");
     algocontroller = controller;
-    //algorithmen einlesen
+    //algorithmen einlesen, algolist befüllen
     // für jeden algo qjson laden un in model packen
     //{algocontroller.import(algoqjson url, algoname);
     //this.load(IOText.load(ulr von qjson).toUtf8());
     //}
-    //jeder baum für einen algo ist ein child von root
 
 }
+
+void CQJsonModel::saveSettings(int row, QUrl filename)
+{
+//verännderungen abspeichern
+    //todo?
+}
+
+void CQJsonModel::loadSettings(int row, QUrl filename)
+{
+//einzelne einstellungen laden, über getSetting
+    //todo?
+}
+Qt::ItemFlags CQJsonModel::flags(QModelIndex& index)
+{
+int row;
+row = index.row();
+//checks if not root item or the one below
+if (row == 0 || index.parent().parent().row()) {
+    return Qt::ItemIsSelectable;
+} else {
+    return Qt::ItemIsEditable;
+}
+}
+
+bool CQJsonModel::setData(QModelIndex& index, QVariant& value, int role)
+{
+//todo
+    if (!index.isValid())
+        return false;
+
+    int row;
+    if (role == Qt::EditRole) {
+        QJsonTreeItem temp = backtrack(index);
+        temp.setValue(value);
+        return true;
+    }
+    return false;
+}
+QJsonTreeItem QJsonModel::backtrack(QModelIndex& index)
+{
+    if(!index.parent().parent().isValid) //one row under root
+    {
+       return mRootItem->getChilds().value(index.row());
+    } else {
+        QJsonTreeItem temp = backtrack(index.parent());
+        return temp->getChilds().value(index.row());
+    }
+}
+
 
 bool QJsonModel::load(const QString &fileName)
 {

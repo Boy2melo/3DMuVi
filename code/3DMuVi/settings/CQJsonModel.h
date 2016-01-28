@@ -7,6 +7,9 @@
 #include <QJsonObject>
 #include <QIcon>
 
+#include <QUrl>
+#include <QList>
+#include <QPair>
 #include <workflow/workflow/aworkflow.h>
 #include <settings/CAlgorithmSettingController.h>
 class QJsonModel : public QAbstractItemModel
@@ -25,13 +28,13 @@ public:
       * \param row
       * \param filename
       */
-     void saveSettings(int row, QString filename);
+     void saveSettings(int row, QUrl filename);
      /*!
       * \brief loadSettings
       * \param row
       * \param filename
       */
-     void loadSettings(int row, QString filename);
+     void loadSettings(int row, QUrl filename);
      /*!
       * \brief flags
       * \param index
@@ -62,7 +65,8 @@ public:
 
 private:
     CAlgorithmSettingController algocontoller;
-
+    QJsonTreeItem backtrack(QModelIndex &index);
+    QList<QPair<QString, int>> algolist;
 
     QJsonTreeItem * mRootItem;
     QJsonDocument mDocument;

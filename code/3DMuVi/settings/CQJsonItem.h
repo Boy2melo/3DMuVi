@@ -15,12 +15,13 @@ public:
     int childCount() const;
     int row() const;
     void setKey(const QString& key);
-    void setValue(const QString& value);
+    void setValue(QString& value);
     void setType(const QJsonValue::Type& type);
     QString key() const;
     QString value() const;
     QJsonValue::Type type() const;
 
+    QList<QJsonTreeItem*> getChilds();
 
     static QJsonTreeItem* load(const QJsonValue& value, QJsonTreeItem * parent = 0);
 

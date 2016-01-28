@@ -32,6 +32,10 @@ QJsonTreeItem::~QJsonTreeItem()
     qDeleteAll(mChilds);
 
 }
+QList<QJsonTreeItem*> QJsonTreeItem::getChilds()
+{
+    return mChilds;
+}
 
 void QJsonTreeItem::appendChild(QJsonTreeItem *item)
 {
@@ -66,7 +70,7 @@ void QJsonTreeItem::setKey(const QString &key)
     mKey = key;
 }
 
-void QJsonTreeItem::setValue(const QString &value)
+void QJsonTreeItem::setValue(QString &value)
 {
     mValue = value;
 }
