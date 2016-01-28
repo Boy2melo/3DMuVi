@@ -17,7 +17,7 @@
 
 **********************************************/
 
-#include "qjsonmodel.h"
+#include "CQJsonModel.h"
 #include <QFile>
 #include <QDebug>
 #include <QJsonDocument>
@@ -25,13 +25,19 @@
 #include <QIcon>
 #include <QFont>
 
-QJsonModel::QJsonModel(QObject *parent) :
+QJsonModel::QJsonModel(AWorkflow& workflow, CAlgorithmSettingController& controller, QObject *parent) :
     QAbstractItemModel(parent)
 {
     mRootItem = new QJsonTreeItem;
     mHeaders.append("key");
     mHeaders.append("value");
-
+    algocontroller = controller;
+    //algorithmen einlesen
+    // für jeden algo qjson laden un in model packen
+    //{algocontroller.import(algoqjson url, algoname);
+    //this.load(IOText.load(ulr von qjson).toUtf8());
+    //}
+    //jeder baum für einen algo ist ein child von root
 
 }
 
@@ -59,13 +65,13 @@ bool QJsonModel::loadJson(const QByteArray &json)
 
     if (!mDocument.isNull())
     {
-        beginResetModel();
+
         if (mDocument.isArray()) {
-            mRootItem = QJsonTreeItem::load(QJsonValue(mDocument.array()));
+            mRootItem->appendChild(QJsonTreeItem::load(QJsonValue(mDocument.array()));
         } else {
-            mRootItem = QJsonTreeItem::load(QJsonValue(mDocument.object()));
+            mRootItem->appendChild(QJsonTreeItem::load(QJsonValue(mDocument.object()));
         }
-        endResetModel();
+
         return true;
     }
     return false;

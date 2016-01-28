@@ -17,7 +17,7 @@
 
 **********************************************/
 
-#include "qjsonitem.h"
+#include "CQJsonItem.h"
 
 QJsonTreeItem::QJsonTreeItem(QJsonTreeItem *parent)
 {

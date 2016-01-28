@@ -1,16 +1,52 @@
-#ifndef QJSONMODEL_H
-#define QJSONMODEL_H
+#ifndef CQJSONMODEL_H
+#define CQJSONMODEL_H
 
 #include <QAbstractItemModel>
-#include "qjsonitem.h"
+#include "CQJsonItem.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QIcon>
+
+#include <workflow/workflow/aworkflow.h>
+#include <settings/CAlgorithmSettingController.h>
 class QJsonModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    explicit QJsonModel(QObject *parent = 0);
+    /*!
+      * \brief CQJsonModel
+      * \param workflow
+      * \param controller
+      * \param parent
+      */
+     explicit CQJsonModel(AWorkflow& workflow, CAlgorithmSettingController& controller, QObject *parent = 0);
+     /*!
+      * \brief saveSettings
+      * \param row
+      * \param filename
+      */
+     void saveSettings(int row, QString filename);
+     /*!
+      * \brief loadSettings
+      * \param row
+      * \param filename
+      */
+     void loadSettings(int row, QString filename);
+     /*!
+      * \brief flags
+      * \param index
+      * \return
+      */
+     Qt::ItemFlags flags(QModelIndex& index);
+     /*!
+      * \brief setData
+      * \param index
+      * \param value
+      * \param role
+      * \return
+      */
+     bool setData(QModelIndex& index, QVariant& value, int role);
+
     bool load(const QString& fileName);
     bool load(QIODevice * device);
     bool loadJson(const QByteArray& json);
@@ -25,6 +61,9 @@ public:
 
 
 private:
+    CAlgorithmSettingController algocontoller;
+
+
     QJsonTreeItem * mRootItem;
     QJsonDocument mDocument;
     QStringList mHeaders;
@@ -33,4 +72,4 @@ private:
 
 };
 
-#endif // QJSONMODEL_H
+#endif // CQJSONMODEL_H

@@ -1,5 +1,5 @@
-#ifndef JSONITEM_H
-#define JSONITEM_H
+#ifndef CJSONITEM_H
+#define CJSONITEM_H
 #include <QtCore>
 #include <QJsonValue>
 #include <QJsonArray>
@@ -38,4 +38,4 @@ private:
 
 };
 
-#endif // JSONITEM_H
+#endif // CJSONITEM_H
