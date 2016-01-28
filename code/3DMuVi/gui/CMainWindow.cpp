@@ -1,78 +1,110 @@
+#include <QMessageBox>
+#include <QFileDialog>
+
+#include <io/CInputDataSet.h>
+#include <workflow/workflow/cworkflowmanager.h>
+
+#include "CSettingsDialog.h"
+
 #include "CMainWindow.h"
 #include "ui_CMainWindow.h"
 
+//============================================================
+/*!
+Initializes the window.
+*/
+//============================================================
 CMainWindow::CMainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::CMainWindow)
+  QMainWindow(parent),
+  ui(new Ui::CMainWindow)
 {
-    ui->setupUi(this);
+  QVector<QString> workflows;
+
+  ui->setupUi(this);
+
+  workflows = CWorkflowManager::Instance()->getAvailableWorkflows();
+  for (QString w : workflows)
+  {
+    ui->menuWorkflow->addAction(w, this, SLOT(onWorkflowSelected()));
+  }
+
+  connect(ui->actionLoadImages, &QAction::triggered, this, &CMainWindow::onLoadImages);
+//TODO: advanced load files
+  connect(ui->actionSettings, &QAction::triggered, this, &CMainWindow::onSettings);
+  connect(ui->actionAbout, &QAction::triggered, this, &CMainWindow::onAbout);
 }
 
+//============================================================
+/*!
+Cleans up all members.
+*/
+//============================================================
 CMainWindow::~CMainWindow()
 {
     delete ui;
 }
 
 
-//============================================================
-/*!
-@param checked
-*/
-//============================================================
-void CMainWindow::onSaveWorkflow(bool checked)
+void CMainWindow::onSaveWorkflow()
 {
+  //TODO: Doesn't need to be implemented
 }
 
-//============================================================
-/*!
-@param checked
-*/
-//============================================================
-void CMainWindow::onSaveWorkflowAs(bool checked)
+void CMainWindow::onSaveWorkflowAs()
 {
+  //TODO: Doesn't need to be implemented
 }
 
-//============================================================
-/*!
-@param checked
-*/
-//============================================================
-void CMainWindow::onLoadImages(bool checked)
+void CMainWindow::onLoadImages()
 {
+  QUrl url = QFileDialog::getExistingDirectoryUrl(this, "Select image directory");
+
+  if(mWorkflow)
+  {
+    CInputDataSet* dataSet = new CInputDataSet(url);
+    std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem*>> images;
+      //= dataSet->getInputImages(); //TODO: Change IO to get CImagePreviewItem instead of
+                                     //      QListWidgetItem
+    std::vector<CImagePreviewItem*> imageItems;
+
+    //AContextDataStore* dataStore = mWorkflow->addDataStore(dataSet);
+
+    for(std::tuple<uint32_t, QImage, CImagePreviewItem*> i : images)
+    {
+      imageItems.push_back(std::get<2>(i));
+    }
+
+    ui->imagePreviewWidget->setImages(imageItems);
+  }
 }
 
-//============================================================
-/*!
-@param checked
-*/
-//============================================================
-void CMainWindow::onAdvancedLoadFiles(bool checked)
+void CMainWindow::onAdvancedLoadFiles()
 {
+  //TODO: Doesn't need to be implemented
 }
 
-//============================================================
-/*!
-@param checked
-*/
-//============================================================
-void CMainWindow::onWorkflowSelected(bool checked)
+void CMainWindow::onWorkflowSelected()
 {
+  QAction* callingAction = qobject_cast<QAction*>(sender());
+
+  if(callingAction)
+  {
+    AWorkflow* workflow = CWorkflowManager::Instance()->getWorkflow(callingAction->text());
+
+    ui->algorithmSelector->setWorkflow(*workflow);
+    mWorkflow.reset(workflow);
+  }
 }
 
-//============================================================
-/*!
-@param checked
-*/
-//============================================================
-void CMainWindow::onSettings(bool checked)
+void CMainWindow::onSettings()
 {
+  CSettingsDialog dialog(this);
+  dialog.exec();
 }
 
-//============================================================
-/*!
-@param checked
-*/
-//============================================================
-void CMainWindow::onAbout(bool checked)
+void CMainWindow::onAbout()
 {
+  QMessageBox::about(this, "About 3DMuVi", "3DMuVi is a framework for testing "\
+                     "3D-reconstruction-algorithms.\nCopyright 2016 Tim Brodbeck, Jens Manig, "\
+                     "Grigori Schapoval, Nathanael Schneider, Laurenz Thiel and Stefan Wolf.");
 }

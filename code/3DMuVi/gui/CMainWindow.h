@@ -1,7 +1,11 @@
 #ifndef CMAINWINDOW_H
 #define CMAINWINDOW_H
 
+#include <memory>
+
 #include <QMainWindow>
+
+#include <workflow/workflow/aworkflow.h>
 
 namespace Ui {
   class CMainWindow;
@@ -17,15 +21,17 @@ public:
 
 private:
   Ui::CMainWindow *ui;
+  std::unique_ptr<AWorkflow> mWorkflow;
+  std::unique_ptr<AContextDataStore> mDataStore;
 
 private slots:
-  void onSaveWorkflow(bool checked);
-  void onSaveWorkflowAs(bool checked);
-  void onLoadImages(bool checked);
-  void onAdvancedLoadFiles(bool checked);
-  void onWorkflowSelected(bool checked);
-  void onSettings(bool checked);
-  void onAbout(bool checked);
+  void onSaveWorkflow();
+  void onSaveWorkflowAs();
+  void onLoadImages();
+  void onAdvancedLoadFiles();
+  void onWorkflowSelected();
+  void onSettings();
+  void onAbout();
 };
 
 #endif // CMAINWINDOW_H
