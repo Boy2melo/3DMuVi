@@ -30,7 +30,7 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
     ./workflow/plugin/ialgorithm.h \
     ./gui/3dView/C3dView.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
-    ./gui/AlgorithmSettings/CAlgoritmSettingsView.h \
+    ./gui/AlgorithmSettings/CAlgorithmSettingsView.h \
     ./gui/ImageViews/CDepthMapView.h \
     ./gui/ImageViews/CFeatureView.h \
     ./gui/ImageViews/CImageView.h \
@@ -43,11 +43,11 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
     ./gui/CLogWidget.h \
     ./gui/CMainWindow.h \
     ./gui/CSettingsDialog.h \
-    ./gui/IGuiDataView.h\
-    ./settings/CGlobalSettingController.h\
-    ./settings/CAlgorithmSettingController.h\
-    ./settings/CAlgorithmSettingsModel.h\
-    ./settings/CQJsonModel.h\
+    ./gui/CStepComboBox.h \
+    ./gui/IGuiDataView.h \
+    ./io/CImageIo.h \
+    ./io/CTextIo.h \
+    ./io/CInputDataSet.h
     ./settings/CQJsonItem.h
 SOURCES += ./main.cpp \
     ./workflow/workflow/acontextdatastore.cpp \
@@ -59,7 +59,7 @@ SOURCES += ./main.cpp \
     ./gui/3dView/C3dView.cpp \
     ./workflow/plugin/cpluginmanager.cpp \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
-    ./gui/AlgorithmSettings/CAlgoritmSettingsView.cpp \
+    ./gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
     ./gui/ImageViews/CDepthMapView.cpp \
     ./gui/ImageViews/CFeatureView.cpp \
     ./gui/ImageViews/CImageView.cpp \
@@ -71,11 +71,12 @@ SOURCES += ./main.cpp \
     ./gui/CImagePreviewWidget.cpp \
     ./gui/CLogWidget.cpp \
     ./gui/CMainWindow.cpp \
-    ./gui/CSettingsDialog.cpp\
-    ./settings/CGlobalSettingController.cpp\
-    ./settings/CAlgorithmSettingController.cpp\
-    ./settings/CAlgorithmSettingsModel.cpp\
-    ./settings/CQJsonModel.cpp\
+    ./gui/CSettingsDialog.cpp \
+    ./gui/CStepComboBox.cpp \
+    ./io/CImageIo.cpp \
+    ./io/CTextIo.cpp \
+    ./io/CInputDataSet.cpp
     ./settings/CQJsonItem.cpp
 FORMS += ./gui/forms/CMainWindow.ui \
-    ./gui/forms/CSettingsDialog.ui
+    ./gui/forms/CSettingsDialog.ui \
+

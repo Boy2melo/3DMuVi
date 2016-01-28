@@ -1,11 +1,11 @@
-#include "CAlgoritmSettingsView.h"
+#include "CAlgorithmSettingsView.h"
 
 //============================================================
 /*!
 @param workflow
  */
 //============================================================
-void CAlgoritmSettingsView::CAlgorithmSettingsView(AWorkflow& workflow)
+CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(parent)
 {
 
 }
@@ -15,7 +15,7 @@ void CAlgoritmSettingsView::CAlgorithmSettingsView(AWorkflow& workflow)
 @param workflow
  */
 //============================================================
-void CAlgoritmSettingsView::setWorkflow(AWorkflow& workflow)
+void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow)
 {
 
 }
@@ -25,6 +25,6 @@ void CAlgoritmSettingsView::setWorkflow(AWorkflow& workflow)
 @param step
  */
 //============================================================
-void CAlgoritmSettingsView::onAlgorithmChanged(int step)
+void CAlgorithmSettingsView::onAlgorithmChanged(int step)
 {
 }

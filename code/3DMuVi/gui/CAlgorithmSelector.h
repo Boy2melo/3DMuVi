@@ -7,12 +7,20 @@
 
 class CAlgorithmSelector : public QWidget
 {
+  Q_OBJECT
+
 public:
-  CAlgorithmSelector(AWorkflow& workflow);
+  explicit CAlgorithmSelector(QWidget *parent);
+  ~CAlgorithmSelector();
   void setWorkflow(AWorkflow& workflow);
 
-public slots:
+signals:
   void algorithmChanged(int step);
+
+private:
+  AWorkflow* mpWorkflow = nullptr;
+private slots:
+  void onCurrentIndexChanged(int index);
 };
 
 #endif // CALGORITHMSELECTOR_H

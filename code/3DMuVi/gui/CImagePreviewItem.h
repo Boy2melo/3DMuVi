@@ -6,7 +6,7 @@
 class CImagePreviewItem: public QListWidgetItem
 {
 public:
-  CImagePreviewItem(QIcon& icon, QString& text, uint32_t imageId);
+  CImagePreviewItem(const QIcon& icon, const QString& text, uint32_t imageId);
   uint32_t getImageId();
 };
 

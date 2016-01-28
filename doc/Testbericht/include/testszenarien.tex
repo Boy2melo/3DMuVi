@@ -1,0 +1,20 @@
+Die Testszenarien orientieren sich an den in Kapitel \ref{ch:usecases}: \nameref{ch:usecases} definierten Abläufen. Die Testszenarien sind von einem Benutzer durchzuführen, der idealerweise wenig bis gar keine Kenntnis über das Programm hat.
+\begin{enumerate}[align=left, leftmargin=4em, label={\textbf{\textbackslash T4.\arabic*\textbackslash}} ]
+\newcommand{\testsz}[1]{
+	\item \textbf{\usecaseTitle{#1}}\\
+	\usecase{#1}
+	\textbf{Nachbedingung:}\\
+}
+
+\testsz{1} Im Feld "{}Images" erscheint eine Vorschau der gewählten Bilder.
+\testsz{2} Die Ansicht in der GUI repräsentiert die ausgewählten Algorithmen.
+\testsz{3} Die GUI repräsentiert die geänderten Einstellungen und die Algorithmen übernehmen die Änderungen. Letzteres ist nur prüfbar, wenn die Änderungen erhebliche Auswirkungen in der Visualisierung nach sich ziehen.
+\testsz{4} Es wird eine Datei an dem gewählten Ort angelegt und nach dem Laden der Einstellungen
+werden Algorithmen und Einstellungen so übernommen, wie sie abgespeichert wurden.
+\testsz{5} Nach dem Laden der Datei sind die Algorithmen und Einstellungen so gesetzt, wie sie beim Abspeichern waren.
+\testsz{6} Der Benutzer sieht ein Fenster, in dem er Anleitung und Hilfe zu dem Programm und seiner Benutzung findet.
+\testsz{7} Die Nachrichten im Logfenster sind nur noch von den ausgewählten Schweregraden.
+\testsz{8} Die Ausführung der Algorithmen wurde erfolgreich beendet und die Ergebnisse können angesehen und manipuliert werden. Es wird in dem eingestellten Verzeichnis eine Ordnerstruktur mit den Zwischenergebnissen angelegt.
+\testsz{9} Es liegen Anzeigedaten bis zum letzten ausgeführten Algorithmus vor. Das eingestellte Verzeichnis enthält Zwischenergebnisse bis zum letzten ausgeführten Algorithmus.
+\testsz{10} Nach Anwahl einer Ansicht werden die entsprechenden Ergebnisse dort Visualisiert.
+\end{enumerate}

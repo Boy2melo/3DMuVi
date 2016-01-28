@@ -5,9 +5,9 @@
 
 #include <workflow/workflow/aworkflow.h>
 
-class CAlgoritmSettingsView : public QTreeView {
+class CAlgorithmSettingsView : public QTreeView {
 public: 
-  void CAlgorithmSettingsView(AWorkflow& workflow);
+  CAlgorithmSettingsView(QWidget* parent = nullptr);
   void setWorkflow(AWorkflow& workflow);
     
 public slots:
