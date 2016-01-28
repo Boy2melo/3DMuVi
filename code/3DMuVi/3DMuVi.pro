@@ -30,7 +30,7 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
     ./workflow/plugin/ialgorithm.h \
     ./gui/3dView/C3dView.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
-    ./gui/AlgorithmSettings/CAlgoritmSettingsView.h \
+    ./gui/AlgorithmSettings/CAlgorithmSettingsView.h \
     ./gui/ImageViews/CDepthMapView.h \
     ./gui/ImageViews/CFeatureView.h \
     ./gui/ImageViews/CImageView.h \
@@ -57,7 +57,7 @@ SOURCES += ./main.cpp \
     ./gui/3dView/C3dView.cpp \
     ./workflow/plugin/cpluginmanager.cpp \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
-    ./gui/AlgorithmSettings/CAlgoritmSettingsView.cpp \
+    ./gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
     ./gui/ImageViews/CDepthMapView.cpp \
     ./gui/ImageViews/CFeatureView.cpp \
     ./gui/ImageViews/CImageView.cpp \
