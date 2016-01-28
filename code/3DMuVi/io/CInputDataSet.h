@@ -2,7 +2,7 @@
 #define INPUTDATASET_H
 #include <QUrl>
 #include <QImage>
-#include <../gui/CImagePreviewItem.h>
+#include <gui/CImagePreviewItem.h>
 #include <tuple>
 #include <QIcon>
 #include <QDir>
