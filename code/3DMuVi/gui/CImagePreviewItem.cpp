@@ -7,7 +7,7 @@
 @param imageId
 */
 //============================================================
-CImagePreviewItem::CImagePreviewItem(QIcon& icon, QString& text, uint32_t imageId)
+CImagePreviewItem::CImagePreviewItem(const QIcon& icon, const QString& text, uint32_t imageId)
 {
 
 }
