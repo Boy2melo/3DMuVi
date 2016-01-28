@@ -1,0 +1,32 @@
+\documentclass[a4paper]{scrreprt}
+
+\usepackage[ngerman]{babel}   % deutsche Silbentrennung
+
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}					% Schönere Schriftart
+
+%\usepackage[ansinew]{inputenc}
+%\usepackage[utf8]{inputenc}   % wegen deutschen Umlauten & UTF-8
+
+\usepackage{graphicx}					% Grafikpaket laden
+\usepackage{hyperref}					% Links
+\hypersetup{									% Link-Formatierung entfernen & pdf-Inforamtionen setzten
+	pdfauthor={Grigori Schapoval, Nathanael Schneider, Tim Brodbeck, Stefan Wolf, Jens Manig, Laurenz Thiel},
+	pdftitle={3D Reconstruction Framework from Multi-View Images (3D-MuVi)},
+	colorlinks,
+	citecolor=black,
+	filecolor=black,
+	linkcolor=black,
+	urlcolor=black
+}
+%\usepackage{microtype}		% font expansion
+\usepackage{enumerate}
+\usepackage{xstring}
+\usepackage{enumitem}    % Layout der Aufzählungs-Items manipulieren
+\setlist{nosep}
+\usepackage[ngerman]{cleveref}
+\title{Praxis der Softwareentwicklung:\\3D Reconstruction Framework from Multi-View Images (3D-MuVi)}
+\subtitle{Pflichtenheft}
+\author{Grigori Schapoval\and Nathanael Schneider\and Tim Brodbeck\and Stefan Wolf\and Jens Manig\and Laurenz Thiel}
+\date{\includegraphics[width=.3\textwidth]{img/logo.pdf}\\\vspace{3mm}WS 2015/16}
