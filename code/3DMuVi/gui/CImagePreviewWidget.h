@@ -7,15 +7,23 @@
 
 class CImagePreviewWidget : public QListWidget
 {
+  Q_OBJECT
+
 public: 
-    CImagePreviewWidget(QWidget* parent = nullptr);
-    void setImages(std::vector<CImagePreviewItem*> images);
+  explicit CImagePreviewWidget(QWidget* parent = nullptr);
+  void setImages(std::vector<CImagePreviewItem*> images);
 
 public slots:
-    void onRelevantImagesChanged(std::vector<uint32_t>& images);
+  void onRelevantImagesChanged(std::vector<uint32_t>& images);
     
 signals:
-    void imagesSelected(std::vector<uint32_t>& images);
+  void imagesSelected(std::vector<uint32_t>& images);
+
+private slots:
+  void onItemSelectionChanged();
+
+private:
+  std::vector<CImagePreviewItem*> mImages;
 };
 
 #endif // CIMAGEPREVIEWWIDGET_H
