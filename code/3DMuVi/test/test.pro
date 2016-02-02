@@ -14,7 +14,10 @@ TEMPLATE = app
 
 INCLUDEPATH += ../
 
-HEADERS += ../gui/CLogWidget.h
+HEADERS += ../gui/CLogWidget.h \
+           ../io/CImageIo.h
 
 SOURCES += gui/CTestCLogWidget.cpp \
+           io/CTestCImageIo.cpp \
+           ../io/CImageIo.cpp \
            ../gui/CLogWidget.cpp
