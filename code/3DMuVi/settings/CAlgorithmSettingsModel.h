@@ -7,19 +7,19 @@
 #include <QString>
 
 #include <workflow/workflow/aworkflow.h>
-
-class CAlgorithmSettingsModel : public QAbstractItemModel
+/*!
+ * \brief The CAlgorithmSettingsModel class
+ */
+class CAlgorithmSettingsModel : public CQJsonModel
 {
+private:
+    AWorkflow workflow;
 public:
-  CAlgorithmSettingsModel(AWorkflow& workflow);
-  void saveSettings(int row, QString filename);
-  void loadSettings(int row, QString filename);
-  QModelIndex index(int row, int column,QModelIndex& parent);
-  QModelIndex parent(QModelIndex& index); 
-  int rowCount(QModelIndex& parent);
-  int columnCount(QModelIndex& parent);
-  QVariant data(QModelIndex& index, int role);
-  Qt::ItemFlags flags(QModelIndex& index);
-  bool setData(QModelIndex& index, QVariant& value, int role);
+    /*!
+     * \brief CAlgorithmSettingsModel construct a settingsmodel with the given workflow
+     * \param workflow  workflow for the model
+     */
+    CAlgorithmSettingsModel(AWorkflow& workflow);
+
 };
 #endif //CALGORITMSETTINGSMODEL_H

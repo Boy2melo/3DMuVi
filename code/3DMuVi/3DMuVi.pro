@@ -47,7 +47,11 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
     ./gui/IGuiDataView.h \
     ./io/CImageIo.h \
     ./io/CTextIo.h \
-    ./io/CInputDataSet.h
+    ./io/CInputDataSet.h\
+    ./settings/CGlobalSettingController.h\
+    ./settings/CAlgorithmSettingController.h\
+    ./settings/CAlgorithmSettingsModel.h\
+    ./settings/CQJsonModel.h\
     ./settings/CQJsonItem.h
 SOURCES += ./main.cpp \
     ./workflow/workflow/acontextdatastore.cpp \
@@ -75,7 +79,11 @@ SOURCES += ./main.cpp \
     ./gui/CStepComboBox.cpp \
     ./io/CImageIo.cpp \
     ./io/CTextIo.cpp \
-    ./io/CInputDataSet.cpp
+    ./io/CInputDataSet.cpp\
+    ./settings/CGlobalSettingController.cpp\
+    ./settings/CAlgorithmSettingController.cpp\
+    ./settings/CAlgorithmSettingsModel.cpp\
+    ./settings/CQJsonModel.cpp\
     ./settings/CQJsonItem.cpp
 FORMS += ./gui/forms/CMainWindow.ui \
     ./gui/forms/CSettingsDialog.ui \
