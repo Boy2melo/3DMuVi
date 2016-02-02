@@ -47,7 +47,17 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
     ./gui/IGuiDataView.h \
     ./io/CImageIo.h \
     ./io/CTextIo.h \
-    ./io/CInputDataSet.h
+    ./io/CInputDataSet.h \
+    ./logger/controll/CAlgoMessage.h \
+    ./logger/controll/CLogController.h \
+    ./logger/controll/CLogHistory.h \
+    ./logger/qslogging/QsLog.h \
+    ./logger/qslogging/QsLogDest.h \
+    ./logger/qslogging/QsLogDestConsole.h \
+    ./logger/qslogging/QsLogDestFile.h \
+    ./logger/qslogging/QsLogDestFunctor.h \
+    ./logger/qslogging/QsLogLevel.h
+
 SOURCES += ./main.cpp \
     ./workflow/workflow/acontextdatastore.cpp \
     ./workflow/workflow/aworkflow.cpp \
@@ -74,7 +84,16 @@ SOURCES += ./main.cpp \
     ./gui/CStepComboBox.cpp \
     ./io/CImageIo.cpp \
     ./io/CTextIo.cpp \
-    ./io/CInputDataSet.cpp
+    ./io/CInputDataSet.cpp \
+    ./logger/controll/CAlgoMessage.cpp \
+    ./logger/controll/CLogController.cpp \
+    ./logger/controll/CLogHistory.cpp \
+    ./logger/qslogging/QsLog.cpp \
+    ./logger/qslogging/QsLogDest.cpp \
+    ./logger/qslogging/QsLogDestConsole.cpp \
+    ./logger/qslogging/QsLogDestFile.cpp \
+    ./logger/qslogging/QsLogDestFunctor.cpp
+
 FORMS += ./gui/forms/CMainWindow.ui \
     ./gui/forms/CSettingsDialog.ui \
 

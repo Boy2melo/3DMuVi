@@ -1,7 +1,7 @@
 #include "CLogController.h"
 #include "CLogHistory.h"
-#include "..\qslogging\QSLog.h"
-#include "..\qslogging\QSLogDest.h"
+#include "../qslogging/QsLog.h"
+#include "../qslogging/QsLogDest.h"
 #include <QDir>
 #include <iostream>
 using namespace QsLogging;
