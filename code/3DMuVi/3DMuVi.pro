@@ -11,8 +11,17 @@ DEFINES += QT_DLL QT_TESTLIB_LIB QT_OPENGL_LIB QT_WIDGETS_LIB
 INCLUDEPATH += ./GeneratedFiles \
     . \
     ./GeneratedFiles/Debug
-LIBS += -lopengl32 \
-    -lglu32
+
+win32{
+  LIBS += -lopengl32 \
+          -lglu32
+}
+else
+{
+  LIBS += -lGL \
+          -lGLU
+}
+
 DEPENDPATH += .
 MOC_DIR += ./GeneratedFiles/debug
 OBJECTS_DIR += debug
