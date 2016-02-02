@@ -60,6 +60,11 @@ public:
     *\param directory where all seeting should go
     */
     void exportto(QUrl directory);
+signals:
+    void loadQJson(QJsonObject data);
+public slots:
+    void requestQJson(QUrl directory);
+    void saveQJson(QJsonObject data, QUrl directory);
 };
 
 #endif //CALGORITHMSETTINGCONTROLLER_H

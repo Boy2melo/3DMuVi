@@ -45,7 +45,7 @@ public:
     void setIcon(const QJsonValue::Type& type, const QIcon& icon);
 
 public slots:
-    QJsonObject loadQJson(QJsonObject data);
+    void loadQJson(QJsonObject data);
 signals:
     void requestQJson(QUrl directory);
     void saveQJson(QJsonObject data, QUrl directory);
