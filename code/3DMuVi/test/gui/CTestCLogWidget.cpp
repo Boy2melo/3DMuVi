@@ -106,5 +106,5 @@ void CTestCLogWidget::onStateChangedError()
                                           "15.01.2016 00:30: WARNING: Third message\n"));
 }
 
-QTEST_MAIN(CTestCLogWidget)
+//QTEST_MAIN(CTestCLogWidget)
 #include  "CTestCLogWidget.moc"

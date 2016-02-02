@@ -14,7 +14,6 @@ class CTestCImageIo : public QObject
 
 private slots:
   void initTestCase();
-  void cleanupTestCase();
 
   /*!
   \brief Test for save.
@@ -39,9 +38,9 @@ private:
 
 void CTestCImageIo::initTestCase()
 {
-    testImagePathToSave.setUrl("data/testSaveImage.png");
-    testImagePath.setUrl("data/testImage.png");
-    testImage.load(testImagePath.path());
+    testImagePathToSave.setUrl("testSaveImage.png");
+    testImagePath.setUrl(":/data/io/data/testImage.png");
+    QCOMPARE(testImage.load(testImagePath.path()),true);
 }
 
 void CTestCImageIo::save()
@@ -50,6 +49,7 @@ void CTestCImageIo::save()
   QImage toCheckImage;
   toCheckImage.load(testImagePathToSave.path());
   QCOMPARE(toCheckImage, testImage);
+  QFile::remove(testImagePathToSave.path());
 }
 
 void CTestCImageIo::load()

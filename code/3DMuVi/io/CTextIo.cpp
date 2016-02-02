@@ -18,7 +18,7 @@ void CTextIo::save(QUrl path, QString  text)
 QString CTextIo::load(QUrl path)
 {
     QString result("");
-    QFile file(path.toString());
+    QFile file(path.path());
 
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
             return result;
