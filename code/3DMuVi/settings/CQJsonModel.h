@@ -12,42 +12,25 @@
 #include <QPair>
 #include <workflow/workflow/aworkflow.h>
 #include <settings/CAlgorithmSettingController.h>
-class QJsonModel : public QAbstractItemModel
+class CQJsonModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
-    /*!
-      * \brief CQJsonModel
-      * \param workflow
-      * \param controller
-      * \param parent
-      */
-     explicit CQJsonModel(AWorkflow& workflow, CAlgorithmSettingController& controller, QObject *parent = 0);
+     explicit CQJsonModel(QObject *parent = 0, QList<QJsonObject> list);
      /*!
-      * \brief saveSettings
-      * \param row
-      * \param filename
+      * \brief saveSettings saves an Algorithmsetting as Jsonfile
+      * \param row which setting will be saved
+      * \param filename url for the file
       */
      void saveSettings(int row, QUrl filename);
      /*!
-      * \brief loadSettings
-      * \param row
-      * \param filename
+      * \brief loadSettings loads an algorithmsettingform a Jsonfile
+      * \param row where the new setting should go, delets the old ons
+      * \param filename url for the file
       */
      void loadSettings(int row, QUrl filename);
-     /*!
-      * \brief flags
-      * \param index
-      * \return
-      */
+
      Qt::ItemFlags flags(QModelIndex& index);
-     /*!
-      * \brief setData
-      * \param index
-      * \param value
-      * \param role
-      * \return
-      */
      bool setData(QModelIndex& index, QVariant& value, int role);
 
     bool load(const QString& fileName);
@@ -61,14 +44,16 @@ public:
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
     void setIcon(const QJsonValue::Type& type, const QIcon& icon);
 
-
+public slots:
+    QJsonObject loadQJson(QJsonObject data);
+signals:
+    void requestQJson(QUrl directory);
+    void saveQJson(QJsonObject data, QUrl directory);
 
 private:
-    CAlgorithmSettingController algocontoller;
     QJsonTreeItem backtrack(QModelIndex &index);
-    QList<QPair<QString, int>> algolist;
 
-    QJsonTreeItem * mRootItem;
+    CQJsonTreeItem * mRootItem;
     QJsonDocument mDocument;
     QStringList mHeaders;
     QHash<QJsonValue::Type, QIcon> mTypeIcons;

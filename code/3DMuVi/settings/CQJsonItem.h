@@ -4,14 +4,14 @@
 #include <QJsonValue>
 #include <QJsonArray>
 #include <QJsonObject>
-class QJsonTreeItem
+class CQJsonTreeItem
 {
 public:
-    QJsonTreeItem(QJsonTreeItem * parent = 0);
-    ~QJsonTreeItem();
-    void appendChild(QJsonTreeItem * item);
-    QJsonTreeItem *child(int row);
-    QJsonTreeItem *parent();
+    CQJsonTreeItem(CQJsonTreeItem * parent = 0);
+    ~CQJsonTreeItem();
+    void appendChild(CQJsonTreeItem * item);
+    CQJsonTreeItem *child(int row);
+    CQJsonTreeItem *parent();
     int childCount() const;
     int row() const;
     void setKey(const QString& key);
@@ -21,20 +21,29 @@ public:
     QString value() const;
     QJsonValue::Type type() const;
 
-    QList<QJsonTreeItem*> getChilds();
+    QList<CQJsonTreeItem*>* getChilds();
+    /*!
+     * \brief toJson converts a treeitem to a jsonobject
+     * \return the treeitem as QJsonObject
+     */
+    QJsonObject toJson();
 
-    static QJsonTreeItem* load(const QJsonValue& value, QJsonTreeItem * parent = 0);
+    static CQJsonTreeItem* load(const QJsonValue& value, QJsonTreeItem * parent = 0);
 
 protected:
-
+    /*!
+     * \brief toJsonValue converts the treeitem to a jsonvlaue
+     * \return  the treeitem as QJsonValue
+     */
+    QJsonValue toJsonValue();
 
 private:
     QString mKey;
     QString mValue;
     QJsonValue::Type mType;
 
-    QList<QJsonTreeItem*> mChilds;
-    QJsonTreeItem * mParent;
+    QList<CQJsonTreeItem*> mChilds;
+    CQJsonTreeItem * mParent;
 
 
 };
