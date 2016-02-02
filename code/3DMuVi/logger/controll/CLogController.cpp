@@ -1,81 +1,100 @@
-/**
- * Project Untitled
- */
-
-
 #include "CLogController.h"
 #include "CLogHistory.h"
-#include "QSLog.h"
-#include "QSLogDest.h"
+#include "../qslogging/QsLog.h"
+#include "../qslogging/QsLogDest.h"
 #include <QDir>
+#include <iostream>
+using namespace QsLogging;
 
 CLogHistory history;
-QSLogging::Logger& logger;
 bool destSet;
+
 /**
- * CLogController implementation
+ * @brief CLogController::CLogController constructor
+ * sets the private attrubute destSet to false;
+ * use the function setLog(QUrl dest) to set an dest for the logger file
  */
 CLogController::CLogController(){
+   history = CLogHistory();
+   destSet= false;
+ }
 
-    destSet = false;
-}
 
-//add to History, GUI-Signal and add to Qslog
+
+/**
+ * @brief CLogController::manageNewLogMessage this function manage new Logmessages
+ *        from CAlgoMessage objects. It adds this objects to the History, calls QsLogging
+ *        to write it to a file, if Destination is set, and send a Signal to the GUI
+ *        with the new message
+ *
+ * @param message QString text to log
+ * @param time    QString timestamp of the logmessage
+ * @param type    QString "INFO", "ERROR" , "WARNING" or "DEBUG"
+ */
 void CLogController::manageNewLogMessage(QString message, QString time, QString type) {
-    h::addHistory(message,time,type);
-    newLogMessage(message, time, type);
+
+    if( !((type == "ERROR") || (type == "WARNING") || (type == "DEBUG")))
+    {
+            type = "INFO";
+    }
+
+    history.addHistory(message,time,type);
+    emit this->newLogMessage(message, time ,type );
     if( ! destSet ){
         return;
     }else{
     if(type == "INFO"){
-    QSLogging::QLOG_INFO() << message;
+    QLOG_INFO() << message;
     }
     if(type == "ERROR"){
-    QSLogging::QLOG_ERROR() << message;
+    QLOG_ERROR() << message;
     }
     if(type == "WARNING"){
-    QSLogging::QLOG_WARN() << message;
+    QLOG_WARN() << message;
     }
     if(type == "DEBUG"){
-    QSLogging::QLOG_DEBUG() << message;
+    QLOG_DEBUG() << message;
     }
     }
 }
-void CLogController::setHistory(CLogHistory h){
-    history = h;
+/**
+ * @brief CLogController::getHistory give the History where the log messages are saved temp
+ * @return CLogHistory& reference to the history object;
+ */
+CLogHistory& CLogController::getHistory( ){
+    CLogHistory& refhistory = history;
+    return refhistory;
 }
 
 /**
- * @param dest
+ * @brief CLogController::setLog this function is used
+ *        to create a output destination for the txt files
+ *        it activates the file logging
+ * @param dest QUrl with the destination
  */
 void CLogController::setLog(QUrl dest) {
-    logger =  QSLogging::Logger::instance();
-    logger.setLoggingLevel(QSLogging::TraceLevel);
-    const QString sLogPath(QDir(dest));
-    QSLogging::DestinationPtr fileDestination( QSLogging::DestinationFactory::MakeFileDestination(
-         sLogPath, EnableLogRotation, MaxSizeBytes(512), MaxOldLogCount(2)));
-    QSLogging::DestinationPtr debugDestination( QSLogging::DestinationFactory::MakeDebugOutputDestination());
-    QSLogging::DestinationPtr functorDestination( QSLogging::DestinationFactory::MakeFunctorDestination(&logFunction));
+
+    Logger& logger =  Logger::instance();
+    logger.setLoggingLevel(TraceLevel);
+    const QString sLogPath = dest.toString();
+    DestinationPtr fileDestination(DestinationFactory::MakeFileDestination(
+      sLogPath, EnableLogRotation, MaxSizeBytes(20000000), MaxOldLogCount(2000000)));
+    DestinationPtr debugDestination(DestinationFactory::MakeDebugOutputDestination());
+    //DestinationPtr functorDestination(DestinationFactory::MakeFunctorDestination(&logFunction));
     logger.addDestination(debugDestination);
     logger.addDestination(fileDestination);
-    logger.addDestination(functorDestination);
+   // logger.addDestination(functorDestination);
 
     destSet = true;
 
 }
-
+/**
+ * @brief CLogController::closeLog this is used to close the log Destination
+ * and stop the File Logging
+ */
 void CLogController::closeLog() {
     destSet = false;
-    QSLogging::Logger::destroyInstance();
+    Logger::destroyInstance();
 
 }
 
-/**
- * @param message
- * @param time
- * @param type
- * @return signal
- */
-void CLogController::newLogMessage(QString message, QString time, QString type) {
-
-}
