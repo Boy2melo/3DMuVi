@@ -57,6 +57,7 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
     ./io/CImageIo.h \
     ./io/CTextIo.h \
     ./io/CInputDataSet.h \
+    ./io/CResultContext.h \
     ./logger/controll/CAlgoMessage.h \
     ./logger/controll/CLogController.h \
     ./logger/controll/CLogHistory.h \
@@ -99,6 +100,7 @@ SOURCES += ./main.cpp \
     ./io/CImageIo.cpp \
     ./io/CTextIo.cpp \
     ./io/CInputDataSet.cpp \
+    ./io/CResultContext.cpp \
     ./logger/controll/CAlgoMessage.cpp \
     ./logger/controll/CLogController.cpp \
     ./logger/controll/CLogHistory.cpp \
@@ -112,6 +114,7 @@ SOURCES += ./main.cpp \
     ./settings/CAlgorithmSettingsModel.cpp\
     ./settings/CQJsonModel.cpp\
     ./settings/CQJsonItem.cpp
+
 
 
 FORMS += ./gui/forms/CMainWindow.ui \
