@@ -6,8 +6,8 @@ TEMPLATE = app
 TARGET = 3DMuVi
 DESTDIR = ../Win32/Debug
 QT += core opengl widgets gui
-CONFIG += qtestlib debug c++11
-DEFINES += QT_DLL QT_TESTLIB_LIB QT_OPENGL_LIB QT_WIDGETS_LIB
+CONFIG += debug c++11
+DEFINES += QT_DLL QT_OPENGL_LIB QT_WIDGETS_LIB
 INCLUDEPATH += ./GeneratedFiles \
     . \
     ./GeneratedFiles/Debug
