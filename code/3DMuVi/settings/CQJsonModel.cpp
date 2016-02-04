@@ -28,12 +28,13 @@
 CQJsonModel::CQJsonModel(QObject *parent, QList<QJsonObject> list) :
     QAbstractItemModel(parent)
 {
-    mRootItem = new QJsonTreeItem;
+    mRootItem = new CQJsonTreeItem;
     mHeaders.append("key");
     mHeaders.append("value");
     for (int i = 0; i < list.size(); i++) {
         loadQJson(list.value(i));
     }
+    QObject::connect(CAlgorithmSettingController, SIGNAL(loadQJson(QJsonObject)) , CQJsonModel, SLOT(loadQJson(QJsonObject)));
 }
 
 void CQJsonModel::saveSettings(int row, QUrl filename)
@@ -83,7 +84,7 @@ CQJsonTreeItem CQJsonModel::backtrack(QModelIndex& index)
     {
        return mRootItem->getChilds().value(index.row());
     } else {
-        QJsonTreeItem temp = backtrack(index.parent());
+        CQJsonTreeItem temp = backtrack(index.parent());
         return temp->getChilds().value(index.row());
     }
 }
@@ -122,9 +123,9 @@ bool CQJsonModel::loadJson(const QByteArray &json)
     {
 
         if (mDocument.isArray()) {
-            mRootItem->appendChild(QJsonTreeItem::load(QJsonValue(mDocument.array()));
+            mRootItem->appendChild(CQJsonTreeItem::load(QJsonValue(mDocument.array()));
         } else {
-            mRootItem->appendChild(QJsonTreeItem::load(QJsonValue(mDocument.object()));
+            mRootItem->appendChild(CQJsonTreeItem::load(QJsonValue(mDocument.object()));
         }
 
         return true;

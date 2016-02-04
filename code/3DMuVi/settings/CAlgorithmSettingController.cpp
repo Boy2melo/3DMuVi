@@ -1,10 +1,13 @@
 #include "CAlgorithmSettingController.h"
 #include "QJsonDocument"
-#include "io/CTextIo.h"
+
 
 CAlgorithmSettingController::CAlgorithmSettingController(QUrl directory)
 {
     tempdirectory = QUrl(directory);
+    io = CTextIo();
+    QObject::connect(CQJsonModel, SIGNAL(requestQJson(QUrl)), CAlgorithmSettingController, SLOT(requestQJson(QUrl)));
+    QObject::connect(CQJsonModel, SIGNAL(saveQJson(QJsonObject, QUrl)), CAlgorithmSettingController, SLOT(saveQJson(QJsonObject, QUrl)));
 }
 QJsonValue getSetting(QString name, QString key)
 {
@@ -13,7 +16,7 @@ QJsonValue getSetting(QString name, QString key)
     QJsonObject tempjson;
     if (algorithms.contains(name)) {
        url = QUrl(tempdirectory.toString() + name);
-       file = io.TextIo.load(url);
+       file = io.load(url);
        QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
        tempjson = docu.object();
     }
@@ -30,14 +33,14 @@ bool setSetting(QString name,QString key, QJsonValue value)
         return false;
     }
     url = QUrl(tempdirectory.toString() + name);
-    file = io.TextIo.load(url);
+    file = io.load(url);
     docu = QJsonDocument().fromJson(file.toUtf8());
     tempjson = docu.object();
     tempjson.insert(key, value);
     docu = QJsonDocument(tempjson);
     file = QString(docu.toJson());
     url = QUrl(tempdirectory.toString() + name);
-    io.TextIo.save(url, file);
+    io.save(url, file);
 }
 
 QJsonObject CAlgorithmSettingController::getSetting(QString name)
@@ -46,7 +49,7 @@ QJsonObject CAlgorithmSettingController::getSetting(QString name)
     QString file;
     if (algorithms.contains(name)) {
        url = QUrl(tempdirectory.toString() + name);
-       file = io.TextIo.load(url);
+       file = io.load(url);
        QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
        return docu.object();
     }
@@ -64,7 +67,7 @@ bool CAlgorithmSettingController::setSetting(QString name, QJsonObject data)
         docu = QJsonDocument(data);
         file = QString(docu.toJson());
         url = QUrl(tempdirectory.toString() + name);
-        io.TextIo.save(url, file);
+        io.save(url, file);
         return true;
     } else {
         return false;
@@ -79,9 +82,9 @@ void CAlgorithmSettingController::import(QUrl directory, QString name)
         algorithms.append(name);
     }
     url = QUrl(directory.toString() + name);
-    file = io.TextIo.load(url);
+    file = io.load(url);
     url = QUrl(tempdirectory.toString() + name);
-    io.TextIo.save(url, file);
+    io.save(url, file);
 }
 
 void CAlgorithmSettingController::exportto(QUrl directory)
@@ -92,14 +95,14 @@ void CAlgorithmSettingController::exportto(QUrl directory)
     for (int i = 0; i < algorithms.length(); i++) {
         name = algorithms.value(i);
         url = QUrl(tempdirectory.toString() + name);
-        file = io.TextIo.load(url);
+        file = io.load(url);
         url = QUrl(directory.toString() + name);
-        io.TextIo.save(url, file);
+        io.save(url, file);
     }
 }
 void requestQJson(QUrl directory)
 {
-    file = io.TextIo.load(directory);
+    file = io.load(directory);
     QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
     emit loadQJson(docu.object());
 }
@@ -108,5 +111,5 @@ void saveQJson(QJsonObject data, QUrl directory)
 {
     QJsonDocument docu = QJsonDocument(data);
     QString file = QString(docu.toJson());
-    io.TextIo.save(directory, file);
+    io.save(directory, file);
 }

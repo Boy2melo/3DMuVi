@@ -31,7 +31,7 @@ void CGlobalSettingController::import(QUrl directory, QString name)
     QUrl url;
     QString file;
     url = QUrl(directory.toString() + name);
-    file =io.TextIo.load(url);
+    file = io.load(url);
     QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
     settings = docu.object();
 }
@@ -40,7 +40,7 @@ void CGlobalSettingController::exportto(QUrl directory)
 {
     QJsonDocument docu = QJsonDocument(settings);
     QString file = QString(docu.toJson());
-    io.TextIo.save(directory, file)
+    io.save(directory, file);
 }
 
 void CGlobalSettingController::resettoDefault()

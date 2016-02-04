@@ -5,6 +5,7 @@
 #include <QJsonObject>
 #include <QUrl>
 #include <QStringList>
+#include "io/CTextIo.h"
 /*!
 * Controller for the parameters of the algortihms
 * Author Jens Manig
@@ -14,6 +15,7 @@ class CAlgorithmSettingController
 private:
     QUrl tempdirectory;
     QStringList algorithms;
+    CTextIo io;
 protected:
     /*!
      * \gets a specific parameter of an algorithmn

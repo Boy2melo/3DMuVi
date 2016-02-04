@@ -4,11 +4,13 @@
 #include <QString>
 #include <QUrl>
 #include <QJsonObject>
+#include "io/CTextIo.h"
 
 class CGlobalSettingController
 {
 private:
     QJsonObject settings;
+    CTextIo io;
 public:
     /*!
      * \brief CGlobalSettingController

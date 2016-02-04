@@ -51,7 +51,7 @@ QJsonValue toJsonValue() {
         value = QJsonValue(mValue);
         break;
     case "Double":
-        ovalue = QJsonValue(mValue.toDouble());
+        value = QJsonValue(mValue.toDouble());
         break;
     case "Bool":
         Boolean boolvalue = false;

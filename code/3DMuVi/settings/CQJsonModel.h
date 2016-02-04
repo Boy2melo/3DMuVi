@@ -51,7 +51,7 @@ signals:
     void saveQJson(QJsonObject data, QUrl directory);
 
 private:
-    QJsonTreeItem backtrack(QModelIndex &index);
+    CQJsonTreeItem backtrack(QModelIndex &index);
 
     CQJsonTreeItem * mRootItem;
     QJsonDocument mDocument;

@@ -28,7 +28,7 @@ public:
      */
     QJsonObject toJson();
 
-    static CQJsonTreeItem* load(const QJsonValue& value, QJsonTreeItem * parent = 0);
+    static CQJsonTreeItem* load(const QJsonValue& value, CQJsonTreeItem * parent = 0);
 
 protected:
     /*!
