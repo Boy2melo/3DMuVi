@@ -11,6 +11,8 @@ CSettingsDialog::CSettingsDialog(QWidget *parent) :
   ui(new Ui::CSettingsDialog)
 {
   ui->setupUi(this);
+
+  connect(ui->resultDirectoryButton, &QPushButton::clicked, this, &CSettingsDialog::onResultDirectoryButtonClicked);
 }
 
 CSettingsDialog::~CSettingsDialog()

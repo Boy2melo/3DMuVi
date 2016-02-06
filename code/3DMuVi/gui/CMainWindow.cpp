@@ -63,19 +63,18 @@ void CMainWindow::onLoadImages()
 {
   QUrl url = QFileDialog::getExistingDirectoryUrl(this, "Select image directory");
 
-  if(mWorkflow)
+  if(!url.isEmpty() && mWorkflow)
   {
     CInputDataSet* dataSet = new CInputDataSet(url);
-    std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem*>> images;
-      //= dataSet->getInputImages(); //TODO: Change IO to get CImagePreviewItem instead of
-                                     //      QListWidgetItem
+    std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>>* images =
+      dataSet->getInputImages();
     std::vector<CImagePreviewItem*> imageItems;
 
     //AContextDataStore* dataStore = mWorkflow->addDataStore(dataSet);
 
-    for(std::tuple<uint32_t, QImage, CImagePreviewItem*> i : images)
+    for(std::tuple<uint32_t, QImage, CImagePreviewItem> i : *images)
     {
-      imageItems.push_back(std::get<2>(i));
+      imageItems.push_back(&(std::get<2>(i)));
     }
 
     ui->imagePreviewWidget->setImages(imageItems);
