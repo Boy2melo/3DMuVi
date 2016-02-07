@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
   QApplication app(argc, argv);
 
   QTest::qExec(&logWidget, argc, argv);
-  //QTest::qExec(&mainWindow, argc, argv);
+  QTest::qExec(&mainWindow, argc, argv);
   QTest::qExec(&settingsDialog, argc, argv);
   QTest::qExec(&imageIo, argc, argv);
   QTest::qExec(&textIo, argc, argv);
