@@ -2,6 +2,7 @@
 #define CTESTCMAINWINDOW_H
 
 #include <QTest>
+#include <QGroupBox>
 
 /*!
 \brief Test for CMainWindow.
@@ -44,7 +45,18 @@ private slots:
    */
   void settingsCheckDialog();
 
+  /*!
+  \brief Test for workflow selection function.
+
+  This is a test for the workflow selection function. It selects a workflow and checks if
+  appropriate group boxes have been created. This test assumes that CFourPhaseWorkflow is
+  the first worklfow in the menu.
+   */
+  void workflowSelection();
+
 private:
+  void workflowSelectionCheckGroupBox(QGroupBox* groupBox, QString reference);
+
   bool mAboutSuccess = false;
   bool mSettingsSuccess = false;
 };
