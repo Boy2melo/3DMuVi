@@ -3,6 +3,8 @@
 
 #include <QVector>
 #include <QString>
+#include "idataview.h"
+
 /*!
    \class AContextDataStore
  * \brief The AContextDataStore class
@@ -22,6 +24,9 @@ protected:
      */
     virtual void OnSerialize(/*TODO*/) = 0;
 public:
+    virtual ~AContextDataStore() {
+    }
+
     /*!
      * \brief Erstelle einen neuen DataStore
      */
@@ -30,7 +35,7 @@ public:
      * \brief Eine Liste an unterstützten Datentypen für diesen Store
      * \return Eine Liste an unterstützten Datentypen für diesen Store
      */
-    virtual QVector<QString> getSupportedDataTypes() const = 0;
+    virtual QStringList getSupportedDataTypes() const = 0;
     /*!
      * \brief Initialisiert den Context aus einem Data Store
      */
@@ -44,7 +49,7 @@ public:
     /*!
      * \brief Wendet die Daten des Stores auf einen DataView an.
      */
-    virtual void ApplyToDataView(/*TODO*/) const = 0;
+    virtual void ApplyToDataView(IDataView *view) const = 0;
     /*!
      * \brief Die ID des Datenkontext
      * \return Die ID des Datenkontext
