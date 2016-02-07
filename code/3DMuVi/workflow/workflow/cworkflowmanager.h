@@ -4,8 +4,7 @@
 #include <QVector>
 #include "workflow/workflow/aworkflow.h"
 
-class CWorkflowManager
-{
+class CWorkflowManager {
 private:
     CWorkflowManager();
 

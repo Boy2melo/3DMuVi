@@ -59,9 +59,6 @@
     <ClCompile Include="workflow\workflow\acontextdatastore.cpp">
       <Filter>Source Files\workflow</Filter>
     </ClCompile>
-    <ClCompile Include="workflow\workflow\aworkflow.cpp">
-      <Filter>Source Files\workflow</Filter>
-    </ClCompile>
     <ClCompile Include="workflow\workflow\cworkflowmanager.cpp">
       <Filter>Source Files\workflow</Filter>
     </ClCompile>
@@ -146,6 +143,93 @@
     <ClCompile Include="gui\CSettingsDialog.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
+    <ClCompile Include="gui\AlgorithmSettings\CAlgorithmSettingsView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CStepComboBox.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CStepComboBox.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CStepComboBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\CImageIo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\CInputDataSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\CResultContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\CTextIo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\controll\CAlgoMessage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\controll\CLogController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CLogController.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CLogController.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\controll\CLogHistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\qslogging\QsLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\qslogging\QsLogDest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\qslogging\QsLogDestConsole.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\qslogging\QsLogDestFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\qslogging\QsLogDestFunctor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_QsLogDestFunctor.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_QsLogDestFunctor.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="settings\CAlgorithmSettingController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="settings\CAlgorithmSettingsModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="settings\CGlobalSettingController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="settings\CQJsonItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="settings\CQJsonModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CQJsonModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CQJsonModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\fourphase\cfourphasedatastore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\fourphase\cfourphaseworkflow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui\3dView\C3dView.h">
@@ -165,6 +249,18 @@
     </CustomBuild>
     <CustomBuild Include="gui\forms\CSettingsDialog.ui">
       <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\CStepComboBox.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="logger\controll\CLogController.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="logger\qslogging\QsLogDestFunctor.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="settings\CQJsonModel.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +335,63 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_CSettingsDialog.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gui\AlgorithmSettings\CAlgorithmSettingsView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\CImageIo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\CInputDataSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\CResultContext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\CTextIo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\controll\CAlgoMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\controll\CLogHistory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\qslogging\QsLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\qslogging\QsLogDest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\qslogging\QsLogDestConsole.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\qslogging\QsLogDestFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\qslogging\QsLogDisableForThisFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="logger\qslogging\QsLogLevel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="settings\CAlgorithmSettingController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="settings\CAlgorithmSettingsModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="settings\CGlobalSettingController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="settings\CQJsonItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\fourphase\cfourphaseworkflow.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\fourphase\cfourphasedatastore.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

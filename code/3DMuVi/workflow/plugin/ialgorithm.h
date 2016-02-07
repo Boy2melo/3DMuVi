@@ -3,6 +3,8 @@
 
 #include <QVector>
 #include "workflow/workflow/acontextdatastore.h"
+#include "logger/controll/CLogController.h"
+#include "settings/CAlgorithmSettingController.h"
 
 /*!
    \class IAlgorithm
@@ -18,11 +20,11 @@ public:
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */
-    void setLogger(/*TODO &*/);
+    void setLogger(CLogController *controller);
     /*!
      * \brief Setze die Parameter für den nächsten Durchlauf
      */
-    void setParameters(/*TODO &*/);
+    void setParameters(CAlgorithmSettingController *settings);
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */
