@@ -3,6 +3,7 @@
 
 #include <QVector>
 #include <QString>
+#include <QStringList>
 #include "idataview.h"
 
 /*!

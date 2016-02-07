@@ -77,7 +77,6 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
 
 SOURCES += ./main.cpp \
     ./workflow/workflow/acontextdatastore.cpp \
-    ./workflow/workflow/aworkflow.cpp \
     ./workflow/workflow/cworkflowmanager.cpp \
     ./workflow/workflow/idatapacket.cpp \
     ./workflow/workflow/idataview.cpp \
