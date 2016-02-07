@@ -42,6 +42,7 @@ HEADERS += gui/CTestCLogWidget.h \
            ../logger/qslogging/QsLogDestFunctor.h \
            ../logger/qslogging/QsLogLevel.h \
            ../settings/CGlobalSettingController.h \
+           ../workflow/workflow/fourphase/cfourphaseworkflow.h \
            ../workflow/workflow/aworkflow.h \
            ../workflow/workflow/cworkflowmanager.h \
            ../workflow/plugin/cpluginmanager.h
@@ -71,7 +72,7 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../logger/qslogging/QsLogDestFile.cpp\
            ../logger/qslogging/QsLogDestFunctor.cpp \
            ../settings/CGlobalSettingController.cpp \
-           #../workflow/workflow/aworkflow.cpp \
+           ../workflow/workflow/fourphase/cfourphaseworkflow.cpp \
            ../workflow/workflow/cworkflowmanager.cpp \
            ../workflow/plugin/cpluginmanager.cpp \
            main.cpp
