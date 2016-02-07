@@ -312,7 +312,6 @@
     <property name="title">
      <string>Workflow</string>
     </property>
-    <addaction name="actionDefault_four_step_workflow"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuWorkflow"/>
@@ -352,11 +351,6 @@
   <action name="actionAbout">
    <property name="text">
     <string>About...</string>
-   </property>
-  </action>
-  <action name="actionDefault_four_step_workflow">
-   <property name="text">
-    <string>Four-step (default)</string>
    </property>
   </action>
   <action name="actionAdvancedLoadFiles">
