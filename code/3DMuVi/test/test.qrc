@@ -2,5 +2,8 @@
     <qresource prefix="/data">
         <file>io/data/testImage.png</file>
         <file>io/data/testText.txt</file>
+        <file>io/data/testInputDataSet/0.png</file>
+        <file>io/data/testInputDataSet/1.png</file>
+        <file>io/data/testInputDataSet/2.png</file>
     </qresource>
 </RCC>
