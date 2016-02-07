@@ -57,7 +57,7 @@ public:
      * \param id Select the file with this id.
      * \return TDataPacket of the deserialized file.
      */
-    IDataPacket getDataPacket(QString id);
+    IDataPacket* getDataPacket(QString id);
 };
 
 #endif // CRESULTCONTEXT_H
