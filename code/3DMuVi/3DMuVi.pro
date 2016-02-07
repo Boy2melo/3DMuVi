@@ -37,6 +37,8 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
     ./workflow/plugin/iplugin.h \
     ./workflow/plugin/cpluginmanager.h \
     ./workflow/plugin/ialgorithm.h \
+	./workflow/workflow/fourphase/cfourphasedatastore.h\
+	./workflow/workflow/fourphase/cfourphaseworkflow.h\
     ./gui/3dView/C3dView.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsView.h \
@@ -80,6 +82,8 @@ SOURCES += ./main.cpp \
     ./workflow/workflow/idatapacket.cpp \
     ./workflow/workflow/idataview.cpp \
     ./workflow/workflow/tdatapacket.cpp \
+	./workflow/workflow/fourphase/cfourphasedatastore.cpp\
+	./workflow/workflow/fourphase/cfourphaseworkflow.cpp\
     ./gui/3dView/C3dView.cpp \
     ./workflow/plugin/cpluginmanager.cpp \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
