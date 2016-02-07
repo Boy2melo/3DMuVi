@@ -15,7 +15,7 @@ public:
     virtual QString getAlgorithmType(const quint32 step) const = 0;
     virtual bool trySetStep(const quint32 step, IPlugin* plugin) = 0;
     virtual IPlugin* getStep(const quint32 step) const = 0;
-    virtual QVector<AContextDataStore*> getDataStores() const = 0;
+    virtual QList<AContextDataStore*> getDataStores() const = 0;
     virtual AContextDataStore* addDataStore() = 0;
     virtual bool removeDataStore(QString id) = 0;
 

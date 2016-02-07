@@ -7,7 +7,9 @@ CFourPhaseDataStore::~CFourPhaseDataStore() {}
 
 void CFourPhaseDataStore::OnSerialize() {}
 
-QVector<QString> CFourPhaseDataStore::getSupportedDataTypes() const {}
+QStringList CFourPhaseDataStore::getSupportedDataTypes() const {
+    return QStringList();
+}
 
 void CFourPhaseDataStore::InitializeFromStorage() {}
 

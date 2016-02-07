@@ -5,7 +5,7 @@
 
 class CFourPhaseWorkflow : public AWorkflow {
 private:
-    IPlugin *mPlugins[];
+    IPlugin **mPlugins;
     QList<CFourPhaseDataStore *> mDataStores[];
 
 public:
@@ -15,7 +15,7 @@ public:
     QString getAlgorithmType(const quint32 step) const override;
     bool trySetStep(const quint32 step, IPlugin* plugin) override;
     IPlugin* getStep(const quint32 step) const override;
-    QVector<AContextDataStore*> getDataStores() const override;
+    QList<AContextDataStore*> getDataStores() const override;
     AContextDataStore* addDataStore() override;
     bool removeDataStore(QString id) override;
     void run(const QString storeId) override;

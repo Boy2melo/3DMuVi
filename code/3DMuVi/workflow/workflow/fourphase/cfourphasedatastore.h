@@ -9,7 +9,7 @@ public:
 protected:
     void OnSerialize() override;
 public:
-    QVector<QString> getSupportedDataTypes() const override;
+    QStringList getSupportedDataTypes() const override;
     void InitializeFromStorage() override;
     void ApplyToDataView(IDataView *view) const override;
 };

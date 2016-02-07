@@ -35,7 +35,7 @@ public:
      * \brief Eine Liste an unterstützten Datentypen für diesen Store
      * \return Eine Liste an unterstützten Datentypen für diesen Store
      */
-    virtual QVector<QString> getSupportedDataTypes() const = 0;
+    virtual QStringList getSupportedDataTypes() const = 0;
     /*!
      * \brief Initialisiert den Context aus einem Data Store
      */

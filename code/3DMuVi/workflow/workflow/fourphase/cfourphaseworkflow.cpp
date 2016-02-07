@@ -1,10 +1,10 @@
 #include "cfourphaseworkflow.h"
 #include "workflow/plugin/cpluginmanager.h"
 
-IPlugin* CFourPhaseWorkflow::mPlugins[4] = { nullptr, nullptr, nullptr, nullptr };
-QList<CFourPhaseDataStore *> CFourPhaseWorkflow::mDataStores;
 
-CFourPhaseWorkflow::CFourPhaseWorkflow() {}
+CFourPhaseWorkflow::CFourPhaseWorkflow() {
+    mPlugins = new IPlugin*[getStepCount()];
+}
 
 
 quint32 CFourPhaseWorkflow::getStepCount() const {
@@ -47,15 +47,23 @@ IPlugin* CFourPhaseWorkflow::getStep(const quint32 step) const {
     }
 }
 
-QVector<AContextDataStore*> CFourPhaseWorkflow::getDataStores() const {}
+QList<AContextDataStore*> CFourPhaseWorkflow::getDataStores() const {
+    return QList<AContextDataStore *>();
+}
 
-AContextDataStore* CFourPhaseWorkflow::addDataStore() {}
+AContextDataStore* CFourPhaseWorkflow::addDataStore() {
+    return nullptr;
+}
 
-bool CFourPhaseWorkflow::removeDataStore(QString id) {}
+bool CFourPhaseWorkflow::removeDataStore(QString id) {
+    return false;
+}
 
 void CFourPhaseWorkflow::run(const QString storeId) {}
 
-quint32 CFourPhaseWorkflow::getState(const QString storeId) const {}
+quint32 CFourPhaseWorkflow::getState(const QString storeId) const {
+    return 0;
+}
 
 void CFourPhaseWorkflow::stop(const QString storeId) {}
 
@@ -63,7 +71,9 @@ bool CFourPhaseWorkflow::checkAvailableDataTypes() const {
     QStringList dataTypes;
     //TODO add input images as initial item
 
-    foreach(IPlugin *plugin, mPlugins) {
+    for (int i = 0; i < getStepCount(); i++) {
+        IPlugin *plugin = mPlugins[i];
+
         if (plugin == nullptr) {
             continue;
         }
