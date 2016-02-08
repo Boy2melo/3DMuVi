@@ -1,3 +1,4 @@
+#include <QTest>
 #include <io/CInputDataSet.h>
 
 /*!
@@ -42,6 +43,5 @@ private:
   QImage testImage0;
   QImage testImage1;
   QImage testImage2;
-  CInputDataSet inputDataSet;
   std::vector<std::tuple<uint32_t,QImage,CImagePreviewItem>>* data;
 };

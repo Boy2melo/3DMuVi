@@ -1,5 +1,3 @@
-#include <QtTest>
-
 #include "CTestCInputDataSet.h"
 
 void CTestCInputDataSet::initTestCase()
