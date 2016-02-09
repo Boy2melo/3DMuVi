@@ -32,48 +32,60 @@ CQJsonTreeItem::~CQJsonTreeItem()
     qDeleteAll(mChilds);
 
 }
-QList<CQJsonTreeItem*>* CQJsonTreeItem::getChilds()
+QList<CQJsonTreeItem*> CQJsonTreeItem::getChilds()
 {
     return mChilds;
 }
 
-QJsonObject toJson() {
+QJsonObject CQJsonTreeItem::toJson() {
     QJsonObject object;
-    object.insert(mkey, this.toJsonValue);
+    object.insert(mKey, this->toJsonValue());
     return object;
 }
 
-QJsonValue toJsonValue() {
+QJsonValue CQJsonTreeItem::toJsonValue() {
     QJsonValue value;
     switch (mType)
     {
-    case "String":
+    case QJsonValue::String:
+    {
         value = QJsonValue(mValue);
         break;
-    case "Double":
+    }
+    case QJsonValue::Double:
+    {
         value = QJsonValue(mValue.toDouble());
         break;
-    case "Bool":
-        Boolean boolvalue = false;
+    }
+    case QJsonValue::Bool:
+    {
+        bool boolvalue = false;
         if (mValue == "true") {
             boolvalue = true;
         }
         value = QJsonValue(boolvalue);
         break;
-        }
-    case "Object":
+    }
+    case QJsonValue::Object:
+    {
         QJsonObject object;
-        for (int i = 0; i < mChilds; i++) {
-            object.insert(mChilds.value(i).key(), mChilds.value(i).toJsonValue());
+        for (int i = 0; i < mChilds.size(); i++) {
+            object.insert(mChilds.value(i)->key(), mChilds.value(i)->toJsonValue());
         }
         value = object;
         break;
-    case "Array":
+    }
+    case QJsonValue::Array:
+    {
         QJsonArray array;
-        for (int i = 0; i < mChilds; i++) {
-            array.append(mChilds.value(i).toJsonValue());
+        for (int i = 0; i < mChilds.size(); i++) {
+            array.append(mChilds.value(i)->toJsonValue());
         }
         break;
+    }
+    default:
+        break;
+    }
     return value;
 }
 
@@ -111,7 +123,7 @@ void CQJsonTreeItem::setKey(const QString &key)
     mKey = key;
 }
 
-void CQJsonTreeItem::setValue(QString &value)
+void CQJsonTreeItem::setValue(QString value)
 {
     mValue = value;
 }

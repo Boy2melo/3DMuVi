@@ -8,7 +8,7 @@
 #include <QIcon>
 
 #include <QUrl>
-#include <QList>
+#include <QVector>
 #include <QPair>
 #include <workflow/workflow/aworkflow.h>
 #include <settings/CAlgorithmSettingController.h>
@@ -16,7 +16,7 @@ class CQJsonModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
-     explicit CQJsonModel(QObject *parent = 0, QList<QJsonObject> list);
+     explicit CQJsonModel(QObject *parent = 0, QVector<QJsonObject> list = QVector<QJsonObject>());
      /*!
       * \brief saveSettings saves an Algorithmsetting as Jsonfile
       * \param row which setting will be saved

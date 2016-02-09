@@ -43,7 +43,7 @@ public:
     * \param name name of the algorithm
     * \return the setting of the algorithm
     */
-    QJsonObject getSetting(QString name);
+    QJsonObject* getSetting(QString name);
     /*!
     * \sets a new setting for an algorithm
     * \param name name of the algorithm

@@ -5,6 +5,7 @@
 CGlobalSettingController::CGlobalSettingController()
 {
     QUrl directory;
+    io = CTextIo();
     directory = QUrl(QString("Verzeichnis"));//verzeichniss fehlt noch
     import(directory, "globalconfig");
 }

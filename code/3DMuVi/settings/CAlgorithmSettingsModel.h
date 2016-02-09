@@ -6,20 +6,22 @@
 #include <QVariant>
 #include <QString>
 
-#include <workflow/workflow/aworkflow.h>
+#include "CQJsonModel.h"
+#include <workflow/plugin/cpluginmanager.h>
 /*!
  * \brief The CAlgorithmSettingsModel class
  */
 class CAlgorithmSettingsModel : public CQJsonModel
 {
 private:
-    AWorkflow workflow;
+    //CPluginManager manager;
 public:
     /*!
-     * \brief CAlgorithmSettingsModel construct a settingsmodel with the given workflow
-     * \param workflow  workflow for the model
+     * \brief CAlgorithmSettingsModel construct a settingsmodel
+     * \param manager
      */
-    CAlgorithmSettingsModel(AWorkflow& workflow);
+    CAlgorithmSettingsModel(CPluginManager& manager);
+    CAlgorithmSettingsModel(QObject *parent, QVector<QJsonObject> list);
 
 };
 #endif //CALGORITMSETTINGSMODEL_H

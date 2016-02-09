@@ -1,15 +1,18 @@
 #include "CAlgorithmSettingController.h"
 #include "QJsonDocument"
+#include "CQJsonModel.h"
 
 
 CAlgorithmSettingController::CAlgorithmSettingController(QUrl directory)
 {
     tempdirectory = QUrl(directory);
     io = CTextIo();
-    QObject::connect(CQJsonModel, SIGNAL(requestQJson(QUrl)), CAlgorithmSettingController, SLOT(requestQJson(QUrl)));
-    QObject::connect(CQJsonModel, SIGNAL(saveQJson(QJsonObject, QUrl)), CAlgorithmSettingController, SLOT(saveQJson(QJsonObject, QUrl)));
+    //QObject::connect(CQJsonModel, &CQJsonModel::requestQJson(QUrl),
+      //               CAlgorithmSettingController, &CAlgorithmSettingController::requestQJson(QUrl));
+    //QObject::connect(CQJsonModel, &CQJsonModel::saveQJson(QJsonObject, QUrl),
+      //               CAlgorithmSettingController, &CAlgorithmSettingController::saveQJson(QJsonObject, QUrl));
 }
-QJsonValue getSetting(QString name, QString key)
+QJsonValue CAlgorithmSettingController::getSetting(QString name, QString key)
 {
     QUrl url;
     QString file;
@@ -23,7 +26,7 @@ QJsonValue getSetting(QString name, QString key)
     return tempjson.value(key);
 }
 
-bool setSetting(QString name,QString key, QJsonValue value)
+bool CAlgorithmSettingController::setSetting(QString name,QString key, QJsonValue value)
 {
     QJsonDocument docu;
     QString file;
@@ -41,17 +44,20 @@ bool setSetting(QString name,QString key, QJsonValue value)
     file = QString(docu.toJson());
     url = QUrl(tempdirectory.toString() + name);
     io.save(url, file);
+    return true;
 }
 
-QJsonObject CAlgorithmSettingController::getSetting(QString name)
+QJsonObject* CAlgorithmSettingController::getSetting(QString name)
 {
     QUrl url;
     QString file;
+    QJsonDocument docu;
     if (algorithms.contains(name)) {
        url = QUrl(tempdirectory.toString() + name);
        file = io.load(url);
-       QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
-       return docu.object();
+       docu = QJsonDocument().fromJson(file.toUtf8());
+       QJsonObject* object = new QJsonObject(docu.object());
+       return object;
     }
 }
 
@@ -100,14 +106,14 @@ void CAlgorithmSettingController::exportto(QUrl directory)
         io.save(url, file);
     }
 }
-void requestQJson(QUrl directory)
+void CAlgorithmSettingController::requestQJson(QUrl directory)
 {
-    file = io.load(directory);
+    QString file = io.load(directory);
     QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
     emit loadQJson(docu.object());
 }
 
-void saveQJson(QJsonObject data, QUrl directory)
+void CAlgorithmSettingController::saveQJson(QJsonObject data, QUrl directory)
 {
     QJsonDocument docu = QJsonDocument(data);
     QString file = QString(docu.toJson());

@@ -1,6 +1,11 @@
 #include "CAlgorithmSettingsModel.h"
 
-CAlgorithmSettingsModel::CAlgorithmSettingsModel(AWorkflow& workflow)
+CAlgorithmSettingsModel::CAlgorithmSettingsModel(CPluginManager& manager)
+{
+
+}
+CAlgorithmSettingsModel::CAlgorithmSettingsModel(QObject *parent, QVector<QJsonObject> list)
+    : CQJsonModel(parent, list)
 {
 
 }

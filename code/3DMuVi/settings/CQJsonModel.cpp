@@ -25,7 +25,7 @@
 #include <QIcon>
 #include <QFont>
 
-CQJsonModel::CQJsonModel(QObject *parent, QList<QJsonObject> list) :
+CQJsonModel::CQJsonModel(QObject *parent, QVector<QJsonObject> list) :
     QAbstractItemModel(parent)
 {
     mRootItem = new CQJsonTreeItem;
@@ -34,22 +34,23 @@ CQJsonModel::CQJsonModel(QObject *parent, QList<QJsonObject> list) :
     for (int i = 0; i < list.size(); i++) {
         loadQJson(list.value(i));
     }
-    QObject::connect(CAlgorithmSettingController, SIGNAL(loadQJson(QJsonObject)) , CQJsonModel, SLOT(loadQJson(QJsonObject)));
+    //QObject::connect(CAlgorithmSettingController, &CAlgorithmSettingController::loadQJson(QJsonObject) ,
+      //               CQJsonModel, &CQJsonModel::loadQJson(QJsonObject));
 }
 
 void CQJsonModel::saveSettings(int row, QUrl filename)
 {
     QJsonObject data;
-    data = mRootItem->getChilds()->value(i)->toJson();
+    data = mRootItem->getChilds().value(row)->toJson();
     emit saveQJson(data, filename);
 }
 
 void CQJsonModel::loadSettings(int row, QUrl filename)
 {
     emit requestQJson(filename);
-    mRootItem->getChilds()->removeAt(row);
-    int j = mRootItem->getChilds()->size() - 1;
-    mRootItem->getChilds()->swap(row, j);
+    mRootItem->getChilds().removeAt(row);
+    int j = mRootItem->getChilds().size() - 1;
+    mRootItem->getChilds().swap(row, j);
 }
 Qt::ItemFlags CQJsonModel::flags(QModelIndex& index)
 {
@@ -67,29 +68,31 @@ bool CQJsonModel::setData(QModelIndex& index, QVariant& value, int role)
 {
     if (!index.isValid())
         return false;
-
+    QJsonValue tempvalue = value.toJsonValue();
     if (role == Qt::EditRole) {
         CQJsonTreeItem temp = backtrack(index);
-        if (value.typeName() != temp.type()) {
+        if (tempvalue.type() != temp.type()) {
             return false;
         }
-        temp.setValue(value);
+        temp.setValue(tempvalue.toString());
         return true;
     }
     return false;
 }
 CQJsonTreeItem CQJsonModel::backtrack(QModelIndex& index)
 {
-    if(!index.parent().parent().isValid) //one row under root
+    if(index.parent().parent().isValid() == false) //one row under root
     {
        return mRootItem->getChilds().value(index.row());
     } else {
-        CQJsonTreeItem temp = backtrack(index.parent());
-        return temp->getChilds().value(index.row());
+        QModelIndex tempindex = index.parent();
+        QModelIndex &parent = tempindex;
+        CQJsonTreeItem temp = backtrack(parent);
+        return temp.getChilds().value(index.row());
     }
 }
 
-void loadQJson(QJsonObject data)
+void CQJsonModel::loadQJson(QJsonObject data)
 {
     QJsonDocument docu = QJsonDocument(data);
     loadJson(docu.toJson());
@@ -123,9 +126,9 @@ bool CQJsonModel::loadJson(const QByteArray &json)
     {
 
         if (mDocument.isArray()) {
-            mRootItem->appendChild(CQJsonTreeItem::load(QJsonValue(mDocument.array()));
+            mRootItem->appendChild(CQJsonTreeItem::load(QJsonValue(mDocument.array())));
         } else {
-            mRootItem->appendChild(CQJsonTreeItem::load(QJsonValue(mDocument.object()));
+            mRootItem->appendChild(CQJsonTreeItem::load(QJsonValue(mDocument.object())));
         }
 
         return true;
