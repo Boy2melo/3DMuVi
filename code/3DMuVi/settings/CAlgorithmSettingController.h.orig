@@ -37,13 +37,40 @@ public:
 	* \Constructor for the Controller
 	* \param directory temporal workdirectory
 	*/
+<<<<<<< HEAD
+    CAlgorithmSettingController(QUrl directory);
+    /*!
+    * \Returns the setting for a certain algorithm
+    * \param name name of the algorithm
+    * \return the setting of the algorithm
+    */
+    QJsonObject* getSetting(QString name);
+    /*!
+    * \sets a new setting for an algorithm
+    * \param name name of the algorithm
+    * \param data the parameters of the algorithm as QJsonObject
+    * \return true if data was a legal setting, else false
+    */
+    bool setSetting(QString name, QJsonObject data);
+    /*!
+    * \impoert a setting for an algorithm as QJsonObject
+    *\param directory of the setting
+    *\param name name of the setting
+    */
+    void import(QUrl directory, QString name);
+    /*!
+    * \exports all algorithmsettings to a directory
+    *\param directory where all seeting should go
+    */
+    void exportto(QUrl directory);
+=======
 	CAlgorithmSettingController(QUrl directory);
 	/*!
 	* \Returns the setting for a certain algorithm
 	* \param name name of the algorithm
 	* \return the setting of the algorithm
 	*/
-    QJsonObject* getSetting(QString name);
+	QJsonObject getSetting(QString name);
 	/*!
 	* \sets a new setting for an algorithm
 	* \param name name of the algorithm
@@ -62,6 +89,7 @@ public:
 	*\param directory where all seeting should go
 	*/
 	void exportto(QUrl directory);
+>>>>>>> b8babf203c2cf9e41486b639bd82a2fd24545183
 signals:
 	void loadQJson(QJsonObject data);
 public slots:

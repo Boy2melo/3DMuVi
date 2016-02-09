@@ -5,7 +5,7 @@ std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> inputData;
 
 CInputDataSet::CInputDataSet(QUrl path)
 {
-    QDir inputDirectory(path.toString());
+    QDir inputDirectory(path.path());
     QStringList filters ("*.png");
 
     inputDirectory.setNameFilters(filters);
@@ -19,7 +19,7 @@ CInputDataSet::CInputDataSet(QUrl path)
 
     foreach(const QString file, files)
     {
-        QUrl imagePath(path.toString().append(file));
+        QUrl imagePath(path.path().append(file));
         QImage imageCache = iio.load(imagePath);
         CImagePreviewItem qlwiCache(QIcon(QPixmap::fromImage(imageCache)), file, id);
         std::tuple<uint32_t, QImage, CImagePreviewItem> item(id,imageCache,qlwiCache);

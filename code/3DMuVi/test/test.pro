@@ -21,6 +21,7 @@ HEADERS += gui/CTestCLogWidget.h \
            gui/CTestCSettingsDialog.h \
            io/CTestCImageIo.h \
            io/CTestCTextIo.h \
+           io/CTestCInputDataSet.h \
            ../gui/CAlgorithmSelector.h \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.h \
            ../gui/CImagePreviewItem.h \
@@ -41,6 +42,7 @@ HEADERS += gui/CTestCLogWidget.h \
            ../logger/qslogging/QsLogDestFunctor.h \
            ../logger/qslogging/QsLogLevel.h \
            ../settings/CGlobalSettingController.h \
+           ../workflow/workflow/fourphase/cfourphaseworkflow.h \
            ../workflow/workflow/aworkflow.h \
            ../workflow/workflow/cworkflowmanager.h \
            ../workflow/plugin/cpluginmanager.h
@@ -50,6 +52,7 @@ SOURCES += gui/CTestCLogWidget.cpp \
            gui/CTestCSettingsDialog.cpp \
            io/CTestCImageIo.cpp \
            io/CTestCTextIo.cpp \
+           io/CTestCInputDataSet.cpp \
            ../gui/CAlgorithmSelector.cpp \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
            ../gui/CImagePreviewItem.cpp \
@@ -69,7 +72,7 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../logger/qslogging/QsLogDestFile.cpp\
            ../logger/qslogging/QsLogDestFunctor.cpp \
            ../settings/CGlobalSettingController.cpp \
-           ../workflow/workflow/aworkflow.cpp \
+           ../workflow/workflow/fourphase/cfourphaseworkflow.cpp \
            ../workflow/workflow/cworkflowmanager.cpp \
            ../workflow/plugin/cpluginmanager.cpp \
            main.cpp

@@ -15,10 +15,11 @@ void CResultContext::addDataPacket(IDataPacket data)
 
 std::vector<QString> CResultContext::getDataPacketIds()
 {
-
+    std::vector<QString> list;
+    return list;
 }
 
-IDataPacket CResultContext::getDataPacket(QString id)
+IDataPacket* CResultContext::getDataPacket(QString id)
 {
-
+    return nullptr;
 }
