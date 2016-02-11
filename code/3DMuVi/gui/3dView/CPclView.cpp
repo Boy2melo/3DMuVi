@@ -64,8 +64,6 @@ void CPclView::addCameraMesh(const pcl::PointXYZ& position, const Eigen::Quatern
 
     pclCameraPoints[i] = pcl::PointXYZ(cameraShapeVertices[i](0), cameraShapeVertices[i](1),
                                        cameraShapeVertices[i](2));
-
-    std::cout << cameraShapeVertices[i] << std::endl;
   }
 
   mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[1], id.toStdString() + "0");
