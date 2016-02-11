@@ -230,6 +230,12 @@
     <ClCompile Include="workflow\workflow\fourphase\cfourphaseworkflow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ialgorithm.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ialgorithm.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui\3dView\C3dView.h">
@@ -262,6 +268,9 @@
     <CustomBuild Include="settings\CQJsonModel.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="workflow\plugin\ialgorithm.h">
+      <Filter>Header Files\workflow\plugin</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DMuVi.rc" />
@@ -286,9 +295,6 @@
       <Filter>Header Files\workflow</Filter>
     </ClInclude>
     <ClInclude Include="workflow\plugin\cpluginmanager.h">
-      <Filter>Header Files\workflow\plugin</Filter>
-    </ClInclude>
-    <ClInclude Include="workflow\plugin\ialgorithm.h">
       <Filter>Header Files\workflow\plugin</Filter>
     </ClInclude>
     <ClInclude Include="workflow\plugin\iplugin.h">

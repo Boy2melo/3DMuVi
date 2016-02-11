@@ -4,6 +4,7 @@
 
 CFourPhaseWorkflow::CFourPhaseWorkflow() {
     mPlugins = new IPlugin*[getStepCount()];
+    mDataStores = new QList<CFourPhaseDataStore*>();
 }
 
 
@@ -48,24 +49,65 @@ IPlugin* CFourPhaseWorkflow::getStep(const quint32 step) const {
 }
 
 QList<AContextDataStore*> CFourPhaseWorkflow::getDataStores() const {
-    return QList<AContextDataStore *>();
+    return *reinterpret_cast<QList<AContextDataStore *> *>(mDataStores);
 }
 
 AContextDataStore* CFourPhaseWorkflow::addDataStore() {
-    return nullptr;
+    auto dataStore = new CFourPhaseDataStore();
+    mDataStores->append(dataStore);
+    return reinterpret_cast<AContextDataStore *>(dataStore);
 }
 
 bool CFourPhaseWorkflow::removeDataStore(QString id) {
-    return false;
+    CFourPhaseDataStore *result = FindStore(id);
+
+    if (result != nullptr) {
+        mDataStores->removeAll(result);
+        delete result;
+        return true;
+    } else {
+        return false;
+    }
 }
 
-void CFourPhaseWorkflow::run(const QString storeId) {}
+bool CFourPhaseWorkflow::run(const QString storeId) {
+    if (!checkAvailableDataTypes()) {
+        return false;
+    }
 
-quint32 CFourPhaseWorkflow::getState(const QString storeId) const {
-    return 0;
+    __PREPARE_ALGORITHM(FindStore(storeId));
+
+    if (store == nullptr) {
+        return false;
+    }
+
+    if (mPlugins[0]->getAlgorithm()->IsBusy()) {
+        return false;
+    }
+
+    __RUN_ALGORITHM(mPlugins[0],
+        __RUN_ALGORITHM(mPlugins[1],
+            __RUN_ALGORITHM(mPlugins[2],
+                __RUN_ALGORITHM(mPlugins[3], ))));
 }
 
-void CFourPhaseWorkflow::stop(const QString storeId) {}
+qint32 CFourPhaseWorkflow::getState(const QString storeId) const {
+    auto store = FindStore(storeId);
+
+    if(store == nullptr) {
+        return -1;
+    }
+
+    return store->getCurrentCalculationStep();
+}
+
+void CFourPhaseWorkflow::stop(const QString storeId) {
+    auto store = FindStore(storeId);
+
+    if (store != nullptr) {
+        store->SetIsAborted(true);
+    }
+}
 
 bool CFourPhaseWorkflow::checkAvailableDataTypes() const {
     QStringList dataTypes;
@@ -93,4 +135,15 @@ bool CFourPhaseWorkflow::checkAvailableDataTypes() const {
     }
 
     return true;
+}
+
+
+CFourPhaseDataStore *CFourPhaseWorkflow::FindStore(QString id) const {
+    for (auto store : *mDataStores) {
+        if (store->getId() == id) {
+            return store;
+        }
+    }
+
+    return nullptr;
 }

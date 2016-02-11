@@ -1,6 +1,6 @@
 #pragma once
 #include "workflow/workflow/acontextdatastore.h"
-class CFourPhaseDataStore : AContextDataStore {
+class CFourPhaseDataStore : public AContextDataStore {
 public:
     CFourPhaseDataStore();
     ~CFourPhaseDataStore();

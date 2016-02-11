@@ -13,8 +13,7 @@
  *
  * Beschreibt ein einzelnes Plugin, welches einen einzelnen [Algorithmus](@ref IAlgorithm) kapselt.
  */
-class IPlugin
-{    
+class IPlugin {
 public:
     /*!
      * \brief getAlgorithm
@@ -52,6 +51,17 @@ public:
     \return Der Typ des Plugins wie in [CPluginManager](@ref CPluginManager) definiert
     */
     virtual QString GetPluginType() const = 0;
+
+    /*!
+    \brief Gibt die Parametervoreinstellungen als Json
+    */
+    virtual QString GetParameterJson() const = 0;
+
+    /*!
+    \brief Prüfe alle Parameter auf gültige Werte
+    \return True falls alle Werte sich in gültigen Grenzen befinden, False andernfalls
+    */
+    virtual bool ValidateParameters(CAlgorithmSettingController*) const = 0;
 };
 
 Q_DECLARE_INTERFACE(IPlugin, IPlugin_iid)
