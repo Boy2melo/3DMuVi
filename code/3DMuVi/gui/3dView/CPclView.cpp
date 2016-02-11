@@ -17,62 +17,65 @@ CPclView::~CPclView()
 
 }
 
-void CPclView::addPointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud, uint32_t id)
+void CPclView::addPointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud, const QString& id)
 {
 
 }
 
-void CPclView::addPolygonMesh(const pcl::PolygonMesh& mesh, uint32_t id)
+void CPclView::addPolygonMesh(const pcl::PolygonMesh& mesh, const QString& id)
 {
 
 }
 
-void CPclView::addTextureMesh(const pcl::TextureMesh& mesh, uint32_t id)
+void CPclView::addTextureMesh(const pcl::TextureMesh& mesh, const QString& id)
 {
 
 }
 
-void CPclView::addCameraMesh(pcl::PointXYZ position, Eigen::Vector4f rotation)
+void CPclView::addCameraMesh(const pcl::PointXYZ& position, const Eigen::Vector4f& rotation,
+                             const QString& id)
 {
 
 }
 
-void CPclView::removePointCloud(uint32_t id)
+void CPclView::removePointCloud(const QString& id)
 {
 
 }
 
-void CPclView::removePolygonMesh(uint32_t id)
+void CPclView::removePolygonMesh(const QString& id)
 {
 
 }
 
-void CPclView::removeTextureMesh(uint32_t id)
+void CPclView::removeTextureMesh(const QString& id)
 {
 
 }
 
-void CPclView::removeCameraMesh(uint32_t id)
+void CPclView::removeCameraMesh(const QString& id)
 {
 
 }
 
-void CPclView::updatePointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud, uint32_t id)
+void CPclView::updatePointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud,
+                                const QString& id)
 {
 
 }
 
-void CPclView::updatePolygonMesh(const pcl::PolygonMesh& mesh, uint32_t id)
+void CPclView::updatePolygonMesh(const pcl::PolygonMesh& mesh, const QString& id)
 {
 
 }
 
-void CPclView::updateTextureMesh(const pcl::TextureMesh& mesh, uint32_t id)
+void CPclView::updateTextureMesh(const pcl::TextureMesh& mesh, const QString& id)
 {
 
 }
 
-void CPclView::updateCameraMesh(pcl::PointXYZ position, Eigen::Vector4f rotation)
+void CPclView::updateCameraMesh(const pcl::PointXYZ& position, const Eigen::Vector4f& rotation,
+                                const QString& id)
 {
 
 }
@@ -87,7 +90,7 @@ void CPclView::setBackground(float red, float blue, float green)
 
 }
 
-void CPclView::centerOnPoint(pcl::PointXYZ point)
+void CPclView::centerOnPoint(const pcl::PointXYZ& point)
 {
 
 }

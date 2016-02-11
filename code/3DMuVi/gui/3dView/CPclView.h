@@ -19,29 +19,33 @@ public:
   explicit CPclView(QWidget *parent = nullptr);
   virtual ~CPclView();
 
-  void addPointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud, uint32_t id);
-  void addPolygonMesh(const pcl::PolygonMesh& mesh, uint32_t id);
-  void addTextureMesh(const pcl::TextureMesh& mesh, uint32_t id);
-  void addCameraMesh(pcl::PointXYZ position, Eigen::Vector4f rotation);
+  void addPointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud,
+                     const QString& id = QString());
+  void addPolygonMesh(const pcl::PolygonMesh& mesh, const QString& id = QString());
+  void addTextureMesh(const pcl::TextureMesh& mesh, const QString& id = QString());
+  void addCameraMesh(const pcl::PointXYZ& position, const Eigen::Vector4f& rotation,
+                     const QString& id = QString());
 
-  void removePointCloud(uint32_t id);
-  void removePolygonMesh(uint32_t id);
-  void removeTextureMesh(uint32_t id);
-  void removeCameraMesh(uint32_t id);
+  void removePointCloud(const QString& id = QString());
+  void removePolygonMesh(const QString& id = QString());
+  void removeTextureMesh(const QString& id = QString());
+  void removeCameraMesh(const QString& id = QString());
 
-  void updatePointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud, uint32_t id);
-  void updatePolygonMesh(const pcl::PolygonMesh& mesh, uint32_t id);
-  void updateTextureMesh(const pcl::TextureMesh& mesh, uint32_t id);
-  void updateCameraMesh(pcl::PointXYZ position, Eigen::Vector4f rotation);
+  void updatePointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud,
+                        const QString& id = QString());
+  void updatePolygonMesh(const pcl::PolygonMesh& mesh, const QString& id = QString());
+  void updateTextureMesh(const pcl::TextureMesh& mesh, const QString& id = QString());
+  void updateCameraMesh(const pcl::PointXYZ& position, const Eigen::Vector4f& rotation,
+                        const QString& id = QString());
 
   void showCoordinateSystem(bool state);
   void setBackground(float red, float blue, float green);
 
-  void centerOnPoint(pcl::PointXYZ point);
+  void centerOnPoint(const pcl::PointXYZ& point);
 
 signals:
-  void pointSelected(pcl::PointXYZ point);
-  void cameraSelected(pcl::PointXYZ position, Eigen::Vector4f rotation);
+  void pointSelected(const pcl::PointXYZ& point);
+  void cameraSelected(const pcl::PointXYZ& position, const Eigen::Vector4f& rotation);
 
 private:
   std::unique_ptr<QVTKWidget> mpQVtkWidget;
