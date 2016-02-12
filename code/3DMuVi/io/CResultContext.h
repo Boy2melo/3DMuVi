@@ -1,6 +1,8 @@
 #ifndef CRESULTCONTEXT_H
 #define CRESULTCONTEXT_H
 #include <QUrl>
+#include <QDir>
+#include <QDateTime>
 #include <QString>
 #include <vector>
 
@@ -33,9 +35,9 @@ public:
      * \return void
      */
     CResultContext(QUrl path,
-                   CLogController logController,
-                   CAlgorithmSettingController algoSettings,
-                   CGlobalSettingController globalSettings);
+                   CLogController* logController,
+                   CAlgorithmSettingController* algoSettings,
+                   CGlobalSettingController* globalSettings);
 
     /*!
      * \brief The data will get serialized and accordingly to their TDataPacket
@@ -43,7 +45,7 @@ public:
      * \param data TDataPacket which get stored.
      * \return void
      */
-    void addDataPacket(IDataPacket data);
+    void addDataPacket(IDataPacket* data);
 
     /*!
      * \brief Returns a vector with all ids of TDataPackets which was found
@@ -58,6 +60,9 @@ public:
      * \return TDataPacket of the deserialized file.
      */
     IDataPacket* getDataPacket(QString id);
+
+private:
+    QDir folder;
 };
 
 #endif // CRESULTCONTEXT_H

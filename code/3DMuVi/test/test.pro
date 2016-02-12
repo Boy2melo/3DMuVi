@@ -22,6 +22,7 @@ HEADERS += gui/CTestCLogWidget.h \
            io/CTestCImageIo.h \
            io/CTestCTextIo.h \
            io/CTestCInputDataSet.h \
+           io/CTestCResultContext.h \
            ../gui/CAlgorithmSelector.h \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.h \
            ../gui/CImagePreviewItem.h \
@@ -32,6 +33,7 @@ HEADERS += gui/CTestCLogWidget.h \
            ../gui/CStepComboBox.h \
            ../io/CImageIo.h \
            ../io/CInputDataSet.h \
+           ../io/CResultContext.h \
            ../io/CTextIo.h \
            ../logger/controll/CLogController.h \
            ../logger/controll/CLogHistory.h \
@@ -42,9 +44,15 @@ HEADERS += gui/CTestCLogWidget.h \
            ../logger/qslogging/QsLogDestFunctor.h \
            ../logger/qslogging/QsLogLevel.h \
            ../settings/CGlobalSettingController.h \
+           ../settings/CAlgorithmSettingController.h \
+           ../settings/CQJsonModel.h \
+           ../settings/CQJsonItem.h \
            ../workflow/workflow/fourphase/cfourphaseworkflow.h \
+           ../workflow/workflow/fourphase/cfourphasedatastore.h \
            ../workflow/workflow/aworkflow.h \
+           ../workflow/plugin/ialgorithm.h \
            ../workflow/workflow/cworkflowmanager.h \
+           ../workflow/workflow/acontextdatastore.h \
            ../workflow/plugin/cpluginmanager.h
 
 SOURCES += gui/CTestCLogWidget.cpp \
@@ -53,6 +61,7 @@ SOURCES += gui/CTestCLogWidget.cpp \
            io/CTestCImageIo.cpp \
            io/CTestCTextIo.cpp \
            io/CTestCInputDataSet.cpp \
+           io/CTestCResultContext.cpp \
            ../gui/CAlgorithmSelector.cpp \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
            ../gui/CImagePreviewItem.cpp \
@@ -63,6 +72,7 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../gui/CStepComboBox.cpp \
            ../io/CImageIo.cpp \
            ../io/CInputDataSet.cpp \
+           ../io/CResultContext.cpp \
            ../io/CTextIo.cpp \
            ../logger/controll/CLogController.cpp \
            ../logger/controll/CLogHistory.cpp \
@@ -72,8 +82,13 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../logger/qslogging/QsLogDestFile.cpp\
            ../logger/qslogging/QsLogDestFunctor.cpp \
            ../settings/CGlobalSettingController.cpp \
+           ../settings/CAlgorithmSettingController.cpp \
+           ../settings/CQJsonModel.cpp \
+           ../settings/CQJsonItem.cpp \
            ../workflow/workflow/fourphase/cfourphaseworkflow.cpp \
+           ../workflow/workflow/fourphase/cfourphasedatastore.cpp \
            ../workflow/workflow/cworkflowmanager.cpp \
+           ../workflow/workflow/acontextdatastore.cpp \
            ../workflow/plugin/cpluginmanager.cpp \
            main.cpp
 
