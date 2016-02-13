@@ -236,6 +236,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_ialgorithm.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_aworkflow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_aworkflow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\aworkflow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui\3dView\C3dView.h">
@@ -271,15 +280,15 @@
     <CustomBuild Include="workflow\plugin\ialgorithm.h">
       <Filter>Header Files\workflow\plugin</Filter>
     </CustomBuild>
+    <CustomBuild Include="workflow\workflow\aworkflow.h">
+      <Filter>Header Files\workflow</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DMuVi.rc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="workflow\workflow\acontextdatastore.h">
-      <Filter>Header Files\workflow</Filter>
-    </ClInclude>
-    <ClInclude Include="workflow\workflow\aworkflow.h">
       <Filter>Header Files\workflow</Filter>
     </ClInclude>
     <ClInclude Include="workflow\workflow\cworkflowmanager.h">

@@ -59,7 +59,7 @@ AContextDataStore* CFourPhaseWorkflow::addDataStore() {
 }
 
 bool CFourPhaseWorkflow::removeDataStore(QString id) {
-    CFourPhaseDataStore *result = FindStore(id);
+    CFourPhaseDataStore *result = static_cast<CFourPhaseDataStore *>(FindStore(id));
 
     if (result != nullptr) {
         mDataStores->removeAll(result);
@@ -70,31 +70,20 @@ bool CFourPhaseWorkflow::removeDataStore(QString id) {
     }
 }
 
-bool CFourPhaseWorkflow::run(const QString storeId) {
-    if (!checkAvailableDataTypes()) {
-        return false;
-    }
-
-    __PREPARE_ALGORITHM(FindStore(storeId));
-
-    if (store == nullptr) {
-        return false;
-    }
-
+void CFourPhaseWorkflow::executeAlgorithm(AContextDataStore* store) {
     if (mPlugins[0]->getAlgorithm()->IsBusy()) {
-        return false;
+        return;
     }
-
     __RUN_ALGORITHM(mPlugins[0],
         __RUN_ALGORITHM(mPlugins[1],
             __RUN_ALGORITHM(mPlugins[2],
-                __RUN_ALGORITHM(mPlugins[3], ))));
+                __RUN_ALGORITHM(mPlugins[3], emit sigDataStoreFinished(store); ))));
 }
 
 qint32 CFourPhaseWorkflow::getState(const QString storeId) const {
     auto store = FindStore(storeId);
 
-    if(store == nullptr) {
+    if (store == nullptr) {
         return -1;
     }
 
@@ -138,10 +127,10 @@ bool CFourPhaseWorkflow::checkAvailableDataTypes() const {
 }
 
 
-CFourPhaseDataStore *CFourPhaseWorkflow::FindStore(QString id) const {
+AContextDataStore *CFourPhaseWorkflow::FindStore(QString id) const {
     for (auto store : *mDataStores) {
         if (store->getId() == id) {
-            return store;
+            return static_cast<AContextDataStore *>(store);
         }
     }
 
