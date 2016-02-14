@@ -4,6 +4,7 @@
 #include <QTreeView>
 
 #include <workflow/workflow/aworkflow.h>
+#include <settings/CAlgorithmSettingsModel.h>
 
 class CAlgorithmSettingsView : public QTreeView {
 public: 
@@ -12,6 +13,8 @@ public:
     
 public slots:
   void onAlgorithmChanged(int step);
+ private:
+  CAlgorithmSettingsModel model;
 };
 
 #endif // CALGORITMSETTINGSVIEW_H

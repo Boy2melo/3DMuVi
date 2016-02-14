@@ -122,4 +122,9 @@ SOURCES += ./main.cpp \
 
 FORMS += ./gui/forms/CMainWindow.ui \
     ./gui/forms/CSettingsDialog.ui \
+    ./gui/forms/CAlgorithmSettingsSaveLoad.ui \
+
+DISTFILES += \
+    gui/forms/CAlgorithmSettingsSaveLoad.ui.qml \
+    gui/forms/CAlgorithmSettingsSaveLoad.qml
 
