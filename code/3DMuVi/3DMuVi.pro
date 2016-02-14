@@ -80,6 +80,7 @@ SOURCES += ./main.cpp \
     ./workflow/workflow/cworkflowmanager.cpp \
     ./workflow/workflow/idatapacket.cpp \
     ./workflow/workflow/idataview.cpp \
+    ./workflow/workflow/aworkflow.cpp \
     ./workflow/workflow/tdatapacket.cpp \
 	./workflow/workflow/fourphase/cfourphasedatastore.cpp\
 	./workflow/workflow/fourphase/cfourphaseworkflow.cpp\

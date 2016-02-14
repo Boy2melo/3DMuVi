@@ -8,7 +8,7 @@ class IDataPacket
 public:
     IDataPacket();
     QString getId() const;
-    QString getDataType() const;
+    virtual QString getDataType() const;
     void* getData();
 };
 

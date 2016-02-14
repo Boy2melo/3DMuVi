@@ -6,7 +6,10 @@
 class CFourPhaseWorkflow : public AWorkflow {
 private:
     IPlugin **mPlugins;
-    QList<CFourPhaseDataStore *> mDataStores[];
+    QList<CFourPhaseDataStore *>* mDataStores;
+
+        private slots:
+    void SlotAlgorithmFinished(AContextDataStore *);
 
 public:
     CFourPhaseWorkflow();
@@ -18,9 +21,12 @@ public:
     QList<AContextDataStore*> getDataStores() const override;
     AContextDataStore* addDataStore() override;
     bool removeDataStore(QString id) override;
-    void run(const QString storeId) override;
-    quint32 getState(const QString storeId) const override;
+    qint32 getState(const QString storeId) const override;
     void stop(const QString storeId) override;
     bool checkAvailableDataTypes() const override;
+
+protected:
+    AContextDataStore *FindStore(QString id) const override;
+    void executeAlgorithm(AContextDataStore* store) override;
 };
 

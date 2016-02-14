@@ -2,9 +2,11 @@
 #define IALGORITHM_H
 
 #include <QVector>
+#include <QObject>
 #include "workflow/workflow/acontextdatastore.h"
 #include "logger/controll/CLogController.h"
 #include "settings/CAlgorithmSettingController.h"
+#include <functional>
 
 /*!
    \class IAlgorithm
@@ -13,8 +15,8 @@
  *
  * Ein Interface, dass die Funktionen der Algorithmen verallgemeinert und unabhängig von Typen macht, wodurch das Template [TAlgorithm](@ref TAlgorithm) polymorph wird.
  */
-class IAlgorithm
-{
+class IAlgorithm : public QObject {
+    Q_OBJECT
 public:
     IAlgorithm();
     /*!
@@ -28,7 +30,12 @@ public:
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */
-    virtual void run(AContextDataStore* dataStore) = 0;
+    virtual void run(AContextDataStore* dataStore, std::function<void (AContextDataStore*)> callback) = 0;
+
+    /*!
+    \brief Gibt zurück, ob der Algorithmus zur Zeit mit einer Ausführung beschäftigt ist
+    */
+    virtual bool IsBusy() const = 0;
 
     /*!
     * \brief Eine Liste aller Daten, die als Eingabe benötigt werden.

@@ -6,6 +6,7 @@
 #include "io/CTestCImageIo.h"
 #include "io/CTestCTextIo.h"
 #include "io/CTestCInputDataSet.h"
+#include "io/CTestCResultContext.h"
 
 int main(int argc, char* argv[])
 {
@@ -15,15 +16,19 @@ int main(int argc, char* argv[])
   CTestCImageIo imageIo;
   CTestCTextIo textIo;
   CTestCInputDataSet inputDataSet;
+  CTestCResultContext resultContext;
 
   QApplication app(argc, argv);
 
-  QTest::qExec(&logWidget, argc, argv);
-  QTest::qExec(&mainWindow, argc, argv);
-  QTest::qExec(&settingsDialog, argc, argv);
-  QTest::qExec(&imageIo, argc, argv);
-  QTest::qExec(&textIo, argc, argv);
-  QTest::qExec(&inputDataSet, argc, argv);
+  int failCounter = 0;
+  failCounter += QTest::qExec(&logWidget, argc, argv);
+  failCounter += QTest::qExec(&mainWindow, argc, argv);
+  failCounter += QTest::qExec(&settingsDialog, argc, argv);
+  failCounter += QTest::qExec(&imageIo, argc, argv);
+  failCounter += QTest::qExec(&textIo, argc, argv);
+  failCounter += QTest::qExec(&inputDataSet, argc, argv);
+  failCounter += QTest::qExec(&resultContext, argc, argv);
+  std::cout << "Total number of fails: " << failCounter << "\n";
 
   return 0;
 }

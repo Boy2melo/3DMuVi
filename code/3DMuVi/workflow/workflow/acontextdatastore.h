@@ -13,11 +13,11 @@
  *
  * Enthält die Daten, welche für einen Bestimmten [Workflow](@ref AWorkflow) zur Verfügung gestellt werden. Jeder Datentyp kann genau einmal im Store vorkommen. Für mehrere gleiche Daten an unterschiedlichen Schritten sind unterschiedliche Klassen anzulegen.
  */
-class AContextDataStore
-{
+class AContextDataStore {
 private:
     QString mContextId;
     qint32 mCalculationStep;
+    bool mAborted;
 protected:
     /*!
      * \brief Wird bei der Serialisierung aufgerufen
@@ -25,8 +25,7 @@ protected:
      */
     virtual void OnSerialize(/*TODO*/) = 0;
 public:
-    virtual ~AContextDataStore() {
-    }
+    virtual ~AContextDataStore() {}
 
     /*!
      * \brief Erstelle einen neuen DataStore
@@ -66,8 +65,24 @@ public:
      */
     qint32 getCurrentCalculationStep() const;
 
-    // Data Types
+    /*!
+    \brief Reset the current calculation step counter*/
+    void resetCalculationStep();
 
+    /*!
+    \brief Increment the current calculation step
+    */
+    void incCalculationStep();
+
+    /*!
+    \brief Whether this data store should not be passed to the next algorithm
+    */
+    bool IsAborted() const;
+
+    /*!
+    \brief Set whether the data should be passed to the next algorithm
+    */
+    void SetIsAborted(bool abort);
 };
 
 #endif // ACONTEXTDATASTORE_H
