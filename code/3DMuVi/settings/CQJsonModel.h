@@ -50,7 +50,7 @@ signals:
     void requestQJson(QUrl directory);
     void saveQJson(QJsonObject data, QUrl directory);
 
-private:
+protected:
     CQJsonTreeItem backtrack(QModelIndex &index);
 
     CQJsonTreeItem * mRootItem;

@@ -7,10 +7,7 @@ CAlgorithmSettingController::CAlgorithmSettingController(QUrl directory)
 {
     tempdirectory = QUrl(directory);
     io = CTextIo();
-    //QObject::connect(CQJsonModel, &CQJsonModel::requestQJson(QUrl),
-      //               CAlgorithmSettingController, &CAlgorithmSettingController::requestQJson(QUrl));
-    //QObject::connect(CQJsonModel, &CQJsonModel::saveQJson(QJsonObject, QUrl),
-      //               CAlgorithmSettingController, &CAlgorithmSettingController::saveQJson(QJsonObject, QUrl));
+
 }
 QJsonValue CAlgorithmSettingController::getSetting(QString name, QString key)
 {
@@ -108,13 +105,26 @@ void CAlgorithmSettingController::exportto(QUrl directory)
 }
 void CAlgorithmSettingController::requestQJson(QUrl directory)
 {
+    if (directory.password().startsWith("a")) {
+        QString temp = directory.password();
+        temp.remove(0,1);
+        directory = QUrl(tempdirectory.url() + "/" + temp);
+
+    }
     QString file = io.load(directory);
     QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
-    emit loadQJson(docu.object());
+    QJsonObject object = docu.object();
+    emit loadQJson(object);
 }
 
 void CAlgorithmSettingController::saveQJson(QJsonObject data, QUrl directory)
 {
+    if (directory.password().startsWith("a")) {
+        QString temp = directory.password();
+        temp.remove(0,1);
+        directory = QUrl(tempdirectory.url() + "/" + temp);
+
+    }
     QJsonDocument docu = QJsonDocument(data);
     QString file = QString(docu.toJson());
     io.save(directory, file);

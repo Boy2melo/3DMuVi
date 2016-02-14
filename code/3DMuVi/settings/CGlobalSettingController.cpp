@@ -1,13 +1,14 @@
 #include "CGlobalSettingController.h"
-#include "QJsonDocument"
+#include <QJsonDocument>
 #include "io/CTextIo.h"
+#include <QFileInfo>
 
 CGlobalSettingController::CGlobalSettingController()
 {
     QUrl directory;
     io = CTextIo();
-    directory = QUrl(QString("Verzeichnis"));//verzeichniss fehlt noch
-    import(directory, "globalconfig");
+    directory = QUrl(QUrl::fromLocalFile(QFileInfo("globalconfig.json").absoluteFilePath()));
+    import(directory, directory.fileName());
 }
 
 QString CGlobalSettingController::getSetting(QString name)
@@ -21,6 +22,10 @@ bool CGlobalSettingController::setSetting(QString name, QString value)
 { 
     if(settings.contains(name)){
         settings.insert(name, QJsonValue(value));
+        QJsonDocument docu = QJsonDocument(settings);
+        QString file = QString(docu.toJson());
+        QUrl directory = QUrl(QUrl::fromLocalFile(QFileInfo("globalconfig.json").absoluteFilePath()));
+        io.save(directory, file);
         return true;
     } else {
         return false;
@@ -31,7 +36,9 @@ void CGlobalSettingController::import(QUrl directory, QString name)
 {
     QUrl url;
     QString file;
-    url = QUrl(directory.toString() + name);
+    if (directory.fileName() == name) {
+    url = QUrl(directory.path() + "/" + name);
+    }
     file = io.load(url);
     QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
     settings = docu.object();
@@ -41,12 +48,13 @@ void CGlobalSettingController::exportto(QUrl directory)
 {
     QJsonDocument docu = QJsonDocument(settings);
     QString file = QString(docu.toJson());
+    directory = QUrl(directory.url() + "/globalconfig");
     io.save(directory, file);
 }
 
 void CGlobalSettingController::resettoDefault()
 {
     QUrl directory;
-    directory = QUrl(QString("Verzeichnis"));//defaultverzeichniss fehlt noch
-    import(directory, "defaultglobalconfig");
+    directory = QUrl(QUrl::fromLocalFile(QFileInfo("defaultglobalconfig.json").absoluteFilePath()));
+    import(directory, directory.fileName());
 }
