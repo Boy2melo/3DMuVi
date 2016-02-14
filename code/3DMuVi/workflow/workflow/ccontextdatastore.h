@@ -1,55 +1,54 @@
-#ifndef ACONTEXTDATASTORE_H
-#define ACONTEXTDATASTORE_H
+#ifndef CCONTEXTDATASTORE_H
+#define CCONTEXTDATASTORE_H
 
 #include <QVector>
 #include <QString>
 #include <QStringList>
 #include "idataview.h"
+#include "idatapacket.h"
 
 /*!
-   \class AContextDataStore
- * \brief The AContextDataStore class
+   \class CContextDataStore
+ * \brief The CContextDataStore class
  * \author Nathanael Schneider
  *
  * Enthält die Daten, welche für einen Bestimmten [Workflow](@ref AWorkflow) zur Verfügung gestellt werden. Jeder Datentyp kann genau einmal im Store vorkommen. Für mehrere gleiche Daten an unterschiedlichen Schritten sind unterschiedliche Klassen anzulegen.
  */
-class AContextDataStore {
+class CContextDataStore {
 private:
     QString mContextId;
     qint32 mCalculationStep;
     bool mAborted;
+    QList<IDataPacket*> mDataPackets;
 protected:
     /*!
      * \brief Wird bei der Serialisierung aufgerufen
      * \param context Der Serialisierungskontext
      */
-    virtual void OnSerialize(/*TODO*/) = 0;
+    void OnSerialize(/*TODO*/);
 public:
-    virtual ~AContextDataStore() {}
+    ~CContextDataStore();
 
     /*!
      * \brief Erstelle einen neuen DataStore
      */
-    AContextDataStore();
-    /*!
-     * \brief Eine Liste an unterstützten Datentypen für diesen Store
-     * \return Eine Liste an unterstützten Datentypen für diesen Store
-     */
-    virtual QStringList getSupportedDataTypes() const = 0;
+    CContextDataStore();
+
     /*!
      * \brief Initialisiert den Context aus einem Data Store
      */
-    virtual void InitializeFromStorage(/*TODO*/) = 0;
+    void InitializeFromStorage(/*TODO*/);
     /*!
      * \brief Gibt Daten vom Typ T zurück, sofern vorhanden.
      * \return Daten vom Typ T oder 0 falls nicht vorhanden
      */
     template<typename T>
     T* getData();
+
     /*!
      * \brief Wendet die Daten des Stores auf einen DataView an.
      */
-    virtual void ApplyToDataView(IDataView *view) const = 0;
+    void ApplyToDataView(IDataView *view) const;
     /*!
      * \brief Die ID des Datenkontext
      * \return Die ID des Datenkontext
@@ -83,6 +82,12 @@ public:
     \brief Set whether the data should be passed to the next algorithm
     */
     void SetIsAborted(bool abort);
+
+
+    static const QString DT_FEATURE_MATCH;
+    static const QString DT_POSE;
+    static const QString DT_DEPTH;
+    static const QString DT_FUSION;
 };
 
 #endif // ACONTEXTDATASTORE_H

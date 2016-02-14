@@ -3,7 +3,7 @@
 
 #include <QVector>
 #include <QObject>
-#include "workflow/workflow/acontextdatastore.h"
+#include "workflow/workflow/ccontextdatastore.h"
 #include "logger/controll/CLogController.h"
 #include "settings/CAlgorithmSettingController.h"
 #include <functional>
@@ -30,7 +30,7 @@ public:
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */
-    virtual void run(AContextDataStore* dataStore, std::function<void (AContextDataStore*)> callback) = 0;
+    virtual void run(CContextDataStore* dataStore, std::function<void (CContextDataStore*)> callback) = 0;
 
     /*!
     \brief Gibt zurück, ob der Algorithmus zur Zeit mit einer Ausführung beschäftigt ist

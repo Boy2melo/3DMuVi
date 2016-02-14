@@ -27,7 +27,7 @@ qint32 CPluginManager::Initialize() {
     mPlugins.clear();
 
     // static plugins
-    foreach(QObject *plugin, QPluginLoader::staticInstances()) {
+    for(QObject *plugin : QPluginLoader::staticInstances()) {
         auto plugin_ptr = qobject_cast<IPlugin *>(plugin);
         if(plugin_ptr != nullptr) {
             mPlugins.push_back(plugin_ptr);
@@ -48,7 +48,7 @@ qint32 CPluginManager::Initialize() {
 #endif
     mPluginsDir.cd("plugins");
 
-    foreach(QString fileName, mPluginsDir.entryList(QDir::Files)) {
+    for(QString fileName : mPluginsDir.entryList(QDir::Files)) {
         QPluginLoader loader(mPluginsDir.absoluteFilePath(fileName));
         QObject *plugin = loader.instance();
         auto plugin_ptr = qobject_cast<IPlugin *>(plugin);
@@ -66,7 +66,7 @@ qint32 CPluginManager::Initialize() {
 QVector<IPlugin*> CPluginManager::getPlugins(QString type) const {
     QVector<IPlugin*> result;
 
-    foreach(IPlugin *plugin, mPlugins) {
+    for(IPlugin *plugin : mPlugins) {
         auto pluginType = plugin->GetPluginType();
         if(pluginType.compare(type)) {
             result.push_back(plugin);

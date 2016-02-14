@@ -2,7 +2,7 @@
 #define AWORKFLOW_H
 
 #include "workflow/plugin/iplugin.h"
-#include "workflow/workflow/acontextdatastore.h"
+#include "ccontextdatastore.h"
 #include <QVector>
 #include <QSet>
 #include <QMutex>
@@ -13,7 +13,7 @@
     IAlgorithm* algorithm = PLUGIN->getAlgorithm(); \
     if(!algorithm->IsBusy() && !store->IsAborted()){ \
         store->incCalculationStep(); \
-        algorithm->run(store, [this](AContextDataStore *store){CALLBACK}); \
+        algorithm->run(store, [this](CContextDataStore *store){CALLBACK}); \
     } else { \
         emit sigDataStoreFinished(store); \
     }
@@ -31,6 +31,9 @@ class AWorkflow : public QObject {
 private:
     QMutex mMutex;
     QSet<QString> mRunningAlgorithms;
+
+protected:
+    QList<CContextDataStore *>* mDataStores;
 
 public:
     virtual ~AWorkflow() {}
@@ -58,15 +61,15 @@ public:
     /*!
     \brief Gibt eine Liste aller Datastores zurück, die in diesem Workflow angelegt wurden.
     */
-    virtual QList<AContextDataStore*> getDataStores() const = 0;
+    QList<CContextDataStore*> getDataStores() const;
     /*!
     \brief Fügt dem Workflow einen neuen DataStore hinzu und gibt ihn zurück
     */
-    virtual AContextDataStore* addDataStore() = 0;
+    CContextDataStore* addDataStore() const;
     /*!
     \brief Entfernt einen Datastore aus der Verwaltung des Workflows. Das Objekt wird ebenfalls aus dem Heap gelöscht.
     */
-    virtual bool removeDataStore(QString id) = 0;
+    bool removeDataStore(QString id) const;
 
     /*!
     \brief Führe den Workflow auf einem gegebenen DataStore aus
@@ -75,27 +78,29 @@ public:
     /*!
     \brief Gib den aktuellen ausführungsschritt für einen Datastore zurück
     */
-    virtual qint32 getState(const QString storeId) const = 0;
+    qint32 getState(const QString storeId) const;
     /*!
     \brief Beende das Durchreichen an den nächsten Schritt für einen Datastore
     */
-    virtual void stop(const QString storeId) = 0;
+    void stop(const QString storeId) const;
     /*!
     \brief Prüfe, ob alle benötigten Daten für die Algorithmen durch den Workflow bereitgestellt werden
     */
     virtual bool checkAvailableDataTypes() const = 0;
 
 protected:
-    virtual AContextDataStore *FindStore(QString id) const = 0;
+    CContextDataStore *FindStore(QString id) const;
+
+    AWorkflow();
 
     protected slots:
-    virtual void executeAlgorithm(AContextDataStore* store) = 0;
+    virtual void executeAlgorithm(CContextDataStore* store) = 0;
 
 signals:
     /*!
     \brief Wird aufgerufen, sobald ein Datastore die Ausführung beendet hat oder nicht weitergereicht wurde
     */
-    void sigDataStoreFinished(AContextDataStore *store);
+    void sigDataStoreFinished(CContextDataStore *store);
 
     /*!
     \brief For internal use only. Do not connect
@@ -103,7 +108,7 @@ signals:
     Wird aufgerufen, sobald die Plugins gestartet werden können. Wird benötigt, um die Plugins in einem 
     separaten Thread auszuführen.
     */
-    void sigExecuteAlgorithm(AContextDataStore *store);
+    void sigExecuteAlgorithm(CContextDataStore *store);
 };
 
 #endif // AWORKFLOW_H

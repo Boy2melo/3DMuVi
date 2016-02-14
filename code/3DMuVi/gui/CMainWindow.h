@@ -28,7 +28,7 @@ public:
 private:
   Ui::CMainWindow *ui;
   std::unique_ptr<AWorkflow> mWorkflow;
-  std::unique_ptr<AContextDataStore> mDataStore;
+  std::unique_ptr<CContextDataStore> mDataStore;
 
 private slots:
   void onSaveWorkflow();

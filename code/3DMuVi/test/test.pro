@@ -48,12 +48,12 @@ HEADERS += gui/CTestCLogWidget.h \
            ../settings/CQJsonModel.h \
            ../settings/CQJsonItem.h \
            ../workflow/workflow/fourphase/cfourphaseworkflow.h \
-           ../workflow/workflow/fourphase/cfourphasedatastore.h \
            ../workflow/workflow/aworkflow.h \
            ../workflow/plugin/ialgorithm.h \
            ../workflow/workflow/cworkflowmanager.h \
-           ../workflow/workflow/acontextdatastore.h \
-           ../workflow/plugin/cpluginmanager.h
+           ../workflow/workflow/ccontextdatastore.h \
+           ../workflow/plugin/cpluginmanager.h \
+           ../workflow/workflow/idatapacket.h
 
 SOURCES += gui/CTestCLogWidget.cpp \
            gui/CTestCMainWindow.cpp \
@@ -86,10 +86,11 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../settings/CQJsonModel.cpp \
            ../settings/CQJsonItem.cpp \
            ../workflow/workflow/fourphase/cfourphaseworkflow.cpp \
-           ../workflow/workflow/fourphase/cfourphasedatastore.cpp \
            ../workflow/workflow/cworkflowmanager.cpp \
-           ../workflow/workflow/acontextdatastore.cpp \
+           ../workflow/workflow/aworkflow.cpp \
+           ../workflow/workflow/ccontextdatastore.cpp \
            ../workflow/plugin/cpluginmanager.cpp \
+           ../workflow/workflow/idatapacket.cpp \
            main.cpp
 
 FORMS += ../gui/forms/CMainWindow.ui \

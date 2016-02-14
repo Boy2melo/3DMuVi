@@ -2,9 +2,8 @@
 #include "workflow/plugin/cpluginmanager.h"
 
 
-CFourPhaseWorkflow::CFourPhaseWorkflow() {
+CFourPhaseWorkflow::CFourPhaseWorkflow() : AWorkflow() {
     mPlugins = new IPlugin*[getStepCount()];
-    mDataStores = new QList<CFourPhaseDataStore*>();
 }
 
 
@@ -48,29 +47,7 @@ IPlugin* CFourPhaseWorkflow::getStep(const quint32 step) const {
     }
 }
 
-QList<AContextDataStore*> CFourPhaseWorkflow::getDataStores() const {
-    return *reinterpret_cast<QList<AContextDataStore *> *>(mDataStores);
-}
-
-AContextDataStore* CFourPhaseWorkflow::addDataStore() {
-    auto dataStore = new CFourPhaseDataStore();
-    mDataStores->append(dataStore);
-    return reinterpret_cast<AContextDataStore *>(dataStore);
-}
-
-bool CFourPhaseWorkflow::removeDataStore(QString id) {
-    CFourPhaseDataStore *result = static_cast<CFourPhaseDataStore *>(FindStore(id));
-
-    if (result != nullptr) {
-        mDataStores->removeAll(result);
-        delete result;
-        return true;
-    } else {
-        return false;
-    }
-}
-
-void CFourPhaseWorkflow::executeAlgorithm(AContextDataStore* store) {
+void CFourPhaseWorkflow::executeAlgorithm(CContextDataStore* store) {
     if (mPlugins[0]->getAlgorithm()->IsBusy()) {
         return;
     }
@@ -78,24 +55,6 @@ void CFourPhaseWorkflow::executeAlgorithm(AContextDataStore* store) {
         __RUN_ALGORITHM(mPlugins[1],
             __RUN_ALGORITHM(mPlugins[2],
                 __RUN_ALGORITHM(mPlugins[3], emit sigDataStoreFinished(store); ))));
-}
-
-qint32 CFourPhaseWorkflow::getState(const QString storeId) const {
-    auto store = FindStore(storeId);
-
-    if (store == nullptr) {
-        return -1;
-    }
-
-    return store->getCurrentCalculationStep();
-}
-
-void CFourPhaseWorkflow::stop(const QString storeId) {
-    auto store = FindStore(storeId);
-
-    if (store != nullptr) {
-        store->SetIsAborted(true);
-    }
 }
 
 bool CFourPhaseWorkflow::checkAvailableDataTypes() const {
@@ -112,27 +71,16 @@ bool CFourPhaseWorkflow::checkAvailableDataTypes() const {
         auto input = plugin->getAlgorithm()->getInputDataTypes();
         auto output = plugin->getAlgorithm()->getOutputDataTypes();
 
-        foreach(QString type, input) {
+        for(QString type : input) {
             if (!dataTypes.contains(type)) {
                 return false;
             }
         }
 
-        foreach(QString type, output) {
+        for(QString type : output) {
             dataTypes.push_back(type);
         }
     }
 
     return true;
-}
-
-
-AContextDataStore *CFourPhaseWorkflow::FindStore(QString id) const {
-    for (auto store : *mDataStores) {
-        if (store->getId() == id) {
-            return static_cast<AContextDataStore *>(store);
-        }
-    }
-
-    return nullptr;
 }
