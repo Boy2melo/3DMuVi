@@ -14,8 +14,15 @@ CMainWindow::CMainWindow(QWidget *parent) :
   ui(new Ui::CMainWindow)
 {
   QVector<QString> workflows;
+  AWorkflow* fourPhaseWorkflow = CWorkflowManager::Instance()->getWorkflow("4Phase Workflow");
 
   ui->setupUi(this);
+
+  ui->algorithmSelector->setWorkflow(*fourPhaseWorkflow);
+  mWorkflow.reset(fourPhaseWorkflow);
+
+  connect(mWorkflow.get(), &AWorkflow::sigDataStoreFinished, this,
+          &CMainWindow::onDataStoreFinished);
 
   workflows = CWorkflowManager::Instance()->getAvailableWorkflows();
   for (QString w : workflows)
