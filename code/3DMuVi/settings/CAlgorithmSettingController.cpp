@@ -110,7 +110,7 @@ void CAlgorithmSettingController::requestQJson(QUrl directory)
 {
     QString file = io.load(directory);
     QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
-    emit loadQJson(docu.object());
+    //emit loadQJson(docu.object());
 }
 
 void CAlgorithmSettingController::saveQJson(QJsonObject data, QUrl directory)

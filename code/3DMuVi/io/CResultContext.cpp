@@ -24,12 +24,17 @@ void CResultContext::addDataPacket(IDataPacket* data)
         folder.cd(dataType);
     }
 
-    QFile file(folder.absoluteFilePath(QString(data->getId())));
+    AStreamProvider* streamProvider = data->getStreamProvider();
+    streamProvider->setDestination(folder);
+    data->serialize(streamProvider);
+    delete(streamProvider);
+
+    /*QFile file(folder.absoluteFilePath(QString(data->getId())));
     file.open(QIODevice::WriteOnly);
 
     QDataStream out(&file);
     data->serialize(&out);
-    file.close();
+    file.close();*/
 
     folder.cdUp();
 }

@@ -10,6 +10,7 @@
 #include <logger/controll/CLogController.h>
 #include <settings/CAlgorithmSettingController.h>
 #include <settings/CGlobalSettingController.h>
+#include <io/AStreamProvider.h>
 
 /*!
  * \class CResultContext

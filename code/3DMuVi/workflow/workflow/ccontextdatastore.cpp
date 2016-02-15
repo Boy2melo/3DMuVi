@@ -23,7 +23,7 @@ qint32 CContextDataStore::getCurrentCalculationStep() const {
 
 void CContextDataStore::Serialize() {
     // TODO: Prepare new context
-    OnSerialize();
+    //OnSerialize();
 }
 
 bool CContextDataStore::IsAborted() const {
