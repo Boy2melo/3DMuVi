@@ -14,6 +14,11 @@
 /*!
 */
 //============================================================
+CInputImageView::CInputImageView()
+{
+
+}
+
 void CInputImageView::activate()
 {
 
@@ -25,14 +30,5 @@ void CInputImageView::activate()
 */
 //============================================================
 void CInputImageView::onImagesSelected(std::vector<uint32_t>& images)
-{
-}
-
-//============================================================
-/*!
-@param images
-*/
-//============================================================
-void CInputImageView::relevantImagesChanged(std::vector<uint32_t>& images)
 {
 }

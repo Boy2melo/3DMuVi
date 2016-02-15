@@ -11,7 +11,8 @@
 #include <gui/IGuiDataView.h>
 
 //TODO: Include VTK
-class C3dView : public QWidget// : public QVTKWidget, public IGuiDataView, public IDataView
+//class C3dView : public QWidget, public QVTKWidget, public IGuiDataView, public IDataView
+class C3dView : public QWidget, public IGuiDataView, public IDataView
 {
   Q_OBJECT
 
@@ -23,7 +24,8 @@ class C3dView : public QWidget// : public QVTKWidget, public IGuiDataView, publi
   };
 
 public:
-  C3dView(QComboBox& modelTypeComboBox);
+  //TODO: add combo box to select model type
+  C3dView(); //QComboBox& modelTypeComboBox);
   void activate();
   //TODO: Include  data packets
   //void applyData(CPclDataPacket* packet);

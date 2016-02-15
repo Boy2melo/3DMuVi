@@ -5,7 +5,8 @@
 @param modelTypeComboBox
  */
 //============================================================
-C3dView::C3dView(QComboBox& modelTypeComboBox)
+//TODO: add combo box to select model type
+C3dView::C3dView() //QComboBox& modelTypeComboBox)
 {
 
 }
