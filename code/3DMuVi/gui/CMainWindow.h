@@ -41,6 +41,8 @@ private:
   std::unique_ptr<AWorkflow> mWorkflow;
   std::unique_ptr<CContextDataStore> mDataStore;
 
+  void setWorkflow(AWorkflow* workflow);
+
 private slots:
   void onSaveWorkflow();
   void onSaveWorkflowAs();
