@@ -23,8 +23,14 @@ HEADERS += gui/CTestCLogWidget.h \
            io/CTestCTextIo.h \
            io/CTestCInputDataSet.h \
            io/CTestCResultContext.h \
-           ../gui/CAlgorithmSelector.h \
+           ../gui/3dView/C3dView.h \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.h \
+           ../gui/ImageViews/CDepthMapView.h \
+           ../gui/ImageViews/CFeatureView.h \
+           ../gui/ImageViews/CImageView.h \
+           ../gui/ImageViews/CInputImageView.h \
+           ../gui/CAlgorithmSelector.h \
+           ../gui/CDataViewTabContainer.h \
            ../gui/CImagePreviewItem.h \
            ../gui/CImagePreviewWidget.h \
            ../gui/CLogWidget.h \
@@ -53,7 +59,8 @@ HEADERS += gui/CTestCLogWidget.h \
            ../workflow/workflow/cworkflowmanager.h \
            ../workflow/workflow/ccontextdatastore.h \
            ../workflow/plugin/cpluginmanager.h \
-           ../workflow/workflow/idatapacket.h
+           ../workflow/workflow/idatapacket.h \
+           ../workflow/workflow/idataview.h
 
 SOURCES += gui/CTestCLogWidget.cpp \
            gui/CTestCMainWindow.cpp \
@@ -62,8 +69,14 @@ SOURCES += gui/CTestCLogWidget.cpp \
            io/CTestCTextIo.cpp \
            io/CTestCInputDataSet.cpp \
            io/CTestCResultContext.cpp \
-           ../gui/CAlgorithmSelector.cpp \
+           ../gui/3dView/C3dView.cpp \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
+           ../gui/ImageViews/CDepthMapView.cpp \
+           ../gui/ImageViews/CFeatureView.cpp \
+           ../gui/ImageViews/CImageView.cpp \
+           ../gui/ImageViews/CInputImageView.cpp \
+           ../gui/CAlgorithmSelector.cpp \
+           ../gui/CDataViewTabContainer.cpp \
            ../gui/CImagePreviewItem.cpp \
            ../gui/CImagePreviewWidget.cpp \
            ../gui/CLogWidget.cpp \
@@ -91,6 +104,7 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../workflow/workflow/ccontextdatastore.cpp \
            ../workflow/plugin/cpluginmanager.cpp \
            ../workflow/workflow/idatapacket.cpp \
+           ../workflow/workflow/idataview.cpp \
            main.cpp
 
 FORMS += ../gui/forms/CMainWindow.ui \
