@@ -23,8 +23,14 @@ void CResultContext::addDataPacket(IDataPacket* data)
         folder.mkdir(dataType);
         folder.cd(dataType);
     }
-    //Dateien sich serialisieren lassen.
-    //Benennen nach data->getId()
+
+    QFile file(folder.absoluteFilePath(QString(data->getId())));
+    file.open(QIODevice::WriteOnly);
+
+    QDataStream out(&file);
+    data->serialize(&out);
+    file.close();
+
     folder.cdUp();
 }
 

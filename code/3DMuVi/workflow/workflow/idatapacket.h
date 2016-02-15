@@ -4,6 +4,7 @@
 #include <QString>
 #include "idataview.h"
 #include <QUuid>
+#include <QDataStream>
 
 class IDataPacket {
 private:
@@ -15,6 +16,8 @@ public:
     QString getId() const;
     virtual QString getDataType() const = 0;
     void ApplyToDataview(IDataView *dataView) const;
+    virtual void serialize(QDataStream* stream) = 0;
+    virtual void deserialize(QDataStream* stream) = 0;
 };
 
 #endif // IDATAPACKET_H
