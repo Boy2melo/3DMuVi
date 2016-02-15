@@ -1,69 +1,74 @@
-#ifndef APLUGIN_H
-#define APLUGIN_H
+#ifndef EXAMPLEPLUGIN_H
+#define EXAMPLEPLUGIN_H
 
-#include "ialgorithm.h"
-#include <QDate>
-#include <QJsonObject>
-#include <QtPlugin>
+#include <QObject>
+#include "workflow/plugin/iplugin.h"
+#include "examplealgorithm.h"
 
-#define IPlugin_iid "org.qt-project.Qt.Fraunhofer.3DMuVi.IPlugin"
-/*!
- * \class APlugin
- * \brief The APlugin class
- * \author Nathanael Schneider
- *
- * Beschreibt ein einzelnes Plugin, welches einen einzelnen [Algorithmus](@ref IAlgorithm) kapselt.
- */
-class IPlugin {
+class ExamplePlugin : public QObject, public IPlugin
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID IPlugin_iid FILE "PluginExample.json")
+    Q_INTERFACES(IPlugin)
+
+private:
+    QString mAutor;
+    quint32 mVersion;
+    QDate mDate;
+    QJsonObject mParameters;
+
+    // TODO: set algorithm type
+    ExampleAlgorithm* mAlgorithm;
 public:
+    ExamplePlugin();
+
+    virtual ~ExamplePlugin();
     /*!
      * \brief getAlgorithm
      * \return Der [Algorithmus](@ref IAlgorithm) des Plugins
      *
      * Gibt einen Zugriff auf den Konkreten [Algorithmus](@ref IAlgorithm) des Plugins
      */
-    virtual IAlgorithm* getAlgorithm() const = 0;
+    virtual IAlgorithm* getAlgorithm() const override;
 
-    virtual ~IPlugin() {}
     /*!
      * \brief Autor
      * \return Der Autor des Plugins
      *
      * Der Autor des Plugins
      */
-    virtual QString Autor() const = 0;
+    virtual QString Autor() const override;
     /*!
      * \brief Date
      * \return Datum der letzten Änderung
      *
      * Datum der letzten Änderung
      */
-    virtual QDate Date() const = 0;
+    virtual QDate Date() const override;
     /*!
      * \brief Version
      * \return Versionsnummer des Plugins
      *
      * Versionsnummer des Plugins
      */
-    virtual qint32 Version() const = 0;
+    virtual qint32 Version() const override;
 
     /*!
     \brief Gibt den Typ des Plugins an
     \return Der Typ des Plugins wie in [CPluginManager](@ref CPluginManager) definiert
     */
-    virtual QString GetPluginType() const = 0;
+    virtual QString GetPluginType() const override;
 
     /*!
     \brief Gibt die Parametervoreinstellungen als Json
     */
-    virtual QJsonObject GetParameterJson() const = 0;
+    virtual QJsonObject GetParameterJson() const override;
 
     /*!
     \brief Prüfe alle Parameter auf gültige Werte
     \return True falls alle Werte sich in gültigen Grenzen befinden, False andernfalls
     */
-    virtual bool ValidateParameters(CAlgorithmSettingController*) const = 0;
+    virtual bool ValidateParameters(CAlgorithmSettingController*) const override;
 };
 
-Q_DECLARE_INTERFACE(IPlugin, IPlugin_iid)
-#endif // APLUGIN_H
+#endif // EXAMPLEPLUGIN_H

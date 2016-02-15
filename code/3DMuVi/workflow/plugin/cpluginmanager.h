@@ -46,22 +46,24 @@ public:
     QVector<IPlugin*> getPlugins(QString type) const;
 
     // Plugin Types:
+
+
     /*!
     * \brief Feature Matcher Plugin
     */
-    static const QString PT_FeatureMatcher;
+#define PT_FeatureMatcher "Feature Matcher"
     /*!
     * \brief Tiefenschätzer Plugin
     */
-    static const QString PT_DepthMapper;
+#define PT_DepthMapper "Depth Mapper"
     /*!
     * \brief Posenschätzung Plugin
     */
-    static const QString PT_PoseEstimator;
+#define PT_PoseEstimator "Pose Estimator"
     /*!
     * \brief PCL Rekonstruktionsplugin
     */
-    static const QString PT_PclReconstructor;
+#define PT_PclReconstructor "PCL Reconstructor"
 };
 
 #endif // CPLUGINMANAGER_H

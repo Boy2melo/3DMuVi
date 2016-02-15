@@ -1,0 +1,17 @@
+{
+    "Autor" : "Nathanael Schneider",
+    "Date"  : "2016-02-15",
+    "Version" : 1,
+    "Properties" : {
+        "ExampleProperty1" : {
+            "type" : "integer",
+            "default" : 1,
+            "description" : "Example Integer Property"
+        },
+        "ExampleProperty2" : {
+            "type" : "string",
+            "default" : "none",
+            "description" : "Example String Property"
+        }
+    }
+}
