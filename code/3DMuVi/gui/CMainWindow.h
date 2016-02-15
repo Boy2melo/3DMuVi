@@ -22,13 +22,24 @@ class CMainWindow : public QMainWindow
   Q_OBJECT
 
 public:
+  /*!
+  \brief CMainWindows constructor.
+
+  Initializes the window.
+  */
   explicit CMainWindow(QWidget *parent = 0);
+
+  /*!
+  \brief CMainWindows destructor.
+
+  Cleans up all members.
+  */
   ~CMainWindow();
 
 private:
   Ui::CMainWindow *ui;
   std::unique_ptr<AWorkflow> mWorkflow;
-  std::unique_ptr<AContextDataStore> mDataStore;
+  std::unique_ptr<CContextDataStore> mDataStore;
 
 private slots:
   void onSaveWorkflow();
@@ -38,6 +49,8 @@ private slots:
   void onWorkflowSelected();
   void onSettings();
   void onAbout();
+
+  void onDataStoreFinished(CContextDataStore* dataStorage);
 };
 
 #endif // CMAINWINDOW_H

@@ -30,116 +30,10 @@
        <widget class="CAlgorithmSettingsView" name="listView"/>
       </item>
       <item>
-       <widget class="QTabWidget" name="tabWidget_2">
+       <widget class="CDataViewTabContainer" name="dataViewTabContainer">
         <property name="currentIndex">
-         <number>2</number>
+         <number>-1</number>
         </property>
-        <widget class="QWidget" name="tab3D">
-         <attribute name="title">
-          <string>3D View</string>
-         </attribute>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <property name="leftMargin">
-           <number>9</number>
-          </property>
-          <property name="topMargin">
-           <number>9</number>
-          </property>
-          <property name="rightMargin">
-           <number>9</number>
-          </property>
-          <property name="bottomMargin">
-           <number>9</number>
-          </property>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
-            <item>
-             <widget class="QComboBox" name="comboBox_5">
-              <property name="minimumSize">
-               <size>
-                <width>120</width>
-                <height>0</height>
-               </size>
-              </property>
-              <item>
-               <property name="text">
-                <string>Point cloud</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Mesh</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Textured</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item>
-             <spacer name="horizontalSpacer_2">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QOpenGLWidget" name="openGLWidget">
-            <property name="minimumSize">
-             <size>
-              <width>400</width>
-              <height>400</height>
-             </size>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="tabDepthMap">
-         <attribute name="title">
-          <string>Depth map</string>
-         </attribute>
-        </widget>
-        <widget class="QWidget" name="tabFeature">
-         <attribute name="title">
-          <string>Feature</string>
-         </attribute>
-         <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0">
-           <widget class="QScrollArea" name="scrollArea">
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOn</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOn</enum>
-            </property>
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>385</width>
-               <height>422</height>
-              </rect>
-             </property>
-            </widget>
-           </widget>
-          </item>
-         </layout>
-        </widget>
        </widget>
       </item>
       <item>
@@ -375,6 +269,12 @@
    <class>CAlgorithmSettingsView</class>
    <extends>QListView</extends>
    <header location="global">gui/AlgorithmSettings/CAlgorithmSettingsView.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CDataViewTabContainer</class>
+   <extends>QTabWidget</extends>
+   <header location="global">gui/CDataViewTabContainer.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

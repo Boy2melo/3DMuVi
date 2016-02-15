@@ -7,7 +7,10 @@
 
 class CInputImageView : public CImageView, public IDataView
 {
+  Q_OBJECT
+
 public:
+  explicit CInputImageView();
   //TODO: Include data packets
   //void applyData(CImageDataPacket* packet);
   void activate();

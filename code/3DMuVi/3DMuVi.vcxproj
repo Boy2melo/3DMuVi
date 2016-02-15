@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="workflow\workflow\datapackets\exampledata.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_aworkflow.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -168,7 +169,6 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="workflow\workflow\aworkflow.cpp" />
-    <ClCompile Include="workflow\workflow\fourphase\cfourphasedatastore.cpp" />
     <ClCompile Include="workflow\workflow\fourphase\cfourphaseworkflow.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_C3dView.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -270,11 +270,10 @@
     <ClCompile Include="settings\CQJsonItem.cpp" />
     <ClCompile Include="settings\CQJsonModel.cpp" />
     <ClCompile Include="workflow\plugin\cpluginmanager.cpp" />
-    <ClCompile Include="workflow\workflow\acontextdatastore.cpp" />
+    <ClCompile Include="workflow\workflow\ccontextdatastore.cpp" />
     <ClCompile Include="workflow\workflow\cworkflowmanager.cpp" />
     <ClCompile Include="workflow\workflow\idatapacket.cpp" />
     <ClCompile Include="workflow\workflow\idataview.cpp" />
-    <ClCompile Include="workflow\workflow\tdatapacket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DMuVi.rc" />
@@ -298,7 +297,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTLIB_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
-    <ClInclude Include="workflow\workflow\fourphase\cfourphasedatastore.h" />
+    <ClInclude Include="workflow\workflow\datapackets\exampledata.h" />
     <ClInclude Include="workflow\workflow\fourphase\cfourphaseworkflow.h" />
     <ClInclude Include="GeneratedFiles\ui_CMainWindow.h" />
     <ClInclude Include="GeneratedFiles\ui_CSettingsDialog.h" />
@@ -477,7 +476,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_TESTLIB_LIB -DQT_OPENGL_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtTest" "-I$(QTDIR)\include\QtOpenGL" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
-    <ClInclude Include="workflow\workflow\acontextdatastore.h" />
+    <ClInclude Include="workflow\workflow\ccontextdatastore.h" />
     <CustomBuild Include="workflow\workflow\aworkflow.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing aworkflow.h...</Message>
@@ -499,7 +498,6 @@
     <ClInclude Include="workflow\workflow\cworkflowmanager.h" />
     <ClInclude Include="workflow\workflow\idatapacket.h" />
     <ClInclude Include="workflow\workflow\idataview.h" />
-    <ClInclude Include="workflow\workflow\tdatapacket.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui\forms\CMainWindow.ui">

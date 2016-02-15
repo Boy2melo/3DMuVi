@@ -6,7 +6,6 @@
 #include <QString>
 #include <vector>
 
-#include <workflow/workflow/tdatapacket.h>
 #include <workflow/workflow/idatapacket.h>
 #include <logger/controll/CLogController.h>
 #include <settings/CAlgorithmSettingController.h>

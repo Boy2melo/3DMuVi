@@ -56,16 +56,10 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="workflow\workflow\acontextdatastore.cpp">
-      <Filter>Source Files\workflow</Filter>
-    </ClCompile>
     <ClCompile Include="workflow\workflow\cworkflowmanager.cpp">
       <Filter>Source Files\workflow</Filter>
     </ClCompile>
     <ClCompile Include="workflow\workflow\idatapacket.cpp">
-      <Filter>Source Files\workflow</Filter>
-    </ClCompile>
-    <ClCompile Include="workflow\workflow\tdatapacket.cpp">
       <Filter>Source Files\workflow</Filter>
     </ClCompile>
     <ClCompile Include="workflow\plugin\cpluginmanager.cpp">
@@ -224,9 +218,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CQJsonModel.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="workflow\workflow\fourphase\cfourphasedatastore.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="workflow\workflow\fourphase\cfourphaseworkflow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -243,6 +234,12 @@
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="workflow\workflow\aworkflow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\ccontextdatastore.cpp">
+      <Filter>Source Files\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\datapackets\exampledata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -288,9 +285,6 @@
     <ResourceCompile Include="3DMuVi.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="workflow\workflow\acontextdatastore.h">
-      <Filter>Header Files\workflow</Filter>
-    </ClInclude>
     <ClInclude Include="workflow\workflow\cworkflowmanager.h">
       <Filter>Header Files\workflow</Filter>
     </ClInclude>
@@ -298,9 +292,6 @@
       <Filter>Header Files\workflow</Filter>
     </ClInclude>
     <ClInclude Include="workflow\workflow\idataview.h">
-      <Filter>Header Files\workflow</Filter>
-    </ClInclude>
-    <ClInclude Include="workflow\workflow\tdatapacket.h">
       <Filter>Header Files\workflow</Filter>
     </ClInclude>
     <ClInclude Include="workflow\plugin\cpluginmanager.h">
@@ -405,7 +396,10 @@
     <ClInclude Include="workflow\workflow\fourphase\cfourphaseworkflow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="workflow\workflow\fourphase\cfourphasedatastore.h">
+    <ClInclude Include="workflow\workflow\ccontextdatastore.h">
+      <Filter>Header Files\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\datapackets\exampledata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

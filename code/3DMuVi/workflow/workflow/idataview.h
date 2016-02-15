@@ -1,12 +1,12 @@
 #ifndef IDATAVIEW_H
 #define IDATAVIEW_H
 
-class IDataView
-{
+class IDataView {
 public:
     IDataView();
 
-    //TODO set datapackages. Templates cant be virtual
+    template<typename T>
+    void applyData(T *data) {}
 };
 
 #endif // IDATAVIEW_H

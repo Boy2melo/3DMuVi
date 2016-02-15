@@ -28,16 +28,14 @@ OBJECTS_DIR += debug
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 win32:RC_FILE = 3DMuVi.rc
-HEADERS += ./workflow/workflow/acontextdatastore.h \
+HEADERS += ./workflow/workflow/ccontextdatastore.h \
     ./workflow/workflow/aworkflow.h \
     ./workflow/workflow/cworkflowmanager.h \
     ./workflow/workflow/idatapacket.h \
     ./workflow/workflow/idataview.h \
-    ./workflow/workflow/tdatapacket.h \
     ./workflow/plugin/iplugin.h \
     ./workflow/plugin/cpluginmanager.h \
     ./workflow/plugin/ialgorithm.h \
-	./workflow/workflow/fourphase/cfourphasedatastore.h\
 	./workflow/workflow/fourphase/cfourphaseworkflow.h\
     ./gui/3dView/C3dView.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
@@ -76,13 +74,11 @@ HEADERS += ./workflow/workflow/acontextdatastore.h \
     ./settings/CQJsonItem.h
 
 SOURCES += ./main.cpp \
-    ./workflow/workflow/acontextdatastore.cpp \
+    ./workflow/workflow/ccontextdatastore.cpp \
     ./workflow/workflow/cworkflowmanager.cpp \
     ./workflow/workflow/idatapacket.cpp \
     ./workflow/workflow/idataview.cpp \
     ./workflow/workflow/aworkflow.cpp \
-    ./workflow/workflow/tdatapacket.cpp \
-	./workflow/workflow/fourphase/cfourphasedatastore.cpp\
 	./workflow/workflow/fourphase/cfourphaseworkflow.cpp\
     ./gui/3dView/C3dView.cpp \
     ./workflow/plugin/cpluginmanager.cpp \
