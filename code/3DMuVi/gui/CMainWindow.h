@@ -22,7 +22,18 @@ class CMainWindow : public QMainWindow
   Q_OBJECT
 
 public:
+  /*!
+  \brief CMainWindows constructor.
+
+  Initializes the window.
+  */
   explicit CMainWindow(QWidget *parent = 0);
+
+  /*!
+  \brief CMainWindows destructor.
+
+  Cleans up all members.
+  */
   ~CMainWindow();
 
 private:
@@ -38,6 +49,8 @@ private slots:
   void onWorkflowSelected();
   void onSettings();
   void onAbout();
+
+  void onDataStoreFinished(CContextDataStore* dataStorage);
 };
 
 #endif // CMAINWINDOW_H

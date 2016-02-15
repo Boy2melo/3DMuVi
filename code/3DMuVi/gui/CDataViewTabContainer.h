@@ -1,17 +1,21 @@
 #ifndef CDATAVIEWTABCONTAINER_H
 #define CDATAVIEWTABCONTAINER_H
 
-#include "CImagePreviewWidget.h"
-
 #include <QTabWidget>
+
+#include <workflow/workflow/ccontextdatastore.h>
+
+#include "CImagePreviewWidget.h"
 
 class CDataViewTabContainer : public QTabWidget
 {
 public:
-    CDataViewTabContainer(CImagePreviewWidget* imagePreview);
+  explicit CDataViewTabContainer(QWidget* parent = nullptr);
+  void setImagePreviewWidget(CImagePreviewWidget* imagePreview);
+  void applyDataStorage(CContextDataStore* dataStorage);
 
 private slots:
-    void onCurrentChanged(int index);
+  void onCurrentChanged(int index);
 };
 
 #endif // CDATAVIEWTABCONTAINER_H

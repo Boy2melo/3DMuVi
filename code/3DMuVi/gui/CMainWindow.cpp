@@ -9,13 +9,6 @@
 #include "CMainWindow.h"
 #include "ui_CMainWindow.h"
 
-//============================================================
-/*!
-\brief CMainWindows constructor.
-
-Initializes the window.
-*/
-//============================================================
 CMainWindow::CMainWindow(QWidget *parent) :
   QMainWindow(parent),
   ui(new Ui::CMainWindow)
@@ -36,13 +29,6 @@ CMainWindow::CMainWindow(QWidget *parent) :
   connect(ui->actionAbout, &QAction::triggered, this, &CMainWindow::onAbout);
 }
 
-//============================================================
-/*!
-\brief CMainWindows destructor.
-
-Cleans up all members.
-*/
-//============================================================
 CMainWindow::~CMainWindow()
 {
     delete ui;
@@ -69,8 +55,10 @@ void CMainWindow::onLoadImages()
     std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>>* images =
       dataSet->getInputImages();
     std::vector<CImagePreviewItem*> imageItems;
+    CContextDataStore* dataStore = mWorkflow->addDataStore();
 
-    //CContextDataStore* dataStore = mWorkflow->addDataStore(dataSet);
+    dataStore->InitializeFromStorage(/*TODO: dataSet*/);
+    mDataStore.reset(dataStore);
 
     for(std::tuple<uint32_t, QImage, CImagePreviewItem> i : *images)
     {
@@ -78,6 +66,7 @@ void CMainWindow::onLoadImages()
     }
 
     ui->imagePreviewWidget->setImages(imageItems);
+    ui->algorithmSelector->setDataStore(dataStore->getId());
   }
 }
 
@@ -96,6 +85,9 @@ void CMainWindow::onWorkflowSelected()
 
     ui->algorithmSelector->setWorkflow(*workflow);
     mWorkflow.reset(workflow);
+
+    connect(mWorkflow.get(), &AWorkflow::sigDataStoreFinished, this,
+            &CMainWindow::onDataStoreFinished);
   }
 }
 
@@ -107,7 +99,13 @@ void CMainWindow::onSettings()
 
 void CMainWindow::onAbout()
 {
-  QMessageBox::about(this, "About 3DMuVi", "3DMuVi is a framework for testing "\
-                     "3D-reconstruction-algorithms.\nCopyright 2016 Tim Brodbeck, Jens Manig, "\
-                     "Grigori Schapoval, Nathanael Schneider, Laurenz Thiel and Stefan Wolf.");
+  QMessageBox::about(this, "About 3DMuVi", "3DMuVi is a framework for testing " \
+                                           "3D-reconstruction-algorithms.\nCopyright 2016 Tim " \
+                                           "Brodbeck, Jens Manig, Grigori Schapoval, Nathanael " \
+                                           "Schneider, Laurenz Thiel and Stefan Wolf.");
+}
+
+void CMainWindow::onDataStoreFinished(CContextDataStore* dataStorage)
+{
+  ui->dataViewTabContainer->applyDataStorage(dataStorage);
 }

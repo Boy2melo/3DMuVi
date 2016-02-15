@@ -5,7 +5,17 @@
 @param imagePreview
  */
 //============================================================
-CDataViewTabContainer::CDataViewTabContainer(CImagePreviewWidget* imagePreview)
+CDataViewTabContainer::CDataViewTabContainer(QWidget* parent)
+{
+
+}
+
+void CDataViewTabContainer::setImagePreviewWidget(CImagePreviewWidget* imagePreview)
+{
+
+}
+
+void CDataViewTabContainer::applyDataStorage(CContextDataStore* dataStorage)
 {
 
 }
