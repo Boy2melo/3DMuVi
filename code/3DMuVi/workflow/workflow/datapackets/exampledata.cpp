@@ -9,7 +9,7 @@ ExampleData::~ExampleData() {}
 
 
 QString ExampleData::getDataType() const {
-    return CContextDataStore::DT_POSE;
+    return DT_POSE;
 }
 
 void ExampleData::getMyData() {
