@@ -29,13 +29,6 @@ void CResultContext::addDataPacket(IDataPacket* data)
     data->serialize(streamProvider);
     delete(streamProvider);
 
-    /*QFile file(folder.absoluteFilePath(QString(data->getId())));
-    file.open(QIODevice::WriteOnly);
-
-    QDataStream out(&file);
-    data->serialize(&out);
-    file.close();*/
-
     folder.cdUp();
 }
 
