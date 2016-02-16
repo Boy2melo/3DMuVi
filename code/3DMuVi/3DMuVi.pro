@@ -64,6 +64,7 @@ HEADERS += ./workflow/workflow/ccontextdatastore.h \
     ./workflow/plugin/ialgorithm.h \
     ./workflow/workflow/fourphase/cfourphaseworkflow.h\
     ./gui/3dView/C3dView.h \
+    ./gui/3dView/CPclView.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsView.h \
     ./gui/ImageViews/CDepthMapView.h \
@@ -110,6 +111,7 @@ SOURCES += ./main.cpp \
     ./workflow/workflow/aworkflow.cpp \
 	./workflow/workflow/fourphase/cfourphaseworkflow.cpp\
     ./gui/3dView/C3dView.cpp \
+    ./gui/3dView/CPclView.cpp \
     ./workflow/plugin/cpluginmanager.cpp \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
     ./gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \

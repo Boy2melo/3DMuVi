@@ -1,8 +1,6 @@
 #ifndef C3DVIEW_H
 #define C3DVIEW_H
 
-//TODO: Include VTK
-//#include <QVTKWidget.h>
 #include <QWidget>
 #include <QComboBox>
 
@@ -10,9 +8,9 @@
 
 #include <gui/IGuiDataView.h>
 
-//TODO: Include VTK
-//class C3dView : public QWidget, public QVTKWidget, public IGuiDataView, public IDataView
-class C3dView : public QWidget, public IGuiDataView, public IDataView
+#include "CPclView.h"
+
+class C3dView : public CPclView, public IGuiDataView, public IDataView
 {
   Q_OBJECT
 
