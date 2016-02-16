@@ -105,36 +105,49 @@ Die Aufgabe umfasst Design, Implementierung und Dokumentation einer intuitiv bed
 
 #### License ####
 VTK is an open-source toolkit licensed under the BSD license.
+
 See LICENSE_VTK.txt for details.
 
 ### PCL ###
 [Homepage](http://pointclouds.org/)
 
 #### License ####
-Software License Agreement (BSD License)
+BSD License
+
 See LICENSE_pcl.txt for details.
 
 ## Zusätzliche Bibliotheken kompilieren ##
 Zum Kompilieren von VTK und PCL müssen alle nachfolgenden Befehle in der Konsole ausgeführt werden. Es wird davon ausgegangen, dass das aktuelle Verzeichnis anfangs das git Verzeichnis ist.
 
+Bevor wir VTK und PCL kompilieren können, müssen wir noch folgendes installieren: CMake, libxt, Qt Designer, Eigen3, flann und boost. Unter Ubuntu 15.10 ist dafür folgendes auszuführen:
+
+    sudo apt-get install cmake libxt-dev qttools5-dev libeigen3-dev libflann-dev libboost-dev libboost-system-dev libboost-filesystem-dev libboost-thread-dev libboost-date-time-dev libboost-iostreams-dev
+
 Build Ordner erstellen:
+
     mkdir code/VTK-build/
     mkdir code/pcl-build/
 
 In das build Verzeichnis von VTK wechseln:
+
     cd code/VTK-build/
 
 CMake ausführen:
+
     cmake -DVTK_Group_Qt=ON -DVTK_RENDERING_BACKEND=OpenGL -DVTK_QT_VERSION=5 ../VTK-7.0.0/
 
 VTK kompilieren (# ist die Anzahl der Prozessorkerne, die verwendet werden sollen):
+
     make -j#
 
 In das build Verzeichnis von PCL wechseln:
+
     cd ../pcl-build/
 
 CMake ausführen:
+
     cmake -DBUILD_visualization=ON -DVTK_DIR=../VTK-build/ -DBUILD_global_tests=OFF ../pcl/
 
 PCL kompilieren (# ist die Anzahl der Prozessorkerne, die verwendet werden sollen):
+
     make -j#
