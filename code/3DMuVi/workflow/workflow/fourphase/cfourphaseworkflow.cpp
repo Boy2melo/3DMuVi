@@ -14,13 +14,13 @@ quint32 CFourPhaseWorkflow::getStepCount() const {
 QString CFourPhaseWorkflow::getAlgorithmType(const quint32 step) const {
     switch (step) {
     case 0:
-        return CPluginManager::PT_FeatureMatcher;
+        return PT_FeatureMatcher;
     case 1:
-        return CPluginManager::PT_DepthMapper;
+        return PT_DepthMapper;
     case 2:
-        return CPluginManager::PT_PoseEstimator;
+        return PT_PoseEstimator;
     case 3:
-        return CPluginManager::PT_PclReconstructor;
+        return PT_PclReconstructor;
     default:
         return "";
     }
