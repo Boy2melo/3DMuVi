@@ -1,6 +1,6 @@
 #include "CSFStreamProvider.h"
 
-CSFStreamProvider::CSFStreamProvider(const QString &fileName){
+CSFStreamProvider::CSFStreamProvider(const QString& fileName){
     name = fileName;
 }
 
