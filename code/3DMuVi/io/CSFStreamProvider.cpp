@@ -5,7 +5,9 @@ CSFStreamProvider::CSFStreamProvider(const QString &fileName){
 }
 
 CSFStreamProvider::~CSFStreamProvider(){
-    file->close();
+    if(file != nullptr){
+       file->close();
+    }
     delete(file);
     delete(stream);
 }
@@ -13,7 +15,8 @@ CSFStreamProvider::~CSFStreamProvider(){
 QDataStream* CSFStreamProvider::getNextStream(){
     if(stream == nullptr){
         file = new QFile(folder.absoluteFilePath(name));
-        file->open(QIODevice::WriteOnly);
+        if(!file->open(QIODevice::WriteOnly))
+            return nullptr;
         stream = new QDataStream(file);
     }
     return stream;

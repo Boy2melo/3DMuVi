@@ -17,10 +17,14 @@ public:
     ~CMFStreamProvider();
     /*!
      * \brief Everytime this function get called it return a pointer to a new file.
-     *        The Filename will be "[i].png" with i starting at 0 and i will incerement for each file.
-     *\return a QDataStream pointer to a file.
+     *  The QDataStream from last call will be deleted.
+     * \param fileName of the file.
+     * \return a QDataStream pointer to a file.
      */
-    QDataStream* getNextStream();
+    QDataStream* getNextStream(const QString &fileName);
+private:
+    QDataStream* stream;
+    QFile* file;
 };
 
 #endif // CMFSTREAMPROVIDER_H
