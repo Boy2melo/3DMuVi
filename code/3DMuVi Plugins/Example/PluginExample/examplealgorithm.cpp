@@ -12,7 +12,7 @@ void ExampleAlgorithm::setLogger(CLogController *controller) {
     mLogger = controller;
 }
 
-void ExampleAlgorithm::setParameters(CAlgorithmSettingController *settings){
+void ExampleAlgorithm::setParameters(QJsonObject *settings){
     mSettings = settings;
 }
 

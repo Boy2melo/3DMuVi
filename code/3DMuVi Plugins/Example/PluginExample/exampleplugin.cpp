@@ -34,7 +34,7 @@ ExamplePlugin::~ExamplePlugin() {
 // ToDo-Functions
 //----------------------------------------------------------
 
-bool ExamplePlugin::ValidateParameters(CAlgorithmSettingController *) const {
+bool ExamplePlugin::ValidateParameters(QJsonObject *) const {
     // TODO: Check parameters
     return true;
 }

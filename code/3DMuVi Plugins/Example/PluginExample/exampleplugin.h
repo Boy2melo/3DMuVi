@@ -2,6 +2,7 @@
 #define EXAMPLEPLUGIN_H
 
 #include <QObject>
+#include <QJsonObject>
 #include "workflow/plugin/iplugin.h"
 #include "examplealgorithm.h"
 
@@ -68,7 +69,7 @@ public:
     \brief Prüfe alle Parameter auf gültige Werte
     \return True falls alle Werte sich in gültigen Grenzen befinden, False andernfalls
     */
-    virtual bool ValidateParameters(CAlgorithmSettingController*) const override;
+    virtual bool ValidateParameters(QJsonObject*) const override;
 };
 
 #endif // EXAMPLEPLUGIN_H

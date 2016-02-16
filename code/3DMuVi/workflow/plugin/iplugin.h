@@ -62,7 +62,7 @@ public:
     \brief Prüfe alle Parameter auf gültige Werte
     \return True falls alle Werte sich in gültigen Grenzen befinden, False andernfalls
     */
-    virtual bool ValidateParameters(CAlgorithmSettingController*) const = 0;
+    virtual bool ValidateParameters(QJsonObject*) const = 0;
 };
 
 Q_DECLARE_INTERFACE(IPlugin, IPlugin_iid)

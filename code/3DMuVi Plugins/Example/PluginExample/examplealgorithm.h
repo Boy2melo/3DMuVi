@@ -1,6 +1,7 @@
 #ifndef EXAMPLEALGORITHM_H
 #define EXAMPLEALGORITHM_H
 #include "workflow/plugin/ialgorithm.h"
+#include <QJsonObject>
 #include <QObject>
 
 class ExampleAlgorithm : public IAlgorithm
@@ -9,7 +10,7 @@ class ExampleAlgorithm : public IAlgorithm
 private:
     bool mIsBusy;
     CLogController *mLogger;
-    CAlgorithmSettingController *mSettings;
+    QJsonObject *mSettings;
 
 public:
     ExampleAlgorithm();
@@ -20,7 +21,7 @@ public:
     /*!
      * \brief Setze die Parameter für den nächsten Durchlauf
      */
-    void setParameters(CAlgorithmSettingController *settings) override;
+    void setParameters(QJsonObject *settings) override;
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */
