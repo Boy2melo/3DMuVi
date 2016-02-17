@@ -25,6 +25,7 @@ public:
     AStreamProvider* getStreamProvider();
     void serialize(AStreamProvider* stream);
     void setFeatureMap(FeatureMatch && match);
+    FeatureMatch getFeatureMap();
 private:
     FeatureMatch featureMatchData;
     AStreamProvider* streamProvider;

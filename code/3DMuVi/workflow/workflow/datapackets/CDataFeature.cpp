@@ -6,11 +6,21 @@
 
 CDataFeature::CDataFeature() {}
 CDataFeature::~CDataFeature() {
-    delete(streamProvider);
+    if(streamProvider != nullptr){
+        delete(streamProvider);
+    }
 }
 
 QString CDataFeature::getDataType() const {
     return DT_FEATURE_MATCH;
+}
+
+void CDataFeature::setFeatureMap(FeatureMatch &&match){
+    featureMatchData = match;
+}
+
+FeatureMatch CDataFeature::getFeatureMap(){
+    return featureMatchData;
 }
 
 AStreamProvider* CDataFeature::getStreamProvider() {
