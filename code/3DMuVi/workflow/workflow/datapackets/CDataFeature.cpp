@@ -15,11 +15,11 @@ QString CDataFeature::getDataType() const {
     return DT_FEATURE_MATCH;
 }
 
-void CDataFeature::setFeatureMap(FeatureMatch &&match){
+void CDataFeature::setFeatureMatch(FeatureMatch && match){
     featureMatchData = match;
 }
 
-FeatureMatch CDataFeature::getFeatureMap(){
+FeatureMatch const & CDataFeature::getFeatureMatch(){
     return featureMatchData;
 }
 
