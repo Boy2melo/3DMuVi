@@ -23,8 +23,12 @@ void CResultContext::addDataPacket(IDataPacket* data)
         folder.mkdir(dataType);
         folder.cd(dataType);
     }
-    //Dateien sich serialisieren lassen.
-    //Benennen nach data->getId()
+
+    AStreamProvider* streamProvider = data->getStreamProvider();
+    streamProvider->setDestination(folder);
+    data->serialize(streamProvider);
+    delete(streamProvider);
+
     folder.cdUp();
 }
 

@@ -14,8 +14,11 @@ CMainWindow::CMainWindow(QWidget *parent) :
   ui(new Ui::CMainWindow)
 {
   QVector<QString> workflows;
+  AWorkflow* fourPhaseWorkflow = CWorkflowManager::Instance()->getWorkflow("4Phase Workflow");
 
   ui->setupUi(this);
+
+  setWorkflow(fourPhaseWorkflow);
 
   workflows = CWorkflowManager::Instance()->getAvailableWorkflows();
   for (QString w : workflows)
@@ -31,9 +34,17 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
 CMainWindow::~CMainWindow()
 {
-    delete ui;
+  delete ui;
 }
 
+void CMainWindow::setWorkflow(AWorkflow* workflow)
+{
+  ui->algorithmSelector->setWorkflow(*workflow);
+  mWorkflow.reset(workflow);
+
+  connect(workflow, &AWorkflow::sigDataStoreFinished, this,
+          &CMainWindow::onDataStoreFinished);
+}
 
 void CMainWindow::onSaveWorkflow()
 {
@@ -83,11 +94,7 @@ void CMainWindow::onWorkflowSelected()
   {
     AWorkflow* workflow = CWorkflowManager::Instance()->getWorkflow(callingAction->text());
 
-    ui->algorithmSelector->setWorkflow(*workflow);
-    mWorkflow.reset(workflow);
-
-    connect(mWorkflow.get(), &AWorkflow::sigDataStoreFinished, this,
-            &CMainWindow::onDataStoreFinished);
+    setWorkflow(workflow);
   }
 }
 

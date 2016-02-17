@@ -3,12 +3,6 @@
 
 CPluginManager* CPluginManager::mInstance = nullptr;
 
-const QString CPluginManager::PT_FeatureMatcher = "Feature Matcher";
-const QString CPluginManager::PT_DepthMapper = "Depth Mapper";
-const QString CPluginManager::PT_PoseEstimator = "Pose Estimator";
-const QString CPluginManager::PT_PclReconstructor = "PCL Reconstructor";
-
-
 CPluginManager::CPluginManager() {}
 
 CPluginManager* CPluginManager::Instance() {

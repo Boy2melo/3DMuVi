@@ -1,11 +1,6 @@
 #include "ccontextdatastore.h"
 #include <QUuid>
 
-const QString CContextDataStore::DT_FEATURE_MATCH = "FeatureMatch Data";
-const QString CContextDataStore::DT_POSE = "Pose Data";
-const QString CContextDataStore::DT_DEPTH = "Depth Data";
-const QString CContextDataStore::DT_FUSION = "Fusion Data";
-
 CContextDataStore::~CContextDataStore() {
     for(IDataPacket *packet : mDataPackets) {
         delete packet;

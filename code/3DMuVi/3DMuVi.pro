@@ -36,7 +36,8 @@ HEADERS += ./workflow/workflow/ccontextdatastore.h \
     ./workflow/plugin/iplugin.h \
     ./workflow/plugin/cpluginmanager.h \
     ./workflow/plugin/ialgorithm.h \
-	./workflow/workflow/fourphase/cfourphaseworkflow.h\
+    ./workflow/workflow/fourphase/cfourphaseworkflow.h\
+    ./workflow/workflow/datapackets/CDataFeature.h \
     ./gui/3dView/C3dView.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsView.h \
@@ -58,6 +59,9 @@ HEADERS += ./workflow/workflow/ccontextdatastore.h \
     ./io/CTextIo.h \
     ./io/CInputDataSet.h \
     ./io/CResultContext.h \
+    ./io/AStreamProvider.h \
+    ./io/CSFStreamProvider.h \
+    ./io/CMFStreamProvider.h \
     ./logger/controll/CAlgoMessage.h \
     ./logger/controll/CLogController.h \
     ./logger/controll/CLogHistory.h \
@@ -80,6 +84,7 @@ SOURCES += ./main.cpp \
     ./workflow/workflow/idataview.cpp \
     ./workflow/workflow/aworkflow.cpp \
 	./workflow/workflow/fourphase/cfourphaseworkflow.cpp\
+    ./workflow/workflow/datapackets/CDataFeature.cpp \
     ./gui/3dView/C3dView.cpp \
     ./workflow/plugin/cpluginmanager.cpp \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
@@ -101,6 +106,9 @@ SOURCES += ./main.cpp \
     ./io/CTextIo.cpp \
     ./io/CInputDataSet.cpp \
     ./io/CResultContext.cpp \
+    ./io/AStreamProvider.cpp \
+    ./io/CSFStreamProvider.cpp \
+    ./io/CMFStreamProvider.cpp \
     ./logger/controll/CAlgoMessage.cpp \
     ./logger/controll/CLogController.cpp \
     ./logger/controll/CLogHistory.cpp \
@@ -114,7 +122,6 @@ SOURCES += ./main.cpp \
     ./settings/CAlgorithmSettingsModel.cpp\
     ./settings/CQJsonModel.cpp\
     ./settings/CQJsonItem.cpp
-
 
 
 FORMS += ./gui/forms/CMainWindow.ui \

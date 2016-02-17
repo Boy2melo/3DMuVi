@@ -84,10 +84,10 @@ public:
     void SetIsAborted(bool abort);
 
 
-    static const QString DT_FEATURE_MATCH;
-    static const QString DT_POSE;
-    static const QString DT_DEPTH;
-    static const QString DT_FUSION;
+#define DT_FEATURE_MATCH "FeatureMatch Data"
+#define DT_POSE "Pose Data"
+#define DT_DEPTH "Depth Data"
+#define DT_FUSION "Fusion Data"
 };
 
 #endif // ACONTEXTDATASTORE_H

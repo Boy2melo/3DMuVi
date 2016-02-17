@@ -1,8 +1,9 @@
 #ifndef IALGORITHM_H
 #define IALGORITHM_H
 
-#include <QVector>
+#include <QStringList>
 #include <QObject>
+#include <QJsonObject>
 #include "workflow/workflow/ccontextdatastore.h"
 #include "logger/controll/CLogController.h"
 #include "settings/CAlgorithmSettingController.h"
@@ -18,15 +19,14 @@
 class IAlgorithm : public QObject {
     Q_OBJECT
 public:
-    IAlgorithm();
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */
-    void setLogger(CLogController *controller);
+    virtual void setLogger(CLogController *controller) = 0;
     /*!
      * \brief Setze die Parameter für den nächsten Durchlauf
      */
-    void setParameters(CAlgorithmSettingController *settings);
+    virtual void setParameters(QJsonObject *settings) = 0;
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */
@@ -41,12 +41,12 @@ public:
     * \brief Eine Liste aller Daten, die als Eingabe benötigt werden.
     * \return Eine Liste aller Daten, die als Eingabe benötigt werden.
     */
-    virtual QVector<QString> getInputDataTypes() const = 0;
+    virtual QStringList getInputDataTypes() const = 0;
     /*!
     * \brief Eine Liste aller Daten, die als Ausgabe erzeugt werden.
     * \return Eine Liste aller Daten, die als Ausgabe erzeugt werden.
     */
-    virtual QVector<QString> getOutputDataTypes() const = 0;
+    virtual QStringList getOutputDataTypes() const = 0;
 };
 
 #endif // IALGORITHM_H
