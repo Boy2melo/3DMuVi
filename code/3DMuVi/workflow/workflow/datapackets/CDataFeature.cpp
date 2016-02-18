@@ -6,11 +6,21 @@
 
 CDataFeature::CDataFeature() {}
 CDataFeature::~CDataFeature() {
-    delete(streamProvider);
+    if(streamProvider != nullptr){
+        delete(streamProvider);
+    }
 }
 
 QString CDataFeature::getDataType() const {
     return DT_FEATURE_MATCH;
+}
+
+void CDataFeature::setFeatureMatch(FeatureMatch && match){
+    featureMatchData = match;
+}
+
+FeatureMatch const & CDataFeature::getFeatureMatch(){
+    return featureMatchData;
 }
 
 AStreamProvider* CDataFeature::getStreamProvider() {
@@ -27,6 +37,7 @@ void CDataFeature::serialize(AStreamProvider* stream){
     float value1;
     float value2;
     uint32_t value3;
+    *dataStream << (int)featureMatchData.size();
     for(std::tuple<uint64_t, float, float, uint32_t> data : featureMatchData){
         std::tie(value0, value1, value2, value3) = data;
         *dataStream << (quint64)value0 << value1 << value2 << (quint32)value3;

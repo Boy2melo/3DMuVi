@@ -6,8 +6,6 @@
 
 using FeatureMatch = std::vector<std::tuple<uint64_t, float, float, uint32_t>>;
 
-
-
 /*!
  * \class CDataFeature
  * \brief The CDataFeature class
@@ -24,7 +22,8 @@ public:
     QString getDataType() const override;
     AStreamProvider* getStreamProvider();
     void serialize(AStreamProvider* stream);
-    void setFeatureMap(FeatureMatch && match);
+    void setFeatureMatch(FeatureMatch && match);
+    FeatureMatch const & getFeatureMatch();
 private:
     FeatureMatch featureMatchData;
     AStreamProvider* streamProvider;
