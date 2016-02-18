@@ -44,8 +44,7 @@ void CAlgorithmSelector::setWorkflow(AWorkflow& workflow)
 
   QLayoutItem *child;
   while ((child = layout()->takeAt(0)) != 0) {
-
-      delete child;
+    delete child;
   }
 
   for(int i=0; i < steps; i++)
@@ -67,7 +66,7 @@ void CAlgorithmSelector::setWorkflow(AWorkflow& workflow)
 
 void CAlgorithmSelector::setDataStore(const QString& storeId)
 {
-
+  mDataStoreId = storeId;
 }
 
 //============================================================
@@ -107,13 +106,21 @@ void CAlgorithmSelector::startButtonPushed(bool isPushed)
     }
   }
 
-  emit workflowRunning(true);
-
-  mpWorkflow->run(mDataStoreId);
 
   startStopButton = qobject_cast<QPushButton*>(sender());
   if(startStopButton)
   {
-    startStopButton->setText("Stop");
+    if(startStopButton->text() == "Stop")
+    {
+      startStopButton->setText("Start");
+      emit workflowRunning(false);
+    }
+    else if(startStopButton->text() == "Start")
+    {
+      startStopButton->setText("Stop");
+      emit workflowRunning(true);
+      mpWorkflow->run(mDataStoreId);
+    }
   }
+
 }
