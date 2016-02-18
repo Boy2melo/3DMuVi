@@ -27,11 +27,12 @@ AStreamProvider* CDataFeature::getStreamProvider() {
     if(streamProvider != nullptr){
         delete(streamProvider);
     }
-    streamProvider = new CSFStreamProvider(this->getId());
+    streamProvider = new CSFStreamProvider();
     return streamProvider;
 }
 
 void CDataFeature::serialize(AStreamProvider* stream){
+    stream->setFileName(this->getId());
     QDataStream* dataStream = stream->getNextStream();
     uint64_t value0;
     float value1;

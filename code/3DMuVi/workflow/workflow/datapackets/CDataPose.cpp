@@ -20,11 +20,12 @@ AStreamProvider* CDataPose::getStreamProvider(){
     if(streamProvider != nullptr){
         delete(streamProvider);
     }
-    streamProvider = new CSFStreamProvider(this->getId());
+    streamProvider = new CSFStreamProvider();
     return streamProvider;
 }
 
 void CDataPose::serialize(AStreamProvider *stream){
+    stream->setFileName(this->getId());
     QDataStream* dataStream = stream->getNextStream();
 
     //serialize featureMap
@@ -72,9 +73,8 @@ void CDataPose::setFeatureMap(FeatureMap && map){
     featureMap = map;
 }
 
-std::vector<SPose> const & getPose(){
-    //TODO
-    return std::vector<SPose>();
+std::vector<SPose> const & CDataPose::getPose(){
+    return pose;
 }
 
 void CDataPose::setPose(std::vector<SPose> && poses){

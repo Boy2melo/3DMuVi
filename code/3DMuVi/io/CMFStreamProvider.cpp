@@ -13,7 +13,7 @@ CMFStreamProvider::~CMFStreamProvider()
     delete(stream);
 }
 
-QDataStream* CMFStreamProvider::getNextStream(const QString &fileName)
+QDataStream* CMFStreamProvider::getNextStream()
 {
     if(file != nullptr){
         file->close();

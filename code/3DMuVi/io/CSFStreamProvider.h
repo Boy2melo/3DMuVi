@@ -13,7 +13,7 @@
 class CSFStreamProvider : public AStreamProvider
 {
 public:
-    CSFStreamProvider(const QString& fileName);
+    CSFStreamProvider();
     ~CSFStreamProvider();
     /*!
      *\brief Everytime this function get called it return a pointer to the same file.
@@ -23,7 +23,6 @@ public:
 private:
     QDataStream* stream;
     QFile* file;
-    QString name;
 };
 
 #endif // CSFSTREAMPROVIDER_H
