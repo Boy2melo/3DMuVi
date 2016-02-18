@@ -1,24 +1,22 @@
-#ifndef EXAMPLEALGORITHM_H
-#define EXAMPLEALGORITHM_H
-
-#include <QImage>
+#ifndef ALGORITHM_H
+#define ALGORITHM_H
+#include "workflow/plugin/ialgorithm.h"
+#include "plugin_config.h"
 #include <QJsonObject>
 #include <QObject>
 
-#include "workflow/plugin/ialgorithm.h"
-//#include "workflow/workflow/datapackets/CDataInputImages.h"
-#include "workflow/workflow/datapackets/CDataFeature.h"
-
-class SurfAlgorithm : public IAlgorithm
+class CLASS_GEN(Algorithm) : public IAlgorithm
 {
     Q_OBJECT
 private:
-    bool mIsBusy = false;
-    CLogController *mLogger = nullptr;
-    QJsonObject *mSettings = nullptr;
+    bool mIsBusy;
+    CLogController *mLogger;
+    QJsonObject *mSettings;
+    QStringList mInputTypes;
+    QStringList mOutputTypes;
 
 public:
-    SurfAlgorithm();
+    CLASS_GEN(Algorithm)();
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */
@@ -48,31 +46,22 @@ public:
     */
     virtual QStringList getOutputDataTypes() const override;
 
-  private:
+    /*!
+    \brief Prüfe alle Parameter auf gültige Werte
+    \return True falls alle Werte sich in gültigen Grenzen befinden, False andernfalls
+    */
+    bool ValidateParameters(const QJsonObject*) const;
+protected:
+    /*!
+     * \brief Führe die Konkrete implementierung des Algorithmus aus
+     * \param store Der Datastore
+     */
+    void executeAlgorithm(CContextDataStore* store);
 
-    void run(CContextDataStore* dataStore);
+    /*!
+     * \brief Wird im Konstruktor aufgerufen. Fülle mInputTypes und mOutputTypes
+     */
+    virtual void OnInitialize();
 };
 
-// mock up:
-
-#define DT_INPUT_IMAGES "Input Images"
-
-using InputImages = std::vector<QImage>;
-struct CDataInputImages
-{
-    InputImages getImages() { return std::vector<QImage>(); }
-};
-
-struct CDataFeatureMatch
-{
-    void setFeatureMatch(FeatureMatch &&) { }
-};
-
-template <typename T>
-T * CContextDataStore::getData()
-{
-  return nullptr;
-}
-
-
-#endif // EXAMPLEALGORITHM_H
+#endif // ALGORITHM_H

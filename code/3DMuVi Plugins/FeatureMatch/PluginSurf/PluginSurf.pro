@@ -8,15 +8,16 @@ QT       += core gui
 
 TARGET = PluginSurf
 TEMPLATE = lib
-CONFIG += plugin c++11
+CONFIG += plugin
+QMAKE_CXXFLAGS += --std=c++11
 
 CONFIG += link_pkgconfig
 PKGCONFIG += opencv
 
-DESTDIR = $$[QT_INSTALL_PLUGINS]/generic
-
-SOURCES += surfplugin.cpp \
-    surfalgorithm.cpp \
+SOURCES += \
+    plugin.cpp \
+    algorithm.cpp \
+    MyAlgorithm.cpp \
     surfmatch-algorithm.cpp
 
 INCLUDEPATH += ../../../3DMuVi \
@@ -24,12 +25,15 @@ INCLUDEPATH += ../../../3DMuVi \
 
 DEFINES += BUILD_NAME=\\\"plugins/$${TARGET}\\\"
 
-HEADERS += surfplugin.h \
+HEADERS += \
     ../../../3DMuVi/workflow/plugin/ialgorithm.h \
     ../../../3DMuVi/workflow/plugin/iplugin.h \
-    surfalgorithm.h \
+    plugin.h \
+    algorithm.h \
+    plugin_config.h \
     surfmatch-algorithm.h
-OTHER_FILES += PluginSurf.json
+OTHER_FILES += \
+    Plugin.json
 
 unix {
     target.path = /usr/lib

@@ -1,15 +1,16 @@
-#ifndef EXAMPLEPLUGIN_H
-#define EXAMPLEPLUGIN_H
+#ifndef PLUGIN_H
+#define PLUGIN_H
 
 #include <QObject>
 #include <QJsonObject>
 #include "workflow/plugin/iplugin.h"
-#include "surfalgorithm.h"
+#include "algorithm.h"
+#include "plugin_config.h"
 
-class SurfPlugin : public QObject, public IPlugin
+class CLASS_GEN(Plugin): public QObject, public IPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID IPlugin_iid FILE "PluginSurf.json")
+    Q_PLUGIN_METADATA(IID IPlugin_iid FILE "Plugin.json")
     Q_INTERFACES(IPlugin)
 
 private:
@@ -19,11 +20,11 @@ private:
     QJsonObject mParameters;
 
     // TODO: set algorithm type
-    SurfAlgorithm* mAlgorithm;
+    CLASS_GEN(Algorithm)* mAlgorithm;
 public:
-    SurfPlugin();
+    CLASS_GEN(Plugin)();
+    ~CLASS_GEN(Plugin)();
 
-    virtual ~SurfPlugin();
     /*!
      * \brief getAlgorithm
      * \return Der [Algorithmus](@ref IAlgorithm) des Plugins
@@ -32,6 +33,10 @@ public:
      */
     virtual IAlgorithm* getAlgorithm() const override;
 
+    /*!
+     * \brief Initialize the Plugin with its metadata
+     */
+    virtual void Initialize(QPluginLoader *loader) override;
     /*!
      * \brief Autor
      * \return Der Autor des Plugins
@@ -66,10 +71,15 @@ public:
     virtual QJsonObject GetParameterJson() const override;
 
     /*!
+     * \brief Gibt die Beschreibung der Parameter als Json
+     */
+    virtual QJsonObject GetParameterDescriptionJson() const override;
+
+    /*!
     \brief Prüfe alle Parameter auf gültige Werte
     \return True falls alle Werte sich in gültigen Grenzen befinden, False andernfalls
     */
     virtual bool ValidateParameters(QJsonObject*) const override;
 };
 
-#endif // EXAMPLEPLUGIN_H
+#endif // PLUGIN_H
