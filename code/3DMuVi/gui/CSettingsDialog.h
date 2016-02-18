@@ -15,7 +15,7 @@ This class provides a dialog in which the user can change global settings.
 */
 class CSettingsDialog : public QDialog
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
   //============================================================
