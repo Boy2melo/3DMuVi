@@ -4,6 +4,7 @@
 #include "CLogHistory.h"
 #include <QUrl>
 #include <QObject>
+#include <tuple>
 /**
  * @brief The CLogController class this class controll the logger,
  * manage the history and multiplexes the logmessages to the GUI (with singnal)
@@ -17,7 +18,9 @@ public:
     CLogController();
 
     void manageNewLogMessage(QString message, QString time, QString type);
-    
+
+    friend CLogController& operator<<(CLogController& logger, std::tuple<const QString& , const QString&> messageTypeTuple );
+
     CLogHistory& getHistory();
     
     void setLog(QUrl dest);

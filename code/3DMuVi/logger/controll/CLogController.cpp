@@ -4,6 +4,7 @@
 #include "../qslogging/QsLogDest.h"
 #include <QDir>
 #include <iostream>
+#include <ctime>
 using namespace QsLogging;
 
 CLogHistory history;
@@ -19,6 +20,30 @@ CLogController::CLogController(){
    destSet= false;
  }
 
+
+CLogController& operator<< (CLogController& logger,std::tuple<const QString& , const QString&> messageTypeTuple)
+{
+   QString message = std::get<0> (messageTypeTuple);
+   QString type = std::get<1> (messageTypeTuple);
+
+
+    if( !((type == "ERROR") || (type == "WARNING") || (type == "DEBUG")))
+    {
+            type = "INFO";
+  }
+
+    QString mtime = "";
+    time_t rawtime;
+    struct tm * timeinfo;
+    char buffer [80];
+    time (&rawtime);
+    timeinfo = localtime (&rawtime);
+    strftime (buffer,80,"%A, %B %d, %Y %I:%M:%S %p",timeinfo);
+    mtime = buffer;
+
+    logger.manageNewLogMessage(message, mtime, type);
+    return logger;
+}
 
 
 /**
