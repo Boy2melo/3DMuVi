@@ -16,6 +16,11 @@ class CQJsonModel : public QAbstractItemModel
 {
     Q_OBJECT
 public:
+    /*!
+      * \brief CQJsonModel constructs a new qjsonmodel
+      * \param parent parent of the model
+      * \param list vector with all the QJsonObject for the model
+      */
      explicit CQJsonModel(QObject *parent = 0, QVector<QJsonObject> list = QVector<QJsonObject>());
      /*!
       * \brief saveSettings saves an Algorithmsetting as Jsonfile
@@ -45,6 +50,10 @@ public:
     void setIcon(const QJsonValue::Type& type, const QIcon& icon);
 
 public slots:
+    /*!
+     * \brief loadQJson loads a qjsonobject into the model
+     * \param data the QJsonObject
+     */
     void loadQJson(QJsonObject data);
 signals:
     void requestQJson(QUrl directory);

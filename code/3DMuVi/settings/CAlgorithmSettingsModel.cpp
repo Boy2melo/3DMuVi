@@ -2,15 +2,23 @@
 
 CAlgorithmSettingsModel::CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithmSettingController& controller)
 {
-    //this->workflow = workflow;
-
-
     QObject::connect(&controller, &CAlgorithmSettingController::loadQJson ,
                     this, &CQJsonModel::loadQJson);
     QObject::connect(this, &CQJsonModel::requestQJson,
                     &controller, &CAlgorithmSettingController::requestQJson);
     QObject::connect(this, &CQJsonModel::saveQJson,
                     &controller, &CAlgorithmSettingController::saveQJson);
+    this->workflow = &workflow;
+    this->settingcontroller = &controller;
+    for (quint32 i = 0; i < workflow.getStepCount(); i++) {
+    QJsonObject object = workflow.getStep(i)->GetParameterJson();
+        this->loadQJson(object);
+        QUrl url = QUrl();
+        url.setPassword("a" + object.keys().value(0));
+        emit saveQJson(object, url);
+    }
+
+
 }
 CAlgorithmSettingsModel::CAlgorithmSettingsModel(QObject *parent, QVector<QJsonObject> list)
     : CQJsonModel(parent, list)
@@ -19,21 +27,34 @@ CAlgorithmSettingsModel::CAlgorithmSettingsModel(QObject *parent, QVector<QJsonO
 }
 void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename)
 {
-    if (filename.isEmpty() == true) {
-        filename.setPassword("a");
-    }
     QJsonObject data;
     data = mRootItem->getChilds().value(row)->toJson();
-    emit saveQJson(data, filename);
+    if (filename.isEmpty() == true) {
+        filename.setPassword("a" + data.keys().value(0));
+    }
+    if (workflow->getStep(row)->ValidateParameters(&data)) {
+        emit saveQJson(data, filename);
+    }
 }
 void CAlgorithmSettingsModel::loadSettings(int row, QUrl filename)
 {
     if (filename.isEmpty() == true) {
-
+        QString data = mRootItem->getChilds().value(row)->key();
+        filename.setPassword("a" + data);
     }
     emit requestQJson(filename);
     mRootItem->getChilds().removeAt(row);
     int j = mRootItem->getChilds().size() - 1;
     mRootItem->getChilds().swap(row, j);
 
+}
+void CAlgorithmSettingsModel::algorithmChanged(int step)
+{
+    QJsonObject object = workflow->getStep(step)->GetParameterJson();
+    loadQJson(object);
+    mRootItem->getChilds().swap(step, mRootItem->getChilds().size() - 1);
+    mRootItem->getChilds().removeLast();
+    QUrl url = QUrl();
+    url.setPassword("a" + object.keys().value(0));
+    emit saveQJson(object, url);
 }

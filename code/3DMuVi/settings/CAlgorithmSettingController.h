@@ -67,7 +67,16 @@ public:
 signals:
     void loadQJson(QJsonObject data);
 public slots:
+    /*!
+     * \brief requestQJson loads a jsonfile from a directory, emits signal loadQJson with the load jsonobject
+     * \param directory directory from where to load
+     */
     void requestQJson(QUrl directory);
+    /*!
+     * \brief saveQJson saves a QJsonObject in a directory
+     * \param data the QJsonObject
+     * \param directory where the file should go
+     */
     void saveQJson(QJsonObject data, QUrl directory);
 };
 
