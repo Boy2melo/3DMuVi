@@ -20,7 +20,7 @@ CInputDataSet::CInputDataSet(QUrl path)
 
     foreach(const QString file, files)
     {
-        QUrl imagePath(path.path().append(file));
+        QUrl imagePath(inputDirectory.filePath(file));
         QImage imageCache = iio.load(imagePath);
         CImagePreviewItem qlwiCache(QIcon(QPixmap::fromImage(imageCache)), file, id);
         std::tuple<uint32_t, QImage, CImagePreviewItem> item(id,imageCache,qlwiCache);
