@@ -10,6 +10,7 @@
 #include <tuple>
 #include <iostream>
 #include <QBitmap>
+#include <workflow/workflow/datapackets/CDataFeature.h>
 
 /*!
    \class CInputDataSet
@@ -18,8 +19,7 @@
  *
  * Stellt Bilder aus einem Ordner für den Workflow als Eingabedaten bereit.
  */
-class CInputDataSet
-{
+class CInputDataSet : public IDataPacket {
 public:
     /*!
      * \brief Ist der Konstruktor der Klasse. Lädt alle Eingabebilder, versieht diese mit einer Id und generiert zu jedem Bild ein Thumbnail.
@@ -27,6 +27,9 @@ public:
      * \return void
      */
     CInputDataSet(QUrl path);
+
+    CInputDataSet() {}
+
     /*!
      * \brief Gibt die vom Konstruktor erzeugten Daten als Tripel zurück.
      * \return Es wird ein Pointer auf einen Vector zurückgegeben. Jeder Vektor enthält ein Triple. Die erste Komponente
@@ -35,6 +38,11 @@ public:
      * auf der GUI durch ein QListWidget angezeigt werden kann.
      */
     std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>>* getInputImages();
+
+    QString getDataType() const override;
+    AStreamProvider* getStreamProvider() override;
+    void serialize(AStreamProvider* stream) override {}
+    void deserialize(AStreamProvider* stream) override {}
 private:
     std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> inputData;
 };

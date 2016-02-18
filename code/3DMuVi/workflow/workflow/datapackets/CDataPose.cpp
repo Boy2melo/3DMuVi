@@ -73,7 +73,8 @@ void CDataPose::setFeatureMap(FeatureMap && map){
 }
 
 std::vector<SPose> const & getPose(){
-    // Todo
+    //TODO
+    return std::vector<SPose>();
 }
 
 void CDataPose::setPose(std::vector<SPose> && poses){

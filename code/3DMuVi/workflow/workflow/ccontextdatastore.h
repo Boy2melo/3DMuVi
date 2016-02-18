@@ -7,6 +7,8 @@
 #include "idataview.h"
 #include "idatapacket.h"
 
+class CInputDataSet;
+
 /*!
    \class CContextDataStore
  * \brief The CContextDataStore class
@@ -37,13 +39,21 @@ public:
     /*!
      * \brief Initialisiert den Context aus einem Data Store
      */
-    void InitializeFromStorage(/*TODO*/);
+    void InitializeFromStorage(CInputDataSet *inputData);
     /*!
      * \brief Gibt Daten vom Typ T zurück, sofern vorhanden.
      * \return Daten vom Typ T oder 0 falls nicht vorhanden
      */
     template<typename T>
     T* getData();
+
+    /*!
+    \brief Fügt daten vom Typ T hinzu
+    \param data Die Daten, die hinzugefügt werden sollen
+    \param overwrite Ob die Daten, falls sie existieren, ersetzt werden sollen. Ansonsten wird bei vorhandensein nichts gemacht
+    */
+    template<typename T>
+    void appendData(T* data, bool overwrite = false);
 
     /*!
      * \brief Wendet die Daten des Stores auf einen DataView an.
@@ -88,6 +98,7 @@ public:
 #define DT_POSE "Pose Data"
 #define DT_DEPTH "Depth Data"
 #define DT_FUSION "Fusion Data"
+#define DT_INPUTIMAGES "Input Images"
 };
 
 #endif // ACONTEXTDATASTORE_H

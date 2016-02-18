@@ -1,5 +1,6 @@
 #include "CInputDataSet.h"
 #include "CImageIo.h"
+#include <workflow/workflow/ccontextdatastore.h>
 
 std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> inputData;
 
@@ -33,3 +34,11 @@ std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>>* CInputDataSet::get
     return &inputData;
 }
 
+QString CInputDataSet::getDataType() const {
+    return DT_INPUTIMAGES;
+}
+
+AStreamProvider* CInputDataSet::getStreamProvider() {
+    // do not save input images
+    return nullptr;
+}

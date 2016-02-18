@@ -11,6 +11,8 @@
 
 class CImageView : public QWidget, public IGuiDataView
 {
+    Q_OBJECT
+
 protected: 
   void paintEvent(QPaintEvent* event);
   void wheelEvent(QWheelEvent* event);

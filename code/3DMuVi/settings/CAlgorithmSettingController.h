@@ -11,9 +11,10 @@
 * Controller for the parameters of the algortihms
 * Author Jens Manig
 */
-class CAlgorithmSettingController : QObject
+class CAlgorithmSettingController : public QObject
 {
 Q_OBJECT
+
 private:
     QUrl tempdirectory;
     QStringList algorithms;
@@ -38,7 +39,7 @@ public:
     /*!
     * \Constructor for the Controller
     * \param directory temporal workdirectory
-	*/
+    */
     CAlgorithmSettingController(QUrl directory);
     /*!
     * \Returns the setting for a certain algorithm

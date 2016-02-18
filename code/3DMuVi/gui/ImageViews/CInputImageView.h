@@ -7,7 +7,7 @@
 
 class CInputImageView : public CImageView, public IDataView
 {
-  Q_OBJECT
+    Q_OBJECT
 
 public:
   explicit CInputImageView();
