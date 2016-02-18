@@ -101,9 +101,6 @@
     <ClCompile Include="gui\AlgorithmSettings\CAlgorithmSettingsSaveLoadWidget.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
-    <ClCompile Include="gui\AlgorithmSettings\CAlgoritmSettingsView.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
     <ClCompile Include="gui\CDatasetSelector.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
@@ -242,6 +239,39 @@
     <ClCompile Include="workflow\workflow\datapackets\exampledata.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="workflow\workflow\datapackets\CDataDepth.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\datapackets\CDataFeature.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\datapackets\CDataFusion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\workflow\datapackets\CDataPose.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\AStreamProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\CMFStreamProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\CSFStreamProvider.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CAlgorithmSettingController.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CAlgorithmSettingController.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CImageView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CAlgorithmSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui\3dView\C3dView.h">
@@ -280,6 +310,12 @@
     <CustomBuild Include="workflow\workflow\aworkflow.h">
       <Filter>Header Files\workflow</Filter>
     </CustomBuild>
+    <CustomBuild Include="settings\CAlgorithmSettingController.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\ImageViews\CImageView.h">
+      <Filter>Header Files\gui</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DMuVi.rc" />
@@ -306,9 +342,6 @@
     <ClInclude Include="gui\AlgorithmSettings\CAlgorithmSettingsSaveLoadWidget.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="gui\AlgorithmSettings\CAlgoritmSettingsView.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
     <ClInclude Include="gui\CDatasetSelector.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
@@ -319,9 +352,6 @@
       <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\CImagePreviewWidget.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\ImageViews\CImageView.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\ImageViews\CInputImageView.h">
@@ -381,9 +411,6 @@
     <ClInclude Include="logger\qslogging\QsLogLevel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="settings\CAlgorithmSettingController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="settings\CAlgorithmSettingsModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -400,6 +427,30 @@
       <Filter>Header Files\workflow</Filter>
     </ClInclude>
     <ClInclude Include="workflow\workflow\datapackets\exampledata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\datapackets\CDataPose.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\datapackets\CDataDepth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\datapackets\CDataFeature.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\datapackets\CDataFusion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\workflow\datapackets\SPose.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\AStreamProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\CMFStreamProvider.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="io\CSFStreamProvider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

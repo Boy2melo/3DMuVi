@@ -68,7 +68,7 @@ void CMainWindow::onLoadImages()
     std::vector<CImagePreviewItem*> imageItems;
     CContextDataStore* dataStore = mWorkflow->addDataStore();
 
-    dataStore->InitializeFromStorage(/*TODO: dataSet*/);
+    dataStore->InitializeFromStorage(dataSet);
     mDataStore.reset(dataStore);
 
     for(std::tuple<uint32_t, QImage, CImagePreviewItem> i : *images)
