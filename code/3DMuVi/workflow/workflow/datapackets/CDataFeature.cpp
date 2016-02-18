@@ -37,6 +37,7 @@ void CDataFeature::serialize(AStreamProvider* stream){
     float value1;
     float value2;
     uint32_t value3;
+    *dataStream << (int)featureMatchData.size();
     for(std::tuple<uint64_t, float, float, uint32_t> data : featureMatchData){
         std::tie(value0, value1, value2, value3) = data;
         *dataStream << (quint64)value0 << value1 << value2 << (quint32)value3;

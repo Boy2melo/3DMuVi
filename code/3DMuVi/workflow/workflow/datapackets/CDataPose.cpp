@@ -33,17 +33,23 @@ void CDataPose::serialize(AStreamProvider *stream){
     float value2;
     float value3;
     float value4;
+    *dataStream << (int)featureMap.size();
     for(std::tuple<uint32_t, float, float, float, float> data : featureMap){
         std::tie(value0, value1, value2, value3, value4) = data;
         *dataStream << (quint32)value0 << value1 << value2 << value3 << value4;
     }
 
     //serialize pose
+    *dataStream << (int)pose.size();
     for(SPose p : pose){
         *dataStream << (quint64)p.cameraId << p.translation << p.orientation << p.principalPoint;
+
+        *dataStream << (int)p.focalLength.size();
         for(float f : p.focalLength){
             *dataStream <<  f;
         }
+
+        *dataStream << (int)p.distortion.size();
         for(float d : p.distortion){
             *dataStream << d;
         }
