@@ -56,11 +56,10 @@ T* CContextDataStore::getData() {
     // T muss von IDataPacket erben
     (void)static_cast<IDataPacket*>((T*)0);
 
-    IDataPacket *reference;
-    *reference = T();
+    T reference;
 
     for(IDataPacket *packet : mDataPackets) {
-        if(packet->getDataType() == reference->getDataType()) {
+        if(packet->getDataType() == reference.getDataType()) {
             return static_cast<T*>(packet);
         }
     }

@@ -21,7 +21,8 @@ public:
      * \param fileName of the file.
      * \return a QDataStream pointer to a file.
      */
-    QDataStream* getNextStream(const QString &fileName);
+    QDataStream* getNextStream();
+
 private:
     QDataStream* stream;
     QFile* file;

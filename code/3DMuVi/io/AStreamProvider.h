@@ -22,8 +22,10 @@ public:
     \param destinationFolder is the folder where the results should be stored.
     */
     void setDestination(QDir destinationFolder);
+    virtual void setFileName(const QString& fileName);
 protected:
     QDir folder;
+    QString fileName;
 };
 
 #endif // ASTREAMPROVIDER_H

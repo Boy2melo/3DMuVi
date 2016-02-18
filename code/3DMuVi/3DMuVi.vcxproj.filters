@@ -299,6 +299,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CSettingsDialog.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CAlgorithmSettingsSaveLoadWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CAlgorithmSettingsView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gui\3dView\C3dView.h">
@@ -355,6 +361,12 @@
     <CustomBuild Include="gui\CSettingsDialog.h">
       <Filter>Header Files\gui</Filter>
     </CustomBuild>
+    <CustomBuild Include="gui\AlgorithmSettings\CAlgorithmSettingsSaveLoadWidget.h">
+      <Filter>Header Files\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\AlgorithmSettings\CAlgorithmSettingsView.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DMuVi.rc" />
@@ -378,9 +390,6 @@
     <ClInclude Include="gui\CAlgorithmSelector.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="gui\AlgorithmSettings\CAlgorithmSettingsSaveLoadWidget.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
     <ClInclude Include="gui\CDatasetSelector.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
@@ -398,9 +407,6 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_CSettingsDialog.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\AlgorithmSettings\CAlgorithmSettingsView.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="io\CImageIo.h">
       <Filter>Header Files</Filter>
