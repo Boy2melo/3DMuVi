@@ -19,15 +19,7 @@ QVector<IPlugin*> CPluginManager::getPlugins() const {
 
 qint32 CPluginManager::Initialize() {
     mPlugins.clear();
-
-    // static plugins
-    for(QObject *plugin : QPluginLoader::staticInstances()) {
-        auto plugin_ptr = qobject_cast<IPlugin *>(plugin);
-        if(plugin_ptr != nullptr) {
-            mPlugins.push_back(plugin_ptr);
-        }
-    }
-
+    
     mPluginsDir = QDir(qApp->applicationDirPath());
 #if defined(Q_OS_WIN)
     if(mPluginsDir.dirName() == "debug" || mPluginsDir.dirName() == "release") {
@@ -48,6 +40,7 @@ qint32 CPluginManager::Initialize() {
         auto plugin_ptr = qobject_cast<IPlugin *>(plugin);
 
         if(plugin_ptr != nullptr) {
+            plugin_ptr->Initialize(&loader);
             mPlugins.push_back(plugin_ptr);
         }
 

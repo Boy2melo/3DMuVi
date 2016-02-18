@@ -88,6 +88,7 @@ public:
 #define DT_POSE "Pose Data"
 #define DT_DEPTH "Depth Data"
 #define DT_FUSION "Fusion Data"
+#define DT_INPUTIMAGES "Input Images"
 };
 
 #endif // ACONTEXTDATASTORE_H
