@@ -23,6 +23,8 @@ HEADERS += gui/CTestCLogWidget.h \
            io/CTestCTextIo.h \
            io/CTestCInputDataSet.h \
            io/CTestCResultContext.h \
+	   logger/CTestLoggerHistory.h \
+    	   logger/CTestLoggerControll.h \
            ../gui/3dView/C3dView.h \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.h \
            ../gui/ImageViews/CDepthMapView.h \
@@ -61,6 +63,7 @@ HEADERS += gui/CTestCLogWidget.h \
            ../workflow/plugin/cpluginmanager.h \
            ../workflow/workflow/idatapacket.h \
            ../workflow/workflow/idataview.h
+		
 
 SOURCES += gui/CTestCLogWidget.cpp \
            gui/CTestCMainWindow.cpp \
@@ -69,6 +72,8 @@ SOURCES += gui/CTestCLogWidget.cpp \
            io/CTestCTextIo.cpp \
            io/CTestCInputDataSet.cpp \
            io/CTestCResultContext.cpp \
+	   logger/CTestLoggerHistory.cpp \
+           logger/CTestLoggerControll.cpp \
            ../gui/3dView/C3dView.cpp \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
            ../gui/ImageViews/CDepthMapView.cpp \
