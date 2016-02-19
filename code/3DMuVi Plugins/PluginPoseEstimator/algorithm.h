@@ -67,6 +67,13 @@ protected:
      * \brief Wird im Konstruktor aufgerufen. Fülle mInputTypes und mOutputTypes
      */
     virtual void OnInitialize();
+
+private:
+
+    /*!
+     * \brief Methode in der der FileStream zur Datei in der die Posen liegen geöffnet wird.
+     */
+    void openFileStream();
 };
 
 #endif // ALGORITHM_H

@@ -25,11 +25,11 @@ bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
       mPoseFileStream.close;
 
     // check if file exists
-    QFile gtSrcFile = QFile(parameterList->value("GtSrcFile").toString());
+    QFile gtSrcFile = QFile(paramst->value("GtSrcFile").toString());
     if (!gtSrcFile.exists()) return false;
 
     // check if delimiter is at least one character
-    if (parameterList->value("Delimiter").toString().length() == 0) return false;
+    if (params->value("Delimiter").toString().length() == 0) return false;
 
     return true;
 }
