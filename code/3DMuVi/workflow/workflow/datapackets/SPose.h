@@ -12,6 +12,7 @@ public:
     uint64_t cameraId;
     QVector3D translation;
     QQuaternion orientation;
+    QVector3D eulerAngles;
     QVector2D principalPoint;
     std::vector<float> focalLength;
     std::vector<float> distortion;

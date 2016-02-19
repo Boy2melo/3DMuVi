@@ -8,8 +8,18 @@ QT       += core gui
 
 TARGET = PluginExample
 TEMPLATE = lib
-CONFIG += plugin c++11
-QMAKE_CXXFLAGS += --std=c++11
+CONFIG += plugin
+
+DESTDIR = $$[QT_INSTALL_PLUGINS]/generic
+
+QMAKE_CXXFLAGS += -std=c++11
+QMAKE_CXXFLAGS_RELEASE += -O3
+
+# add suffix d to debug output
+CONFIG(debug, debug|release) {
+  win32: TARGET =  $$join(TARGET,,,d)
+  unix: TARGET = $$join(TARGET,,,_debug)
+}
 
 SOURCES += \
     plugin.cpp \
