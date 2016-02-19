@@ -69,8 +69,7 @@ void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
   auto result = findSurfMatches(imgs, upright, octaves, intervals, init_sample, thres);
 
   // Step 4: append result data to dataStore
-  //auto resultPacket = new CDataFeature;
-  //resultPacket->setFeatureMatch(move(result));
-  //store->putPacket(resultPacket);
-
+  auto resultPacket = new CDataFeature;
+  resultPacket->setFeatureMatch(move(result));
+  store->appendData(resultPacket, true);
 }
