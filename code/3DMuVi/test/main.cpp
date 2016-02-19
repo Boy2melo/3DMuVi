@@ -7,6 +7,9 @@
 #include "io/CTestCTextIo.h"
 #include "io/CTestCInputDataSet.h"
 #include "io/CTestCResultContext.h"
+#include "logger/CTestLoggerControll.h"
+#include "logger/CTestLoggerHistory.h"
+
 
 int main(int argc, char* argv[])
 {
@@ -17,6 +20,8 @@ int main(int argc, char* argv[])
   CTestCTextIo textIo;
   CTestCInputDataSet inputDataSet;
   CTestCResultContext resultContext;
+  CTestLoggerControll logControll;
+  CTestLoggerHistory logHistory;	
 
   QApplication app(argc, argv);
 
@@ -28,6 +33,8 @@ int main(int argc, char* argv[])
   failCounter += QTest::qExec(&textIo, argc, argv);
   failCounter += QTest::qExec(&inputDataSet, argc, argv);
   failCounter += QTest::qExec(&resultContext, argc, argv);
+  failCounter += QTest::qExec(&logControll, argc, argv);
+  failCounter += QTest::qExec(&logHistory, argc, argv);
   std::cout << "Total number of fails: " << failCounter << "\n";
 
   return 0;

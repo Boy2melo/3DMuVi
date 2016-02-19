@@ -1,4 +1,5 @@
 #include "CAlgorithmSettingsView.h"
+#include <settings/CAlgorithmSettingsModel.h>
 
 //============================================================
 /*!
@@ -18,6 +19,9 @@ CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(pare
 void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow)
 {
 
+    CAlgorithmSettingsModel model;
+    setModel(model);
+
 }
 
 //============================================================
@@ -27,4 +31,7 @@ void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow)
 //============================================================
 void CAlgorithmSettingsView::onAlgorithmChanged(int step)
 {
+    QUrl url;
+
+    this->model().loadSettings(step, url);
 }

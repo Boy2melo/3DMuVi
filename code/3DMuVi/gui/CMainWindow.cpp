@@ -68,12 +68,12 @@ void CMainWindow::onLoadImages()
     std::vector<CImagePreviewItem*> imageItems;
     CContextDataStore* dataStore = mWorkflow->addDataStore();
 
-    dataStore->InitializeFromStorage(/*TODO: dataSet*/);
+    dataStore->InitializeFromStorage(dataSet);
     mDataStore.reset(dataStore);
 
     for(std::tuple<uint32_t, QImage, CImagePreviewItem> i : *images)
     {
-      imageItems.push_back(&(std::get<2>(i)));
+      imageItems.push_back(new CImagePreviewItem(std::get<2>(i)));
     }
 
     ui->imagePreviewWidget->setImages(imageItems);

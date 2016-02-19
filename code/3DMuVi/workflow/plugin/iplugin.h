@@ -5,6 +5,7 @@
 #include <QDate>
 #include <QJsonObject>
 #include <QtPlugin>
+#include <QPluginLoader>
 
 #define IPlugin_iid "org.qt-project.Qt.Fraunhofer.3DMuVi.IPlugin"
 /*!
@@ -23,6 +24,11 @@ public:
      * Gibt einen Zugriff auf den Konkreten [Algorithmus](@ref IAlgorithm) des Plugins
      */
     virtual IAlgorithm* getAlgorithm() const = 0;
+
+    /*!
+     * \brief Initialize the Plugin with its metadata
+     */
+    virtual void Initialize(QPluginLoader *loader) = 0;
 
     virtual ~IPlugin() {}
     /*!
@@ -59,10 +65,15 @@ public:
     virtual QJsonObject GetParameterJson() const = 0;
 
     /*!
+     * \brief Gibt die Beschreibung für die einzelnen Parameter
+     */
+    virtual QJsonObject GetParameterDescriptionJson() const = 0;
+
+    /*!
     \brief Prüfe alle Parameter auf gültige Werte
     \return True falls alle Werte sich in gültigen Grenzen befinden, False andernfalls
     */
-    virtual bool ValidateParameters(CAlgorithmSettingController*) const = 0;
+    virtual bool ValidateParameters(QJsonObject*) const = 0;
 };
 
 Q_DECLARE_INTERFACE(IPlugin, IPlugin_iid)

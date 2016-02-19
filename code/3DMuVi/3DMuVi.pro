@@ -63,6 +63,11 @@ HEADERS += ./workflow/workflow/ccontextdatastore.h \
     ./workflow/plugin/cpluginmanager.h \
     ./workflow/plugin/ialgorithm.h \
     ./workflow/workflow/fourphase/cfourphaseworkflow.h\
+    ./workflow/workflow/datapackets/CDataFeature.h \
+    ./workflow/workflow/datapackets/CDataPose.h \
+    ./workflow/workflow/datapackets/CDataDepth.h \
+    ./workflow/workflow/datapackets/CDataFusion.h \
+    ./workflow/workflow/datapackets/SPose.h \
     ./gui/3dView/C3dView.h \
     ./gui/3dView/CPclView.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
@@ -109,7 +114,11 @@ SOURCES += ./main.cpp \
     ./workflow/workflow/idatapacket.cpp \
     ./workflow/workflow/idataview.cpp \
     ./workflow/workflow/aworkflow.cpp \
-	./workflow/workflow/fourphase/cfourphaseworkflow.cpp\
+    ./workflow/workflow/fourphase/cfourphaseworkflow.cpp \
+    ./workflow/workflow/datapackets/CDataFeature.cpp \
+    ./workflow/workflow/datapackets/CDataPose.cpp \
+    ./workflow/workflow/datapackets/CDataDepth.cpp \
+    ./workflow/workflow/datapackets/CDataFusion.cpp \
     ./gui/3dView/C3dView.cpp \
     ./gui/3dView/CPclView.cpp \
     ./workflow/plugin/cpluginmanager.cpp \
@@ -149,7 +158,11 @@ SOURCES += ./main.cpp \
     ./settings/CQJsonModel.cpp\
     ./settings/CQJsonItem.cpp
 
-
 FORMS += ./gui/forms/CMainWindow.ui \
     ./gui/forms/CSettingsDialog.ui \
+    ./gui/forms/CAlgorithmSettingsSaveLoad.ui \
+
+DISTFILES += \
+    gui/forms/CAlgorithmSettingsSaveLoad.ui.qml \
+    gui/forms/CAlgorithmSettingsSaveLoad.qml
 

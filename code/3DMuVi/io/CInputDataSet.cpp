@@ -1,11 +1,13 @@
 #include "CInputDataSet.h"
 #include "CImageIo.h"
+#include <workflow/workflow/ccontextdatastore.h>
 
 std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> inputData;
 
 CInputDataSet::CInputDataSet(QUrl path)
 {
-    QDir inputDirectory(path.path());
+    QString strPath = path.toLocalFile();
+    QDir inputDirectory(strPath);
     QStringList filters ("*.png");
 
     inputDirectory.setNameFilters(filters);
@@ -19,7 +21,7 @@ CInputDataSet::CInputDataSet(QUrl path)
 
     foreach(const QString file, files)
     {
-        QUrl imagePath(path.path().append(file));
+        QUrl imagePath(inputDirectory.filePath(file));
         QImage imageCache = iio.load(imagePath);
         CImagePreviewItem qlwiCache(QIcon(QPixmap::fromImage(imageCache)), file, id);
         std::tuple<uint32_t, QImage, CImagePreviewItem> item(id,imageCache,qlwiCache);
@@ -33,3 +35,11 @@ std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>>* CInputDataSet::get
     return &inputData;
 }
 
+QString CInputDataSet::getDataType() const {
+    return DT_INPUTIMAGES;
+}
+
+AStreamProvider* CInputDataSet::getStreamProvider() {
+    // do not save input images
+    return nullptr;
+}

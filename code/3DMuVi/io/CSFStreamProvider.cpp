@@ -1,19 +1,21 @@
 #include "CSFStreamProvider.h"
 
-CSFStreamProvider::CSFStreamProvider(const QString &fileName){
-    name = fileName;
+CSFStreamProvider::CSFStreamProvider(){
 }
 
 CSFStreamProvider::~CSFStreamProvider(){
-    file->close();
+    if(file != nullptr){
+       file->close();
+    }
     delete(file);
     delete(stream);
 }
 
 QDataStream* CSFStreamProvider::getNextStream(){
     if(stream == nullptr){
-        file = new QFile(folder.absoluteFilePath(name));
-        file->open(QIODevice::WriteOnly);
+        file = new QFile(folder.absoluteFilePath(fileName));
+        if(!file->open(QIODevice::WriteOnly))
+            return nullptr;
         stream = new QDataStream(file);
     }
     return stream;

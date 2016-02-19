@@ -34,8 +34,7 @@ CQJsonModel::CQJsonModel(QObject *parent, QVector<QJsonObject> list) :
     for (int i = 0; i < list.size(); i++) {
         loadQJson(list.value(i));
     }
-    //QObject::connect(CAlgorithmSettingController, &CAlgorithmSettingController::loadQJson(QJsonObject) ,
-      //               CQJsonModel, &CQJsonModel::loadQJson(QJsonObject));
+
 }
 
 void CQJsonModel::saveSettings(int row, QUrl filename)

@@ -2,7 +2,9 @@
 #define CIMAGEPREVIEWITEM_H
 
 #include <QListWidgetItem>
-
+/*!
+ * \brief The the class for pictures in picture preview.
+ */
 class CImagePreviewItem: public QListWidgetItem
 {
 public:
