@@ -1,0 +1,22 @@
+{
+    "Autor" : "Boitumelo Ruf",
+    "Date"  : "2016-02-18",
+    "Version" : 1,
+    "Properties" : {
+        "GtSrcDir" : {
+            "type" : "string",
+            "default" : "none",
+            "description" : "Path to directory containing the groundtruth source files."
+        },
+        "XmlDataId" : {
+            "type" : "string",
+            "default" : "depth",
+            "description" : "Id of xml node holding the data"
+        },
+        "NumOfFrames" : {
+            "type" : "int",
+            "default" : "5",
+            "description" : "Number of frames that are to be used for reconstruction. Must be larger than 1."
+        }
+    }
+}
