@@ -6,7 +6,8 @@ std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> inputData;
 
 CInputDataSet::CInputDataSet(QUrl path)
 {
-    QDir inputDirectory(path.path());
+    QString strPath = path.toLocalFile();
+    QDir inputDirectory(strPath);
     QStringList filters ("*.png");
 
     inputDirectory.setNameFilters(filters);

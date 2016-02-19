@@ -10,7 +10,7 @@
 CImagePreviewWidget::CImagePreviewWidget(QWidget* parent) : QListWidget(parent)
 {
   setViewMode(QListWidget::IconMode);
-  //setIconSize(QSize(200,200));
+  setIconSize(QSize(200,200));
   setResizeMode(QListWidget::Adjust);
   connect(this, &CImagePreviewWidget::itemSelectionChanged, this, &CImagePreviewWidget::onItemSelectionChanged);
 }

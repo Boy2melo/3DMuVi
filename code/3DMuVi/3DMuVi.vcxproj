@@ -364,8 +364,8 @@
     <ClInclude Include="workflow\workflow\fourphase\cfourphaseworkflow.h" />
     <ClInclude Include="GeneratedFiles\ui_CMainWindow.h" />
     <ClInclude Include="GeneratedFiles\ui_CSettingsDialog.h" />
-    <ClInclude Include="gui\AlgorithmSettings\CAlgorithmSettingsSaveLoadWidget.h" />
-    <ClInclude Include="gui\AlgorithmSettings\CAlgorithmSettingsView.h" />
+    <CustomBuild Include="gui\AlgorithmSettings\CAlgorithmSettingsSaveLoadWidget.h" />
+    <CustomBuild Include="gui\AlgorithmSettings\CAlgorithmSettingsView.h" />
     <CustomBuild Include="gui\ImageViews\CDepthMapView.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Moc%27ing CDepthMapView.h...</Message>

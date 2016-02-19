@@ -55,7 +55,7 @@ public:
     /*!
     * \brief Tiefenschätzer Plugin
     */
-#define PT_DepthMapper "Depth Mapper"
+#define PT_DepthEstimator "Depth Estimator"
     /*!
     * \brief Posenschätzung Plugin
     */
@@ -63,7 +63,7 @@ public:
     /*!
     * \brief PCL Rekonstruktionsplugin
     */
-#define PT_PclReconstructor "PCL Reconstructor"
+#define PT_Fusion "Fusion"
 };
 
 #endif // CPLUGINMANAGER_H

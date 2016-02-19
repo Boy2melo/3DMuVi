@@ -3,6 +3,9 @@
 
 #include <QComboBox>
 
+/*!
+ * \brief Derived class from QComboBox with added member variable mStep.
+ */
 class CStepComboBox : public QComboBox
 {
   Q_OBJECT

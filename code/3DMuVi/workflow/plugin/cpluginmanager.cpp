@@ -8,6 +8,7 @@ CPluginManager::CPluginManager() {}
 CPluginManager* CPluginManager::Instance() {
     if (mInstance == nullptr) {
         mInstance = new CPluginManager();
+        mInstance->Initialize();
     }
 
     return mInstance;

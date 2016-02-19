@@ -22,6 +22,7 @@ public:
     \param destinationFolder is the folder where the results should be stored.
     */
     void setDestination(QDir destinationFolder);
+    QDir getDestination() const;
     virtual void setFileName(const QString& fileName);
 protected:
     QDir folder;
