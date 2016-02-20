@@ -80,3 +80,23 @@ PointCloud::Ptr CDataFusion::getPointCloud()
 {
   return mPointCloudData;
 }
+
+void CDataFusion::setPolygonMesh(pcl::PolygonMesh::Ptr mesh)
+{
+  mPolygonMeshData = mesh;
+}
+
+pcl::PolygonMesh::Ptr CDataFusion::getPolygonMesh()
+{
+  return mPolygonMeshData;
+}
+
+void CDataFusion::setTextureMesh(pcl::TextureMesh::Ptr mesh)
+{
+  mTextureMeshData = mesh;
+}
+
+pcl::TextureMesh::Ptr CDataFusion::getTextureMesh()
+{
+  return mTextureMeshData;
+}
