@@ -29,8 +29,8 @@ class C3dView : public CPclView, public IGuiDataView, public IDataView
   enum E3dModelType
   {
     POINT_CLOUD,
-    MESH,
-    TEXTURED
+    POLYGON_MESH,
+    TEXTURE_MESH
   };
 
 public:
@@ -85,8 +85,16 @@ private slots:
   void onCurrentIndexChangedModelType(int index);
 
 private:
-  bool mCloudAdded = false;
+  bool mPointCloudAdded = false;
+  bool mPolygonMeshAdded = false;
+  bool mTextureMeshAdded = false;
   std::vector<uint64_t> mPoseIds;
+  PointCloud::Ptr mPointCloud;
+  pcl::PolygonMesh::Ptr mPolygonMesh;
+  pcl::TextureMesh::Ptr mTextureMesh;
+  E3dModelType mSelectedModelType = POINT_CLOUD;
+
+  void updateView();
 };
 
 #endif // C3DVIEW_H

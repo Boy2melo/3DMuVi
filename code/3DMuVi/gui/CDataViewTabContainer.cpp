@@ -1,7 +1,14 @@
+#include <QVBoxLayout>
+
 #include "CDataViewTabContainer.h"
 
 CDataViewTabContainer::CDataViewTabContainer(QWidget* parent) : QTabWidget(parent)
 {
+  QWidget* container3dView = new QWidget(this);
+  QWidget* containerModelTypeSelector = new QWidget(container3dView);
+  QBoxLayout* layoutModelTypeSelector = new QHBoxLayout;
+  QComboBox* modelTypeSelector = new QComboBox(containerModelTypeSelector);
+
   mpInputImageView = new CInputImageView;
   addTab(mpInputImageView, "Input images");
 
@@ -11,8 +18,15 @@ CDataViewTabContainer::CDataViewTabContainer(QWidget* parent) : QTabWidget(paren
   mpDepthMapView = new CDepthMapView;
   addTab(mpDepthMapView, "Depth maps");
 
+  containerModelTypeSelector->setLayout(layoutModelTypeSelector);
+  layoutModelTypeSelector->addWidget(modelTypeSelector);
+  layoutModelTypeSelector->addStretch();
+  container3dView->setLayout(new QVBoxLayout);
+  container3dView->layout()->addWidget(containerModelTypeSelector);
   mp3dView = new C3dView;
-  addTab(mp3dView, "3D view");
+  mp3dView->setModelTypeSelector(modelTypeSelector);
+  container3dView->layout()->addWidget(mp3dView);
+  addTab(container3dView, "3D view");
 }
 
 void CDataViewTabContainer::setImagePreviewWidget(CImagePreviewWidget* imagePreview)
