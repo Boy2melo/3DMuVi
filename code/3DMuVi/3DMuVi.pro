@@ -13,6 +13,8 @@ INCLUDEPATH += ./GeneratedFiles \
     ./GeneratedFiles/Debug
 
 PCL{
+  DEFINES += PCL
+
   INCLUDEPATH += ../pcl/common/include/ ../pcl-build/include/ ../pcl/visualization/include/
   INCLUDEPATH += ../pcl/geometry/include/
   INCLUDEPATH += /usr/include/eigen3/
