@@ -1,6 +1,7 @@
 #include "ccontextdatastore.h"
 #include "io/CInputDataSet.h"
 #include <QUuid>
+#include <io/CResultContext.h>
 
 CContextDataStore::~CContextDataStore() {
     for(IDataPacket *packet : mDataPackets) {
@@ -15,7 +16,7 @@ CContextDataStore::CContextDataStore() {
 }
 
 void CContextDataStore::InitializeFromStorage(CInputDataSet* inputData) {
-    appendData(inputData, true);
+    appendData(inputData);
 }
 
 QString CContextDataStore::getId() const {
@@ -26,7 +27,10 @@ qint32 CContextDataStore::getCurrentCalculationStep() const {
     return mCalculationStep;
 }
 
-void CContextDataStore::Serialize() {
+void CContextDataStore::Serialize(CResultContext *context) {
+    for(IDataPacket *packet : mDataPackets) {
+        context->addDataPacket(packet);
+    }
 }
 
 bool CContextDataStore::IsAborted() const {
@@ -68,22 +72,37 @@ T* CContextDataStore::getData() {
 }
 
 template <typename T>
-void CContextDataStore::appendData(T* data, bool overwrite) {
+T* CContextDataStore::createData(bool overwrite) {
     // T muss von IDataPacket erben
     (void)static_cast<IDataPacket*>((T*)0);
 
     T* heap_obj = new T();
-    *heap_obj = *data;
 
-    auto reference = getData<T>();
-
-    if(reference != nullptr && overwrite) {
-        mDataPackets.removeAll(reference);
-        delete reference;
-
-        mDataPackets.push_back(heap_obj);
-    } else if(reference == nullptr) {
-        mDataPackets.push_back(heap_obj);
+    if(appendData(heap_obj, overwrite)) {
+        return heap_obj;
+    } else {
+        delete heap_obj;
+        return nullptr;
     }
 }
 
+template <typename T>
+bool CContextDataStore::appendData(T* data, bool overwrite) {
+    // T muss von IDataPacket erben
+    (void)static_cast<IDataPacket*>((T*)0);
+    
+    auto reference = getData<T>();
+
+    if (reference != nullptr && overwrite) {
+        mDataPackets.removeAll(reference);
+        delete reference;
+
+        mDataPackets.push_back(data);
+        return true;
+    } else if (reference == nullptr) {
+        mDataPackets.push_back(data);
+        return false;
+    }
+
+    return false;
+}

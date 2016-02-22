@@ -7,7 +7,7 @@
 #include "algorithm.h"
 #include "plugin_config.h"
 
-class CLASS_GEN(Plugin): public QObject, public IPlugin
+class _CLASS_GEN(Plugin) : public QObject, public IPlugin
 {
     Q_OBJECT
     Q_PLUGIN_METADATA(IID IPlugin_iid FILE "Plugin.json")
@@ -20,11 +20,11 @@ private:
     QJsonObject mParameters;
 
     // TODO: set algorithm type
-    CLASS_GEN(Algorithm)* mAlgorithm;
+    _CLASS_GEN(Algorithm)* mAlgorithm;
 public:
-    CLASS_GEN(Plugin)();
-    ~CLASS_GEN(Plugin)();
+    _CLASS_GEN(Plugin)();
 
+    virtual ~_CLASS_GEN(Plugin)();
     /*!
      * \brief getAlgorithm
      * \return Der [Algorithmus](@ref IAlgorithm) des Plugins
@@ -51,6 +51,12 @@ public:
      * Datum der letzten Änderung
      */
     virtual QDate Date() const override;
+
+    /*!
+    \brief Der Name des Plugins
+    */
+    virtual QString Name() const override;
+
     /*!
      * \brief Version
      * \return Versionsnummer des Plugins

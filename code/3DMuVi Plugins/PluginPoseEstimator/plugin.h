@@ -10,7 +10,7 @@
 class _CLASS_GEN(Plugin) : public QObject, public IPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID IPlugin_iid FILE "PluginPoseEstimator.json")
+    Q_PLUGIN_METADATA(IID IPlugin_iid FILE "Plugin.json")
     Q_INTERFACES(IPlugin)
 
 private:
@@ -51,6 +51,12 @@ public:
      * Datum der letzten Änderung
      */
     virtual QDate Date() const override;
+
+    /*!
+    \brief Der Name des Plugins
+    */
+    virtual QString Name() const override;
+
     /*!
      * \brief Version
      * \return Versionsnummer des Plugins

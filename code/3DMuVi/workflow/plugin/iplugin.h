@@ -38,6 +38,11 @@ public:
      * Der Autor des Plugins
      */
     virtual QString Autor() const = 0;
+
+    /*!
+    \brief Der Name des Plugins
+    */
+    virtual QString Name() const = 0;
     /*!
      * \brief Date
      * \return Datum der letzten Änderung
