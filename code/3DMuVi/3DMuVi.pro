@@ -15,31 +15,13 @@ INCLUDEPATH += ./GeneratedFiles \
 PCL{
   DEFINES += PCL
 
-  INCLUDEPATH += ../pcl/common/include/ ../pcl-build/include/ ../pcl/visualization/include/
-  INCLUDEPATH += ../pcl/geometry/include/
-  INCLUDEPATH += /usr/include/eigen3/
-  INCLUDEPATH += ../VTK-7.0.0/Common/Core/ ../VTK-build/Common/Core/
-  INCLUDEPATH += ../VTK-7.0.0/Common/Math/ ../VTK-build/Common/Math/
-  INCLUDEPATH += ../VTK-7.0.0/Rendering/LOD/ ../VTK-build/Rendering/LOD/
-  INCLUDEPATH += ../VTK-7.0.0/Filters/Modeling/ ../VTK-build/Filters/Modeling/
-  INCLUDEPATH += ../VTK-7.0.0/Filters/General/ ../VTK-build/Filters/General/
-  INCLUDEPATH += ../VTK-7.0.0/Filters/Core/ ../VTK-build/Filters/Core/
-  INCLUDEPATH += ../VTK-7.0.0/Filters/Sources/ ../VTK-build/Filters/Sources/
-  INCLUDEPATH += ../VTK-7.0.0/Rendering/Core/ ../VTK-build/Rendering/Core/
-  INCLUDEPATH += ../VTK-7.0.0/Interaction/Style/ ../VTK-build/Interaction/Style/
-  INCLUDEPATH += ../VTK-7.0.0/Common/DataModel/ ../VTK-build/Common/DataModel/
-  INCLUDEPATH += ../VTK-7.0.0/Rendering/Annotation/ ../VTK-build/Rendering/Annotation/
-  INCLUDEPATH += ../VTK-7.0.0/Rendering/FreeType/ ../VTK-build/Rendering/FreeType/
-  INCLUDEPATH += ../VTK-7.0.0/Common/ExecutionModel/ ../VTK-build/Common/ExecutionModel/
-  INCLUDEPATH += ../VTK-7.0.0/Filters/Geometry/ ../VTK-build/Filters/Geometry/
-  INCLUDEPATH += ../VTK-7.0.0/GUISupport/Qt/ ../VTK-build/GUISupport/Qt/
-  INCLUDEPATH += ../VTK-7.0.0/Rendering/OpenGL/ ../VTK-build/Rendering/OpenGL/
+  CONFIG += link_pkgconfig
+  PKGCONFIG += pcl_common-1.8 pcl_geometry-1.8 pcl_visualization-1.8
 
-  LIBS += -L"$$PWD/../VTK-build/lib/" -L"$$PWD/../pcl-build/lib/"
-
+  INCLUDEPATH += /usr/local/include/vtk-7.0/
 
   LIBS += -lboost_system -lvtkGUISupportQt-7.0 -lvtkCommonCore-7.0 -lvtkRenderingCore-7.0
-  LIBS += -lvtkCommonDataModel-7.0 -lvtkCommonMath-7.0 -lpcl_common -lpcl_visualization
+  LIBS += -lvtkCommonDataModel-7.0 -lvtkCommonMath-7.0
 }
 
 win32{
