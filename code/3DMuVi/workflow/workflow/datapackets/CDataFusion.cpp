@@ -71,7 +71,7 @@ void CDataFusion::deserialize(AStreamProvider* stream)
   }
 }
 
-void CDataFusion::setPointClound(PointCloud::Ptr cloud)
+void CDataFusion::setPointCloud(PointCloud::Ptr cloud)
 {
   mPointCloudData = cloud;
 }

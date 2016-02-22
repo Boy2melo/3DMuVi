@@ -58,7 +58,7 @@ public:
    * \brief Sets the point cloud.
    * \param cloud The point cloud which should be kept by this data packet.
    */
-  void setPointClound(PointCloud::Ptr cloud);
+  void setPointCloud(PointCloud::Ptr cloud);
 
   /*!
    * \brief Returns the point cloud.
