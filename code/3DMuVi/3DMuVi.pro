@@ -12,6 +12,18 @@ INCLUDEPATH += ./GeneratedFiles \
     . \
     ./GeneratedFiles/Debug
 
+PCL{
+  DEFINES += PCL
+
+  CONFIG += link_pkgconfig
+  PKGCONFIG += pcl_common-1.8 pcl_geometry-1.8 pcl_visualization-1.8
+
+  INCLUDEPATH += /usr/local/include/vtk-7.0/
+
+  LIBS += -lboost_system -lvtkGUISupportQt-7.0 -lvtkCommonCore-7.0 -lvtkRenderingCore-7.0
+  LIBS += -lvtkCommonDataModel-7.0 -lvtkCommonMath-7.0
+}
+
 win32{
   LIBS += -lopengl32 \
           -lglu32
@@ -40,9 +52,7 @@ HEADERS += ./workflow/workflow/ccontextdatastore.h \
     ./workflow/workflow/datapackets/CDataFeature.h \
     ./workflow/workflow/datapackets/CDataPose.h \
     ./workflow/workflow/datapackets/CDataDepth.h \
-    ./workflow/workflow/datapackets/CDataFusion.h \
     ./workflow/workflow/datapackets/SPose.h \
-    ./gui/3dView/C3dView.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
     ./gui/AlgorithmSettings/CAlgorithmSettingsView.h \
     ./gui/ImageViews/CDepthMapView.h \
@@ -91,8 +101,6 @@ SOURCES += ./main.cpp \
     ./workflow/workflow/datapackets/CDataFeature.cpp \
     ./workflow/workflow/datapackets/CDataPose.cpp \
     ./workflow/workflow/datapackets/CDataDepth.cpp \
-    ./workflow/workflow/datapackets/CDataFusion.cpp \
-    ./gui/3dView/C3dView.cpp \
     ./workflow/plugin/cpluginmanager.cpp \
     ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
     ./gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
@@ -129,6 +137,16 @@ SOURCES += ./main.cpp \
     ./settings/CAlgorithmSettingsModel.cpp\
     ./settings/CQJsonModel.cpp\
     ./settings/CQJsonItem.cpp
+
+PCL{
+  HEADERS += ./gui/3dView/C3dView.h \
+      ./gui/3dView/CPclView.h \
+      ./workflow/workflow/datapackets/CDataFusion.h
+
+  SOURCES += ./gui/3dView/C3dView.cpp \
+    ./gui/3dView/CPclView.cpp \
+    ./workflow/workflow/datapackets/CDataFusion.cpp
+}
 
 FORMS += ./gui/forms/CMainWindow.ui \
     ./gui/forms/CSettingsDialog.ui \

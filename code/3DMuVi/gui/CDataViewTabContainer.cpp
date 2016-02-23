@@ -1,7 +1,16 @@
+#include <QVBoxLayout>
+
 #include "CDataViewTabContainer.h"
 
 CDataViewTabContainer::CDataViewTabContainer(QWidget* parent) : QTabWidget(parent)
 {
+#ifdef PCL
+  QWidget* container3dView = new QWidget(this);
+  QWidget* containerModelTypeSelector = new QWidget(container3dView);
+  QBoxLayout* layoutModelTypeSelector = new QHBoxLayout;
+  QComboBox* modelTypeSelector = new QComboBox(containerModelTypeSelector);
+#endif
+
   mpInputImageView = new CInputImageView;
   addTab(mpInputImageView, "Input images");
 
@@ -11,8 +20,17 @@ CDataViewTabContainer::CDataViewTabContainer(QWidget* parent) : QTabWidget(paren
   mpDepthMapView = new CDepthMapView;
   addTab(mpDepthMapView, "Depth maps");
 
+#ifdef PCL
+  containerModelTypeSelector->setLayout(layoutModelTypeSelector);
+  layoutModelTypeSelector->addWidget(modelTypeSelector);
+  layoutModelTypeSelector->addStretch();
+  container3dView->setLayout(new QVBoxLayout);
+  container3dView->layout()->addWidget(containerModelTypeSelector);
   mp3dView = new C3dView;
-  addTab(mp3dView, "3D view");
+  mp3dView->setModelTypeSelector(modelTypeSelector);
+  container3dView->layout()->addWidget(mp3dView);
+  addTab(container3dView, "3D view");
+#endif
 }
 
 void CDataViewTabContainer::setImagePreviewWidget(CImagePreviewWidget* imagePreview)
@@ -38,7 +56,10 @@ void CDataViewTabContainer::applyDataStorage(CContextDataStore* dataStorage)
   dataStorage->ApplyToDataView(mpInputImageView);
   dataStorage->ApplyToDataView(mpFeatureView);
   dataStorage->ApplyToDataView(mpDepthMapView);
+
+#ifdef PCL
   dataStorage->ApplyToDataView(mp3dView);
+#endif
 }
 
 void CDataViewTabContainer::onCurrentChanged(int index)

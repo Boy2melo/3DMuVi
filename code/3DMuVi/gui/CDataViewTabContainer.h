@@ -5,7 +5,10 @@
 
 #include <workflow/workflow/ccontextdatastore.h>
 
+#ifdef PCL
 #include "3dView/C3dView.h"
+#endif
+
 #include "ImageViews/CDepthMapView.h"
 #include "ImageViews/CFeatureView.h"
 #include "ImageViews/CInputImageView.h"
@@ -54,7 +57,10 @@ private:
   CInputImageView* mpInputImageView = nullptr;
   CFeatureView* mpFeatureView = nullptr;
   CDepthMapView* mpDepthMapView = nullptr;
+
+#ifdef PCL
   C3dView* mp3dView = nullptr;
+#endif
 };
 
 #endif // CDATAVIEWTABCONTAINER_H

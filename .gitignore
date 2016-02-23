@@ -1,4 +1,6 @@
 /code/build/*
+/code/VTK-build/*
+/code/pcl-build/*
 
 # User specific files
 *.user
