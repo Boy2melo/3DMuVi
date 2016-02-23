@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-TARGET = PluginExample
+TARGET = PluginPoseEstimator
 TEMPLATE = lib
 CONFIG += plugin
 

@@ -6,7 +6,7 @@
 
 QT       += core gui
 
-TARGET = PluginExample
+TARGET = PluginDepthEstimator
 TEMPLATE = lib
 CONFIG += plugin
 
