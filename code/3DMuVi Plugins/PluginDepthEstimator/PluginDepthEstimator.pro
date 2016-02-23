@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets
 
 TARGET = PluginDepthEstimator
 TEMPLATE = lib
@@ -47,5 +47,9 @@ unix {
 #############
 # OpenCV
 unix {
-LIBS += -L/usr/local/lib -lopencv_core
-INCLUDEPATH += OCV_INCLUDE_DIR
+  INCLUDEPATH += /home/rufboi/3rd_party/OpenCV_3.1.0_gcc4.8/include/
+  DEPENDPATH += /home/rufboi/3rd_party/OpenCV_3.1.0_gcc4.8/include/
+
+  LIBS += -L/home/rufboi/3rd_party/OpenCV_3.1.0_gcc4.8/lib/
+  LIBS += -lopencv_core
+}
