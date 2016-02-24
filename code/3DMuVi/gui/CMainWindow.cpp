@@ -30,6 +30,15 @@ CMainWindow::CMainWindow(QWidget *parent) :
 //TODO: advanced load files
   connect(ui->actionSettings, &QAction::triggered, this, &CMainWindow::onSettings);
   connect(ui->actionAbout, &QAction::triggered, this, &CMainWindow::onAbout);
+
+  connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, ui->actionLoadImages,
+          &QAction::setDisabled);
+  connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, ui->menuWorkflow,
+          &QMenu::setDisabled);
+  connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, ui->actionSettings,
+          &QAction::setDisabled);
+  connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, ui->algorithmSettingsView,
+          &CAlgorithmSettingsView::setDisabled);
 }
 
 CMainWindow::~CMainWindow()
