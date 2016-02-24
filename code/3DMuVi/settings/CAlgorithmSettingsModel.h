@@ -1,5 +1,5 @@
 #ifndef CALGORITMSETTINGSMODEL_H
-#define CCALGORITMSETTINGSMODEL_H
+#define CALGORITMSETTINGSMODEL_H
 
 #include <QAbstractItemModel>
 #include <QModelIndex>

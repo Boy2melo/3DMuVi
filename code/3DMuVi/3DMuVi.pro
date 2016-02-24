@@ -94,7 +94,7 @@ SOURCES += ./main.cpp \
     ./workflow/workflow/datapackets/CDataFusion.cpp \
     ./gui/3dView/C3dView.cpp \
     ./workflow/plugin/cpluginmanager.cpp \
-    ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
+    #./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
     ./gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
     ./gui/ImageViews/CDepthMapView.cpp \
     ./gui/ImageViews/CFeatureView.cpp \
@@ -131,8 +131,8 @@ SOURCES += ./main.cpp \
     ./settings/CQJsonItem.cpp
 
 FORMS += ./gui/forms/CMainWindow.ui \
-    ./gui/forms/CSettingsDialog.ui \
-    ./gui/forms/CAlgorithmSettingsSaveLoad.ui \
+    ./gui/forms/CSettingsDialog.ui
+    #./gui/forms/CAlgorithmSettingsSaveLoad.ui \
 
 DISTFILES += \
     gui/forms/CAlgorithmSettingsSaveLoad.ui.qml \
