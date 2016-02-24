@@ -6,8 +6,8 @@
 @param row row of the algorithm
 @param model the Algorthmsettingsmodel
  */
-//============================================================
-void CAlgorithmSettingsSaveLoadWidget::CAlgorithmSettingsSaveLoadWidget(int row, CAlgorithmSettingsModel& model),
+ //============================================================
+void CAlgorithmSettingsSaveLoadWidget::CAlgorithmSettingsSaveLoadWidget(int row, CAlgorithmSettingsModel& model) :
     ui(new Ui::CAlgortihmSettingsSaveLoad)
 
 {
@@ -18,11 +18,9 @@ void CAlgorithmSettingsSaveLoadWidget::CAlgorithmSettingsSaveLoadWidget(int row,
     //signalslotsconnecten
 }
 
-void loadbutton()
-{
-    this.model.laodSetting(row, QUrl());
+void loadbutton() {
+    this->model.laodSetting(row, QUrl());
 }
-void savebutton()
-{
-    this.model.saveSetting(row,QUrl());
+void savebutton() {
+    this->model.saveSetting(row, QUrl());
 }

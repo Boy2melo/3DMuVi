@@ -9,6 +9,8 @@
  *  the history is used in the logger packet of the gui
  */
 class CLogHistory {
+
+    std::vector<std::tuple<QString, QString, QString>> currenthistory;
 public:  
     std::vector<std::tuple<QString,QString,QString>>& getHistory();
     

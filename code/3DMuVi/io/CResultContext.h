@@ -23,8 +23,7 @@
  * Furthermore, there will be one directory for each TDataPacket
  * type, which contains all the data from this type.
  */
-class CResultContext
-{
+class CResultContext {
 public:
     /*!
      * \brief Constructor of the Class
@@ -35,9 +34,9 @@ public:
      * \return void
      */
     CResultContext(QUrl path,
-                   CLogController* logController,
-                   CAlgorithmSettingController* algoSettings,
-                   CGlobalSettingController* globalSettings);
+        CLogController* logController,
+        CAlgorithmSettingController* algoSettings,
+        CGlobalSettingController* globalSettings);
 
     /*!
      * \brief The data will get serialized and accordingly to their TDataPacket
@@ -59,6 +58,7 @@ public:
      * \param id Select the file with this id.
      * \return TDataPacket of the deserialized file.
      */
+    // NYI
     IDataPacket* getDataPacket(QString id);
 
 private:

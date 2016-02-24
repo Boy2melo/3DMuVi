@@ -33,5 +33,5 @@ void CAlgorithmSettingsView::onAlgorithmChanged(int step)
 {
     QUrl url;
 
-    this->model().loadSettings(step, url);
+    this->model.loadSettings(step, url);
 }

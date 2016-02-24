@@ -21,26 +21,25 @@ using FeatureMap = std::vector<std::tuple<uint32_t, float, float, float, float>>
  *
  * Erster Entwurf - Komplett ungetestet.
  */
-class CDataDepth : public IDataPacket
-{
+class CDataDepth : public IDataPacket {
 public:
     CDataDepth();
     ~CDataDepth();
 
     QString getDataType() const override;
-    AStreamProvider* getStreamProvider();
-    void serialize(AStreamProvider* stream);
+    AStreamProvider* getStreamProvider() override;
+    void serialize(AStreamProvider* stream) override;
 
-    FeatureMatch const & getFeatureMatch();
+    FeatureMatch const & getFeatureMatch() const;
     void setFeatureMatch(FeatureMatch && feature);
 
-    FeatureMap const & getFeatureMap();
+    FeatureMap const & getFeatureMap() const;
     void setFeatureMap(FeatureMap && map);
 
-    std::vector<SPose> const & getPose();
+    std::vector<SPose> const & getPose() const;
     void setPose(std::vector<SPose> && poses);
 
-    std::vector<QImage> const & getDepthMap();
+    std::vector<QImage> const & getDepthMap() const;
     void setDepthMap(std::vector<QImage> && depthMaps);
 private:
     AStreamProvider* streamProvider;

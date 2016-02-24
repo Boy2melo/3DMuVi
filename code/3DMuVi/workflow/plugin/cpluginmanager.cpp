@@ -56,7 +56,7 @@ QVector<IPlugin*> CPluginManager::getPlugins(QString type) const {
 
     for(IPlugin *plugin : mPlugins) {
         auto pluginType = plugin->GetPluginType();
-        if(pluginType.compare(type)) {
+        if(pluginType == type) {
             result.push_back(plugin);
         }
     }

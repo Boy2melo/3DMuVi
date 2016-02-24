@@ -12,9 +12,10 @@
  *
  * Provide essential functions of a StreamProvider.
  */
-class AStreamProvider
-{
+class AStreamProvider {
 public:
+    virtual ~AStreamProvider() {}
+
     AStreamProvider();
     virtual QDataStream* getNextStream() = 0;
     /*!
