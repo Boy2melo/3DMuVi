@@ -19,12 +19,16 @@ public:
 
     void manageNewLogMessage(QString message, QString time, QString type);
 
-    friend CLogController& operator<<(CLogController& logger, std::tuple<const QString& , const QString&> messageTypeTuple );
+    friend CLogController& operator<<(CLogController& logger,const QString&  message );
+    friend CLogController& operator<<(CLogController& logger,const int& loglevel );
 
     CLogHistory& getHistory();
     
     void setLog(QUrl dest);
-    
+    void activateWindowlog();
+    void deactivateWindowlog();
+    void activateDatalog();
+    void deactivateDatalog();
     void closeLog();
 signals:
     void newLogMessage(QString message, QString time, QString type);

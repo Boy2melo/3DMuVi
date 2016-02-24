@@ -9,6 +9,9 @@ using namespace QsLogging;
 
 CLogHistory history;
 bool destSet;
+bool windowlog;
+bool datalog;
+int loglevel;
 
 /**
  * @brief CLogController::CLogController constructor
@@ -18,13 +21,44 @@ bool destSet;
 CLogController::CLogController(){
    history = CLogHistory();
    destSet= false;
+   loglevel = 2;
+   windowlog = true;
+   datalog = true;
  }
-
-
-CLogController& operator<< (CLogController& logger,std::tuple<const QString& , const QString&> messageTypeTuple)
+CLogController::activateWindowlog(){
+   windowlog = true;
+ }
+CLogController::deactivateWindowlog(){
+   windowlog = false;
+ }
+CLogController::activateDatalog(){
+   datalog = true;
+ }
+CLogController::deactivateDatalog(){
+   datalog = false;
+ }
+CLogController& operator<< (CLogController& logger,  const int& loglev)
 {
-   QString message = std::get<0> (messageTypeTuple);
-   QString type = std::get<1> (messageTypeTuple);
+  loglevel = loglev;
+  return logger;
+}
+
+CLogController& operator<< (CLogController& logger,  const QString& message)
+{
+
+   QString type;
+   if(loglevel == 0){
+       type = "ERROR";
+      }
+   if(loglevel == 1){
+       type = "WARNING";
+      }
+   if(loglevel == 2){
+       type = "INFO";
+      }
+   if(loglevel == 3){
+       type = "DEBUG";
+      }
 
 
     if( !((type == "ERROR") || (type == "WARNING") || (type == "DEBUG")))
@@ -62,25 +96,29 @@ void CLogController::manageNewLogMessage(QString message, QString time, QString 
     {
             type = "INFO";
     }
+    if(windowlog){
+      history.addHistory(message,time,type);
+      emit this->newLogMessage(message, time ,type );
+    }
 
-    history.addHistory(message,time,type);
-    emit this->newLogMessage(message, time ,type );
-    if( ! destSet ){
-        return;
+    if( destSet && datalog ){
+        if(type == "INFO"){
+        QLOG_INFO() << message;
+        }
+        if(type == "ERROR"){
+        QLOG_ERROR() << message;
+        }
+        if(type == "WARNING"){
+        QLOG_WARN() << message;
+        }
+        if(type == "DEBUG"){
+        QLOG_DEBUG() << message;
+        }
+
+
     }else{
-    if(type == "INFO"){
-    QLOG_INFO() << message;
     }
-    if(type == "ERROR"){
-    QLOG_ERROR() << message;
-    }
-    if(type == "WARNING"){
-    QLOG_WARN() << message;
-    }
-    if(type == "DEBUG"){
-    QLOG_DEBUG() << message;
-    }
-    }
+
 }
 /**
  * @brief CLogController::getHistory give the History where the log messages are saved temp
