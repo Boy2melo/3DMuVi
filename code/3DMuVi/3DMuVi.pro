@@ -16,7 +16,7 @@ win32{
   LIBS += -lopengl32 \
           -lglu32
 }
-else
+unix
 {
   LIBS += -lGL \
           -lGLU
