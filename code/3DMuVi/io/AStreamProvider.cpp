@@ -1,11 +1,10 @@
 #include "AStreamProvider.h"
 
-AStreamProvider::AStreamProvider()
-{
+AStreamProvider::AStreamProvider() {
 
 }
 
-void AStreamProvider::setDestination(QDir destinationFolder){
+void AStreamProvider::setDestination(QDir destinationFolder) {
     folder = destinationFolder;
 }
 
@@ -13,6 +12,6 @@ QDir AStreamProvider::getDestination() const {
     return fileName;
 }
 
-void AStreamProvider::setFileName(const QString &fileName){
+void AStreamProvider::setFileName(const QString &fileName) {
     this->fileName = fileName;
 }

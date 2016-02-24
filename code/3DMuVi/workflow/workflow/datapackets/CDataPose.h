@@ -19,24 +19,24 @@ using FeatureMap = std::vector<std::tuple<uint32_t, float, float, float, float>>
  *
  * Erster Entwurf - Komplett ungetestet.
  */
-class CDataPose : public IDataPacket
-{
+class CDataPose : public IDataPacket {
 public:
     CDataPose();
     ~CDataPose();
 
     QString getDataType() const override;
-    AStreamProvider* getStreamProvider();
-    void serialize(AStreamProvider* stream);
+    AStreamProvider* getStreamProvider() override;
+    void serialize(AStreamProvider* stream) override;
 
-    FeatureMatch const & getFeatureMatch();
+    FeatureMatch const & getFeatureMatch() const;
     void setFeatureMatch(FeatureMatch && feature);
 
-    FeatureMap const & getFeatureMap();
+    FeatureMap const & getFeatureMap() const;
     void setFeatureMap(FeatureMap && map);
 
-    std::vector<SPose> const & getPose();
+    std::vector<SPose> const & getPose() const;
     void setPose(std::vector<SPose> && poses);
+
 private:
     AStreamProvider* streamProvider;
     FeatureMatch featureMatch;

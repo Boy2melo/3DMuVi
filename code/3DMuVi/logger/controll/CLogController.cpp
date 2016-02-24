@@ -7,38 +7,72 @@
 #include <ctime>
 using namespace QsLogging;
 
-CLogHistory history;
-bool destSet;
+
 
 /**
  * @brief CLogController::CLogController constructor
- * sets the private attrubute destSet to false;
+ * sets the private attrubute mDestSet to false;
  * use the function setLog(QUrl dest) to set an dest for the logger file
  */
-CLogController::CLogController(){
-   history = CLogHistory();
-   destSet= false;
- }
+CLogController::CLogController() {
+    mHistory = CLogHistory();
+    mDestSet = false;
+    mCurrentLogLevel = LOG_INFO;
+    mLogToWindow = true;
+    mLogToFile = true;
+    mMinLogLevel = LOG_INFO;
+}
+void CLogController::activateWindowlog() {
+    mLogToWindow = true;
+}
+void CLogController::deactivateWindowlog() {
+    mLogToWindow = false;
+}
+void CLogController::activateDatalog() {
+    mLogToFile = true;
+}
+void CLogController::deactivateDatalog() {
+    mLogToFile = false;
+}
+
+CLogController& operator<< (CLogController& logger, const int& loglev) {
+    logger.mCurrentLogLevel = static_cast<uchar>(loglev);
+    return logger;
+}
+
+CLogController& operator<< (CLogController& logger, const QString& message) {
+    if (logger.mCurrentLogLevel < logger.mMinLogLevel) {
+        return logger;
+    }
 
 
-CLogController& operator<< (CLogController& logger,std::tuple<const QString& , const QString&> messageTypeTuple)
-{
-   QString message = std::get<0> (messageTypeTuple);
-   QString type = std::get<1> (messageTypeTuple);
-
-
-    if( !((type == "ERROR") || (type == "WARNING") || (type == "DEBUG")))
-    {
-            type = "INFO";
-  }
+    QString type;
+    switch (logger.mCurrentLogLevel) {
+    case LOG_DEBUG:
+        type = "DEBUG";
+        break;
+    case LOG_INFO:
+        type = "INFO";
+        break;
+    case LOG_WARN:
+        type = "WARNING";
+        break;
+    case LOG_ERROR:
+        type = "ERROR";
+        break;
+    default:
+        type = "INFO";
+        break;
+    }
+    logger.mCurrentLogLevel = LOG_INFO;
 
     QString mtime = "";
     time_t rawtime;
     struct tm * timeinfo;
-    char buffer [80];
-    time (&rawtime);
-    timeinfo = localtime (&rawtime);
-    strftime (buffer,80,"%A, %B %d, %Y %I:%M:%S %p",timeinfo);
+    char buffer[80];
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    strftime(buffer, 80, "%A, %B %d, %Y %I:%M:%S %p", timeinfo);
     mtime = buffer;
 
     logger.manageNewLogMessage(message, mtime, type);
@@ -58,36 +92,36 @@ CLogController& operator<< (CLogController& logger,std::tuple<const QString& , c
  */
 void CLogController::manageNewLogMessage(QString message, QString time, QString type) {
 
-    if( !((type == "ERROR") || (type == "WARNING") || (type == "DEBUG")))
-    {
-            type = "INFO";
+    if (!((type == "ERROR") || (type == "WARNING") || (type == "DEBUG"))) {
+        type = "INFO";
     }
 
-    history.addHistory(message,time,type);
-    emit this->newLogMessage(message, time ,type );
-    if( ! destSet ){
-        return;
-    }else{
-    if(type == "INFO"){
-    QLOG_INFO() << message;
+    if (mLogToWindow) {
+        mHistory.addHistory(message, time, type);
+        emit this->newLogMessage(message, time, type);
     }
-    if(type == "ERROR"){
-    QLOG_ERROR() << message;
-    }
-    if(type == "WARNING"){
-    QLOG_WARN() << message;
-    }
-    if(type == "DEBUG"){
-    QLOG_DEBUG() << message;
-    }
+
+    if (mDestSet && mLogToFile) {
+        if (type == "INFO") {
+            QLOG_INFO() << message;
+        }
+        if (type == "ERROR") {
+            QLOG_ERROR() << message;
+        }
+        if (type == "WARNING") {
+            QLOG_WARN() << message;
+        }
+        if (type == "DEBUG") {
+            QLOG_DEBUG() << message;
+        }
     }
 }
 /**
  * @brief CLogController::getHistory give the History where the log messages are saved temp
- * @return CLogHistory& reference to the history object;
+ * @return CLogHistory& reference to the mHistory object;
  */
-CLogHistory& CLogController::getHistory( ){
-    CLogHistory& refhistory = history;
+CLogHistory& CLogController::getHistory() {
+    CLogHistory& refhistory = mHistory;
     return refhistory;
 }
 
@@ -99,18 +133,18 @@ CLogHistory& CLogController::getHistory( ){
  */
 void CLogController::setLog(QUrl dest) {
 
-    Logger& logger =  Logger::instance();
+    Logger& logger = Logger::instance();
     logger.setLoggingLevel(TraceLevel);
     const QString sLogPath = dest.toString();
     DestinationPtr fileDestination(DestinationFactory::MakeFileDestination(
-      sLogPath, EnableLogRotation, MaxSizeBytes(20000000), MaxOldLogCount(2000000)));
+        sLogPath, EnableLogRotation, MaxSizeBytes(20000000), MaxOldLogCount(2000000)));
     DestinationPtr debugDestination(DestinationFactory::MakeDebugOutputDestination());
     //DestinationPtr functorDestination(DestinationFactory::MakeFunctorDestination(&logFunction));
     logger.addDestination(debugDestination);
     logger.addDestination(fileDestination);
-   // logger.addDestination(functorDestination);
+    // logger.addDestination(functorDestination);
 
-    destSet = true;
+    mDestSet = true;
 
 }
 /**
@@ -118,8 +152,14 @@ void CLogController::setLog(QUrl dest) {
  * and stop the File Logging
  */
 void CLogController::closeLog() {
-    destSet = false;
+    mDestSet = false;
     Logger::destroyInstance();
-
 }
 
+void CLogController::setMinLoglevel(uchar loglevel) {
+    mMinLogLevel = loglevel;
+}
+
+uchar CLogController::getMinLogLevel() const {
+    return mMinLogLevel;
+}

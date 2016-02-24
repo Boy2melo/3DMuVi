@@ -19,8 +19,8 @@ CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(pare
 void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow)
 {
 
-    CAlgorithmSettingsModel model;
-    setModel(model);
+    //CAlgorithmSettingsModel model;
+    //setModel(model);
 
 }
 
@@ -33,5 +33,5 @@ void CAlgorithmSettingsView::onAlgorithmChanged(int step)
 {
     QUrl url;
 
-    this->model().loadSettings(step, url);
+    //this->model.loadSettings(step, url);
 }

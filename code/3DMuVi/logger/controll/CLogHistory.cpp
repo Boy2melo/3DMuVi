@@ -2,7 +2,7 @@
 #include "CLogHistory.h"
 
 using namespace std;
-vector<tuple<QString,QString,QString>> currenthistory;
+
 
 /**
  * @brief CLogHistory::getHistory returns a reference of the log history

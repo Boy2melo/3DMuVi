@@ -14,7 +14,7 @@ public:
 public slots:
   void onAlgorithmChanged(int step);
  private:
-  CAlgorithmSettingsModel model;
+  //CAlgorithmSettingsModel model;
 };
 
 #endif // CALGORITMSETTINGSVIEW_H

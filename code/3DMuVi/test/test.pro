@@ -98,6 +98,7 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../gui/CMainWindow.cpp \
            ../gui/CSettingsDialog.cpp \
            ../gui/CStepComboBox.cpp \
+           ../io/AStreamProvider.cpp \
            ../io/CImageIo.cpp \
            ../io/CInputDataSet.cpp \
            ../io/CResultContext.cpp \

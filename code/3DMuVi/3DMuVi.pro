@@ -28,7 +28,7 @@ win32{
   LIBS += -lopengl32 \
           -lglu32
 }
-else
+unix
 {
   LIBS += -lGL \
           -lGLU
@@ -102,7 +102,7 @@ SOURCES += ./main.cpp \
     ./workflow/workflow/datapackets/CDataPose.cpp \
     ./workflow/workflow/datapackets/CDataDepth.cpp \
     ./workflow/plugin/cpluginmanager.cpp \
-    ./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
+    #./gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
     ./gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
     ./gui/ImageViews/CDepthMapView.cpp \
     ./gui/ImageViews/CFeatureView.cpp \
@@ -149,8 +149,8 @@ PCL{
 }
 
 FORMS += ./gui/forms/CMainWindow.ui \
-    ./gui/forms/CSettingsDialog.ui \
-    ./gui/forms/CAlgorithmSettingsSaveLoad.ui \
+    ./gui/forms/CSettingsDialog.ui
+    #./gui/forms/CAlgorithmSettingsSaveLoad.ui \
 
 DISTFILES += \
     gui/forms/CAlgorithmSettingsSaveLoad.ui.qml \

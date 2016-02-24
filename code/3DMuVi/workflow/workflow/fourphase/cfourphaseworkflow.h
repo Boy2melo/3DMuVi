@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _H_CFOURPHASEWORKFLOW
+#define _H_CFOURPHASEWORKFLOW
+
 #include <workflow/workflow/aworkflow.h>
 #include "workflow/plugin/iplugin.h"
 #include "workflow/workflow/ccontextdatastore.h"
@@ -6,8 +8,9 @@
 class CFourPhaseWorkflow : public AWorkflow {
 private:
     IPlugin **mPlugins;
-   
+
     private slots:
+    // ReSharper disable once CppFunctionIsNotImplemented
     void SlotAlgorithmFinished(CContextDataStore *);
 
 public:
@@ -23,3 +26,4 @@ protected:
     void executeAlgorithm(CContextDataStore* store) override;
 };
 
+#endif

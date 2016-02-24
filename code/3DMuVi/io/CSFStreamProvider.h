@@ -10,8 +10,7 @@
  *
  * Provides a stream to a single file.
  */
-class CSFStreamProvider : public AStreamProvider
-{
+class CSFStreamProvider : public AStreamProvider {
 public:
     CSFStreamProvider();
     ~CSFStreamProvider();
@@ -19,7 +18,7 @@ public:
      *\brief Everytime this function get called it return a pointer to the same file.
      *\return a QDataStream pointer to a file.
      */
-    QDataStream* getNextStream();
+    QDataStream* getNextStream() override;
 private:
     QDataStream* stream;
     QFile* file;
