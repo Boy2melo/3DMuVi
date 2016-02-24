@@ -3,7 +3,7 @@
 #include <workflow/workflow/ccontextdatastore.h>
 
 CInputDataSet::CInputDataSet(QUrl path) {
-    auto strPath = path.toLocalFile();
+    auto strPath = path.isLocalFile() ? path.toLocalFile() : path.path();
     QDir inputDirectory(strPath);
     QStringList filters("*.png");
 
