@@ -27,11 +27,11 @@ public:
     AStreamProvider* getStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
 
-    std::vector<QImage> const & getDepthMap() const;
-    void setDepthMap(std::vector<QImage> && depthMaps);
+    std::shared_ptr<std::vector<QImage>> getDepthMap() const;
+    void setDepthMap(std::shared_ptr<std::vector<QImage>> depthMaps);
 private:
     AStreamProvider* streamProvider;
-    std::vector<QImage> depthMap;
+    std::shared_ptr<std::vector<QImage>> depthMap;
 };
 
 #endif // CDATADEPTH_H

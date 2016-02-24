@@ -18,11 +18,11 @@ QString CDataFeature::getDataType() const {
     return DT_FEATURE_MATCH;
 }
 
-void CDataFeature::setFeatureMatch(FeatureMatch && match) {
+void CDataFeature::setFeatureMatch(std::shared_ptr<FeatureMatch> match) {
     featureMatchData = match;
 }
 
-FeatureMatch const & CDataFeature::getFeatureMatch() const {
+std::shared_ptr<FeatureMatch> CDataFeature::getFeatureMatch() const {
     return featureMatchData;
 }
 
@@ -41,8 +41,8 @@ void CDataFeature::serialize(AStreamProvider* stream) {
     float value1;
     float value2;
     uint32_t value3;
-    *dataStream << (int)featureMatchData.size();
-    for (auto data : featureMatchData) {
+    *dataStream << (int)featureMatchData->size();
+    for (auto data : *featureMatchData) {
         std::tie(value0, value1, value2, value3) = data;
         *dataStream << static_cast<quint64>(value0) << value1 << value2 << static_cast<quint32>(value3);
     }

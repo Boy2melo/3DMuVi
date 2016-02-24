@@ -27,13 +27,16 @@ public:
     AStreamProvider* getStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
 
-    std::vector<SPose> const & getPose() const;
-    void setPose(std::vector<SPose> && poses);
+    std::shared_ptr<FeatureMap> getFeatureMap() const;
+    void setFeatureMap(std::shared_ptr<FeatureMap>  map);
+
+    std::shared_ptr<std::vector<SPose>> getPose() const;
+    void setPose(std::shared_ptr<std::vector<SPose>> poses);
 
 private:
     AStreamProvider* streamProvider;
-    FeatureMap featureMap;
-    std::vector<SPose> pose;
+    std::shared_ptr<FeatureMap> featureMap;
+    std::shared_ptr<std::vector<SPose>> pose;
 };
 
 #endif // CDATAPOSE_H

@@ -5,6 +5,7 @@
 #include "io/AStreamProvider.h"
 #include <QUuid>
 #include <QDataStream>
+#include <memory>
 
 class IDataView;
 

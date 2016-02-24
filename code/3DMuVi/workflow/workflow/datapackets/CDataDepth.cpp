@@ -25,10 +25,10 @@ AStreamProvider* CDataDepth::getStreamProvider() {
 void CDataDepth::serialize(AStreamProvider *stream) {
     stream->setFileName(QString("dataDepthMeta"));
     auto dataStream = stream->getNextStream();
-    *dataStream << static_cast<int>(depthMap.size());
+    *dataStream << static_cast<int>(depthMap->size());
 
     auto fileNameCounter = 0;
-    for (auto map : depthMap) {
+    for (auto map : *depthMap) {
         stream->setFileName(QString(fileNameCounter + ".png"));
         dataStream = stream->getNextStream();
 
@@ -45,10 +45,10 @@ void CDataDepth::serialize(AStreamProvider *stream) {
     }
 }
 
-std::vector<QImage> const & CDataDepth::getDepthMap() const {
+std::shared_ptr<std::vector<QImage>> CDataDepth::getDepthMap() const {
     return depthMap;
 }
 
-void CDataDepth::setDepthMap(std::vector<QImage> &&depthMaps) {
+void CDataDepth::setDepthMap(std::shared_ptr<std::vector<QImage>> depthMaps) {
     depthMap = depthMaps;
 }
