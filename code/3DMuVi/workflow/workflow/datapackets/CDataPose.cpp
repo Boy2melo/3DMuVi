@@ -57,14 +57,6 @@ void CDataPose::serialize(AStreamProvider *stream) {
     }
 }
 
-FeatureMatch const & CDataPose::getFeatureMatch() const {
-    return featureMatch;
-}
-
-void CDataPose::setFeatureMatch(FeatureMatch && feature) {
-    featureMatch = feature;
-}
-
 FeatureMap const & CDataPose::getFeatureMap() const {
     return featureMap;
 }

@@ -9,7 +9,6 @@
 #include "io/AStreamProvider.h"
 #include "io/CSFStreamProvider.h"
 
-using FeatureMatch = std::vector<std::tuple<uint64_t, float, float, uint32_t>>;
 using FeatureMap = std::vector<std::tuple<uint32_t, float, float, float, float>>;
 
 /*!
@@ -28,18 +27,11 @@ public:
     AStreamProvider* getStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
 
-    FeatureMatch const & getFeatureMatch() const;
-    void setFeatureMatch(FeatureMatch && feature);
-
-    FeatureMap const & getFeatureMap() const;
-    void setFeatureMap(FeatureMap && map);
-
     std::vector<SPose> const & getPose() const;
     void setPose(std::vector<SPose> && poses);
 
 private:
     AStreamProvider* streamProvider;
-    FeatureMatch featureMatch;
     FeatureMap featureMap;
     std::vector<SPose> pose;
 };

@@ -11,9 +11,6 @@
 #include "io/AStreamProvider.h"
 #include "io/CMFStreamProvider.h"
 
-using FeatureMatch = std::vector<std::tuple<uint64_t, float, float, uint32_t>>;
-using FeatureMap = std::vector<std::tuple<uint32_t, float, float, float, float>>;
-
 /*!
  * \class CDataDepth
  * \brief The CDataDepth class
@@ -30,22 +27,10 @@ public:
     AStreamProvider* getStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
 
-    FeatureMatch const & getFeatureMatch() const;
-    void setFeatureMatch(FeatureMatch && feature);
-
-    FeatureMap const & getFeatureMap() const;
-    void setFeatureMap(FeatureMap && map);
-
-    std::vector<SPose> const & getPose() const;
-    void setPose(std::vector<SPose> && poses);
-
     std::vector<QImage> const & getDepthMap() const;
     void setDepthMap(std::vector<QImage> && depthMaps);
 private:
     AStreamProvider* streamProvider;
-    FeatureMatch featureMatch;
-    FeatureMap featureMap;
-    std::vector<SPose> pose;
     std::vector<QImage> depthMap;
 };
 

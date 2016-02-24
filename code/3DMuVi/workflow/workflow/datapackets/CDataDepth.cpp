@@ -45,30 +45,6 @@ void CDataDepth::serialize(AStreamProvider *stream) {
     }
 }
 
-FeatureMatch const & CDataDepth::getFeatureMatch() const {
-    return featureMatch;
-}
-
-void CDataDepth::setFeatureMatch(FeatureMatch && feature) {
-    featureMatch = feature;
-}
-
-FeatureMap const & CDataDepth::getFeatureMap() const {
-    return featureMap;
-}
-
-void CDataDepth::setFeatureMap(FeatureMap && map) {
-    featureMap = map;
-}
-
-std::vector<SPose> const & CDataDepth::getPose() const {
-    return pose;
-}
-
-void CDataDepth::setPose(std::vector<SPose> && poses) {
-    pose = poses;
-}
-
 std::vector<QImage> const & CDataDepth::getDepthMap() const {
     return depthMap;
 }
