@@ -5,15 +5,16 @@
 
 CLogWidget::CLogWidget(QWidget* parent) : QPlainTextEdit(parent)
 {
-  mpLogger = new CLogController;
+    CLogController& mpLoggerref  = CLogController::instance();
+    mpLogger = &mpLoggerref;
 
-  setReadOnly(true);
-  connect(mpLogger, &CLogController::newLogMessage, this, &CLogWidget::onNewLogMessage);
+    setReadOnly(true);
+    connect(mpLogger,  &CLogController::newLogMessage, this, &CLogWidget::onNewLogMessage);
 }
 
 CLogWidget::~CLogWidget()
 {
-  delete mpLogger;
+  // delete mpLogger;
 }
 
 void CLogWidget::onNewLogMessage(QString message, QString time, QString type)
@@ -72,8 +73,8 @@ void CLogWidget::updateViewState(int state, bool* internalState)
 
 void CLogWidget::updateLog()
 {
-  CLogHistory history;
-  std::vector<std::tuple<QString, QString, QString>> pastMessages = history.getHistory();
+  //CLogHistory history;
+  std::vector<std::tuple<QString, QString, QString>> pastMessages = mpLogger->getHistory().getHistory();
 
   clear();
   for(std::tuple<QString, QString, QString> m : pastMessages)

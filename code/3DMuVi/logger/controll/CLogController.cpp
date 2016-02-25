@@ -8,12 +8,21 @@
 using namespace QsLogging;
 
 
-
 /**
  * @brief CLogController::CLogController constructor
  * sets the private attrubute mDestSet to false;
  * use the function setLog(QUrl dest) to set an dest for the logger file
  */
+ void CLogController::initilize(){
+     mHistory = CLogHistory();
+     mDestSet = false;
+     mCurrentLogLevel = LOG_INFO;
+     mLogToWindow = true;
+     mLogToFile = true;
+     mMinLogLevel = LOG_INFO;
+ }
+
+/*
 CLogController::CLogController() {
     mHistory = CLogHistory();
     mDestSet = false;
@@ -22,6 +31,7 @@ CLogController::CLogController() {
     mLogToFile = true;
     mMinLogLevel = LOG_INFO;
 }
+*/
 void CLogController::activateWindowlog() {
     mLogToWindow = true;
 }
@@ -98,7 +108,7 @@ void CLogController::manageNewLogMessage(QString message, QString time, QString 
 
     if (mLogToWindow) {
         mHistory.addHistory(message, time, type);
-        emit this->newLogMessage(message, time, type);
+        emit(newLogMessage(message, time, type));
     }
 
     if (mDestSet && mLogToFile) {
