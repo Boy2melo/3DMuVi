@@ -34,13 +34,13 @@ void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename)
     }
     if (workflow->getStep(row)->ValidateParameters(&data)) {
         emit saveQJson(data, filename);
-        workflow->getStep(row)->getAlgorithm()->setParameters(data);
+        workflow->getStep(row)->getAlgorithm()->setParameters(&data);
     }
 }
 void CAlgorithmSettingsModel::loadSettings(int row, QUrl filename)
 {
     if (filename.isEmpty() == true) {
-        filename.setPassword("a" + workflow->getStep(row)->GetPluginType();
+        filename.setPassword("a" + workflow->getStep(row)->GetPluginType());
     }
     emit requestQJson(filename);
     mRootItem->getChilds().removeAt(row);
