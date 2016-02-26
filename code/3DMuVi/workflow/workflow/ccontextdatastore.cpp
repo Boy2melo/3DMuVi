@@ -2,6 +2,10 @@
 #include "io/CInputDataSet.h"
 #include <QUuid>
 #include <io/CResultContext.h>
+#include "datapackets/CDataFeature.h"
+#include "datapackets/CDataDepth.h"
+#include "datapackets/CDataPose.h"
+#include "datapackets/CDataFusion.h"
 
 CContextDataStore::~CContextDataStore() {
     for(IDataPacket *packet : mDataPackets) {
@@ -106,3 +110,10 @@ bool CContextDataStore::appendData(T* data, bool overwrite) {
 
     return false;
 }
+
+//Compiler muss Template Implementierungen anlegen, damit diese von den Plugins aufrufbar sind
+template bool CContextDataStore::appendData<CDataFeature>(CDataFeature*,bool);
+template bool CContextDataStore::appendData<CDataDepth>(CDataDepth*, bool);
+template bool CContextDataStore::appendData<CDataPose>(CDataPose*, bool);
+//TODO: merge CDataFusion from pcl branch
+//template bool CContextDataStore::appendData<CDataFusion>(CDataFusion*, bool);

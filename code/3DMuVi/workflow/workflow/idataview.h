@@ -1,26 +1,26 @@
 #ifndef IDATAVIEW_H
 #define IDATAVIEW_H
 #include "idatapacket.h"
-#include "io/CInputDataSet.h"
 
-#ifdef PCL
-#include "datapackets/CDataFusion.h"
-#endif
-
-class CDataPose;
+class CInputDataSet;
+class CDataFeature;
 class CDataDepth;
+class CDataPose;
+#ifdef PCL
+class CDataFusion;
+#endif
 
 class IDataView {
 public:
     IDataView();
 
-    void applyData(IDataPacket const *data) {}
-    void applyData(CInputDataSet const *data) {}
-    void applyData(CDataFeature const *data) {}
-    void applyData(CDataDepth const *data) {}
-    void applyData(CDataPose const *data) {}
+    void applyData(IDataPacket const *data);
+    virtual void applyData(CInputDataSet const * /* data */) {}
+    virtual void applyData(CDataFeature const * /* data */) {}
+    virtual void applyData(CDataDepth const * /* data */) {}
+    virtual void applyData(CDataPose const * /* data */) {}
 #ifdef PCL
-    void applyData(CDataFusion const *data) {}
+    virtual void applyData(CDataFusion const * /* data */) {}
 #endif
 };
 

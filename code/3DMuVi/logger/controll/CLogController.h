@@ -16,15 +16,27 @@
 class CLogController
     :public QObject {
     Q_OBJECT
-
+private:
     CLogHistory mHistory;
     bool mDestSet;
     bool mLogToWindow;
     bool mLogToFile;
     uchar mCurrentLogLevel;
     uchar mMinLogLevel;
+    void initilize();
+    CLogController( const CLogController& ){}
+    CLogController & operator = (const CLogController &){}
+    CLogController(){
+        initilize();
+    }
+
+
 public:
-    CLogController();
+    static CLogController& instance() {
+        static CLogController _instance;
+        return _instance;
+     }
+    ~CLogController(){}
 
     void manageNewLogMessage(QString message, QString time, QString type);
 

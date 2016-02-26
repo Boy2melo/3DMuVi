@@ -9,7 +9,6 @@
 #include "io/AStreamProvider.h"
 #include "io/CSFStreamProvider.h"
 
-using FeatureMatch = std::vector<std::tuple<uint64_t, float, float, uint32_t>>;
 using FeatureMap = std::vector<std::tuple<uint32_t, float, float, float, float>>;
 
 /*!
@@ -27,21 +26,18 @@ public:
     QString getDataType() const override;
     AStreamProvider* getStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
+    void deserialize(AStreamProvider *stream) override;
 
-    FeatureMatch const & getFeatureMatch() const;
-    void setFeatureMatch(FeatureMatch && feature);
+    std::shared_ptr<FeatureMap> getFeatureMap() const;
+    void setFeatureMap(std::shared_ptr<FeatureMap>  map);
 
-    FeatureMap const & getFeatureMap() const;
-    void setFeatureMap(FeatureMap && map);
-
-    std::vector<SPose> const & getPose() const;
-    void setPose(std::vector<SPose> && poses);
+    std::shared_ptr<std::vector<SPose>> getPose() const;
+    void setPose(std::shared_ptr<std::vector<SPose>> poses);
 
 private:
     AStreamProvider* streamProvider;
-    FeatureMatch featureMatch;
-    FeatureMap featureMap;
-    std::vector<SPose> pose;
+    std::shared_ptr<FeatureMap> featureMap;
+    std::shared_ptr<std::vector<SPose>> pose;
 };
 
 #endif // CDATAPOSE_H

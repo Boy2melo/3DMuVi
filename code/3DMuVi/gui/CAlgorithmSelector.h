@@ -51,6 +51,7 @@ private:
 private slots:
   void onCurrentIndexChanged(int index);
   void startButtonPushed(bool isPushed);
+  void onDataStoreFinished(CContextDataStore* dataStore);
 };
 
 #endif // CALGORITHMSELECTOR_H

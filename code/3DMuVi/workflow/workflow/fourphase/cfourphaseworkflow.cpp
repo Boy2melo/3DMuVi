@@ -4,6 +4,10 @@
 
 CFourPhaseWorkflow::CFourPhaseWorkflow() : AWorkflow() {
     mPlugins = new IPlugin*[getStepCount()];
+
+    for (quint32 i = 0; i < getStepCount(); i++) {
+        mPlugins[i] = nullptr;
+    }
 }
 
 
@@ -59,7 +63,7 @@ void CFourPhaseWorkflow::executeAlgorithm(CContextDataStore* store) {
 
 bool CFourPhaseWorkflow::checkAvailableDataTypes() const {
     QStringList dataTypes;
-    //TODO add input images as initial item
+    dataTypes.push_back(DT_INPUTIMAGES);
 
     for (int i = 0; i < getStepCount(); i++) {
         IPlugin *plugin = mPlugins[i];
