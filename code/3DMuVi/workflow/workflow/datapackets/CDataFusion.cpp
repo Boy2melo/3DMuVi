@@ -13,6 +13,7 @@ CDataFusion::~CDataFusion()
   if(mpStream)
   {
     delete mpStream;
+    mpStream = nullptr;
   }
 }
 
@@ -26,6 +27,7 @@ AStreamProvider* CDataFusion::getStreamProvider()
   if(mpStream)
   {
     delete mpStream;
+    mpStream = nullptr;
   }
 
   mpStream = new CSFStreamProvider();
@@ -37,6 +39,11 @@ AStreamProvider* CDataFusion::getStreamProvider()
 void CDataFusion::serialize(AStreamProvider* stream)
 {
   QDataStream* dataStream = nullptr;
+
+  if(!stream)
+  {
+    return;
+  }
 
   stream->setFileName(getId());
   dataStream = stream->getNextStream();
@@ -52,8 +59,15 @@ void CDataFusion::serialize(AStreamProvider* stream)
 //TODO: this should be reimplemented using the pcl load funtions
 void CDataFusion::deserialize(AStreamProvider* stream)
 {
-  QDataStream* dataStream = stream->getNextStream();
+  QDataStream* dataStream = nullptr;
   int size;
+
+  if(!stream)
+  {
+    return;
+  }
+
+  dataStream = stream->getNextStream();
 
   *dataStream >> size;
   mPointCloudData->resize(size);
@@ -76,7 +90,7 @@ void CDataFusion::setPointCloud(PointCloud::Ptr cloud)
   mPointCloudData = cloud;
 }
 
-PointCloud::Ptr CDataFusion::getPointCloud()
+PointCloud::Ptr CDataFusion::getPointCloud() const
 {
   return mPointCloudData;
 }
@@ -86,7 +100,7 @@ void CDataFusion::setPolygonMesh(pcl::PolygonMesh::Ptr mesh)
   mPolygonMeshData = mesh;
 }
 
-pcl::PolygonMesh::Ptr CDataFusion::getPolygonMesh()
+pcl::PolygonMesh::Ptr CDataFusion::getPolygonMesh() const
 {
   return mPolygonMeshData;
 }
@@ -96,7 +110,7 @@ void CDataFusion::setTextureMesh(pcl::TextureMesh::Ptr mesh)
   mTextureMeshData = mesh;
 }
 
-pcl::TextureMesh::Ptr CDataFusion::getTextureMesh()
+pcl::TextureMesh::Ptr CDataFusion::getTextureMesh() const
 {
   return mTextureMeshData;
 }

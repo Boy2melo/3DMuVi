@@ -64,7 +64,7 @@ public:
    * \brief Returns the point cloud.
    * \return The point cloud which is kept by this data packet.
    */
-  PointCloud::Ptr getPointCloud();
+  PointCloud::Ptr getPointCloud() const;
 
   /*!
    * \brief Sets the polygon mesh.
@@ -76,7 +76,7 @@ public:
    * \brief Returns the polygon mesh.
    * \return The polygon mesh which is kept by this data packet.
    */
-  pcl::PolygonMesh::Ptr getPolygonMesh();
+  pcl::PolygonMesh::Ptr getPolygonMesh() const;
 
   /*!
    * \brief Sets the texture mesh.
@@ -88,13 +88,13 @@ public:
    * \brief Returns the texture mesh.
    * \return The texture mesh which is kept by this data packet.
    */
-  pcl::TextureMesh::Ptr getTextureMesh();
+  pcl::TextureMesh::Ptr getTextureMesh() const;
 
 private:
   PointCloud::Ptr mPointCloudData;
   pcl::PolygonMesh::Ptr mPolygonMeshData;
   pcl::TextureMesh::Ptr mTextureMeshData;
-  AStreamProvider* mpStream;
+  AStreamProvider* mpStream = nullptr;
 };
 
 #endif // CDATAFUSION_H
