@@ -21,6 +21,7 @@ public:
     QString getDataType() const override;
     AStreamProvider* getStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
+    void deserialize(AStreamProvider* stream) override;
     void setFeatureMatch(std::shared_ptr<FeatureMatch> match);
     std::shared_ptr<FeatureMatch> getFeatureMatch() const;
 private:

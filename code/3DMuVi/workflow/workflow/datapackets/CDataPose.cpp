@@ -57,6 +57,10 @@ void CDataPose::serialize(AStreamProvider *stream) {
     }
 }
 
+void CDataPose::deserialize(AStreamProvider *stream) {
+
+}
+
 std::shared_ptr<FeatureMap> CDataPose::getFeatureMap() const {
     return featureMap;
 }

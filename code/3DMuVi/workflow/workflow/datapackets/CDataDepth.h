@@ -26,6 +26,7 @@ public:
     QString getDataType() const override;
     AStreamProvider* getStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
+    void deserialize(AStreamProvider *stream) override;
 
     std::shared_ptr<std::vector<QImage>> getDepthMap() const;
     void setDepthMap(std::shared_ptr<std::vector<QImage>> depthMaps);

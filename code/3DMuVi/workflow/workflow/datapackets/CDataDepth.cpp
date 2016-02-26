@@ -45,6 +45,10 @@ void CDataDepth::serialize(AStreamProvider *stream) {
     }
 }
 
+void CDataDepth::deserialize(AStreamProvider *stream) {
+
+}
+
 std::shared_ptr<std::vector<QImage>> CDataDepth::getDepthMap() const {
     return depthMap;
 }
