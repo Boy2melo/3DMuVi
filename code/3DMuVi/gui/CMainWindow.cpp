@@ -49,6 +49,7 @@ CMainWindow::~CMainWindow()
 void CMainWindow::setWorkflow(AWorkflow* workflow)
 {
   ui->algorithmSelector->setWorkflow(*workflow);
+  ui->algorithmSettingsView->setWorkflow(*workflow);
   mWorkflow.reset(workflow);
 
   connect(workflow, &AWorkflow::sigDataStoreFinished, this,
