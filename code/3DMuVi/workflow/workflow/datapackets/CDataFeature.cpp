@@ -47,3 +47,7 @@ void CDataFeature::serialize(AStreamProvider* stream) {
         *dataStream << static_cast<quint64>(value0) << value1 << value2 << static_cast<quint32>(value3);
     }
 }
+
+void CDataFeature::deserialize(AStreamProvider *stream) {
+
+}
