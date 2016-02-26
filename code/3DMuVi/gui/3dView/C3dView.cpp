@@ -28,7 +28,7 @@ void C3dView::activate()
   emit relevantImagesChanged(imageIds);
 }
 
-void C3dView::applyData(CDataFusion* packet)
+void C3dView::applyData(CDataFusion const* packet)
 {
   mPointCloud = packet->getPointCloud();
   mPolygonMesh = packet->getPolygonMesh();
@@ -37,9 +37,9 @@ void C3dView::applyData(CDataFusion* packet)
   updateView();
 }
 
-void C3dView::applyData(CDataPose* packet)
+void C3dView::applyData(CDataPose const* packet)
 {
-  std::vector<SPose> poses = packet->getPose();
+  std::vector<SPose> poses = *packet->getPose();
 
   for(uint64_t id : mPoseIds)
   {

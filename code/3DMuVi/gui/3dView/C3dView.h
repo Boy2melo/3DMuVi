@@ -62,7 +62,7 @@ public:
 
   Displays the model which is in the given data packet.
   */
-  void applyData(CDataFusion* packet);
+  void applyData(CDataFusion const* packet) override;
 
   /*!
   \brief Shows the given pose data.
@@ -70,7 +70,7 @@ public:
 
   Displays the given poses as camera meshes.
   */
-  void applyData(CDataPose* packet);
+  void applyData(CDataPose const* packet) override;
 
 signals:
   /*!
