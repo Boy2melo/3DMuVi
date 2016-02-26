@@ -61,6 +61,10 @@ void CAlgorithmSelector::setWorkflow(AWorkflow& workflow)
     groupBox->layout()->addWidget(comboBox);
     layout()->addWidget(groupBox);
     layout()->addWidget(start);
+        if(plugins.size() > 0)
+        {
+          workflow.trySetStep(i, plugins.at(0));
+        }
   }
 }
 
@@ -119,8 +123,24 @@ void CAlgorithmSelector::startButtonPushed(bool isPushed)
     {
       startStopButton->setText("Stop");
       emit workflowRunning(true);
-      mpWorkflow->run(mDataStoreId);
+      if(!mpWorkflow->run(mDataStoreId))
+        {
+          startStopButton->setText("Start");
+          emit workflowRunning(false);
+        }
     }
+  }
+
+}
+
+void CAlgorithmSelector::onDataStoreFinished(CContextDataStore* dataStore)
+{
+  QPushButton* startStopButton = findChild<QPushButton*>();
+
+  if(dataStore->getId() == mDataStoreId)
+  {
+    startStopButton->setText("Start");
+    emit workflowRunning(false);
   }
 
 }
