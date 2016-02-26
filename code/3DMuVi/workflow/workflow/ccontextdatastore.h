@@ -6,8 +6,9 @@
 #include <QStringList>
 #include "idataview.h"
 #include "idatapacket.h"
-
-class CInputDataSet;
+#include <memory>
+#include "io/CInputDataSet.h"
+#include "io/CResultContext.h"
 
 /*!
    \class CContextDataStore
@@ -23,11 +24,6 @@ private:
     bool mAborted;
     QList<IDataPacket*> mDataPackets;
 protected:
-    /*!
-     * \brief Wird bei der Serialisierung aufgerufen
-     * \param context Der Serialisierungskontext
-     */
-    void OnSerialize(/*TODO*/);
 public:
     ~CContextDataStore();
 
@@ -48,12 +44,20 @@ public:
     T* getData();
 
     /*!
-    \brief Fügt daten vom Typ T hinzu
-    \param data Die Daten, die hinzugefügt werden sollen
+    \brief Fügt daten vom Typ T hinzu und gibt den Pointer auf das Packet zurück
     \param overwrite Ob die Daten, falls sie existieren, ersetzt werden sollen. Ansonsten wird bei vorhandensein nichts gemacht
     */
     template<typename T>
-    void appendData(T* data, bool overwrite = false);
+    T* createData(bool overwrite = true);
+
+    /*!
+    \brief Fügt Daten vom Typ T hinzu
+    \param data Die Daten auf dem Heap
+    \param overwrite Ob die Daten, falls sie existieren, ersetzt werden sollen. Ansonsten wird bei vorhandensein nichts gemacht
+    \return True, falls das Packet hinzugefügt wurde
+    */
+    template<typename T>
+    bool appendData(T* data, bool overwrite = true);
 
     /*!
      * \brief Wendet die Daten des Stores auf einen DataView an.
@@ -67,7 +71,7 @@ public:
     /*!
      * \brief Schreibe den Context auf die Festplatte
      */
-    void Serialize();
+    void Serialize(CResultContext *context);
     /*!
      * \brief Der aktuelle Verarbeitungsschritt im Workflow, in dem der Context sich befindet
      * \return Der aktuelle Verarbeitungsschritt

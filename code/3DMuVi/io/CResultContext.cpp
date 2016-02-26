@@ -1,12 +1,13 @@
 #include "CResultContext.h"
 
 CResultContext::CResultContext(QUrl path,
-                               CLogController* logController,
-                               CAlgorithmSettingController* algoSettings,
-                               CGlobalSettingController* globalSettings)
-{
+    CLogController* logController,
+    CAlgorithmSettingController* algoSettings,
+    CGlobalSettingController* globalSettings) {
+
+
     folder = QDir(path.path());
-    QString timeString = QDateTime::currentDateTime().toString();
+    auto timeString = QDateTime::currentDateTime().toString();
     folder.mkdir(timeString);
     folder.cd(timeString);
 
@@ -16,10 +17,9 @@ CResultContext::CResultContext(QUrl path,
     globalSettings->exportto(folderUrl);
 }
 
-void CResultContext::addDataPacket(IDataPacket* data)
-{
-    QString dataType = data->getDataType();
-    if(!folder.cd(dataType)){
+void CResultContext::addDataPacket(IDataPacket* data) {
+    auto dataType = data->getDataType();
+    if (!folder.cd(dataType)) {
         folder.mkdir(dataType);
         folder.cd(dataType);
     }
@@ -32,14 +32,13 @@ void CResultContext::addDataPacket(IDataPacket* data)
     folder.cdUp();
 }
 
-std::vector<QString> CResultContext::getDataPacketIds()
-{
+std::vector<QString> CResultContext::getDataPacketIds() {
     std::vector<QString> list;
-    QStringList resultFolders = folder.entryList(QDir::AllDirs);
-    for(QString resultFolder : resultFolders){
+    auto resultFolders = folder.entryList(QDir::AllDirs);
+    for (QString resultFolder : resultFolders) {
         folder.cd(resultFolder);
-        QStringList resultFiles = folder.entryList(QDir::Files);
-        for(QString resultFile : resultFiles){
+        auto resultFiles = folder.entryList(QDir::Files);
+        for (auto resultFile : resultFiles) {
             list.push_back(resultFile);
         }
         folder.cdUp();
@@ -47,7 +46,7 @@ std::vector<QString> CResultContext::getDataPacketIds()
     return list;
 }
 
-IDataPacket* CResultContext::getDataPacket(QString id)
-{
+IDataPacket* CResultContext::getDataPacket(QString id) {
+    //TODO NYI
     return nullptr;
 }

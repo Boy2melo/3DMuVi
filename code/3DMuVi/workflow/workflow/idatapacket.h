@@ -2,10 +2,12 @@
 #define IDATAPACKET_H
 
 #include <QString>
-#include "idataview.h"
 #include "io/AStreamProvider.h"
 #include <QUuid>
 #include <QDataStream>
+#include <memory>
+
+class IDataView;
 
 class IDataPacket {
 private:

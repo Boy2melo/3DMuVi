@@ -21,7 +21,7 @@ public:
      * \param fileName of the file.
      * \return a QDataStream pointer to a file.
      */
-    QDataStream* getNextStream();
+    QDataStream* getNextStream() override;
 
 private:
     QDataStream* stream;

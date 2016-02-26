@@ -13,20 +13,19 @@
 class CImageIo
 {
 public:
-    CImageIo();
     /*!
      * \brief Speichert ein Bild als PNG.
      * \param path Pfad zum Speicherort.
      * \param image Das zu speichernde Bild.
      * \return void
      */
-    void save(QImage image, QUrl path);
+    static void save(QImage image, QUrl path);
     /*!
      * \brief Speichert ein Bild als PNG.
      * \param path Pfad zum Speicherort.
      * \return void
      */
-    QImage load(QUrl path);
+    static QImage load(QUrl path);
 };
 
 #endif // IMAGEIO_H

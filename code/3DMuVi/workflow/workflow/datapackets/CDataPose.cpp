@@ -2,31 +2,31 @@
 
 //Erster Entwurf - Komplett ungetestet.
 
-CDataPose::CDataPose(){
-
+CDataPose::CDataPose() {
+    streamProvider = nullptr;
 }
 
-CDataPose::~CDataPose(){
-    if(streamProvider != nullptr){
+CDataPose::~CDataPose() {
+    if (streamProvider != nullptr) {
         delete(streamProvider);
     }
 }
 
-QString CDataPose::getDataType() const{
+QString CDataPose::getDataType() const {
     return DT_POSE;
 }
 
-AStreamProvider* CDataPose::getStreamProvider(){
-    if(streamProvider != nullptr){
+AStreamProvider* CDataPose::getStreamProvider() {
+    if (streamProvider != nullptr) {
         delete(streamProvider);
     }
     streamProvider = new CSFStreamProvider();
     return streamProvider;
 }
 
-void CDataPose::serialize(AStreamProvider *stream){
+void CDataPose::serialize(AStreamProvider *stream) {
     stream->setFileName(this->getId());
-    QDataStream* dataStream = stream->getNextStream();
+    auto dataStream = stream->getNextStream();
 
     //serialize featureMap
     uint32_t value0;
@@ -34,49 +34,41 @@ void CDataPose::serialize(AStreamProvider *stream){
     float value2;
     float value3;
     float value4;
-    *dataStream << (int)featureMap.size();
-    for(std::tuple<uint32_t, float, float, float, float> data : featureMap){
+    *dataStream << static_cast<int>(featureMap->size());
+    for (auto data : *featureMap) {
         std::tie(value0, value1, value2, value3, value4) = data;
-        *dataStream << (quint32)value0 << value1 << value2 << value3 << value4;
+        *dataStream << static_cast<quint32>(value0) << value1 << value2 << value3 << value4;
     }
 
     //serialize pose
-    *dataStream << (int)pose.size();
-    for(SPose p : pose){
-        *dataStream << (quint64)p.cameraId << p.translation << p.orientation << p.principalPoint;
+    *dataStream << static_cast<int>(pose->size());
+    for (auto p : *pose) {
+        *dataStream << static_cast<quint64>(p.cameraId) << p.translation << p.orientation << p.principalPoint;
 
-        *dataStream << (int)p.focalLength.size();
-        for(float f : p.focalLength){
-            *dataStream <<  f;
+        *dataStream << static_cast<int>(p.focalLength.size());
+        for (auto f : p.focalLength) {
+            *dataStream << f;
         }
 
-        *dataStream << (int)p.distortion.size();
-        for(float d : p.distortion){
+        *dataStream << static_cast<int>(p.distortion.size());
+        for (auto d : p.distortion) {
             *dataStream << d;
         }
     }
 }
 
-FeatureMatch const & CDataPose::getFeatureMatch(){
-    return featureMatch;
-}
-
-void CDataPose::setFeatureMatch(FeatureMatch && feature){
-    featureMatch = feature;
-}
-
-FeatureMap const & CDataPose::getFeatureMap(){
+std::shared_ptr<FeatureMap> CDataPose::getFeatureMap() const {
     return featureMap;
 }
 
-void CDataPose::setFeatureMap(FeatureMap && map){
+void CDataPose::setFeatureMap(std::shared_ptr<FeatureMap>  map) {
     featureMap = map;
 }
 
-std::vector<SPose> const & CDataPose::getPose(){
+std::shared_ptr<std::vector<SPose>> CDataPose::getPose() const {
     return pose;
 }
 
-void CDataPose::setPose(std::vector<SPose> && poses){
+void CDataPose::setPose(std::shared_ptr<std::vector<SPose>> poses) {
     pose = poses;
 }

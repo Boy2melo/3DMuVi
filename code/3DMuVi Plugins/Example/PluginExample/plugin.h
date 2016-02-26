@@ -51,6 +51,12 @@ public:
      * Datum der letzten Änderung
      */
     virtual QDate Date() const override;
+
+    /*!
+    \brief Der Name des Plugins
+    */
+    virtual QString Name() const override;
+
     /*!
      * \brief Version
      * \return Versionsnummer des Plugins

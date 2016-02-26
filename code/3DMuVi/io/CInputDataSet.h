@@ -20,6 +20,7 @@
  * Stellt Bilder aus einem Ordner für den Workflow als Eingabedaten bereit.
  */
 class CInputDataSet : public IDataPacket {
+    std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> inputData;
 public:
     /*!
      * \brief Ist der Konstruktor der Klasse. Lädt alle Eingabebilder, versieht diese mit einer Id und generiert zu jedem Bild ein Thumbnail.
@@ -43,8 +44,6 @@ public:
     AStreamProvider* getStreamProvider() override;
     void serialize(AStreamProvider* stream) override {}
     void deserialize(AStreamProvider* stream) override {}
-private:
-    std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> inputData;
 };
 
 #endif // INPUTDATASET_H

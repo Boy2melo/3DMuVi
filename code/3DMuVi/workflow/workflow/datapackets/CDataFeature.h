@@ -13,19 +13,18 @@ using FeatureMatch = std::vector<std::tuple<uint64_t, float, float, uint32_t>>;
  *
  * Erster Entwurf - Komplett ungetestet.
  */
-class CDataFeature : public IDataPacket
-{
+class CDataFeature : public IDataPacket {
 public:
     CDataFeature();
     ~CDataFeature();
 
     QString getDataType() const override;
-    AStreamProvider* getStreamProvider();
-    void serialize(AStreamProvider* stream);
-    void setFeatureMatch(FeatureMatch && match);
-    FeatureMatch const & getFeatureMatch();
+    AStreamProvider* getStreamProvider() override;
+    void serialize(AStreamProvider* stream) override;
+    void setFeatureMatch(std::shared_ptr<FeatureMatch> match);
+    std::shared_ptr<FeatureMatch> getFeatureMatch() const;
 private:
-    FeatureMatch featureMatchData;
+    std::shared_ptr<FeatureMatch> featureMatchData;
     AStreamProvider* streamProvider;
 };
 

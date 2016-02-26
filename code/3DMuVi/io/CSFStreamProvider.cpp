@@ -1,6 +1,8 @@
 #include "CSFStreamProvider.h"
 
 CSFStreamProvider::CSFStreamProvider(){
+    stream = nullptr;
+    file = nullptr;
 }
 
 CSFStreamProvider::~CSFStreamProvider(){

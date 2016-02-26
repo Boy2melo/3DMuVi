@@ -18,6 +18,10 @@ QDate _CLASS_GEN(Plugin)::Date() const {
     return QDate::fromString(str(_PLUGIN_DATE), "yyyy-MM-dd");
 }
 
+QString _CLASS_GEN(Plugin)::Name() const {
+    return str(_PLUGIN_NAME);
+}
+
 QJsonObject _CLASS_GEN(Plugin)::GetParameterJson() const {
     return mParameters.value("Default").toObject();
 }
