@@ -1,5 +1,4 @@
 #include "CAlgorithmSettingsView.h"
-#include <settings/CAlgorithmSettingsModel.h>
 
 //============================================================
 /*!
@@ -8,7 +7,6 @@
 //============================================================
 CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(parent)
 {
-
 }
 
 //============================================================
@@ -18,10 +16,15 @@ CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(pare
 //============================================================
 void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow)
 {
+    model = QPointer<CAlgorithmSettingsModel>(new CAlgorithmSettingsModel(workflow, *settingcontroller));
+    this->setModel(model);
+    //saveloadwidget einbinden
+    this->show();
+}
 
-    CAlgorithmSettingsModel model;
-    setModel(model);
-
+void CAlgorithmSettingsView::setAlgorithmController(CAlgorithmSettingController& controller)
+{
+    settingcontroller = QPointer<CAlgorithmSettingController>(&controller);
 }
 
 //============================================================
@@ -31,7 +34,6 @@ void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow)
 //============================================================
 void CAlgorithmSettingsView::onAlgorithmChanged(int step)
 {
-    QUrl url;
-
-    this->model().loadSettings(step, url);
+    model->algorithmChanged(step);
+    this->show();
 }

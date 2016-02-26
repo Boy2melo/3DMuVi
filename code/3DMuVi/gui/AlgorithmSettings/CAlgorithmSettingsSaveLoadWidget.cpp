@@ -1,28 +1,33 @@
 #include "CAlgorithmSettingsSaveLoadWidget.h"
-#include "ui_CAlgorithmSettingsSaveLoad.h"
-
+#include <QPushButton>
 //============================================================
 /*!
 @param row row of the algorithm
 @param model the Algorthmsettingsmodel
  */
 //============================================================
-void CAlgorithmSettingsSaveLoadWidget::CAlgorithmSettingsSaveLoadWidget(int row, CAlgorithmSettingsModel& model),
-    ui(new Ui::CAlgortihmSettingsSaveLoad)
-
+CAlgorithmSettingsSaveLoadWidget::CAlgorithmSettingsSaveLoadWidget(QWidget* parent, int row, CAlgorithmSettingsModel& model):
+    QWidget(parent)
 {
-    ui->setupUi(this);
-    this->model = model;
-    this->row = row;
-
-    //signalslotsconnecten
+    settingmodel = &model;
+    settingrow = row;
+    save = new QPushButton("save", this);
+    load = new QPushButton("load", this);
+    connect(load, &QPushButton::clicked,
+            this, &CAlgorithmSettingsSaveLoadWidget::loadbutton);
+    connect(save, &QPushButton::clicked,
+            this, &CAlgorithmSettingsSaveLoadWidget::savebutton);
 }
-
-void loadbutton()
+CAlgorithmSettingsSaveLoadWidget::~CAlgorithmSettingsSaveLoadWidget()
 {
-    this.model.laodSetting(row, QUrl());
+    delete save;
+    delete load;
 }
-void savebutton()
+void CAlgorithmSettingsSaveLoadWidget::loadbutton()
 {
-    this.model.saveSetting(row,QUrl());
+    this->settingmodel->loadSettings(settingrow, QUrl());
+}
+void CAlgorithmSettingsSaveLoadWidget::savebutton()
+{
+    this->settingmodel->saveSettings(settingrow,QUrl());
 }
