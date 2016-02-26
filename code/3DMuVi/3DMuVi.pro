@@ -22,6 +22,9 @@ unix
           -lGLU
 }
 
+#TODO: Does MSVC need a similar option?
+gcc:QMAKE_LFLAGS += -rdynamic
+
 DEPENDPATH += .
 MOC_DIR += ./GeneratedFiles/debug
 OBJECTS_DIR += debug
