@@ -3,6 +3,7 @@
 
 #include <QTreeView>
 #include <QPointer>
+#include <QTemporaryDir>
 #include <workflow/workflow/aworkflow.h>
 #include <settings/CAlgorithmSettingsModel.h>
 #include <settings/CAlgorithmSettingController.h>
@@ -14,6 +15,9 @@ public:
    * \param parent parent of the view
    */
   CAlgorithmSettingsView(QWidget* parent = nullptr);
+  /*! \brief destructor
+   */
+  ~CAlgorithmSettingsView();
   /*!
    * \brief setWorkflow sets the workflow and shows the view for the workflow
    * \param workflow the workflow
@@ -30,6 +34,7 @@ public slots:
  private:
   QPointer<CAlgorithmSettingsModel> model;
   QPointer<CAlgorithmSettingController> settingcontroller;
+  QTemporaryDir temp;
 };
 
 #endif // CALGORITMSETTINGSVIEW_H

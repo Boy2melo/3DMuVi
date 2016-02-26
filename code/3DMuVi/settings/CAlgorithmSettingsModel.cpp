@@ -10,13 +10,13 @@ CAlgorithmSettingsModel::CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithm
                     &controller, &CAlgorithmSettingController::saveQJson);
     this->workflow = &workflow;
     this->settingcontroller = &controller;
-    for (quint32 i = 0; i < workflow.getStepCount(); i++) {
+    /*for (quint32 i = 0; i < workflow.getStepCount(); i++) {
     QJsonObject object = workflow.getStep(i)->GetParameterJson();
         this->loadQJson(object);
         QUrl url = QUrl();
         url.setPassword("a" + object.keys().value(0));
         emit saveQJson(object, url);
-    }
+    }*/
 
 
 }

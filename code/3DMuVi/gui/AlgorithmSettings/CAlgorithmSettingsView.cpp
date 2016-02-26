@@ -1,6 +1,7 @@
 #include "CAlgorithmSettingsView.h"
 #include "CAlgorithmSettingsSaveLoadWidget.h"
 #include <QModelIndex>
+#include <QUrl>
 //============================================================
 /*!
 @param workflow
@@ -8,6 +9,15 @@
 //============================================================
 CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(parent)
 {
+    QTemporaryDir temp;
+    if(temp.isValid()) {
+        QUrl url = QUrl(temp.path());
+    settingcontroller = QPointer<CAlgorithmSettingController>(new CAlgorithmSettingController((url)));
+    }
+}
+CAlgorithmSettingsView::~CAlgorithmSettingsView()
+{
+    temp.remove();
 }
 
 //============================================================
