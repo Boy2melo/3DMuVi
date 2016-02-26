@@ -13,7 +13,12 @@ private:
     QPushButton* save;
     QPushButton* load;
 public:
-  //TODO: Include CAlgorithmSettingsModel
+    /*!
+   * \brief CAlgorithmSettingsSaveLoadWidget creates a new widget
+   * \param parent parent of the widget
+   * \param row row in the model
+   * \param model the settingsmodel, in which the widget is used
+   */
   CAlgorithmSettingsSaveLoadWidget(QWidget* parent, int row, CAlgorithmSettingsModel& model);
   ~CAlgorithmSettingsSaveLoadWidget();
 public slots:
