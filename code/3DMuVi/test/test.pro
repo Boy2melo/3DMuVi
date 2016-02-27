@@ -138,13 +138,13 @@ SOURCES += gui/CTestCLogWidget.cpp \
            main.cpp
 
 PCL{
-  HEADERS += ./gui/3dView/C3dView.h \
-      ./gui/3dView/CPclView.h \
-      ./workflow/workflow/datapackets/CDataFusion.h
+  HEADERS += ../gui/3dView/C3dView.h \
+      ../gui/3dView/CPclView.h \
+      ../workflow/workflow/datapackets/CDataFusion.h
 
-  SOURCES += ./gui/3dView/C3dView.cpp \
-    ./gui/3dView/CPclView.cpp \
-    ./workflow/workflow/datapackets/CDataFusion.cpp
+  SOURCES += ../gui/3dView/C3dView.cpp \
+    ../gui/3dView/CPclView.cpp \
+    ../workflow/workflow/datapackets/CDataFusion.cpp
 }
 
 FORMS += ../gui/forms/CMainWindow.ui \
