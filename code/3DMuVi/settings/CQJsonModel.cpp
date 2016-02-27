@@ -25,9 +25,8 @@
 #include <QIcon>
 #include <QFont>
 
-CQJsonModel::CQJsonModel(QObject *parent, QVector<QJsonObject> list) :
-    QAbstractItemModel(parent)
-{
+CQJsonModel::CQJsonModel(QObject* parent, QVector<QJsonObject> list) :
+    QAbstractItemModel(parent) {
     mRootItem = new CQJsonTreeItem;
     mHeaders.append("key");
     mHeaders.append("value");
@@ -37,34 +36,32 @@ CQJsonModel::CQJsonModel(QObject *parent, QVector<QJsonObject> list) :
 
 }
 
-void CQJsonModel::saveSettings(int row, QUrl filename)
-{
+void CQJsonModel::saveSettings(int row, QUrl filename) {
     QJsonObject data;
     data = mRootItem->getChilds().value(row)->toJson();
     emit saveQJson(data, filename);
 }
 
-void CQJsonModel::loadSettings(int row, QUrl filename)
-{
+void CQJsonModel::loadSettings(int row, QUrl filename) {
     emit requestQJson(filename);
     mRootItem->getChilds().removeAt(row);
     int j = mRootItem->getChilds().size() - 1;
     mRootItem->getChilds().swap(row, j);
 }
-Qt::ItemFlags CQJsonModel::flags(QModelIndex& index)
-{
-int row;
-row = index.row();
-//checks if not root item or the one below
-if (row == 0 || index.parent().parent().row()) {
-    return Qt::ItemIsSelectable;
-} else {
-    return Qt::ItemIsEditable;
-}
+
+Qt::ItemFlags CQJsonModel::flags(QModelIndex& index) {
+    int row;
+    row = index.row();
+    //checks if not root item or the one below
+    if (row == 0 || index.parent().parent().row()) {
+        return Qt::ItemIsSelectable;
+    }
+    else {
+        return Qt::ItemIsEditable;
+    }
 }
 
-bool CQJsonModel::setData(QModelIndex& index, QVariant& value, int role)
-{
+bool CQJsonModel::setData(QModelIndex& index, QVariant& value, int role) {
     if (!index.isValid())
         return false;
     QJsonValue tempvalue = value.toJsonValue();
@@ -78,29 +75,27 @@ bool CQJsonModel::setData(QModelIndex& index, QVariant& value, int role)
     }
     return false;
 }
-CQJsonTreeItem CQJsonModel::backtrack(QModelIndex& index)
-{
-    if(index.parent().parent().isValid() == false) //one row under root
+
+CQJsonTreeItem CQJsonModel::backtrack(QModelIndex& index) {
+    if (index.parent().parent().isValid() == false) //one row under root
     {
-       return mRootItem->getChilds().value(index.row());
-    } else {
+        return mRootItem->getChilds().value(index.row());
+    }
+    else {
         QModelIndex tempindex = index.parent();
-        QModelIndex &parent = tempindex;
+        QModelIndex& parent = tempindex;
         CQJsonTreeItem temp = backtrack(parent);
         return temp.getChilds().value(index.row());
     }
 }
 
-void CQJsonModel::loadQJson(QJsonObject data)
-{
+void CQJsonModel::loadQJson(QJsonObject data) {
     QJsonDocument docu = QJsonDocument(data);
     loadJson(docu.toJson());
 }
 
 
-
-bool CQJsonModel::load(const QString &fileName)
-{
+bool CQJsonModel::load(const QString& fileName) {
     QFile file(fileName);
     bool success = false;
     if (file.open(QIODevice::ReadOnly)) {
@@ -112,21 +107,19 @@ bool CQJsonModel::load(const QString &fileName)
     return success;
 }
 
-bool CQJsonModel::load(QIODevice *device)
-{
+bool CQJsonModel::load(QIODevice* device) {
     return loadJson(device->readAll());
 }
 
-bool CQJsonModel::loadJson(const QByteArray &json)
-{
+bool CQJsonModel::loadJson(const QByteArray& json) {
     mDocument = QJsonDocument::fromJson(json);
 
-    if (!mDocument.isNull())
-    {
+    if (!mDocument.isNull()) {
 
         if (mDocument.isArray()) {
             mRootItem->appendChild(CQJsonTreeItem::load(QJsonValue(mDocument.array())));
-        } else {
+        }
+        else {
             mRootItem->appendChild(CQJsonTreeItem::load(QJsonValue(mDocument.object())));
         }
 
@@ -136,17 +129,16 @@ bool CQJsonModel::loadJson(const QByteArray &json)
 }
 
 
-QVariant CQJsonModel::data(const QModelIndex &index, int role) const
-{
+QVariant CQJsonModel::data(const QModelIndex& index, int role) const {
 
     if (!index.isValid())
         return QVariant();
 
 
-    CQJsonTreeItem *item = static_cast<CQJsonTreeItem*>(index.internalPointer());
+    CQJsonTreeItem* item = static_cast<CQJsonTreeItem*>(index.internalPointer());
 
 
-    if ((role == Qt::DecorationRole) && (index.column() == 0)){
+    if ((role == Qt::DecorationRole) && (index.column() == 0)) {
 
         return mTypeIcons.value(item->type());
     }
@@ -162,13 +154,11 @@ QVariant CQJsonModel::data(const QModelIndex &index, int role) const
     }
 
 
-
     return QVariant();
 
 }
 
-QVariant CQJsonModel::headerData(int section, Qt::Orientation orientation, int role) const
-{
+QVariant CQJsonModel::headerData(int section, Qt::Orientation orientation, int role) const {
     if (role != Qt::DisplayRole)
         return QVariant();
 
@@ -180,32 +170,30 @@ QVariant CQJsonModel::headerData(int section, Qt::Orientation orientation, int r
         return QVariant();
 }
 
-QModelIndex CQJsonModel::index(int row, int column, const QModelIndex &parent) const
-{
+QModelIndex CQJsonModel::index(int row, int column, const QModelIndex& parent) const {
     if (!hasIndex(row, column, parent))
         return QModelIndex();
 
-    CQJsonTreeItem *parentItem;
+    CQJsonTreeItem* parentItem;
 
     if (!parent.isValid())
         parentItem = mRootItem;
     else
         parentItem = static_cast<CQJsonTreeItem*>(parent.internalPointer());
 
-    CQJsonTreeItem *childItem = parentItem->child(row);
+    CQJsonTreeItem* childItem = parentItem->child(row);
     if (childItem)
         return createIndex(row, column, childItem);
     else
         return QModelIndex();
 }
 
-QModelIndex CQJsonModel::parent(const QModelIndex &index) const
-{
+QModelIndex CQJsonModel::parent(const QModelIndex& index) const {
     if (!index.isValid())
         return QModelIndex();
 
-    CQJsonTreeItem *childItem = static_cast<CQJsonTreeItem*>(index.internalPointer());
-    CQJsonTreeItem *parentItem = childItem->parent();
+    CQJsonTreeItem* childItem = static_cast<CQJsonTreeItem*>(index.internalPointer());
+    CQJsonTreeItem* parentItem = childItem->parent();
 
     if (parentItem == mRootItem)
         return QModelIndex();
@@ -213,9 +201,8 @@ QModelIndex CQJsonModel::parent(const QModelIndex &index) const
     return createIndex(parentItem->row(), 0, parentItem);
 }
 
-int CQJsonModel::rowCount(const QModelIndex &parent) const
-{
-    CQJsonTreeItem *parentItem;
+int CQJsonModel::rowCount(const QModelIndex& parent) const {
+    CQJsonTreeItem* parentItem;
     if (parent.column() > 0)
         return 0;
 
@@ -227,13 +214,12 @@ int CQJsonModel::rowCount(const QModelIndex &parent) const
     return parentItem->childCount();
 }
 
-int CQJsonModel::columnCount(const QModelIndex &parent) const
-{
+int CQJsonModel::columnCount(const QModelIndex& parent) const {
     Q_UNUSED(parent)
     return 2;
 }
 
-void CQJsonModel::setIcon(const QJsonValue::Type &type, const QIcon &icon)
-{
-    mTypeIcons.insert(type,icon);
+void CQJsonModel::setIcon(const QJsonValue::Type& type, const QIcon& icon) {
+    mTypeIcons.insert(type, icon);
 }
+

@@ -82,6 +82,17 @@ Die Aufgabe umfasst Design, Implementierung und Dokumentation einer intuitiv bed
 
 <hr/>
 
+## Bauen neuer Plugins
+### Hinweise zu VisualStudio
+Es empfiehlt sich, neue Plugins immer in der Solution 3DMuVi anzulegen.
+
+Um ein neues Plugin mit VisualStudio zu bauen, wird zuerst eine neue Qt Library angelegt. Danach wird das Example-Plugin kopiert und vorhandene Dateien gelöscht. Nun sind folgende Änderungen vorzunehmen:
+- Unter References in der Projektansicht wird ein Verweis auf 3DMuVi hinzugefügt.
+- In den Projekteinstellungen wird der Includepfad zum Wurzelverzeichniss von 3DMuVi hinzugefügt
+- In den Einstellungen von plugin.h wird unter dem Custom Build Tool der Commandlineaufruf um den selben Pfad ergänzt, indem "-I<pfad>" ans ende angehängt wird (mit "")
+
+<hr/>
+
 ## Software und Bibliotheken ##
  - C++11/14
  - [Qt5](http://http://www.qt.io/)

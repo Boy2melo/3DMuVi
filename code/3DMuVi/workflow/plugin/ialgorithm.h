@@ -16,8 +16,7 @@
  *
  * Ein Interface, dass die Funktionen der Algorithmen verallgemeinert und unabhängig von Typen macht, wodurch das Template [TAlgorithm](@ref TAlgorithm) polymorph wird.
  */
-class IAlgorithm : public QObject {
-    Q_OBJECT
+class IAlgorithm {
 public:
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus

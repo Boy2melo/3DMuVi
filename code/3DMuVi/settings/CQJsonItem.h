@@ -4,8 +4,7 @@
 #include <QJsonValue>
 #include <QJsonArray>
 #include <QJsonObject>
-class CQJsonTreeItem
-{
+class CQJsonTreeItem {
 public:
     CQJsonTreeItem(CQJsonTreeItem * parent = 0);
     ~CQJsonTreeItem();

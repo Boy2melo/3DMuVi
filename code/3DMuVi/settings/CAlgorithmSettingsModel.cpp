@@ -1,13 +1,12 @@
 #include "CAlgorithmSettingsModel.h"
 
-CAlgorithmSettingsModel::CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithmSettingController& controller)
-{
-    QObject::connect(&controller, &CAlgorithmSettingController::loadQJson ,
-                    this, &CQJsonModel::loadQJson);
-    QObject::connect(this, &CQJsonModel::requestQJson,
-                    &controller, &CAlgorithmSettingController::requestQJson);
-    QObject::connect(this, &CQJsonModel::saveQJson,
-                    &controller, &CAlgorithmSettingController::saveQJson);
+CAlgorithmSettingsModel::CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithmSettingController& controller) {
+    connect(&controller, &CAlgorithmSettingController::loadQJson,
+            this, &CQJsonModel::loadQJson);
+    connect(this, &CQJsonModel::requestQJson,
+            &controller, &CAlgorithmSettingController::requestQJson);
+    connect(this, &CQJsonModel::saveQJson,
+            &controller, &CAlgorithmSettingController::saveQJson);
     this->workflow = &workflow;
     this->settingcontroller = &controller;
     /*for (quint32 i = 0; i < workflow.getStepCount(); i++) {
@@ -20,13 +19,13 @@ CAlgorithmSettingsModel::CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithm
 
 
 }
-CAlgorithmSettingsModel::CAlgorithmSettingsModel(QObject *parent, QVector<QJsonObject> list)
-    : CQJsonModel(parent, list)
-{
+
+CAlgorithmSettingsModel::CAlgorithmSettingsModel(QObject* parent, QVector<QJsonObject> list)
+    : CQJsonModel(parent, list), workflow(nullptr), settingcontroller(nullptr) {
 
 }
-void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename)
-{
+
+void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename) {
     QJsonObject data;
     data = mRootItem->getChilds().value(row)->toJson();
     if (filename.isEmpty() == true) {
@@ -37,8 +36,8 @@ void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename)
         workflow->getStep(row)->getAlgorithm()->setParameters(&data);
     }
 }
-void CAlgorithmSettingsModel::loadSettings(int row, QUrl filename)
-{
+
+void CAlgorithmSettingsModel::loadSettings(int row, QUrl filename) {
     if (filename.isEmpty() == true) {
         filename.setPassword("a" + workflow->getStep(row)->GetPluginType());
     }
@@ -46,15 +45,15 @@ void CAlgorithmSettingsModel::loadSettings(int row, QUrl filename)
     mRootItem->getChilds().removeAt(row);
     int j = mRootItem->getChilds().size() - 1;
     mRootItem->getChilds().swap(row, j);
-
 }
-void CAlgorithmSettingsModel::algorithmChanged(int step)
-{
+
+void CAlgorithmSettingsModel::algorithmChanged(int step) {
     QJsonObject object = workflow->getStep(step)->GetParameterJson();
     loadQJson(object);
     mRootItem->getChilds().swap(step, mRootItem->getChilds().size() - 1);
     mRootItem->getChilds().removeLast();
-    QUrl url = QUrl();
+    QUrl url;
     url.setPassword("a" + object.keys().value(0));
     emit saveQJson(object, url);
 }
+

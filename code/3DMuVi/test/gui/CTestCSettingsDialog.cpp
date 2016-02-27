@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <QCheckBox>
+#include <QComboBox>
 #include <QFileDialog>
 #include <QLineEdit>
 #include <QMessageBox>
@@ -8,6 +10,7 @@
 
 #include <gui/CSettingsDialog.h>
 #include <settings/CGlobalSettingController.h>
+#include <logger/controll/CLogController.h>
 
 #include "CTestCSettingsDialog.h"
 
@@ -35,10 +38,23 @@ void CTestCSettingsDialog::test()
   for(QWidget* w : QApplication::allWidgets())
   {
     QLineEdit* resultDirectoryEdit = qobject_cast<QLineEdit*>(w);
+    QComboBox* logLevelComboBox = qobject_cast<QComboBox*>(w);
+    QCheckBox* logEnabledCheckBox = qobject_cast<QCheckBox*>(w);
 
     if(resultDirectoryEdit)
     {
       QTest::keyClicks(resultDirectoryEdit, "/tmp/");
+    }
+
+    if(logLevelComboBox)
+    {
+      logLevelComboBox->setCurrentText("Error");
+    }
+
+    if(logEnabledCheckBox && (logEnabledCheckBox->text() == "Window logging" ||
+                              logEnabledCheckBox->text() == "Data logging"))
+    {
+      logEnabledCheckBox->setChecked(true);
     }
   }
 
@@ -54,6 +70,10 @@ void CTestCSettingsDialog::test()
   }
 
   QCOMPARE(settingController.getSetting("resultDirectory"), QString("/tmp/"));
+  QCOMPARE(settingController.getSetting("minLogLevel"), QString::number(LOG_ERROR));
+  QCOMPARE(settingController.getSetting("logWindowEnabled"), QString(true));
+  QCOMPARE(settingController.getSetting("logDataEnabled"), QString(true));
+  QCOMPARE(CLogController::instance().getMinLogLevel(), static_cast<uchar>(LOG_ERROR));
 }
 
 void CTestCSettingsDialog::testResultDirectoryDialogShown()
@@ -79,6 +99,7 @@ void CTestCSettingsDialog::testCheckSettingsError()
 
     if(messageBox && messageBox->windowTitle() == "Warning")
     {
+      QTimer::singleShot(WAITING_TIME_LONG, this, &CTestCSettingsDialog::testCheckSettingsError);
       QTest::keyClick(messageBox, Qt::Key_Enter);
     }
   }

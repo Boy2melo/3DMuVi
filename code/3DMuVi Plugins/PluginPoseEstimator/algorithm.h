@@ -1,4 +1,4 @@
-#ifndef ALGORITHM_H
+﻿#ifndef ALGORITHM_H
 #define ALGORITHM_H
 #include "workflow/plugin/ialgorithm.h"
 #include "plugin_config.h"
@@ -7,7 +7,6 @@
 
 class _CLASS_GEN(Algorithm) : public IAlgorithm
 {
-    Q_OBJECT
 private:
     bool mIsBusy;
     CLogController *mLogger;

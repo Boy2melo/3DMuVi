@@ -25,8 +25,8 @@ public:
      */
     CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithmSettingController& controller);
     CAlgorithmSettingsModel(QObject *parent, QVector<QJsonObject> list);
-    void saveSettings(int row, QUrl filename);
-    void loadSettings(int row, QUrl filename);
+    void saveSettings(int row, QUrl filename) override;
+    void loadSettings(int row, QUrl filename) override;
     /*!
      * \brief algorithmChanged changes the model, if an algorithm is changed
      * \param step number of the algorithm

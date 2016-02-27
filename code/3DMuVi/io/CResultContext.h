@@ -28,13 +28,11 @@ public:
     /*!
      * \brief Constructor of the Class
      * \param path Path to the location wher the results should be saved.
-     * \param logController Provides the log from the previously execution.
      * \param algoSettings Provides the settings from the algorithms.
      * \param globalSettings Provides the global settings.
      * \return void
      */
     CResultContext(QUrl path,
-        CLogController* logController,
         CAlgorithmSettingController* algoSettings,
         CGlobalSettingController* globalSettings);
 
@@ -44,7 +42,7 @@ public:
      * \param data TDataPacket which get stored.
      * \return void
      */
-    void addDataPacket(IDataPacket* data);
+    void addDataPacket(std::shared_ptr<IDataPacket> data);
 
     /*!
      * \brief Returns a vector with all ids of TDataPackets which was found

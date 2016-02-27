@@ -1,0 +1,8 @@
+{
+    "Default" : {
+        "EinParameter": 100
+    },
+    "Description" : {
+        "EinParameter" : "Erster Parameter"
+    }
+}

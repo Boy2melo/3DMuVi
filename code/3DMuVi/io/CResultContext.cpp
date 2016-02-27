@@ -1,7 +1,6 @@
 #include "CResultContext.h"
 
 CResultContext::CResultContext(QUrl path,
-    CLogController* logController,
     CAlgorithmSettingController* algoSettings,
     CGlobalSettingController* globalSettings) {
 
@@ -12,12 +11,12 @@ CResultContext::CResultContext(QUrl path,
     folder.cd(timeString);
 
     QUrl folderUrl(folder.path());
-    logController->setLog(folderUrl);
-    algoSettings->exportto(folderUrl);
-    globalSettings->exportto(folderUrl);
+    CLogController::instance().setLog(folderUrl);
+    algoSettings->exportTo(folderUrl);
+    globalSettings->exportTo(folderUrl);
 }
 
-void CResultContext::addDataPacket(IDataPacket* data) {
+void CResultContext::addDataPacket(std::shared_ptr<IDataPacket> data) {
     auto dataType = data->getDataType();
     if (!folder.cd(dataType)) {
         folder.mkdir(dataType);
