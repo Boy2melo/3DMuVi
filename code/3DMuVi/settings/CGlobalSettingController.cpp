@@ -3,24 +3,21 @@
 #include "io/CTextIo.h"
 #include <QFileInfo>
 
-CGlobalSettingController::CGlobalSettingController()
-{
+CGlobalSettingController::CGlobalSettingController() {
     QUrl directory;
     io = CTextIo();
     directory = QUrl(QUrl::fromLocalFile(QFileInfo("globalconfig.json").absoluteFilePath()));
     import(directory, directory.fileName());
 }
 
-QString CGlobalSettingController::getSetting(QString name)
-{
-     QJsonValue value = settings.value(name);
-     QString result = QString(value.toString());
-     return result;
+QString CGlobalSettingController::getSetting(QString name) {
+    QJsonValue value = settings.value(name);
+    QString result = QString(value.toString());
+    return result;
 }
 
-bool CGlobalSettingController::setSetting(QString name, QString value)
-{ 
-    if(settings.contains(name)){
+bool CGlobalSettingController::setSetting(QString name, QString value) {
+    if (settings.contains(name)) {
         settings.insert(name, QJsonValue(value));
         QJsonDocument docu = QJsonDocument(settings);
         QString file = QString(docu.toJson());
@@ -32,28 +29,25 @@ bool CGlobalSettingController::setSetting(QString name, QString value)
     }
 }
 
-void CGlobalSettingController::import(QUrl directory, QString name)
-{
+void CGlobalSettingController::import(QUrl directory, QString name) {
     QUrl url;
     QString file;
     if (directory.fileName() == name) {
-    url = QUrl(directory.path() + "/" + name);
+        url = QUrl(directory.path() + "/" + name);
     }
     file = io.load(url);
     QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
     settings = docu.object();
 }
 
-void CGlobalSettingController::exportto(QUrl directory)
-{
+void CGlobalSettingController::exportto(QUrl directory) {
     QJsonDocument docu = QJsonDocument(settings);
     QString file = QString(docu.toJson());
     directory = QUrl(directory.url() + "/globalconfig");
     io.save(directory, file);
 }
 
-void CGlobalSettingController::resettoDefault()
-{
+void CGlobalSettingController::resettoDefault() {
     QUrl directory;
     directory = QUrl(QUrl::fromLocalFile(QFileInfo("defaultglobalconfig.json").absoluteFilePath()));
     import(directory, directory.fileName());

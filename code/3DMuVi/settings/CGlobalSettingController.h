@@ -6,8 +6,7 @@
 #include <QJsonObject>
 #include "io/CTextIo.h"
 
-class CGlobalSettingController
-{
+class CGlobalSettingController {
 private:
     QJsonObject settings;
     CTextIo io;
@@ -21,7 +20,7 @@ public:
      * \param name name of the setting
      * \return value of teh setting as QString
      */
-    QString getSetting(QString name);
+    QString getSetting(QString name) const;
     /*!
      * \sets a global setting
      * \param name mane of the setting
@@ -38,7 +37,7 @@ public:
      * \exports the globalsettings in a config file in JsonFormat
      * \param directory the directory where the config should be
      */
-    void exportto(QUrl diretory);
+    void exportTo(QUrl diretory) const;
     /*!
      * \resets all settings to default
      */

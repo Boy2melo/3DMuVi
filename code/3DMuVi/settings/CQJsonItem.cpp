@@ -19,21 +19,19 @@
 
 #include "CQJsonItem.h"
 
-CQJsonTreeItem::CQJsonTreeItem(CQJsonTreeItem *parent)
-{
+CQJsonTreeItem::CQJsonTreeItem(CQJsonTreeItem* parent) {
 
     mParent = parent;
 
 
 }
 
-CQJsonTreeItem::~CQJsonTreeItem()
-{
+CQJsonTreeItem::~CQJsonTreeItem() {
     qDeleteAll(mChilds);
 
 }
-QList<CQJsonTreeItem*> CQJsonTreeItem::getChilds()
-{
+
+QList<CQJsonTreeItem*> CQJsonTreeItem::getChilds() {
     return mChilds;
 }
 
@@ -45,123 +43,104 @@ QJsonObject CQJsonTreeItem::toJson() {
 
 QJsonValue CQJsonTreeItem::toJsonValue() {
     QJsonValue value;
-    switch (mType)
-    {
-    case QJsonValue::String:
-    {
-        value = QJsonValue(mValue);
-        break;
-    }
-    case QJsonValue::Double:
-    {
-        value = QJsonValue(mValue.toDouble());
-        break;
-    }
-    case QJsonValue::Bool:
-    {
-        bool boolvalue = false;
-        if (mValue == "true") {
-            boolvalue = true;
+    switch (mType) {
+        case QJsonValue::String: {
+            value = QJsonValue(mValue);
+            break;
         }
-        value = QJsonValue(boolvalue);
-        break;
-    }
-    case QJsonValue::Object:
-    {
-        QJsonObject object;
-        for (int i = 0; i < mChilds.size(); i++) {
-            object.insert(mChilds.value(i)->key(), mChilds.value(i)->toJsonValue());
+        case QJsonValue::Double: {
+            value = QJsonValue(mValue.toDouble());
+            break;
         }
-        value = object;
-        break;
-    }
-    case QJsonValue::Array:
-    {
-        QJsonArray array;
-        for (int i = 0; i < mChilds.size(); i++) {
-            array.append(mChilds.value(i)->toJsonValue());
+        case QJsonValue::Bool: {
+            bool boolvalue = false;
+            if (mValue == "true") {
+                boolvalue = true;
+            }
+            value = QJsonValue(boolvalue);
+            break;
         }
-        break;
-    }
-    default:
-        break;
+        case QJsonValue::Object: {
+            QJsonObject object;
+            for (int i = 0; i < mChilds.size(); i++) {
+                object.insert(mChilds.value(i)->key(), mChilds.value(i)->toJsonValue());
+            }
+            value = object;
+            break;
+        }
+        case QJsonValue::Array: {
+            QJsonArray array;
+            for (int i = 0; i < mChilds.size(); i++) {
+                array.append(mChilds.value(i)->toJsonValue());
+            }
+            break;
+        }
+        default:
+            break;
     }
     return value;
 }
 
 
-void CQJsonTreeItem::appendChild(CQJsonTreeItem *item)
-{
+void CQJsonTreeItem::appendChild(CQJsonTreeItem* item) {
     mChilds.append(item);
 }
 
-CQJsonTreeItem *CQJsonTreeItem::child(int row)
-{
+CQJsonTreeItem* CQJsonTreeItem::child(int row) {
     return mChilds.value(row);
 }
 
-CQJsonTreeItem *CQJsonTreeItem::parent()
-{
+CQJsonTreeItem* CQJsonTreeItem::parent() {
     return mParent;
 }
 
-int CQJsonTreeItem::childCount() const
-{
+int CQJsonTreeItem::childCount() const {
     return mChilds.count();
 }
 
-int CQJsonTreeItem::row() const
-{
+int CQJsonTreeItem::row() const {
     if (mParent)
         return mParent->mChilds.indexOf(const_cast<CQJsonTreeItem*>(this));
 
     return 0;
 }
 
-void CQJsonTreeItem::setKey(const QString &key)
-{
+void CQJsonTreeItem::setKey(const QString& key) {
     mKey = key;
 }
 
-void CQJsonTreeItem::setValue(QString value)
-{
+void CQJsonTreeItem::setValue(QString value) {
     mValue = value;
 }
 
-void CQJsonTreeItem::setType(const QJsonValue::Type &type)
-{
+void CQJsonTreeItem::setType(const QJsonValue::Type& type) {
     mType = type;
 }
 
-QString CQJsonTreeItem::key() const
-{
+QString CQJsonTreeItem::key() const {
     return mKey;
 }
 
-QString CQJsonTreeItem::value() const
-{
+QString CQJsonTreeItem::value() const {
     return mValue;
 }
 
-QJsonValue::Type CQJsonTreeItem::type() const
-{
+QJsonValue::Type CQJsonTreeItem::type() const {
     return mType;
 }
 
-CQJsonTreeItem* CQJsonTreeItem::load(const QJsonValue& value, CQJsonTreeItem* parent)
-{
+CQJsonTreeItem* CQJsonTreeItem::load(const QJsonValue& value, CQJsonTreeItem* parent) {
 
 
-    CQJsonTreeItem * rootItem = new CQJsonTreeItem(parent);
+    CQJsonTreeItem* rootItem = new CQJsonTreeItem(parent);
     rootItem->setKey("root");
 
-    if ( value.isObject())
-    {
+    if (value.isObject()) {
 
         //Get all QJsonValue childs
-        foreach (QString key , value.toObject().keys()){
+        foreach(QString key, value.toObject().keys()) {
             QJsonValue v = value.toObject().value(key);
-            CQJsonTreeItem * child = load(v,rootItem);
+            CQJsonTreeItem* child = load(v, rootItem);
             child->setKey(key);
             child->setType(v.type());
             rootItem->appendChild(child);
@@ -170,21 +149,19 @@ CQJsonTreeItem* CQJsonTreeItem::load(const QJsonValue& value, CQJsonTreeItem* pa
 
     }
 
-    else if ( value.isArray())
-    {
+    else if (value.isArray()) {
         //Get all QJsonValue childs
         int index = 0;
-        foreach (QJsonValue v , value.toArray()){
+        foreach(QJsonValue v, value.toArray()) {
 
-            CQJsonTreeItem * child = load(v,rootItem);
+            CQJsonTreeItem* child = load(v, rootItem);
             child->setKey(QString::number(index));
             child->setType(v.type());
             rootItem->appendChild(child);
             ++index;
         }
     }
-    else
-    {
+    else {
         rootItem->setValue(value.toVariant().toString());
         rootItem->setType(value.type());
     }

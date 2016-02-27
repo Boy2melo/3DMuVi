@@ -13,11 +13,11 @@ public:
     IDataView();
 
     void applyData(IDataPacket const *data);
-    virtual void applyData(CInputDataSet const * /* data */) {}
-    virtual void applyData(CDataFeature const * /* data */) {}
-    virtual void applyData(CDataDepth const * /* data */) {}
-    virtual void applyData(CDataPose const * /* data */) {}
-    virtual void applyData(CDataFusion const * /* data */) {}
+    virtual void applyData(CInputDataSet const *) {}
+    virtual void applyData(CDataFeature const *) {}
+    virtual void applyData(CDataDepth const *) {}
+    virtual void applyData(CDataPose const *) {}
+    virtual void applyData(CDataFusion const *) {}
 };
 
 #endif // IDATAVIEW_H

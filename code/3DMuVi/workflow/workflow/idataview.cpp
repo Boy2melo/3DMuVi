@@ -29,8 +29,10 @@ void IDataView::applyData(const IDataPacket *data)
       applyData(static_cast<CDataPose const*>(data));
     }
     //TODO: merge CDataFusion from pcl branch
-    /*else if(data->getDataType() == DT_FUSION)
+#if PCL
+    else if(data->getDataType() == DT_FUSION)
     {
       applyData(static_cast<CDataFusion const*>(data));
-    }*/
+    }
+#endif
 }

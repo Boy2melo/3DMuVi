@@ -7,11 +7,7 @@
 #include "datapackets/CDataPose.h"
 #include "datapackets/CDataFusion.h"
 
-CContextDataStore::~CContextDataStore() {
-    for(IDataPacket *packet : mDataPackets) {
-        delete packet;
-    }
-}
+CContextDataStore::~CContextDataStore() {}
 
 CContextDataStore::CContextDataStore() {
     QUuid uuid = QUuid().createUuid();
@@ -20,7 +16,7 @@ CContextDataStore::CContextDataStore() {
 }
 
 void CContextDataStore::InitializeFromStorage(CInputDataSet* inputData) {
-    appendData(inputData);
+    appendData(std::shared_ptr<CInputDataSet>(inputData));
 }
 
 QString CContextDataStore::getId() const {
@@ -32,8 +28,8 @@ qint32 CContextDataStore::getCurrentCalculationStep() const {
 }
 
 void CContextDataStore::Serialize(CResultContext *context) {
-    for(IDataPacket *packet : mDataPackets) {
-        context->addDataPacket(packet);
+    for(auto packet : mDataPackets) {
+        context->addDataPacket(packet.get());
     }
 }
 
@@ -54,21 +50,21 @@ void CContextDataStore::incCalculationStep() {
 }
 
 void CContextDataStore::ApplyToDataView(IDataView* view) const {
-    for (IDataPacket *packet : mDataPackets) {
+    for (auto packet : mDataPackets) {
         packet->ApplyToDataview(view);
     }
 }
 
 template <typename T>
-T* CContextDataStore::getData() {
+std::shared_ptr<T> CContextDataStore::getData() {
     // T muss von IDataPacket erben
     (void)static_cast<IDataPacket*>((T*)0);
 
     T reference;
 
-    for(IDataPacket *packet : mDataPackets) {
+    for(auto packet : mDataPackets) {
         if(packet->getDataType() == reference.getDataType()) {
-            return static_cast<T*>(packet);
+            return std::dynamic_pointer_cast<T>(packet);
         }
     }
 
@@ -76,22 +72,21 @@ T* CContextDataStore::getData() {
 }
 
 template <typename T>
-T* CContextDataStore::createData(bool overwrite) {
+std::shared_ptr<T> CContextDataStore::createData(bool overwrite) {
     // T muss von IDataPacket erben
     (void)static_cast<IDataPacket*>((T*)0);
 
-    T* heap_obj = new T();
-
-    if(appendData(heap_obj, overwrite)) {
-        return heap_obj;
+    std::shared_ptr<T> obj();
+    
+    if(appendData(obj, overwrite)) {
+        return obj;
     } else {
-        delete heap_obj;
         return nullptr;
     }
 }
 
 template <typename T>
-bool CContextDataStore::appendData(T* data, bool overwrite) {
+bool CContextDataStore::appendData(std::shared_ptr<T> data, bool overwrite) {
     // T muss von IDataPacket erben
     (void)static_cast<IDataPacket*>((T*)0);
     
@@ -99,8 +94,6 @@ bool CContextDataStore::appendData(T* data, bool overwrite) {
 
     if (reference != nullptr && overwrite) {
         mDataPackets.removeAll(reference);
-        delete reference;
-
         mDataPackets.push_back(data);
         return true;
     } else if (reference == nullptr) {
@@ -112,8 +105,10 @@ bool CContextDataStore::appendData(T* data, bool overwrite) {
 }
 
 //Compiler muss Template Implementierungen anlegen, damit diese von den Plugins aufrufbar sind
-template bool CContextDataStore::appendData<CDataFeature>(CDataFeature*,bool);
-template bool CContextDataStore::appendData<CDataDepth>(CDataDepth*, bool);
-template bool CContextDataStore::appendData<CDataPose>(CDataPose*, bool);
+template bool CContextDataStore::appendData<CDataFeature>(std::shared_ptr<CDataFeature>,bool);
+template bool CContextDataStore::appendData<CDataDepth>(std::shared_ptr<CDataDepth>, bool);
+template bool CContextDataStore::appendData<CDataPose>(std::shared_ptr<CDataPose>, bool);
 //TODO: merge CDataFusion from pcl branch
-//template bool CContextDataStore::appendData<CDataFusion>(CDataFusion*, bool);
+#if PCL
+template bool CContextDataStore::appendData<CDataFusion>(std::shared_ptr<CDataFusion>, bool);
+#endif

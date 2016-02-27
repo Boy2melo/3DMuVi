@@ -3,33 +3,30 @@
 #include "CQJsonModel.h"
 
 
-CAlgorithmSettingController::CAlgorithmSettingController(QUrl directory)
-{
+CAlgorithmSettingController::CAlgorithmSettingController(QUrl directory) {
     tempdirectory = QUrl(directory);
     io = CTextIo();
 
 }
-QJsonValue CAlgorithmSettingController::getSetting(QString name, QString key)
-{
+QJsonValue CAlgorithmSettingController::getSetting(QString name, QString key) const {
     QUrl url;
     QString file;
     QJsonObject tempjson;
     if (algorithms.contains(name)) {
-       url = QUrl(tempdirectory.url() + name + ".json");
-       file = io.load(url);
-       QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
-       tempjson = docu.object();
+        url = QUrl(tempdirectory.url() + name + ".json");
+        file = io.load(url);
+        QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
+        tempjson = docu.object();
     }
     return tempjson.value(key);
 }
 
-bool CAlgorithmSettingController::setSetting(QString name,QString key, QJsonValue value)
-{
+bool CAlgorithmSettingController::setSetting(QString name, QString key, QJsonValue value) const {
     QJsonDocument docu;
     QString file;
     QUrl url;
     QJsonObject tempjson;
-    if (!algorithms.contains (name)) {
+    if (!algorithms.contains(name)) {
         return false;
     }
     url = QUrl(tempdirectory.url() + name + ".json");
@@ -44,44 +41,41 @@ bool CAlgorithmSettingController::setSetting(QString name,QString key, QJsonValu
     return true;
 }
 
-QJsonObject* CAlgorithmSettingController::getSetting(QString name)
-{
+QJsonObject* CAlgorithmSettingController::getSetting(QString name) const {
     QUrl url;
     QString file;
     QJsonDocument docu;
     if (algorithms.contains(name)) {
-       url = QUrl(tempdirectory.url() + name + ".json");
-       file = io.load(url);
-       docu = QJsonDocument().fromJson(file.toUtf8());
-       QJsonObject* object = new QJsonObject(docu.object());
-       return object;
+        url = QUrl(tempdirectory.url() + name + ".json");
+        file = io.load(url);
+        docu = QJsonDocument().fromJson(file.toUtf8());
+        QJsonObject* object = new QJsonObject(docu.object());
+        return object;
     }
+
+    return nullptr;
 }
 
-bool CAlgorithmSettingController::setSetting(QString name, QJsonObject data)
-{
+bool CAlgorithmSettingController::setSetting(QString name, QJsonObject data) {
     QJsonDocument docu;
     QString file;
     QUrl url;
-    if (!algorithms.contains (name)) {
+    if (!algorithms.contains(name)) {
         algorithms.append(name);
     }
-    if(true){//Algorithmen checks if parameters are legal
-        docu = QJsonDocument(data);
-        file = QString(docu.toJson());
-        url = QUrl(tempdirectory.url() + name + ".json");
-        io.save(url, file);
-        return true;
-    } else {
-        return false;
-    }
+    
+    //Algorithmen checks if parameters are legal
+    docu = QJsonDocument(data);
+    file = QString(docu.toJson());
+    url = QUrl(tempdirectory.url() + name + ".json");
+    io.save(url, file);
+    return true;
 }
 
-void CAlgorithmSettingController::import(QUrl directory, QString name)
-{ 
+void CAlgorithmSettingController::import(QUrl directory, QString name) {
     QString file;
     QUrl url;
-    if (!algorithms.contains (name)) {
+    if (!algorithms.contains(name)) {
         algorithms.append(name);
     }
     url = QUrl(directory.toString() + name);
@@ -90,8 +84,7 @@ void CAlgorithmSettingController::import(QUrl directory, QString name)
     io.save(url, file);
 }
 
-void CAlgorithmSettingController::exportto(QUrl directory)
-{
+void CAlgorithmSettingController::exportTo(QUrl directory) const {
     QString file;
     QUrl url;
     QString name;
@@ -103,13 +96,12 @@ void CAlgorithmSettingController::exportto(QUrl directory)
         io.save(url, file);
     }
 }
-void CAlgorithmSettingController::requestQJson(QUrl directory)
-{
+void CAlgorithmSettingController::requestQJson(QUrl directory) {
     if (directory.password().startsWith("a")) {
         QString temp = directory.password();
-        temp.remove(0,1);
+        temp.remove(0, 1);
         directory = QUrl(tempdirectory.url() + "/" + temp + ".json");
-        if (!algorithms.contains (temp)) {
+        if (!algorithms.contains(temp)) {
             algorithms.append(temp);
         }
     }
@@ -119,13 +111,12 @@ void CAlgorithmSettingController::requestQJson(QUrl directory)
     emit loadQJson(object);
 }
 
-void CAlgorithmSettingController::saveQJson(QJsonObject data, QUrl directory)
-{
+void CAlgorithmSettingController::saveQJson(QJsonObject data, QUrl directory) {
     if (directory.password().startsWith("a")) {
         QString temp = directory.password();
-        temp.remove(0,1);
+        temp.remove(0, 1);
         directory = QUrl(tempdirectory.url() + "/" + temp + ".json");
-        if (!algorithms.contains (temp)) {
+        if (!algorithms.contains(temp)) {
             algorithms.append(temp);
         }
     }
