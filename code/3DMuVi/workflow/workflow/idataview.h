@@ -6,7 +6,9 @@ class CInputDataSet;
 class CDataFeature;
 class CDataDepth;
 class CDataPose;
+#ifdef PCL
 class CDataFusion;
+#endif
 
 class IDataView {
 public:
@@ -17,7 +19,9 @@ public:
     virtual void applyData(CDataFeature const *) {}
     virtual void applyData(CDataDepth const *) {}
     virtual void applyData(CDataPose const *) {}
+#ifdef PCL
     virtual void applyData(CDataFusion const *) {}
+#endif
 };
 
 #endif // IDATAVIEW_H

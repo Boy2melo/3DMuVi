@@ -10,7 +10,7 @@
 class _CLASS_GEN(Plugin) : public QObject, public IPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID IPlugin_iid FILE "PluginDepthEstimator.json")
+    Q_PLUGIN_METADATA(IID IPlugin_iid FILE "PluginDepthFusor.json")
     Q_INTERFACES(IPlugin)
 
 private:

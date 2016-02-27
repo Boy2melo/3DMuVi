@@ -6,7 +6,7 @@
 
 QT       += core gui widgets
 
-TARGET = PluginPoseEstimator
+TARGET = PluginDepthFusion
 TEMPLATE = lib
 CONFIG += plugin
 
@@ -42,4 +42,15 @@ OTHER_FILES += \
 unix {
     target.path = /usr/lib
     INSTALLS += target
+}
+
+e################
+# PCL
+unix {
+    INCLUDEPATH += /home/rufboi/3rd_party/PCL_1.7.2_gcc4.8/include/
+    DEPENDPATH += /home/rufboi/3rd_party/PCL_1.7.2_gcc4.8/include/
+
+    LIBS += -L/home/rufboi/3rd_party/PCL_1.7.2_gcc4.8/lib/
+    LIBS += -lpcl_common
+    LIBS += -lpcl_io
 }

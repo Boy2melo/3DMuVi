@@ -14,6 +14,18 @@ CONFIG += c++11
 
 TEMPLATE = app
 
+PCL{
+  DEFINES += PCL
+
+  CONFIG += link_pkgconfig
+  PKGCONFIG += pcl_common-1.8 pcl_geometry-1.8 pcl_visualization-1.8
+
+  INCLUDEPATH += /usr/local/include/vtk-7.0/
+
+  LIBS += -lboost_system -lvtkGUISupportQt-7.0 -lvtkCommonCore-7.0 -lvtkRenderingCore-7.0
+  LIBS += -lvtkCommonDataModel-7.0 -lvtkCommonMath-7.0
+}
+
 INCLUDEPATH += ../
 
 HEADERS += gui/CTestCLogWidget.h \
@@ -25,7 +37,6 @@ HEADERS += gui/CTestCLogWidget.h \
            io/CTestCResultContext.h \
            logger/CTestLoggerHistory.h \
            logger/CTestLoggerControll.h \
-           ../gui/3dView/C3dView.h \
            ../gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.h \
            ../gui/ImageViews/CDepthMapView.h \
@@ -81,7 +92,6 @@ SOURCES += gui/CTestCLogWidget.cpp \
            io/CTestCResultContext.cpp \
            logger/CTestLoggerHistory.cpp \
            logger/CTestLoggerControll.cpp \
-           ../gui/3dView/C3dView.cpp \
            ../gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
            ../gui/ImageViews/CDepthMapView.cpp \
@@ -126,6 +136,16 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../workflow/workflow/idatapacket.cpp \
            ../workflow/workflow/idataview.cpp \
            main.cpp
+
+PCL{
+  HEADERS += ../gui/3dView/C3dView.h \
+      ../gui/3dView/CPclView.h \
+      ../workflow/workflow/datapackets/CDataFusion.h
+
+  SOURCES += ../gui/3dView/C3dView.cpp \
+    ../gui/3dView/CPclView.cpp \
+    ../workflow/workflow/datapackets/CDataFusion.cpp
+}
 
 FORMS += ../gui/forms/CMainWindow.ui \
          ../gui/forms/CSettingsDialog.ui

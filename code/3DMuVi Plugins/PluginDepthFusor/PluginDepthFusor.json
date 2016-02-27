@@ -1,0 +1,22 @@
+{
+    "Autor" : "Boitumelo Ruf",
+    "Date"  : "2016-02-17",
+    "Version" : 1,
+    "Properties" : {
+        "PcSrcFile" : {
+            "type" : "string",
+            "default" : "none",
+            "description" : "Path to source file holding the point cloud."
+        },
+        "MeshSrcFile" : {
+            "type" : "string",
+            "default" : "none",
+            "description" : "Path to source file holding the mesh."
+        },
+        "TexMeshSrcFile" : {
+            "type" : "string",
+            "default" : "none",
+            "description" : "Path to source file holding the textured mesh."
+        }
+    }
+}

@@ -108,3 +108,30 @@ Um ein neues Plugin mit VisualStudio zu bauen, wird zuerst eine neue Qt Library 
  - Epipolargeometrie
  - [Agisoft&trade;](http://www.agisoft.com)
  <hl/>
+
+## Verwendete Bibliotheken ##
+
+### VTK ###
+[Homepage](http://www.vtk.org/)
+
+#### License ####
+VTK is an open-source toolkit licensed under the BSD license.
+
+See LICENSE_VTK.txt for details.
+
+### PCL ###
+[Homepage](http://pointclouds.org/)
+
+#### License ####
+BSD License
+
+See LICENSE_pcl.txt for details.
+
+## Zusätzliche Bibliotheken kompilieren ##
+Zum Kompilieren von 3D-MuVi werden VTK und pcl in ausreichend aktueller Version benötigt. Beide müssen mit Unterstützung für Qt5 kompiliert werden.
+
+VTK kann unter diesem Link heruntergeladen werden:
+[VTK-7.0.0] (http://www.vtk.org/files/release/7.0/VTK-7.0.0.tar.gz)
+
+Von pcl wird die aktuelle Version aus dem git benötigt.
+[pcl auf github] (https://github.com/PointCloudLibrary/pcl/)
