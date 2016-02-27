@@ -111,14 +111,14 @@ void CSettingsDialog::updateLogWindowEnabled()
     case Qt::Checked:
     case Qt::PartiallyChecked:
     {
-      logWindowEnabled = QString(true);
+      logWindowEnabled = QString::number(1);
       CLogController::instance().activateWindowlog();
     }
     break;
 
     case Qt::Unchecked:
     {
-      logWindowEnabled = QString(false);
+      logWindowEnabled = QString::number(0);
       CLogController::instance().deactivateWindowlog();
     }
   }
@@ -141,14 +141,14 @@ void CSettingsDialog::updateLogDataEnabled()
     case Qt::Checked:
     case Qt::PartiallyChecked:
     {
-      logDataEnabled= QString(true);
+      logDataEnabled= QString::number(1);
       CLogController::instance().activateDatalog();
     }
     break;
 
     case Qt::Unchecked:
     {
-      logDataEnabled = QString(false);
+      logDataEnabled = QString::number(0);
       CLogController::instance().deactivateDatalog();
     }
   }

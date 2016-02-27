@@ -71,8 +71,8 @@ void CTestCSettingsDialog::test()
 
   QCOMPARE(settingController.getSetting("resultDirectory"), QString("/tmp/"));
   QCOMPARE(settingController.getSetting("minLogLevel"), QString::number(LOG_ERROR));
-  QCOMPARE(settingController.getSetting("logWindowEnabled"), QString(true));
-  QCOMPARE(settingController.getSetting("logDataEnabled"), QString(true));
+  QCOMPARE(settingController.getSetting("logWindowEnabled"), QString::number(1));
+  QCOMPARE(settingController.getSetting("logDataEnabled"), QString::number(1));
   QCOMPARE(CLogController::instance().getMinLogLevel(), static_cast<uchar>(LOG_ERROR));
 }
 
