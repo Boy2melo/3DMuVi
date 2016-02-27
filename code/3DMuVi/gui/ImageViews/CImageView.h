@@ -26,7 +26,7 @@ protected:
   bool  init;
   int currentcolor;
   QTransform m_transform;
-  std::vector<std::tuple<uint32_t,QPoint,QImage&>> ImageOffsetList;
+  std::vector<std::tuple<uint32_t,QPoint,QImage>> ImageOffsetList;
   std::vector<std::vector<std::tuple<uint32_t,QPoint>>> FeatureList;
 public:
    CImageView(QWidget *parent = 0);

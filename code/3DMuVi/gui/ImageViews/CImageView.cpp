@@ -6,6 +6,8 @@ CImageView::CImageView(QWidget *parent){
   exp = 1;
   init = false;
   currentcolor = 0;
+
+
 }
 
 
@@ -21,9 +23,8 @@ void CImageView::paintEvent(QPaintEvent* event)
    {painter.setTransform(m_transform);}
     init = true;
     // Paint all Images from the List
-
     for(uint i = 0; i <  ImageOffsetList.size(); i++ ) {
-        QImage& image = std::get<2> (ImageOffsetList[i]);
+        QImage image = std::get<2> (ImageOffsetList[i]);
         QPoint offset = std::get<1> (ImageOffsetList[i]);
         painter.drawImage(offset,image);
     }
@@ -127,36 +128,65 @@ void CImageView::showImages(std::vector<std::tuple<uint32_t,QImage&>> images)
 //calculate the grid for the Imageview (3x3 for 9 images, 4x4 for 12 images...)
 int tablesize = ceil(sqrt(images.size()));
 uint iIndex = 0;
+
 //pepArray: bottem right pixel of the images layoutet at [i][j] used to calculate the offset
-QPoint pepArray [tablesize][tablesize];
+std::vector<std::vector<QPoint>> pepArray;
+//Initilize Full List with empty QPoints
+for(int i = 0; i < tablesize; i++){
+     std::vector<QPoint> tmpv;
+    for(int j = 0;j < tablesize; j++ ) {
+      tmpv.push_back(QPoint(0,0));
+    }
+    pepArray.push_back(tmpv);
+}
+
+//pepArray = QPoint[tablesize][tablesize];
 
 //build ImageOffsetList
+
 for(int i = 0; i < tablesize; i++){
     for(int j = 0;j < tablesize; j++ ) {
         if(iIndex < images.size()){
             uint32_t id = std::get<0> (images[iIndex]);
             QImage& iRef = std::get<1> (images[iIndex]);
-
+            QImage  image = iRef.copy();
             //calculate offset
             int offsetx = 0;
             int offsety = 0;
+
             if(i != 0){
-               offsetx = (pepArray[i-1][j].rx() + 20) ;
+                for(int g = j; g >= 0; g--){
+                    int temp = (pepArray[i-1][g].rx() + 20);
+                    if(temp > offsetx){
+                        offsetx = temp;
+                  }
+                }
             }
             if(j != 0){
-               offsety = (pepArray[i][j-1].ry() + 20) ;
+                for(int g = i; g >= 0; g--){
+                    int temp = (pepArray[g][j-1].ry() + 20);
+                    if(temp > offsety){
+                        offsety = temp;
+                  }
             }
+            }
+
             QPoint Offset(offsetx,offsety);
+
             //update pepArray
-            pepArray[i][j] = QPoint(offsetx + iRef.width(), offsety + iRef.height());
+            std::vector<QPoint> tmpv = pepArray[i];
+            tmpv.insert(tmpv.begin() + j,QPoint(offsetx + iRef.width(), offsety + iRef.height()));
+            pepArray.insert(pepArray.begin() + i,tmpv);
 
             //add to the Offset List with calculated Offset needed for Painting Images and Feauturepoints / lines
-            std::tuple<uint32_t,QPoint,QImage&> tuple (id,Offset,iRef);
+            std::tuple<uint32_t,QPoint,QImage> tuple (id,Offset,image);
             ImageOffsetList.push_back(tuple);
+
         }
         iIndex++;
     }
 }
+this->update();
 }
 
 
@@ -193,5 +223,6 @@ void CImageView::addConnectedMarkers(std::vector<std::tuple<uint32_t,QVector2D>>
 
 
  FeatureList.push_back(result);
+ this->update();
 }
 
