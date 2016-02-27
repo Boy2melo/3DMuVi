@@ -31,6 +31,25 @@ void CImageView::paintEvent(QPaintEvent* event)
 
     // for all FeaureLists  Paint all Feauture points with lines
     for(uint j = 0; j < FeatureList.size(); j++){
+
+        switch (currentcolor) {
+           case 0:
+               painter.setPen(Qt::magenta);
+               currentcolor = 1;
+               break;
+           case 1:
+            painter.setPen(Qt::green);
+            currentcolor = 2;
+               break;
+           case 2:
+            painter.setPen(Qt::cyan);
+            currentcolor = 0;
+               break;
+           default:
+               currentcolor = 0;
+               break;
+           }
+
         //Paint List
         for(uint g = 0; g < FeatureList[j].size(); g++){
             QPoint cpoint = std::get<1> (FeatureList[j][g]);
@@ -39,23 +58,7 @@ void CImageView::paintEvent(QPaintEvent* event)
                  painter.drawLine(cpoint,thisPoint);
             }
         }
-     switch (currentcolor) {
-        case 0:
-            painter.setPen(Qt::magenta);
-            currentcolor = 1;
-            break;
-        case 1:
-         painter.setPen(Qt::green);
-         currentcolor = 2;
-            break;
-        case 2:
-         painter.setPen(Qt::cyan);
-         currentcolor = 0;
-            break;
-        default:
-            currentcolor = 0;
-            break;
-        }
+
     }
 
 
