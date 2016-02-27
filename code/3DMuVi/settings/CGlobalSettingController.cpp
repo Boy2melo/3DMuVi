@@ -47,7 +47,7 @@ void CGlobalSettingController::exportTo(QUrl directory) const{
     io.save(directory, file);
 }
 
-void CGlobalSettingController::resettoDefault() {
+void CGlobalSettingController::resetToDefault() {
     QUrl directory;
     directory = QUrl(QUrl::fromLocalFile(QFileInfo("defaultglobalconfig.json").absoluteFilePath()));
     import(directory, directory.fileName());
