@@ -23,9 +23,10 @@ HEADERS += gui/CTestCLogWidget.h \
            io/CTestCTextIo.h \
            io/CTestCInputDataSet.h \
            io/CTestCResultContext.h \
-	   logger/CTestLoggerHistory.h \
-    	   logger/CTestLoggerControll.h \
+           logger/CTestLoggerHistory.h \
+           logger/CTestLoggerControll.h \
            ../gui/3dView/C3dView.h \
+           ../gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.h \
            ../gui/ImageViews/CDepthMapView.h \
            ../gui/ImageViews/CFeatureView.h \
@@ -41,7 +42,9 @@ HEADERS += gui/CTestCLogWidget.h \
            ../gui/CStepComboBox.h \
            ../io/CImageIo.h \
            ../io/CInputDataSet.h \
+           ../io/CMFStreamProvider.h \
            ../io/CResultContext.h \
+           ../io/CSFStreamProvider.h \
            ../io/CTextIo.h \
            ../logger/controll/CLogController.h \
            ../logger/controll/CLogHistory.h \
@@ -53,8 +56,12 @@ HEADERS += gui/CTestCLogWidget.h \
            ../logger/qslogging/QsLogLevel.h \
            ../settings/CGlobalSettingController.h \
            ../settings/CAlgorithmSettingController.h \
+           ../settings/CAlgorithmSettingsModel.h \
            ../settings/CQJsonModel.h \
            ../settings/CQJsonItem.h \
+           ../workflow/workflow/datapackets/CDataDepth.h \
+           ../workflow/workflow/datapackets/CDataFeature.h \
+           ../workflow/workflow/datapackets/CDataPose.h \
            ../workflow/workflow/fourphase/cfourphaseworkflow.h \
            ../workflow/workflow/aworkflow.h \
            ../workflow/plugin/ialgorithm.h \
@@ -72,9 +79,10 @@ SOURCES += gui/CTestCLogWidget.cpp \
            io/CTestCTextIo.cpp \
            io/CTestCInputDataSet.cpp \
            io/CTestCResultContext.cpp \
-	   logger/CTestLoggerHistory.cpp \
+           logger/CTestLoggerHistory.cpp \
            logger/CTestLoggerControll.cpp \
            ../gui/3dView/C3dView.cpp \
+           ../gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
            ../gui/ImageViews/CDepthMapView.cpp \
            ../gui/ImageViews/CFeatureView.cpp \
@@ -91,7 +99,9 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../io/AStreamProvider.cpp \
            ../io/CImageIo.cpp \
            ../io/CInputDataSet.cpp \
+           ../io/CMFStreamProvider.cpp \
            ../io/CResultContext.cpp \
+           ../io/CSFStreamProvider.cpp \
            ../io/CTextIo.cpp \
            ../logger/controll/CLogController.cpp \
            ../logger/controll/CLogHistory.cpp \
@@ -102,8 +112,12 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../logger/qslogging/QsLogDestFunctor.cpp \
            ../settings/CGlobalSettingController.cpp \
            ../settings/CAlgorithmSettingController.cpp \
+           ../settings/CAlgorithmSettingsModel.cpp \
            ../settings/CQJsonModel.cpp \
            ../settings/CQJsonItem.cpp \
+           ../workflow/workflow/datapackets/CDataDepth.cpp \
+           ../workflow/workflow/datapackets/CDataFeature.cpp \
+           ../workflow/workflow/datapackets/CDataPose.cpp \
            ../workflow/workflow/fourphase/cfourphaseworkflow.cpp \
            ../workflow/workflow/cworkflowmanager.cpp \
            ../workflow/workflow/aworkflow.cpp \
