@@ -5,7 +5,7 @@
 //The name of your Plugin
 #define _PLUGIN_NAME DummyFeatureMatch
 //The type of your plugin
-#define _PLUGIN_TYPE PT_FeatureMatcher
+#define _PLUGIN_TYPE PT_Fusion
 //The Author of this plugin
 #define _PLUGIN_AUTHOR Nathanael Schneider
 //The Version of this plugin (uint)
