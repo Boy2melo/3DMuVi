@@ -59,6 +59,11 @@ public slots:
 
 private:
   Ui::CSettingsDialog *ui;
+
+  void updateResultDirectory();
+  void updateLogLevel();
+  void updateLogWindowEnabled();
+  void updateLogDataEnabled();
 };
 
 #endif // CSETTINGSDIALOG_H

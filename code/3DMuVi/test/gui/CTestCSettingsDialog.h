@@ -39,6 +39,7 @@ private slots:
 
 private:
   bool mResultDirectoryDialogShown = false;
+  const unsigned int N_SETTINGS = 4;
 };
 
 #endif // CTESTCSETTINGSDIALOG_H
