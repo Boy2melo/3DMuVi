@@ -33,15 +33,15 @@ public:
     \brief Get the DepthMap data.
     \return std::shared_ptr<std::vector<QImage>> Returns a shared pointer to a std::vector with QImages.
     */
-    std::shared_ptr<std::vector<QImage>> getDepthMap() const;
+    std::shared_ptr<std::vector<std::tuple<uint32_t, QImage>>> getDepthMap() const;
     /*!
     \brief Sets the DepthMap data.
     \param depthMaps A shared pointer which point to a std::vector with QImages.
     */
-    void setDepthMap(std::shared_ptr<std::vector<QImage>> depthMaps);
+    void setDepthMap(std::shared_ptr<std::vector<std::tuple<uint32_t, QImage>>> depthMaps);
 private:
     AStreamProvider* streamProvider;
-    std::shared_ptr<std::vector<QImage>> depthMap;
+    std::shared_ptr<std::vector<std::tuple<uint32_t, QImage>>> depthMap;
 };
 
 #endif // CDATADEPTH_H

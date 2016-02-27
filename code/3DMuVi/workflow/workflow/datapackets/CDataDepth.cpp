@@ -25,18 +25,28 @@ AStreamProvider* CDataDepth::getStreamProvider() {
 void CDataDepth::serialize(AStreamProvider *stream) {
     stream->setFileName(QString("dataDepthMeta"));
     auto dataStream = stream->getNextStream();
+
+    uint32_t id;
+    QImage dMap;
+
     *dataStream << static_cast<int>(depthMap->size());
+    for (auto map : *depthMap) {
+        std::tie(id, std::ignore) = map;
+        *dataStream << static_cast<quint64>(id);
+    }
 
     auto fileNameCounter = 0;
-    for (auto map : *depthMap) {
-        stream->setFileName(QString(fileNameCounter + ".png"));
+    for (auto map : *depthMap) {   
+        std::tie(id, dMap) = map;
+
+        stream->setFileName(QString(QString(id) + ".png"));
         dataStream = stream->getNextStream();
 
         //serialize a QImage
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         buffer.open(QIODevice::WriteOnly);
-        map.save(&buffer, "PNG");
+        dMap.save(&buffer, "PNG");
 
         *dataStream << buffer.data();
         buffer.close();
@@ -49,10 +59,10 @@ void CDataDepth::deserialize(AStreamProvider *stream) {
 
 }
 
-std::shared_ptr<std::vector<QImage>> CDataDepth::getDepthMap() const {
+std::shared_ptr<std::vector<std::tuple<uint32_t, QImage>>> CDataDepth::getDepthMap() const {
     return depthMap;
 }
 
-void CDataDepth::setDepthMap(std::shared_ptr<std::vector<QImage>> depthMaps) {
+void CDataDepth::setDepthMap(std::shared_ptr<std::vector<std::tuple<uint32_t, QImage>>> depthMaps) {
     depthMap = depthMaps;
 }
