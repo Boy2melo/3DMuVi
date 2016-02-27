@@ -5,8 +5,7 @@
 #include <QJsonObject>
 #include <QObject>
 
-class CLASS_GEN(Algorithm) : public IAlgorithm
-{
+class _CLASS_GEN(Algorithm) : public IAlgorithm {
 private:
     bool mIsBusy;
     CLogController *mLogger;
@@ -15,7 +14,7 @@ private:
     QStringList mOutputTypes;
 
 public:
-    CLASS_GEN(Algorithm)();
+    _CLASS_GEN(Algorithm)();
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */
@@ -27,7 +26,7 @@ public:
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */
-    virtual void run(CContextDataStore* dataStore, std::function<void (CContextDataStore*)> callback) override;
+    virtual void run(CContextDataStore* dataStore, std::function<void(CContextDataStore*)> callback) override;
 
     /*!
     \brief Gibt zurück, ob der Algorithmus zur Zeit mit einer Ausführung beschäftigt ist

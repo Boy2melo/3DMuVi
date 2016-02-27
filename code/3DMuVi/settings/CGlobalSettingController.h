@@ -41,6 +41,6 @@ public:
     /*!
      * \resets all settings to default
      */
-    void resettoDefault();
+    void resetToDefault();
 };
 #endif //CGLOBALSETTINGCONTROLLER_H

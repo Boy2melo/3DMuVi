@@ -2,7 +2,7 @@
 #define CALGORITHMSELECTOR_H
 
 #include <QWidget>
-
+#include <QObject>
 #include <workflow/workflow/aworkflow.h>
 
 /*!

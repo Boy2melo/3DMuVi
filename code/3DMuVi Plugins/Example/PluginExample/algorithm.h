@@ -7,7 +7,6 @@
 
 class _CLASS_GEN(Algorithm) : public IAlgorithm
 {
-    Q_OBJECT
 private:
     bool mIsBusy;
     CLogController *mLogger;

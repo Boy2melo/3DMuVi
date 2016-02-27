@@ -218,12 +218,6 @@
     <ClCompile Include="workflow\workflow\fourphase\cfourphaseworkflow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ialgorithm.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ialgorithm.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_aworkflow.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -299,11 +293,14 @@
     <ClCompile Include="GeneratedFiles\Release\moc_CSettingsDialog.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CAlgorithmSelector.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_CAlgorithmSettingsSaveLoadWidget.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_CAlgorithmSettingsView.cpp">
-      <Filter>Generated Files\Debug</Filter>
+    <ClCompile Include="GeneratedFiles\Release\moc_CAlgorithmSettingsSaveLoadWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -367,6 +364,12 @@
     <CustomBuild Include="gui\AlgorithmSettings\CAlgorithmSettingsView.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="gui\CAlgorithmSelector.h">
+      <Filter>Header Files\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\forms\CAlgorithmSettingsSaveLoad.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DMuVi.rc" />
@@ -386,9 +389,6 @@
     </ClInclude>
     <ClInclude Include="workflow\plugin\iplugin.h">
       <Filter>Header Files\workflow\plugin</Filter>
-    </ClInclude>
-    <ClInclude Include="gui\CAlgorithmSelector.h">
-      <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="gui\CDatasetSelector.h">
       <Filter>Header Files\gui</Filter>
@@ -485,6 +485,9 @@
     </ClInclude>
     <ClInclude Include="io\CSFStreamProvider.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_CAlgorithmSettingsSaveLoad.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
