@@ -1,7 +1,6 @@
 #include "CResultContext.h"
 
 CResultContext::CResultContext(QUrl path,
-    CLogController* logController,
     CAlgorithmSettingController* algoSettings,
     CGlobalSettingController* globalSettings) {
 
@@ -12,7 +11,7 @@ CResultContext::CResultContext(QUrl path,
     folder.cd(timeString);
 
     QUrl folderUrl(folder.path());
-    logController->setLog(folderUrl);
+    CLogController::instance().setLog(folderUrl);
     algoSettings->exportTo(folderUrl);
     globalSettings->exportTo(folderUrl);
 }
