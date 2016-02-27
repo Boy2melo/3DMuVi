@@ -2,7 +2,8 @@
 
 void CTestCResultContext::initTestCase()
 {
-    CLogController* logController = new CLogController();
+    CLogController& lc = CLogController::instance();
+    CLogController* logController = &lc;
     CAlgorithmSettingController* algoController = new CAlgorithmSettingController(QUrl("."));
     CGlobalSettingController* globalController = new CGlobalSettingController();
     CResultContext asd(QUrl("."),logController,algoController,globalController);

@@ -1,6 +1,5 @@
 #include "CTestLoggerControll.h"
-CLogController c;
-CLogController& controll = c;
+CLogController& controll = CLogController::instance();
 CLogHistory& h = controll.getHistory();
 void CTestLoggerControll::initTestCase()
 {
