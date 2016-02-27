@@ -16,22 +16,40 @@ using FeatureMap = std::vector<std::tuple<uint32_t, float, float, float, float>>
  * \brief The CDataPose class
  * \author Laurenz Thiel
  *
- * Erster Entwurf - Komplett ungetestet.
+ * Datapacket which contains the FeatureMap and Pose data.
+ * It can be serialized into a stream and deserialized from a stream.
  */
 class CDataPose : public IDataPacket {
 public:
     CDataPose();
     ~CDataPose();
 
+
     QString getDataType() const override;
     AStreamProvider* getStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
     void deserialize(AStreamProvider *stream) override;
 
+    /*!
+    \brief Get the FeatureMap
+    \return std::shared_ptr<FeatureMap> Returns a shared pointer to the FeatureMap.
+    */
     std::shared_ptr<FeatureMap> getFeatureMap() const;
+    /*!
+    \brief Sets the FeatureMap
+    \param map A shared pointer which point to a FeatureMap.
+    */
     void setFeatureMap(std::shared_ptr<FeatureMap>  map);
 
+    /*!
+    \brief Get the SPose data.
+    \return std::shared_ptr<FeatureMap> Returns a shared pointer to a std::vector with SPoses.
+    */
     std::shared_ptr<std::vector<SPose>> getPose() const;
+    /*!
+    \brief Sets the SPose data.
+    \param map A shared pointer which point to a std::vector with SPoses.
+    */
     void setPose(std::shared_ptr<std::vector<SPose>> poses);
 
 private:

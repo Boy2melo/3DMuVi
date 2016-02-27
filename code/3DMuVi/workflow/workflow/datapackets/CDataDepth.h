@@ -16,7 +16,8 @@
  * \brief The CDataDepth class
  * \author Laurenz Thiel
  *
- * Erster Entwurf - Komplett ungetestet.
+ * Datapacket which contains the depth maps.
+ * It can be serialized into a stream and deserialized from a stream.
  */
 class CDataDepth : public IDataPacket {
 public:
@@ -28,7 +29,15 @@ public:
     void serialize(AStreamProvider* stream) override;
     void deserialize(AStreamProvider *stream) override;
 
+    /*!
+    \brief Get the DepthMap data.
+    \return std::shared_ptr<std::vector<QImage>> Returns a shared pointer to a std::vector with QImages.
+    */
     std::shared_ptr<std::vector<QImage>> getDepthMap() const;
+    /*!
+    \brief Sets the DepthMap data.
+    \param depthMaps A shared pointer which point to a std::vector with QImages.
+    */
     void setDepthMap(std::shared_ptr<std::vector<QImage>> depthMaps);
 private:
     AStreamProvider* streamProvider;

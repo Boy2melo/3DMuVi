@@ -23,7 +23,15 @@ public:
     \param destinationFolder is the folder where the results should be stored.
     */
     void setDestination(QDir destinationFolder);
+    /*!
+    \brief Provide the path to the destination folder.
+    \return QDir is the folder where the results are stored.
+    */
     QDir getDestination() const;
+    /*!
+    \brief Sets the file name.
+    \param fileName Name of the file.
+    */
     virtual void setFileName(const QString& fileName);
 protected:
     QDir folder;
