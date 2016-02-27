@@ -26,7 +26,7 @@ protected:
      * \param key key for the parameter
      * \return the parameter
      */
-    QJsonValue getSetting(QString name, QString key);
+    QJsonValue getSetting(QString name, QString key) const;
     /*!
      * \sets a parameter in an algorithmn to the specific value
      * \param name name of the algorithn
@@ -34,7 +34,7 @@ protected:
      * \param value new value
      * \return ture is legal value, else false
      */
-    bool setSetting(QString name,QString key, QJsonValue value);
+    bool setSetting(QString name,QString key, QJsonValue value) const;
 public:
     /*!
     * \Constructor for the Controller
@@ -46,7 +46,7 @@ public:
     * \param name name of the algorithm
     * \return the setting of the algorithm
     */
-    QJsonObject* getSetting(QString name);
+    QJsonObject* getSetting(QString name) const;
     /*!
     * \sets a new setting for an algorithm
     * \param name name of the algorithm
@@ -64,7 +64,7 @@ public:
     * \exports all algorithmsettings to a directory
     *\param directory where all seeting should go
     */
-    void exportto(QUrl directory);
+    void exportTo(QUrl directory) const;
 signals:
     void loadQJson(QJsonObject data);
 public slots:

@@ -44,7 +44,7 @@ public:
      * \param data TDataPacket which get stored.
      * \return void
      */
-    void addDataPacket(IDataPacket* data);
+    void addDataPacket(std::shared_ptr<IDataPacket> data);
 
     /*!
      * \brief Returns a vector with all ids of TDataPackets which was found

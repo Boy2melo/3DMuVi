@@ -22,7 +22,7 @@ private:
     QString mContextId;
     qint32 mCalculationStep;
     bool mAborted;
-    QList<IDataPacket*> mDataPackets;
+    QList<std::shared_ptr<IDataPacket>> mDataPackets;
 protected:
 public:
     ~CContextDataStore();
@@ -41,14 +41,14 @@ public:
      * \return Daten vom Typ T oder 0 falls nicht vorhanden
      */
     template<typename T>
-    T* getData();
+    std::shared_ptr<T> getData();
 
     /*!
     \brief Fügt daten vom Typ T hinzu und gibt den Pointer auf das Packet zurück
     \param overwrite Ob die Daten, falls sie existieren, ersetzt werden sollen. Ansonsten wird bei vorhandensein nichts gemacht
     */
     template<typename T>
-    T* createData(bool overwrite = true);
+    std::shared_ptr<T> createData(bool overwrite = true);
 
     /*!
     \brief Fügt Daten vom Typ T hinzu
@@ -57,7 +57,7 @@ public:
     \return True, falls das Packet hinzugefügt wurde
     */
     template<typename T>
-    bool appendData(T* data, bool overwrite = true);
+    bool appendData(std::shared_ptr<T> data, bool overwrite = true);
 
     /*!
      * \brief Wendet die Daten des Stores auf einen DataView an.

@@ -29,7 +29,7 @@ qint32 CContextDataStore::getCurrentCalculationStep() const {
 
 void CContextDataStore::Serialize(CResultContext *context) {
     for(auto packet : mDataPackets) {
-        context->addDataPacket(packet.get());
+        context->addDataPacket(packet);
     }
 }
 

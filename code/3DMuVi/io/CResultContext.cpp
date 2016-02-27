@@ -13,11 +13,11 @@ CResultContext::CResultContext(QUrl path,
 
     QUrl folderUrl(folder.path());
     logController->setLog(folderUrl);
-    algoSettings->exportto(folderUrl);
-    globalSettings->exportto(folderUrl);
+    algoSettings->exportTo(folderUrl);
+    globalSettings->exportTo(folderUrl);
 }
 
-void CResultContext::addDataPacket(IDataPacket* data) {
+void CResultContext::addDataPacket(std::shared_ptr<IDataPacket> data) {
     auto dataType = data->getDataType();
     if (!folder.cd(dataType)) {
         folder.mkdir(dataType);

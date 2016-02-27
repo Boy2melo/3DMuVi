@@ -10,7 +10,7 @@ CGlobalSettingController::CGlobalSettingController() {
     import(directory, directory.fileName());
 }
 
-QString CGlobalSettingController::getSetting(QString name) {
+QString CGlobalSettingController::getSetting(QString name) const{
     QJsonValue value = settings.value(name);
     QString result = QString(value.toString());
     return result;
@@ -40,7 +40,7 @@ void CGlobalSettingController::import(QUrl directory, QString name) {
     settings = docu.object();
 }
 
-void CGlobalSettingController::exportto(QUrl directory) {
+void CGlobalSettingController::exportTo(QUrl directory) const{
     QJsonDocument docu = QJsonDocument(settings);
     QString file = QString(docu.toJson());
     directory = QUrl(directory.url() + "/globalconfig");
