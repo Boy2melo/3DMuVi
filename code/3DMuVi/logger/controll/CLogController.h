@@ -6,7 +6,7 @@
 #include <QObject>
 #include <tuple>
 
-#define __LOG(controller, level) if(level >= controller->getMinLogLevel()) *controller << level <<
+#define __LOG(level) if(level >= CLogController::instance().getMinLogLevel()) CLogController::instance() << level <<
 
 /**
  * @brief The CLogController class this class controll the logger,
