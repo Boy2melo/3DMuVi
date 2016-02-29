@@ -6,7 +6,7 @@ CImageView::CImageView(QWidget *parent){
   exp = 1;
   init = false;
   currentcolor = 0;
-
+  this->resize(500000,500000);	
 
 }
 
