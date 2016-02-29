@@ -1,5 +1,5 @@
 #include "aworkflow.h"
-
+#include <QTimer>
 
 AWorkflow::AWorkflow() {
     mDataStores = new QList<CContextDataStore*>();
@@ -7,40 +7,46 @@ AWorkflow::AWorkflow() {
 
 bool AWorkflow::run(const QString storeId) {
     mMutex.lock();      // Only one thread can do a check, so a data store is guaranteed to only be executed once
-    
+
     // do a basic check
     auto store = FindStore(storeId);
 
-    if(!checkAvailableDataTypes()) {
+    if (!checkAvailableDataTypes()) {
+        mMutex.unlock();
         return false;   //Workflow wrong configured
     }
 
-    if(store == nullptr) {
+    if (store == nullptr) {
+        mMutex.unlock();
         return false;   // Invalid store
     }
 
-    if(mRunningAlgorithms.contains(store->getId())) {
+    if (mRunningAlgorithms.contains(store->getId())) {
+        mMutex.unlock();
         return false;   // Store already in use
     }
 
     store->SetIsAborted(false);
     store->resetCalculationStep();
-    
+
     // Start a new Thread
-    QThread *thread = new QThread();
-    QThread *currentThread = this->thread();
-
-    connect(this, &AWorkflow::sigExecuteAlgorithm, this, &AWorkflow::executeAlgorithm);
+    auto *thread = new QThread(this);
+    auto *timer = new QTimer(nullptr);
+    thread->start();
+    timer->setInterval(10);
+    timer->setSingleShot(true);
+    timer->moveToThread(thread);
+    
+    //TODO: Timer not working
+    //connect(timer, &QTimer::timeout, [this, store]() {
+        this->executeAlgorithm(store);
+    //});
+    //connect(thread, &QThread::started, timer, &QTimer::start);
     connect(thread, &QThread::finished, thread, &QThread::deleteLater);     // Prevent memory leak
-
-    this->moveToThread(thread);
-
-    emit sigExecuteAlgorithm(store);
-
-    this->moveToThread(currentThread);
-
-    disconnect(this, &AWorkflow::sigExecuteAlgorithm, this, &AWorkflow::executeAlgorithm);
-
+    connect(thread, &QThread::finished, timer, &QTimer::deleteLater);
+    
+    timer->start(10);
+    
     mMutex.unlock();
 
     return true;

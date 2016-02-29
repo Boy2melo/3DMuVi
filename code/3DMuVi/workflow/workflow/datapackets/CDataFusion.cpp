@@ -1,3 +1,4 @@
+#ifdef PCL
 #include "workflow/workflow/ccontextdatastore.h"
 #include "io/CSFStreamProvider.h"
 
@@ -114,3 +115,4 @@ pcl::TextureMesh::Ptr CDataFusion::getTextureMesh() const
 {
   return mTextureMeshData;
 }
+#endif

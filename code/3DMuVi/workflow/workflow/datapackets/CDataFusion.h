@@ -1,3 +1,4 @@
+#ifdef PCL
 #ifndef CDATAFUSION_H
 #define CDATAFUSION_H
 
@@ -98,3 +99,4 @@ private:
 };
 
 #endif // CDATAFUSION_H
+#endif // PCL

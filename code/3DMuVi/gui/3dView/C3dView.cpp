@@ -1,3 +1,4 @@
+#ifdef PCL
 #include "C3dView.h"
 
 C3dView::C3dView(QWidget* parent) : CPclView(parent)
@@ -127,3 +128,4 @@ void C3dView::updateView()
     break;
   }
 }
+#endif

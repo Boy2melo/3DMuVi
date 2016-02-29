@@ -55,7 +55,6 @@ CLogController& operator<< (CLogController& logger, const QString& message) {
         return logger;
     }
 
-
     QString type;
     switch (logger.mCurrentLogLevel) {
     case LOG_DEBUG:

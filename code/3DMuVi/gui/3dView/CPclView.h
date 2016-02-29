@@ -1,3 +1,4 @@
+#ifdef PCL
 #ifndef CPCLVIEW_H
 #define CPCLVIEW_H
 
@@ -149,3 +150,4 @@ private:
 };
 
 #endif // CPCLVIEW_H
+#endif

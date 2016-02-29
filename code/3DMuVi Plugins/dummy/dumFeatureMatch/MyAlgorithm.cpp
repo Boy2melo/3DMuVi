@@ -6,7 +6,7 @@
 //----------------------------------------
 
 void _CLASS_GEN(Algorithm)::OnInitialize(){
-    mInputTypes.push_back(DT_FEATURE_MATCH);
+    mOutputTypes.push_back(DT_FEATURE_MATCH);
     mInputTypes.push_back(DT_INPUTIMAGES);
 }
 

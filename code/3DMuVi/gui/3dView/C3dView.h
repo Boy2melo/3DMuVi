@@ -1,3 +1,4 @@
+#ifdef PCL
 #ifndef C3DVIEW_H
 #define C3DVIEW_H
 
@@ -98,3 +99,4 @@ private:
 };
 
 #endif // C3DVIEW_H
+#endif

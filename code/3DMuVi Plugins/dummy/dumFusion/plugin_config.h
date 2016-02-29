@@ -3,7 +3,7 @@
 #include "workflow/plugin/cpluginmanager.h"
 
 //The name of your Plugin
-#define _PLUGIN_NAME DummyFeatureMatch
+#define _PLUGIN_NAME DummyFusion
 //The type of your plugin
 #define _PLUGIN_TYPE PT_Fusion
 //The Author of this plugin

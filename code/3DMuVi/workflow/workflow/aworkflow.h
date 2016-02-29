@@ -101,14 +101,6 @@ signals:
     \brief Wird aufgerufen, sobald ein Datastore die Ausführung beendet hat oder nicht weitergereicht wurde
     */
     void sigDataStoreFinished(CContextDataStore *store);
-
-    /*!
-    \brief For internal use only. Do not connect
-    
-    Wird aufgerufen, sobald die Plugins gestartet werden können. Wird benötigt, um die Plugins in einem 
-    separaten Thread auszuführen.
-    */
-    void sigExecuteAlgorithm(CContextDataStore *store);
 };
 
 #endif // AWORKFLOW_H

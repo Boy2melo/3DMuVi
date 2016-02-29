@@ -1,3 +1,4 @@
+#ifdef PCL
 #include <QVBoxLayout>
 
 #include <vtkRenderWindow.h>
@@ -139,3 +140,4 @@ void CPclView::centerOnPoint(const pcl::PointXYZ& point)
 {
 
 }
+#endif
