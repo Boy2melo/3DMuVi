@@ -1,5 +1,7 @@
 #include <QVBoxLayout>
 
+#include <QScrollArea>
+
 #include "CDataViewTabContainer.h"
 
 CDataViewTabContainer::CDataViewTabContainer(QWidget* parent) : QTabWidget(parent)
@@ -10,15 +12,27 @@ CDataViewTabContainer::CDataViewTabContainer(QWidget* parent) : QTabWidget(paren
   QBoxLayout* layoutModelTypeSelector = new QHBoxLayout;
   QComboBox* modelTypeSelector = new QComboBox(containerModelTypeSelector);
 #endif
+  QScrollArea* inputImageViewArea = new QScrollArea(this);
+  QScrollArea* featureViewArea = new QScrollArea(this);
+  QScrollArea* depthMapViewArea = new QScrollArea(this);
 
   mpInputImageView = new CInputImageView;
-  addTab(mpInputImageView, "Input images");
+  inputImageViewArea->setWidget(mpInputImageView);
+  mpInputImageView->setScrollBars(inputImageViewArea->horizontalScrollBar(),
+                                  inputImageViewArea->verticalScrollBar());
+  addTab(inputImageViewArea, "Input images");
 
   mpFeatureView = new CFeatureView;
-  addTab(mpFeatureView, "Features");
+  featureViewArea->setWidget(mpFeatureView);
+  mpFeatureView->setScrollBars(featureViewArea->horizontalScrollBar(),
+                               featureViewArea->verticalScrollBar());
+  addTab(featureViewArea, "Features");
 
   mpDepthMapView = new CDepthMapView;
-  addTab(mpDepthMapView, "Depth maps");
+  depthMapViewArea->setWidget(mpDepthMapView);
+  mpDepthMapView->setScrollBars(depthMapViewArea->horizontalScrollBar(),
+                                depthMapViewArea->verticalScrollBar());
+  addTab(depthMapViewArea, "Depth maps");
 
 #ifdef PCL
   containerModelTypeSelector->setLayout(layoutModelTypeSelector);

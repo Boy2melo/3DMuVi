@@ -9,6 +9,8 @@
 
 #include <gui/IGuiDataView.h>
 
+class QScrollBar;
+
 class CImageView : public QWidget, public IGuiDataView
 {
     Q_OBJECT
@@ -30,6 +32,7 @@ protected:
   std::vector<std::vector<std::tuple<uint32_t,QPoint>>> FeatureList;
 public:
    CImageView(QWidget *parent = 0);
+   void setScrollBars(QScrollBar* horizontal, QScrollBar* vertical);
 };
 
 #endif // CIMAGEVIEW_H

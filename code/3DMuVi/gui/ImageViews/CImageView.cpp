@@ -10,6 +10,11 @@ CImageView::CImageView(QWidget *parent){
 
 }
 
+void CImageView::setScrollBars(QScrollBar* horizontal, QScrollBar* vertical)
+{
+
+}
+
 
 //============================================================
 /*!
