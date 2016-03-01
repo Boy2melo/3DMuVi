@@ -1,4 +1,8 @@
 #ifdef PCL
+#include <pcl/io/pcd_io.h>
+#include <pcl/io/ply_io.h>
+#include <pcl/io/obj_io.h>
+
 #include "workflow/workflow/ccontextdatastore.h"
 #include "io/CSFStreamProvider.h"
 
@@ -36,54 +40,28 @@ AStreamProvider* CDataFusion::getStreamProvider()
   return mpStream;
 }
 
-//TODO: this should be reimplemented using the pcl save funtions
 void CDataFusion::serialize(AStreamProvider* stream)
 {
-  QDataStream* dataStream = nullptr;
+  QDir dir = stream->getDestination();
 
-  if(!stream)
-  {
-    return;
-  }
-
-  stream->setFileName(getId());
-  dataStream = stream->getNextStream();
-
-  *dataStream << (int)mPointCloudData->size();
-
-  for(pcl::PointXYZRGB p : *mPointCloudData)
-  {
-    dataStream->writeRawData((char*)&p, sizeof(p));
-  }
+  pcl::io::savePCDFile(dir.absoluteFilePath("point_cloud.pcd").toStdString(),
+                       *mPointCloudData);
+  pcl::io::savePLYFile(dir.absoluteFilePath("polygon_mesh.ply").toStdString(), *mPolygonMeshData);
+  pcl::io::saveOBJFile(dir.absoluteFilePath("texture_mesh.obj").toStdString(), *mTextureMeshData);
 }
 
 //TODO: this should be reimplemented using the pcl load funtions
 void CDataFusion::deserialize(AStreamProvider* stream)
 {
-  QDataStream* dataStream = nullptr;
-  int size;
+  QDir dir = stream->getDestination();
 
-  if(!stream)
-  {
-    return;
-  }
+  mPointCloudData = PointCloud::Ptr(new PointCloud);
+  mPolygonMeshData = pcl::PolygonMesh::Ptr(new pcl::PolygonMesh);
+  mTextureMeshData = pcl::TextureMesh::Ptr(new pcl::TextureMesh);
 
-  dataStream = stream->getNextStream();
-
-  *dataStream >> size;
-  mPointCloudData->resize(size);
-
-  for(int i = 0; i < size; i++)
-  {
-    pcl::PointXYZRGB point;
-
-    for(unsigned int i = 0; i < sizeof(point); i++)
-    {
-      dataStream->readRawData((char*)&point, sizeof(point));
-    }
-
-    mPointCloudData->push_back(point);
-  }
+  pcl::io::loadPCDFile(dir.absoluteFilePath("point_cloud.pcd").toStdString(), *mPointCloudData);
+  pcl::io::loadPLYFile(dir.absoluteFilePath("polygon_mesh.ply").toStdString(), *mPolygonMeshData);
+  pcl::io::loadOBJFile(dir.absoluteFilePath("texture_mesh.obj").toStdString(), *mTextureMeshData);
 }
 
 void CDataFusion::setPointCloud(PointCloud::Ptr cloud)
