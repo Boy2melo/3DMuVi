@@ -47,6 +47,11 @@ unix {
 e################
 # PCL
 unix {
+    DEFINES += PCL
+
+    CONFIG += link_pkgconfig
+    PKGCONFIG += pcl_io-1.8
+
     INCLUDEPATH += /home/rufboi/3rd_party/PCL_1.7.2_gcc4.8/include/
     DEPENDPATH += /home/rufboi/3rd_party/PCL_1.7.2_gcc4.8/include/
 

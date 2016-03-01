@@ -7,7 +7,7 @@
 // Autofunctions, no adjustments needed
 //----------------------------------------------
 QString _CLASS_GEN(Plugin)::Autor() const {
-    return str(_PLUGIN_AUTHOR);
+    return _str(_PLUGIN_AUTHOR);
 }
 
 qint32 _CLASS_GEN(Plugin)::Version() const {
@@ -15,11 +15,11 @@ qint32 _CLASS_GEN(Plugin)::Version() const {
 }
 
 QDate _CLASS_GEN(Plugin)::Date() const {
-    return QDate::fromString(str(_PLUGIN_DATE), "yyyy-MM-dd");
+    return QDate::fromString(_str(_PLUGIN_DATE), "yyyy-MM-dd");
 }
 
 QString _CLASS_GEN(Plugin)::Name() const {
-    return str(_PLUGIN_NAME);
+    return _str(_PLUGIN_NAME);
 }
 
 QJsonObject _CLASS_GEN(Plugin)::GetParameterJson() const {

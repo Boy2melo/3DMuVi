@@ -19,7 +19,7 @@
 #define _concat1(x,y) _concat2(x, y)    //Double layer of indirection - otherwise _PLUGIN_NAME will not be resolved
 #define _concat2(x,y) _concat3(x, y)
 #define _concat3(x,y) x ## y
-#define str(x) str1(x)
+#define _str(x) str1(x)
 #define str1(x) str2(x)
 #define str2(x) str3(x)
 #define str3(x) #x

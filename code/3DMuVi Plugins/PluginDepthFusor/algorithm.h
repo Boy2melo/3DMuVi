@@ -4,6 +4,7 @@
 #include "plugin_config.h"
 #include <QJsonObject>
 #include <QObject>
+#include <fstream>
 
 #include <pcl/common/common.h>
 #include <pcl/PolygonMesh.h>
@@ -12,7 +13,6 @@
 
 class _CLASS_GEN(Algorithm) : public IAlgorithm
 {
-    Q_OBJECT
 private:
     bool mIsBusy;
     CLogController *mLogger;
@@ -80,14 +80,14 @@ private:
      * \param iFilePath Path to file.
      * \return Polygon Mesh pointer.
      */
-    pcl::PolygonMesh::Ptr loadMeshFromPly(const string &iFilePath);
+    pcl::PolygonMesh::Ptr loadMeshFromPly(const std::string &iFilePath);
 
     /*!
      * \brief Method to load pcl point cloud from pcd file.
      * \param iFilePath Path to source file.
      * \return Point Cloud Pointer
      */
-    pcl::PointCloud<pcl::PointXYZRGBA>::Ptr loadPointCoudFromPcd(const string &iFilePath);
+    pcl::PointCloud<pcl::PointXYZRGB>::Ptr loadPointCoudFromPcd(const std::string &iFilePath);
 };
 
 #endif // ALGORITHM_H
