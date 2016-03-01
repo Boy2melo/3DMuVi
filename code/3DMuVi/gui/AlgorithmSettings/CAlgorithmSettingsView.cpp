@@ -29,16 +29,24 @@ void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow)
 {
     model = QPointer<CAlgorithmSettingsModel>(new CAlgorithmSettingsModel(workflow, *settingcontroller));
     this->setModel(model);
-    //saveloadwidget einbinden setIndexWidget(Modelindex, widget)
     int algorithms = workflow.getStepCount();
     int i = 0;
-    QModelIndex index = this->rootIndex().child(0, 2);
-    while (i <= algorithms) {
+    // QModelIndex index = this->rootIndex().child(0, 2);
+    /*while (i <= algorithms) {
         if (index.isValid()){
             this->setIndexWidget(index, new CAlgorithmSettingsSaveLoadWidget(0, i, *model));
         }
         i++;
         index = index.sibling(i, 2);
+    }*/
+    for (int i = 0; i < algorithms; i++) {
+        QJsonObject object = workflow.getStep(i)->GetParameterJson();
+        model->loadQJson(object);
+        //QModelIndex index = this->rootIndex().child(i, 2);
+        //if (index.isValid()){
+          //  this->setIndexWidget(index, new CAlgorithmSettingsSaveLoadWidget(0, i, *model));
+        //}
+
     }
     this->show();
 }
@@ -55,6 +63,9 @@ void CAlgorithmSettingsView::setAlgorithmController(CAlgorithmSettingController&
 //============================================================
 void CAlgorithmSettingsView::onAlgorithmChanged(int step)
 {
+    this->hide();
     model->algorithmChanged(step);
+    QModelIndex index = this->rootIndex().child(step, 2);
+    this->setIndexWidget(index, new CAlgorithmSettingsSaveLoadWidget(0, step, *model));
     this->show();
 }

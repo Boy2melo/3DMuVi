@@ -195,7 +195,7 @@ QModelIndex CQJsonModel::parent(const QModelIndex& index) const {
     CQJsonTreeItem* childItem = static_cast<CQJsonTreeItem*>(index.internalPointer());
     CQJsonTreeItem* parentItem = childItem->parent();
 
-    if (parentItem == mRootItem)
+    if (parentItem == mRootItem || parentItem == nullptr)
         return QModelIndex();
 
     return createIndex(parentItem->row(), 0, parentItem);
