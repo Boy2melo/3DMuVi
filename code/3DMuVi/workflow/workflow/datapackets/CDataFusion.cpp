@@ -50,7 +50,6 @@ void CDataFusion::serialize(AStreamProvider* stream)
   pcl::io::saveOBJFile(dir.absoluteFilePath("texture_mesh.obj").toStdString(), *mTextureMeshData);
 }
 
-//TODO: this should be reimplemented using the pcl load funtions
 void CDataFusion::deserialize(AStreamProvider* stream)
 {
   QDir dir = stream->getDestination();
