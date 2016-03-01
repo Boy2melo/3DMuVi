@@ -3,9 +3,9 @@
 #include "workflow/plugin/cpluginmanager.h"
 
 //The name of your Plugin
-#define _PLUGIN_NAME PoseEstimator
+#define _PLUGIN_NAME DepthEstimator
 //The type of your plugin
-#define _PLUGIN_TYPE PT_PoseEstimator
+#define _PLUGIN_TYPE PT_DepthEstimator
 //The Author of this plugin
 #define _PLUGIN_AUTHOR Boitumelo Ruf
 //The Version of this plugin (uint)
