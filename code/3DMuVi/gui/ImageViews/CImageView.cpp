@@ -1,31 +1,34 @@
 #include "CImageView.h"
 #include <QPainter>
 #include <QWheelEvent>
+#include <QScrollBar>
+
 
 CImageView::CImageView(QWidget *parent){
-  exp = 1;
+  Q_UNUSED(parent)
+   // initilize
+  exp = 0;
+  mousepressed = false;
   init = false;
   currentcolor = 0;
-  this->resize(500000,500000);	
-
+  sizeX = 480;
+  sizeY = 480;
+  this->resize(sizeX,sizeY);
 }
-
 void CImageView::setScrollBars(QScrollBar* horizontal, QScrollBar* vertical)
 {
-
+h = horizontal;
+v = vertical;
 }
 
-
-//============================================================
-/*!
-@param event
-*/
-//============================================================
 void CImageView::paintEvent(QPaintEvent* event)
 {
+    Q_UNUSED(event)
     QPainter painter(this);
    if(init)
-   {painter.setTransform(m_transform);}
+    {
+       painter.setTransform(m_transform);
+     }
     init = true;
     // Paint all Images from the List
     for(uint i = 0; i <  ImageOffsetList.size(); i++ ) {
@@ -36,7 +39,6 @@ void CImageView::paintEvent(QPaintEvent* event)
 
     // for all FeaureLists  Paint all Feauture points with lines
     for(uint j = 0; j < FeatureList.size(); j++){
-
         switch (currentcolor) {
            case 0:
                painter.setPen(Qt::magenta);
@@ -55,6 +57,7 @@ void CImageView::paintEvent(QPaintEvent* event)
                break;
            }
 
+
         //Paint List
         for(uint g = 0; g < FeatureList[j].size(); g++){
             QPoint cpoint = std::get<1> (FeatureList[j][g]);
@@ -65,69 +68,81 @@ void CImageView::paintEvent(QPaintEvent* event)
         }
 
     }
-
-
+    //reset Color
+    currentcolor = 0;
 }
 
-//============================================================
-/*!
-@param event
-*/
-//============================================================
+
 void CImageView::wheelEvent(QWheelEvent* event)
 {
-    exp = exp + (event->delta() / 120.0);
-    if(exp <= -15 ){
-        exp = -15;
-    }
-    if(exp >= 25) {
-        exp  = 25;
-    }
 
+    exp = exp + (event->delta() / 120.0);
+    if(exp <= -6 ){
+        exp = -6;
+    }
+    if(exp >= 15) {
+        exp  = 15;
+    }
     float factor = powf(1.41, exp);
+
     QTransform transform;
     transform = m_transform.fromScale(factor, factor);
     m_transform = transform;
+
+    if(factor > 0){
+    resize(sizeX*factor ,sizeY*factor);
+
+
+    double val = v->value() / factor;
+    double hal = h->value() / factor;
+
+    double hPoint = val / sizeX;
+    double vPoint = hal / sizeY;
+
+
+    h->setMaximum(sizeX*factor);
+    v->setMaximum(sizeY*factor);
+
+
+    h->setValue(sizeX*factor*hPoint);
+    v->setValue(sizeY*factor*vPoint);
+    }
     event->accept();
     this->update();
-
 }
 
-//============================================================
-/*!
-@param event
-*/
-//============================================================
+
 void CImageView::mouseMoveEvent(QMouseEvent* event)
 {
+if(mousepressed){
+QPoint currentpos = event->pos();
+double deltax = pmousepoint.rx() - currentpos.rx();
+double deltay = pmousepoint.ry() - currentpos.ry();
 
+deltax = - deltax / 400.0 ;
+deltay = - deltay / 400.0 ;
+
+deltax = deltax  * sizeX / 1000.0;
+deltay = deltay  * sizeY / 1000.0;
+h->setValue(h->value() +   deltax );
+v->setValue(v->value() +   deltay );
+}
 }
 
-//============================================================
-/*!
-@param event
-*/
-//============================================================
+
 void CImageView::mousePressEvent(QMouseEvent* event)
 {
-
+mousepressed = true;
+pmousepoint = event->pos();
 }
 
-//============================================================
-/*!
-@param event
-*/
-//============================================================
+
 void CImageView::mouseReleaseEvent(QMouseEvent* event)
 {
-
+Q_UNUSED(event)
+mousepressed = false;
 }
 
-//============================================================
-/*!
-@param images
-*/
-//============================================================
 void CImageView::showImages(std::vector<std::tuple<uint32_t,QImage&>> images)
 {
 // clear old Image List + FeaturepointList
@@ -148,10 +163,7 @@ for(int i = 0; i < tablesize; i++){
     pepArray.push_back(tmpv);
 }
 
-//pepArray = QPoint[tablesize][tablesize];
-
 //build ImageOffsetList
-
 for(int i = 0; i < tablesize; i++){
     for(int j = 0;j < tablesize; j++ ) {
         if(iIndex < images.size()){
@@ -190,19 +202,28 @@ for(int i = 0; i < tablesize; i++){
             std::tuple<uint32_t,QPoint,QImage> tuple (id,Offset,image);
             ImageOffsetList.push_back(tuple);
 
+            //check Maximum Size
+            if( sizeX < pepArray[i][j].rx()){
+                sizeX = pepArray[i][j].rx();
+            }
+
+            if( sizeY < pepArray[i][j].ry()){
+                sizeY = pepArray[i][j].ry();
+            }
+
+
         }
         iIndex++;
     }
 }
+//resize and fit scrollbars to current value;
+this->resize(sizeX,sizeY);
+h->setMaximum(sizeX);
+v->setMaximum(sizeY);
+
 this->update();
 }
 
-
-//============================================================
-/*!
-@param positions
-*/
-//============================================================
 void CImageView::addConnectedMarkers(std::vector<std::tuple<uint32_t,QVector2D>> positions)
 {
    std::vector<std::tuple<uint32_t,QPoint>> result;
