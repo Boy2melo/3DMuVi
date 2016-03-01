@@ -5,13 +5,21 @@
 
 #include "CImageView.h"
 
+class CDataDeptht;
+
 class CDepthMapView : public CImageView, public IDataView {
   Q_OBJECT
 
 public:
   //TODO: Include data packets
-  //void applyData(CDepthMapDataPacket* packet);
+  void applyData(CDataDepth* packet);
   void activate();
+
+private:
+  CDataDepth* appliedData;
+  std::vector<uint32_t> mDataID;
+
+  void updateView();
 
 public slots:
   void onImagesSelected(std::vector<uint32_t>& images);
