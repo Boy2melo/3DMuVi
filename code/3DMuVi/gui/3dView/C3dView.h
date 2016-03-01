@@ -55,7 +55,7 @@ public:
 
   This method sends out the signal relevantImagesChanged with the poses as image IDs.
   */
-  void activate();
+  void activate() override;
 
   /*!
   \brief Shows the given fusion data.

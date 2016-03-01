@@ -126,6 +126,8 @@ void CPclView::updateCameraMesh(const pcl::PointXYZ& position,
   addCameraMesh(position, rotation, id);
 }
 
+//Not implemented
+/*
 void CPclView::showCoordinateSystem(bool state)
 {
 
@@ -140,4 +142,5 @@ void CPclView::centerOnPoint(const pcl::PointXYZ& point)
 {
 
 }
+*/
 #endif
