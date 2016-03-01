@@ -4,6 +4,7 @@
 #include "plugin_config.h"
 #include <QJsonObject>
 #include <QObject>
+#include <fstream>
 
 class _CLASS_GEN(Algorithm) : public IAlgorithm
 {

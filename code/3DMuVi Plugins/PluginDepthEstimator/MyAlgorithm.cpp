@@ -3,6 +3,7 @@
 #include "workflow/workflow/datapackets/CDataPose.h"
 #include "workflow/workflow/datapackets/SPose.h"
 #include "opencv2/core.hpp"
+#include "opencv2/imgproc.hpp"
 
 
 //----------------------------------------
@@ -30,35 +31,23 @@ bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
     if (params->value("NumOfFrames").toInt() < 2) return false;
 
     //--- get file list from directory ---
-    QDir dir = QDir(params->value("GtSrcDir"));
+    QDir dir = QDir(params->value("GtSrcDir").toString());
     dir.setNameFilters(QStringList() << "*.xml");
     dir.setSorting(QDir::Name);
-    mFileList = dir.entryList();
-    mFileItr = mFileList.begin();
+    QStringList fileList = dir.entryList();
+    QStringList::iterator fileItr = fileList.begin();
 
-    if(mFileList.empty())
+    if(fileList.empty())
     {
       std::cout << "\033[33m"
                 << "WARNING: No Files in given source directory!"
-                << "Directory: " << params->value("GtSrcDir")
+                << "Directory: " << params->value("GtSrcDir").toString().toStdString()
                 << "\033[0m"
                 << std::endl;
       return false;
     }
 
     return true;
-}
-
-// mock up:
-using InputImages = std::vector<QImage>;
-struct CDataInputImages
-{
-    InputImages getImages() { return std::vector<QImage>(); }
-};
-
-template <typename T>
-T * CContextDataStore::getData() {
-  return nullptr;
 }
 
 void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
@@ -73,35 +62,35 @@ void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
     };
 
     // get input files
-    auto pInputImages = store->getData<CDataInputImages>();
+    auto pInputImages = store->getData<CInputDataSet>();
     auto pPoses = store->getData<CDataPose>();
 
-    std::vector<QImage> depthMaps;
+    auto depthMaps = new std::vector<std::tuple<uint32_t, QImage>>;
     int frameCounter = 0;
 
     // read data from file
-    for(QImage img : pInputImages->getImages())
+    for(std::tuple<uint32_t, QImage, CImagePreviewItem> img : *pInputImages->getInputImages())
     {
       frameCounter++;
       mFileItr++;
 
-      if(frameCounter == mSettings->value("NumOfFrames"))
+      if(frameCounter == mSettings->value("NumOfFrames").toInt())
       {
         //--- read depthmap ---
         cv::Mat depthMap;
-        cv::FileStorage fs = cv::FileStorage(mSettings->value("GtSrcDir") + "/"
-                                             + (*mFileItr).toStdString(),
+        cv::FileStorage fs = cv::FileStorage(mSettings->value("GtSrcDir").toString().toStdString()
+                                             + "/" + (*mFileItr).toStdString(),
                                              cv::FileStorage::READ);
         fs[mSettings->value("XmlDataId").toString().toStdString()] >> depthMap;
 
         frameCounter = 0;
 
-        depthMaps.push_back(mat2Qimage(depthMap));
+        depthMaps->push_back(std::tuple<uint32_t, QImage>(std::get<0>(img), mat2Qimage(depthMap)));
       }
     }
 
-    CDataDepth depthData;
-    depthData.setDepthMap(depthMaps);
+    CDataDepth* depthData = new CDataDepth;
+    depthData->setDepthMap(std::shared_ptr<std::vector<std::tuple<uint32_t, QImage>>>(depthMaps));
 
-    store->appendData<CDataDepth>(depthData, true);
+    store->appendData<CDataDepth>(std::shared_ptr<CDataDepth>(depthData), true);
 }

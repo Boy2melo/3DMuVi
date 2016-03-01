@@ -22,12 +22,12 @@ using namespace cv;
 // Adjust these functions to your needs
 //----------------------------------------
 
-void CLASS_GEN(Algorithm)::OnInitialize(){
+void _CLASS_GEN(Algorithm)::OnInitialize(){
     mInputTypes.push_back(DT_INPUTIMAGES);
     mOutputTypes.push_back(DT_FEATURE_MATCH);
 }
 
-bool CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
+bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
     // First level typechecks are already done, see plugin.cpp
     Q_UNUSED(params);
     return true;
@@ -40,13 +40,7 @@ struct CDataInputImages
     InputImages getImages() { return std::vector<QImage>(); }
 };
 
-template <typename T>
-T * CContextDataStore::getData() {
-  return nullptr;
-}
-
-
-void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
+void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
   // Step 1: extract data from dataStore
   auto pInputPacket = store->getData<CDataInputImages>();
   if (pInputPacket == nullptr) return;
@@ -70,6 +64,6 @@ void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
 
   // Step 4: append result data to dataStore
   auto resultPacket = new CDataFeature;
-  resultPacket->setFeatureMatch(move(result));
-  store->appendData(resultPacket, true);
+  resultPacket->setFeatureMatch(std::shared_ptr<FeatureMatch>(new FeatureMatch(result)));
+  store->appendData(std::shared_ptr<CDataFeature>(resultPacket), true);
 }

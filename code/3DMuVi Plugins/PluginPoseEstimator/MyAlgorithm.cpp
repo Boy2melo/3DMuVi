@@ -21,29 +21,18 @@ bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
     // First level typechecks are already done, see plugin.cpp
 
     // close file stream if still open
-    if(mPoseFileStream.is_open())
-      mPoseFileStream.close;
+    //TODO: close not allowed in const method. Is this really necessary?
+    //if(mPoseFileStream.is_open())
+    //  mPoseFileStream.close();
 
     // check if file exists
-    QFile gtSrcFile = QFile(paramst->value("GtSrcFile").toString());
+    QFile gtSrcFile(params->value("GtSrcFile").toString());
     if (!gtSrcFile.exists()) return false;
 
     // check if delimiter is at least one character
     if (params->value("Delimiter").toString().length() == 0) return false;
 
     return true;
-}
-
-// mock up:
-using InputImages = std::vector<QImage>;
-struct CDataInputImages
-{
-    InputImages getImages() { return std::vector<QImage>(); }
-};
-
-template <typename T>
-T * CContextDataStore::getData() {
-  return nullptr;
 }
 
 void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
@@ -53,17 +42,17 @@ void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
     if(!mPoseFileStream.is_open()) openFileStream();
 
     // get input files
-    auto pInputImages = store->getData<CDataInputImages>();
+    auto pInputImages = store->getData<CInputDataSet>();
     auto pFeatureMatches = store->getData<CDataFeature>();
 
-    std::vector<SPose> poses;
+    auto poses = new std::vector<SPose>;
 
     // read data from file
-    for(QImage img : pInputImages->getImages())
+    for(std::tuple<uint32_t, QImage, CImagePreviewItem> img : *pInputImages->getInputImages())
     {
       //--- if new line is read, parse pose. otherwise return. ---
         std::string line;
-        std::string delimiter = mSettings->value("Delimiter");
+        std::string delimiter = mSettings->value("Delimiter").toString().toStdString();
         if(std::getline(mPoseFileStream, line))
         {
           SPose newPose;
@@ -95,25 +84,25 @@ void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
           newPose.translation = QVector3D(poseVals[0], poseVals[1], poseVals[2]);
           newPose.eulerAngles = QVector3D(deg2Rad(poseVals[3]), deg2Rad(poseVals[4]), deg2Rad(poseVals[5]));
 
-          poses.push_back(newPose);
+          poses->push_back(newPose);
        }
     }
 
-    CDataPose poseData;
-    poseData.setPose(poses);
+    auto poseData = new CDataPose;
+    poseData->setPose(std::shared_ptr<std::vector<SPose>>(poses));
 
-    store->appendData<CDataPose>(poseData, true);
+    store->appendData<CDataPose>(std::shared_ptr<CDataPose>(poseData), true);
 }
 
 void _CLASS_GEN(Algorithm)::openFileStream()
 {
   //--- open file stream ---
-  mPoseFileStream.open(mSettings->value("GtSrcFile"), std::ios_base::in);
+  mPoseFileStream.open(mSettings->value("GtSrcFile").toString().toStdString(), std::ios_base::in);
   if(!mPoseFileStream.is_open())
   {
     std::cout << "\033[33m"
               << "WARNING: Pose groundtruth file did not open. Check path!"
-              << "File: " << mSettings->value("GtSrcFile")
+              << "File: " << mSettings->value("GtSrcFile").toString().toStdString()
               << "\033[0m"
               << std::endl;
   }

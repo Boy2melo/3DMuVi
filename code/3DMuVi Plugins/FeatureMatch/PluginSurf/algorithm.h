@@ -5,7 +5,7 @@
 #include <QJsonObject>
 #include <QObject>
 
-class CLASS_GEN(Algorithm) : public IAlgorithm
+class _CLASS_GEN(Algorithm) : public IAlgorithm
 {
 private:
     bool mIsBusy;
@@ -15,7 +15,7 @@ private:
     QStringList mOutputTypes;
 
 public:
-    CLASS_GEN(Algorithm)();
+    _CLASS_GEN(Algorithm)();
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */
