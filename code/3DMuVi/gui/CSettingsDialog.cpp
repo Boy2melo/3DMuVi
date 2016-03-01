@@ -69,9 +69,13 @@ void CSettingsDialog::accept()
 
 void CSettingsDialog::onResultDirectoryButtonClicked(bool)
 {
-  QUrl url = QFileDialog::getExistingDirectoryUrl(this, "Select result directory");
+  QUrl url = QFileDialog::getExistingDirectoryUrl(this, "Select result directory",
+                                                  QUrl(ui->resultDirectoryEdit->text()));
 
-  ui->resultDirectoryEdit->setText(url.toString());
+  if(!url.isEmpty())
+  {
+    ui->resultDirectoryEdit->setText(url.toString());
+  }
 }
 
 void CSettingsDialog::updateResultDirectory()
