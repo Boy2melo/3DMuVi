@@ -1,44 +1,44 @@
-#include "plugin.h"
 #include "workflow/plugin/cpluginmanager.h"
 #include <QPluginLoader>
 #include <QJsonObject>
+#include "plugin.h"
 
 //----------------------------------------------
 // Autofunctions, no adjustments needed
 //----------------------------------------------
-QString _CLASS_GEN(Plugin)::Autor() const {
-    return _str(_PLUGIN_AUTHOR);
+QString CLASS_GEN(Plugin)::Autor() const {
+    return PLUGIN_AUTHOR;
 }
 
-qint32 _CLASS_GEN(Plugin)::Version() const {
-    return _PLUGIN_VERSION;
+qint32 CLASS_GEN(Plugin)::Version() const {
+    return PLUGIN_VERSION;
 }
 
-QDate _CLASS_GEN(Plugin)::Date() const {
-    return QDate::fromString(_str(_PLUGIN_DATE), "yyyy-MM-dd");
+QDate CLASS_GEN(Plugin)::Date() const {
+    return QDate::fromString(PLUGIN_DATE, "yyyy-MM-dd");
 }
 
-QString _CLASS_GEN(Plugin)::Name() const {
-    return _str(_PLUGIN_NAME);
+QString CLASS_GEN(Plugin)::Name() const {
+    return STRINGIFY(PLUGIN_NAME);
 }
 
-QJsonObject _CLASS_GEN(Plugin)::GetParameterJson() const {
+QJsonObject CLASS_GEN(Plugin)::GetParameterJson() const {
     return mParameters.value("Default").toObject();
 }
 
-QJsonObject _CLASS_GEN(Plugin)::GetParameterDescriptionJson() const {
+QJsonObject CLASS_GEN(Plugin)::GetParameterDescriptionJson() const {
     return mParameters.value("Description").toObject();
 }
 
-IAlgorithm *_CLASS_GEN(Plugin)::getAlgorithm() const {
+IAlgorithm *CLASS_GEN(Plugin)::getAlgorithm() const {
     return static_cast<IAlgorithm*>(mAlgorithm);
 }
 
-_CLASS_GEN(Plugin)::~_CLASS_GEN(Plugin)() {
+CLASS_GEN(Plugin)::~CLASS_GEN(Plugin)() {
     delete mAlgorithm;
 }
 
-bool _CLASS_GEN(Plugin)::ValidateParameters(QJsonObject *params) const {
+bool CLASS_GEN(Plugin)::ValidateParameters(QJsonObject *params) const {
     // First level type check over given parameters
     for(QJsonObject::iterator itr = params->begin(); itr != params->end(); itr++){
         // Get reference type
@@ -52,14 +52,14 @@ bool _CLASS_GEN(Plugin)::ValidateParameters(QJsonObject *params) const {
     return mAlgorithm->ValidateParameters(params);
 }
 
-QString _CLASS_GEN(Plugin)::GetPluginType() const {
-    return _PLUGIN_TYPE;
+QString CLASS_GEN(Plugin)::GetPluginType() const {
+    return PLUGIN_TYPE;
 }
 
-void _CLASS_GEN(Plugin)::Initialize(QPluginLoader* loader) {
+void CLASS_GEN(Plugin)::Initialize(QPluginLoader* loader) {
     mParameters = loader->metaData().value("MetaData").toObject();
 }
 
-_CLASS_GEN(Plugin)::_CLASS_GEN(Plugin)(){
-    mAlgorithm = new _CLASS_GEN(Algorithm)();
+CLASS_GEN(Plugin)::CLASS_GEN(Plugin)(){
+    mAlgorithm = new CLASS_GEN(Algorithm)();
 }

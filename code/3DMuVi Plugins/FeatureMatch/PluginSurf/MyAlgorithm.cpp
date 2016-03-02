@@ -1,6 +1,8 @@
 #include "algorithm.h"
 
 #include <vector>
+#include <tuple>
+#include <memory>
 
 #include <QImage>
 #include <QJsonObject>
@@ -11,8 +13,7 @@
 #include "surfmatch-algorithm.h"
 
 #include "workflow/workflow/ccontextdatastore.h"
-
-//#include "workflow/workflow/datapackets/CDataInputImages.h"
+#include "io/CInputDataSet.h"
 #include "workflow/workflow/datapackets/CDataFeature.h"
 
 using namespace std;
@@ -22,32 +23,30 @@ using namespace cv;
 // Adjust these functions to your needs
 //----------------------------------------
 
-void _CLASS_GEN(Algorithm)::OnInitialize(){
+void CLASS_GEN(Algorithm)::OnInitialize(){
     mInputTypes.push_back(DT_INPUTIMAGES);
     mOutputTypes.push_back(DT_FEATURE_MATCH);
 }
 
-bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
+bool CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
     // First level typechecks are already done, see plugin.cpp
     Q_UNUSED(params);
     return true;
 }
 
-// mock up:
-using InputImages = std::vector<QImage>;
-struct CDataInputImages
-{
-    InputImages getImages() { return std::vector<QImage>(); }
-};
 
-void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
+void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
   // Step 1: extract data from dataStore
-  auto pInputPacket = store->getData<CDataInputImages>();
+  std::shared_ptr<CInputDataSet> pInputPacket = store->getData<CInputDataSet>();
+
   if (pInputPacket == nullptr) return;
-  auto inputImages = pInputPacket->getImages();
-  vector<Mat> imgs(inputImages.size());
-  transform(inputImages.begin(), inputImages.end(), imgs.begin(), [](QImage qImg) {
-    qImg = qImg.convertToFormat(QImage::Format_ARGB32);
+
+  using TupleType = std::tuple<uint32_t, QImage, CImagePreviewItem>;
+  vector<TupleType>* inputImages = pInputPacket->getInputImages();
+
+  vector<Mat> imgs(inputImages->size());
+  transform(inputImages->begin(), inputImages->end(), imgs.begin(), [](TupleType const & tup) {
+    QImage qImg = get<1>(tup).convertToFormat(QImage::Format_ARGB32);
     auto img = Mat(qImg.height(), qImg.width(), CV_8UC4, qImg.bits(), qImg.bytesPerLine());
     return img.clone();
   });
@@ -60,10 +59,11 @@ void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
   auto thres = mSettings->value("Threshold").toDouble(0.00001);
 
   // Step 3: run algorithm
-  auto result = findSurfMatches(imgs, upright, octaves, intervals, init_sample, thres);
+  shared_ptr<FeatureTable> result(new FeatureTable);
+  *result = findSurfMatches(imgs, upright, octaves, intervals, init_sample, thres);
 
   // Step 4: append result data to dataStore
-  auto resultPacket = new CDataFeature;
-  resultPacket->setFeatureMatch(std::shared_ptr<FeatureMatch>(new FeatureMatch(result)));
-  store->appendData(std::shared_ptr<CDataFeature>(resultPacket), true);
+  auto resultPacket = std::make_shared<CDataFeature>();
+  resultPacket->setFeatureMatch(result);
+  store->appendData(resultPacket, true);
 }

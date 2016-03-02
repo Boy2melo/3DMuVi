@@ -1,11 +1,12 @@
 #ifndef ALGORITHM_H
 #define ALGORITHM_H
 #include "workflow/plugin/ialgorithm.h"
-#include "plugin_config.h"
 #include <QJsonObject>
 #include <QObject>
+#include "plugin_config.h"
 
-class _CLASS_GEN(Algorithm) : public IAlgorithm
+
+class CLASS_GEN(Algorithm) : public IAlgorithm
 {
 private:
     bool mIsBusy;
@@ -15,7 +16,7 @@ private:
     QStringList mOutputTypes;
 
 public:
-    _CLASS_GEN(Algorithm)();
+    CLASS_GEN(Algorithm)();
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */

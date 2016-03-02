@@ -7,10 +7,10 @@
 #include "algorithm.h"
 #include "plugin_config.h"
 
-class _CLASS_GEN(Plugin) : public QObject, public IPlugin
+class CLASS_GEN(Plugin) : public QObject, public IPlugin
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID IPlugin_iid FILE "Plugin.json")
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.Fraunhofer.3DMuVi.IPlugin" FILE "Plugin.json")
     Q_INTERFACES(IPlugin)
 
 private:
@@ -20,11 +20,11 @@ private:
     QJsonObject mParameters;
 
     // TODO: set algorithm type
-    _CLASS_GEN(Algorithm)* mAlgorithm;
+    CLASS_GEN(Algorithm)* mAlgorithm;
 public:
-    _CLASS_GEN(Plugin)();
+    CLASS_GEN(Plugin)();
 
-    virtual ~_CLASS_GEN(Plugin)();
+    virtual ~CLASS_GEN(Plugin)();
     /*!
      * \brief getAlgorithm
      * \return Der [Algorithmus](@ref IAlgorithm) des Plugins
