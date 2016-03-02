@@ -11,7 +11,7 @@
 #include <pcl/io/pcd_io.h>
 #include <pcl/io/ply_io.h>
 
-class _CLASS_GEN(Algorithm) : public IAlgorithm
+class CLASS_GEN(Algorithm) : public IAlgorithm
 {
 private:
     bool mIsBusy;
@@ -26,7 +26,7 @@ private:
     std::fstream  mPoseFileStream;
 
 public:
-    _CLASS_GEN(Algorithm)();
+    CLASS_GEN(Algorithm)();
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */

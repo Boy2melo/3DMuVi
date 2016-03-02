@@ -35,3 +35,5 @@
 code/obj/
 *.opendb
 code/3DMuVi.sdf
+code/3DMuVi/GeneratedFiles/
+code/Win32/

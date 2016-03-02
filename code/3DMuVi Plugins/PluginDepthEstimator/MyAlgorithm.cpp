@@ -10,14 +10,14 @@
 // Adjust these functions to your needs
 //----------------------------------------
 
-void _CLASS_GEN(Algorithm)::OnInitialize(){
+void CLASS_GEN(Algorithm)::OnInitialize(){
     mInputTypes.push_back(DT_INPUTIMAGES);
     mInputTypes.push_back(DT_POSE);
 
     mOutputTypes.push_back(DT_DEPTH);
 }
 
-bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
+bool CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
     // First level typechecks are already done, see plugin.cpp
 
     // check if directory exists
@@ -50,7 +50,7 @@ bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
     return true;
 }
 
-void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
+void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
 
     auto mat2Qimage = [](cv::Mat const& src){
         //TODO support conversion of single channel float.

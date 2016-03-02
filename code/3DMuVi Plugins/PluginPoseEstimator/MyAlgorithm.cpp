@@ -10,20 +10,15 @@
 // Adjust these functions to your needs
 //----------------------------------------
 
-void _CLASS_GEN(Algorithm)::OnInitialize(){
+void CLASS_GEN(Algorithm)::OnInitialize(){
     mInputTypes.push_back(DT_FEATURE_MATCH);
     mInputTypes.push_back(DT_INPUTIMAGES);
 
     mOutputTypes.push_back(DT_POSE);
 }
 
-bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
+bool CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
     // First level typechecks are already done, see plugin.cpp
-
-    // close file stream if still open
-    //TODO: close not allowed in const method. Is this really necessary?
-    //if(mPoseFileStream.is_open())
-    //  mPoseFileStream.close();
 
     // check if file exists
     QFile gtSrcFile(params->value("GtSrcFile").toString());
@@ -35,11 +30,12 @@ bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
     return true;
 }
 
-void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
+void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
 
     auto deg2Rad = [](float val){return (val / 180.f) * M_PI; };
 
-    if(!mPoseFileStream.is_open()) openFileStream();
+    mPoseFileStream.close();
+    openFileStream();
 
     // get input files
     auto pInputImages = store->getData<CInputDataSet>();
@@ -94,7 +90,7 @@ void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
     store->appendData<CDataPose>(std::shared_ptr<CDataPose>(poseData), true);
 }
 
-void _CLASS_GEN(Algorithm)::openFileStream()
+void CLASS_GEN(Algorithm)::openFileStream()
 {
   //--- open file stream ---
   mPoseFileStream.open(mSettings->value("GtSrcFile").toString().toStdString(), std::ios_base::in);

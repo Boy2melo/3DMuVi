@@ -5,7 +5,7 @@
 #include <QJsonObject>
 #include <QObject>
 
-class _CLASS_GEN(Algorithm) : public IAlgorithm
+class CLASS_GEN(Algorithm) : public IAlgorithm
 {
 private:
     bool mIsBusy;
@@ -25,7 +25,7 @@ private:
     QStringList::iterator     mFileItr;
 
 public:
-    _CLASS_GEN(Algorithm)();
+    CLASS_GEN(Algorithm)();
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */

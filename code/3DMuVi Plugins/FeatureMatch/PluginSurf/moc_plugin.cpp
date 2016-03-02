@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'plugin.h'
 **
-** Created by: The Qt Meta Object Compiler version 67 (Qt 5.5.0)
+** Created by: The Qt Meta Object Compiler version 67 (Qt 5.5.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -13,7 +13,7 @@
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'plugin.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
-#error "This file was generated using the moc from 5.5.0. It"
+#error "This file was generated using the moc from 5.5.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -113,7 +113,7 @@ static const unsigned char qt_pluginMetaData[] = {
     'a',  's',  's',  'N',  'a',  'm',  'e',  0x00,
     0x0e, 0x00, 'O',  'p',  'e',  'n',  'S',  'u', 
     'r',  'f',  'P',  'l',  'u',  'g',  'i',  'n', 
-    0x1a, 0xa0, 0xa0, 0x00, 0x07, 0x00, 'v',  'e', 
+    ':',  0xa0, 0xa0, 0x00, 0x07, 0x00, 'v',  'e', 
     'r',  's',  'i',  'o',  'n',  0x00, 0x00, 0x00,
     0x11, 0x00, 0x00, 0x00, 0x05, 0x00, 'd',  'e', 
     'b',  'u',  'g',  0x00, 0x95, 0x12, 0x00, 0x00,
@@ -365,7 +365,7 @@ static const unsigned char qt_pluginMetaData[] = {
     'e',  'n',  'S',  'u',  'r',  'f',  'P',  'l', 
     'u',  'g',  'i',  'n',  '1',  0x00, 0x00, 0x00,
     0x05, 0x00, 'd',  'e',  'b',  'u',  'g',  0x00,
-    0x1a, 0xa0, 0xa0, 0x00, 0x07, 0x00, 'v',  'e', 
+    ':',  0xa0, 0xa0, 0x00, 0x07, 0x00, 'v',  'e', 
     'r',  's',  'i',  'o',  'n',  0x00, 0x00, 0x00,
     0x0c, 0x00, 0x00, 0x00, 'H',  0x00, 0x00, 0x00,
     0xc4, 0x03, 0x00, 0x00, 0xe4, 0x03, 0x00, 0x00,

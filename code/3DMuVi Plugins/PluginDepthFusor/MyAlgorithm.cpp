@@ -11,7 +11,7 @@
 // Adjust these functions to your needs
 //----------------------------------------
 
-void _CLASS_GEN(Algorithm)::OnInitialize(){
+void CLASS_GEN(Algorithm)::OnInitialize(){
     mInputTypes.push_back(DT_INPUTIMAGES);
     mInputTypes.push_back(DT_POSE);
     mInputTypes.push_back(DT_DEPTH);
@@ -19,7 +19,7 @@ void _CLASS_GEN(Algorithm)::OnInitialize(){
     mOutputTypes.push_back(DT_FUSION);
 }
 
-bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
+bool CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
     // First level typechecks are already done, see plugin.cpp
 
     // check if files exists
@@ -30,7 +30,7 @@ bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
     return true;
 }
 
-void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
+void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
 
     // get input files
     auto pInputImages = store->getData<CInputDataSet>();
@@ -42,12 +42,12 @@ void _CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
     auto fusionData = new CDataFusion;
     fusionData->setPointCloud(loadPointCoudFromPcd(mSettings->value("PcSrcFile").toString().toStdString()));
     fusionData->setPolygonMesh(loadMeshFromPly(mSettings->value("MeshSrcFile").toString().toStdString()));
-    //fusionData->setTextureMesh(loadMeshFromPly(mSettings->value("TexMeshSrcFile").toString().toStdString()));
+//    fusionData->setTextureMesh(loadMeshFromPly(mSettings->value("TexMeshSrcFile").toString().toStdString()));
 
     store->appendData<CDataFusion>(std::shared_ptr<CDataFusion>(fusionData), true);
 }
 
-pcl::PolygonMesh::Ptr _CLASS_GEN(Algorithm)::loadMeshFromPly(const std::string &iFilePath) {
+pcl::PolygonMesh::Ptr CLASS_GEN(Algorithm)::loadMeshFromPly(const std::string &iFilePath) {
   pcl::PolygonMesh::Ptr pPolyMesh = pcl::PolygonMesh::Ptr(new pcl::PolygonMesh());
 
   if(pcl::io::loadPLYFile(iFilePath, *pPolyMesh) == -1)
@@ -57,7 +57,7 @@ pcl::PolygonMesh::Ptr _CLASS_GEN(Algorithm)::loadMeshFromPly(const std::string &
 }
 
 //TODO: Changed PointXYZRGBA to PointXYZRGB since 3D-MuVi only supports PointXYZRGB. Do we have to support more types?
-pcl::PointCloud<pcl::PointXYZRGB>::Ptr _CLASS_GEN(Algorithm)::loadPointCoudFromPcd(const std::string &iFilePath)
+pcl::PointCloud<pcl::PointXYZRGB>::Ptr CLASS_GEN(Algorithm)::loadPointCoudFromPcd(const std::string &iFilePath)
 {
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr pPointCloud = pcl::PointCloud<pcl::PointXYZRGB>::Ptr(new pcl::PointCloud<pcl::PointXYZRGB>);
 
