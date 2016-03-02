@@ -31,21 +31,15 @@ bool AWorkflow::run(const QString storeId) {
 
     // Start a new Thread
     auto *thread = new QThread(this);
-    auto *timer = new QTimer(nullptr);
-    thread->start();
-    timer->setInterval(10);
-    timer->setSingleShot(true);
-    timer->moveToThread(thread);
-    
-    //TODO: Timer not working
-    //connect(timer, &QTimer::timeout, [this, store]() {
-        this->executeAlgorithm(store);
-    //});
-    //connect(thread, &QThread::started, timer, &QTimer::start);
-    connect(thread, &QThread::finished, thread, &QThread::deleteLater);     // Prevent memory leak
-    connect(thread, &QThread::finished, timer, &QTimer::deleteLater);
-    
-    timer->start(10);
+
+
+    this->moveToThread(thread);
+    QTimer::singleShot(0, [=]{
+      this->executeAlgorithm(store);
+    });
+
+        connect(thread, &QThread::finished, thread, &QThread::deleteLater);
+thread->start();
     
     mMutex.unlock();
 
