@@ -35,7 +35,7 @@ void CGlobalSettingController::import(QUrl directory, QString name) {
     if (directory.fileName() == name) {
         url = QUrl(directory.path() + "/" + name);
     }
-    file = io.load(url);
+    file = io.load(directory);
     QJsonDocument docu = QJsonDocument().fromJson(file.toUtf8());
     settings = docu.object();
 }

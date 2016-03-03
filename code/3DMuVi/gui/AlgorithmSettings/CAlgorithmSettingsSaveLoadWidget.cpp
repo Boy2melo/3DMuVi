@@ -1,5 +1,6 @@
 #include "CAlgorithmSettingsSaveLoadWidget.h"
 #include <QPushButton>
+#include <QHBoxLayout>
 //============================================================
 /*!
 @param row row of the algorithm
@@ -11,8 +12,11 @@ CAlgorithmSettingsSaveLoadWidget::CAlgorithmSettingsSaveLoadWidget(QWidget* pare
 {
     settingmodel = &model;
     settingrow = row;
+    setLayout(new QHBoxLayout);
     save = new QPushButton("save", this);
     load = new QPushButton("load", this);
+    layout()->addWidget(save);
+    layout()->addWidget(load);
     connect(load, &QPushButton::clicked,
             this, &CAlgorithmSettingsSaveLoadWidget::loadbutton);
     connect(save, &QPushButton::clicked,

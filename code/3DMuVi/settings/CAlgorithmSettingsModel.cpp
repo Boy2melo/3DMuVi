@@ -57,3 +57,27 @@ void CAlgorithmSettingsModel::algorithmChanged(int step) {
     emit saveQJson(object, url);
 }
 
+bool CAlgorithmSettingsModel::setData(const QModelIndex& index, const QVariant& value, int role)
+{
+  if(CQJsonModel::setData(index, value,role))
+  {
+    CQJsonTreeItem* parentItem = backtrack(index);
+    QJsonObject params;
+    IPlugin* plugin = workflow->getStep(parentItem->row());
+
+    for(CQJsonTreeItem* i : parentItem->getChilds())
+    {
+      QJsonObject o = i->toJson();
+      QString key = o.keys().at(0);
+      params.insert(key, o.take(key));
+    }
+
+    //if(plugin->ValidateParameters(&params))
+    {
+      plugin->getAlgorithm()->setParameters(new QJsonObject(params));
+    }
+    return true;
+  }
+  return false;
+}
+

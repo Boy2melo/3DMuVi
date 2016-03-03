@@ -6,7 +6,7 @@
 #include <QJsonObject>
 class CQJsonTreeItem {
 public:
-    CQJsonTreeItem(CQJsonTreeItem * parent = 0);
+    CQJsonTreeItem(CQJsonTreeItem * parent);
     ~CQJsonTreeItem();
     void appendChild(CQJsonTreeItem * item);
     CQJsonTreeItem *child(int row);
@@ -27,7 +27,7 @@ public:
      */
     QJsonObject toJson();
 
-    static CQJsonTreeItem* load(const QJsonValue& value, CQJsonTreeItem * parent = 0);
+    static CQJsonTreeItem* load(const QJsonValue& value, CQJsonTreeItem * parent);
 
 protected:
     /*!

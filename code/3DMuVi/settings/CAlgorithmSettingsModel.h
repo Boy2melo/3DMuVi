@@ -33,5 +33,7 @@ public:
      */
     void algorithmChanged(int step);
 
+    bool setData(const QModelIndex &index, const QVariant &value, int role) override;
+
 };
 #endif //CALGORITMSETTINGSMODEL_H

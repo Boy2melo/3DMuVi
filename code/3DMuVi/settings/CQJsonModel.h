@@ -36,8 +36,8 @@ public:
      */
     virtual void loadSettings(int row, QUrl filename);
 
-    Qt::ItemFlags flags(QModelIndex& index);
-    bool setData(QModelIndex& index, QVariant& value, int role);
+    Qt::ItemFlags flags(const QModelIndex& index) const;
+    virtual bool setData(const QModelIndex& index, const QVariant& value, int role);
 
     bool load(const QString& fileName);
     bool load(QIODevice* device);
@@ -61,7 +61,7 @@ public slots:
     void saveQJson(QJsonObject data, QUrl directory);
 
 protected:
-    CQJsonTreeItem backtrack(QModelIndex& index);
+    CQJsonTreeItem* backtrack(const QModelIndex& index);
 
     CQJsonTreeItem* mRootItem;
     QJsonDocument mDocument;

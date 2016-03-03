@@ -42,6 +42,7 @@ void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow)
     for (int i = 0; i < algorithms; i++) {
         QJsonObject object = workflow.getStep(i)->GetParameterJson();
         model->loadQJson(object);
+        setIndexWidget(model->index(i, 1), new CAlgorithmSettingsSaveLoadWidget(this, i, *model));
         //QModelIndex index = this->rootIndex().child(i, 2);
         //if (index.isValid()){
           //  this->setIndexWidget(index, new CAlgorithmSettingsSaveLoadWidget(0, i, *model));
