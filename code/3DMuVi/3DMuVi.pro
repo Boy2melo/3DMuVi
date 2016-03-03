@@ -79,7 +79,6 @@ HEADERS += ./workflow/workflow/ccontextdatastore.h \
     ./io/AStreamProvider.h \
     ./io/CSFStreamProvider.h \
     ./io/CMFStreamProvider.h \
-    ./logger/controll/CAlgoMessage.h \
     ./logger/controll/CLogController.h \
     ./logger/controll/CLogHistory.h \
     ./logger/qslogging/QsLog.h \
@@ -127,7 +126,6 @@ SOURCES += ./main.cpp \
     ./io/AStreamProvider.cpp \
     ./io/CSFStreamProvider.cpp \
     ./io/CMFStreamProvider.cpp \
-    ./logger/controll/CAlgoMessage.cpp \
     ./logger/controll/CLogController.cpp \
     ./logger/controll/CLogHistory.cpp \
     ./logger/qslogging/QsLog.cpp \
