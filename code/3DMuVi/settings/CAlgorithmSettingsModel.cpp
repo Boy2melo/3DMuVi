@@ -82,5 +82,6 @@ bool CAlgorithmSettingsModel::setData(const QModelIndex& index, const QVariant& 
 void CAlgorithmSettingsModel::insertName(int row)
 {
     CQJsonTreeItem* temp = mRootItem->getChilds().value(row);
-    temp->setKey(workflow->getStep(row)->Name());
+    IPlugin* plugin = workflow->getStep(row);
+    temp->setKey(plugin ? plugin->Name() : "No plugin loaded");
 }

@@ -30,7 +30,8 @@ void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow) {
     int algorithms = workflow.getStepCount();
 
     for (int i = 0; i < algorithms; i++) {
-        QJsonObject object = workflow.getStep(i)->GetParameterJson();
+        IPlugin* plugin = workflow.getStep(i);
+        QJsonObject object = plugin ? plugin->GetParameterJson() : QJsonObject();
         model->loadQJson(object);
         model->insertName(i);
         setIndexWidget(model->index(i, 1), new CAlgorithmSettingsSaveLoadWidget(this, i, *model));
