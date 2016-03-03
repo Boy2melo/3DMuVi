@@ -40,7 +40,7 @@ void CAlgorithmSettingsModel::loadSettings(int row, QUrl filename) {
         filename.setPassword("a" + workflow->getStep(row)->Name());
     }
     emit requestQJson(filename);
-    int j = mRootItem->getChilds().size();
+    int j = mRootItem->getChilds().size() - 1;
     mRootItem->getChilds().swap(row, j);
     mRootItem->getChilds().removeAt(j);
     insertName(row);
