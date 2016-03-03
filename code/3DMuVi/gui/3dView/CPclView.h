@@ -39,14 +39,14 @@ public:
    */
   void addPointCloud(pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr pointCloud,
                      const QString& id = QString("cloud"));
-  void addPolygonMesh(pcl::PolygonMesh::ConstPtr mesh, const QString& id = QString("polymesh"));
+  void addPolygonMesh(const pcl::PolygonMesh& mesh, const QString& id = QString("polymesh"));
 
   /*!
    * \brief Adds a texture mesh to the view.
    * \param mesh The texture mesh to add.
    * \param id The id which is later used to update or remove the texture mesh.
    */
-  void addTextureMesh(pcl::TextureMesh::ConstPtr mesh, const QString& id = QString("texmesh"));
+  void addTextureMesh(const pcl::TextureMesh& mesh, const QString& id = QString("texmesh"));
   void addCameraMesh(const pcl::PointXYZ& position, const Eigen::Quaternionf& rotation,
                      const QString& id = QString("camera"));
 
@@ -87,14 +87,14 @@ public:
    * \param mesh The new polygon mesh.
    * \param id The id of the polygon mesh which should be updated.
    */
-  void updatePolygonMesh(pcl::PolygonMesh::ConstPtr mesh, const QString& id = QString("polymesh"));
+  void updatePolygonMesh(const pcl::PolygonMesh& mesh, const QString& id = QString("polymesh"));
 
   /*!
    * \brief Updates the texture mesh with the given id.
    * \param mesh The new texture mesh.
    * \param id The id of the texture mesh which should be updated.
    */
-  void updateTextureMesh(pcl::TextureMesh::ConstPtr mesh, const QString& id = QString("texmesh"));
+  void updateTextureMesh(const pcl::TextureMesh& mesh, const QString& id = QString("texmesh"));
 
   /*!
    * \brief Updates the camera mesh with the given id.
