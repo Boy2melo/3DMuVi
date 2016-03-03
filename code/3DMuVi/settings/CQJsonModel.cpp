@@ -52,34 +52,25 @@ void CQJsonModel::loadSettings(int row, QUrl filename) {
 Qt::ItemFlags CQJsonModel::flags(const QModelIndex& index) const {
   if(index.column() == 1)
   {
-    return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
-  }
-  else
-  {
-    return QAbstractItemModel::flags(index);
-  }
-    int row;
-    row = index.row();
-    //checks if not root item or the one below
-    if (row == 0 || index.parent().parent().row()) {
-        return QAbstractItemModel::flags(index) | Qt::ItemIsSelectable;
-    }
-    else {
+    CQJsonTreeItem* temp = static_cast<CQJsonTreeItem*>(index.internalPointer());
+    if (temp->type() != QJsonValue::Array && temp->type() != QJsonValue::Object) {
         return QAbstractItemModel::flags(index) | Qt::ItemIsEditable;
     }
+  }
+    return QAbstractItemModel::flags(index);
 }
 
 bool CQJsonModel::setData(const QModelIndex& index, const QVariant& value, int role) {
     if (!index.isValid())
         return false;
-    QJsonValue tempvalue = value.toJsonValue();
     if (role == Qt::EditRole) {
-        CQJsonTreeItem* temp = static_cast<CQJsonTreeItem*>(index.internalPointer());//backtrack(index);
-        /*if (tempvalue.type() != temp.type()) {
-            return false;
-        }*/
-        temp->setValue(value.toString());
-        return true;
+        CQJsonTreeItem* temp = static_cast<CQJsonTreeItem*>(index.internalPointer());
+        QJsonValue tempvalue = value.toJsonValue();
+        if (temp->type() == tempvalue.type())
+        {
+            temp->setValue(value.toString());
+            return true;
+        }
     }
     return false;
 }
