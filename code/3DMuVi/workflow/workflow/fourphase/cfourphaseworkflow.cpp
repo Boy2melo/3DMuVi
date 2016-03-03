@@ -20,9 +20,9 @@ QString CFourPhaseWorkflow::getAlgorithmType(const quint32 step) const {
     case 0:
         return PT_FeatureMatcher;
     case 1:
-        return PT_DepthEstimator;
-    case 2:
         return PT_PoseEstimator;
+    case 2:
+        return PT_DepthEstimator;
     case 3:
         return PT_Fusion;
     default:
