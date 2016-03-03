@@ -16,7 +16,7 @@ class CAlgorithmSettingsModel : public CQJsonModel
 {
 private:
     AWorkflow* workflow;
-    CAlgorithmSettingController* settingcontroller;
+    CAlgorithmSettingController* settingcontroller;    
 public:
     /*!
      * \brief CAlgorithmSettingsModel construct a settingsmodel
@@ -35,5 +35,10 @@ public:
 
     bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 
+    /*!
+     * \brief insertName inserts the name of the algorithm into the model
+     * \param row place of the algorithm
+     */
+    void insertName(int row);
 };
 #endif //CALGORITMSETTINGSMODEL_H

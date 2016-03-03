@@ -43,6 +43,7 @@ void CAlgorithmSettingsModel::loadSettings(int row, QUrl filename) {
     int j = mRootItem->getChilds().size();
     mRootItem->getChilds().swap(row, j);
     mRootItem->getChilds().removeAt(j);
+    insertName(row);
 }
 
 void CAlgorithmSettingsModel::algorithmChanged(int step) {
@@ -78,4 +79,8 @@ bool CAlgorithmSettingsModel::setData(const QModelIndex& index, const QVariant& 
   }
   return false;
 }
-
+void CAlgorithmSettingsModel::insertName(int row)
+{
+    CQJsonTreeItem* temp = mRootItem->getChilds().value(row);
+    temp->setKey(workflow->getStep(row)->Name());
+}
