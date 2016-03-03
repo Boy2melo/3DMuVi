@@ -19,10 +19,10 @@ public:
   explicit CPclView(QWidget *parent = nullptr);
   virtual ~CPclView();
 
-  void addPointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud,
+  void addPointCloud(pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr pointCloud,
                      const QString& id = QString("cloud"));
-  void addPolygonMesh(const pcl::PolygonMesh& mesh, const QString& id = QString("polymesh"));
-  void addTextureMesh(const pcl::TextureMesh& mesh, const QString& id = QString("texmesh"));
+  void addPolygonMesh(pcl::PolygonMesh::ConstPtr mesh, const QString& id = QString("polymesh"));
+  void addTextureMesh(pcl::TextureMesh::ConstPtr mesh, const QString& id = QString("texmesh"));
   void addCameraMesh(const pcl::PointXYZ& position, const Eigen::Quaternionf& rotation,
                      const QString& id = QString("camera"));
 
@@ -31,10 +31,10 @@ public:
   void removeTextureMesh(const QString& id = QString("texmesh"));
   void removeCameraMesh(const QString& id = QString("camera"));
 
-  void updatePointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud,
+  void updatePointCloud(pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr pointCloud,
                         const QString& id = QString("cloud"));
-  void updatePolygonMesh(const pcl::PolygonMesh& mesh, const QString& id = QString("polymesh"));
-  void updateTextureMesh(const pcl::TextureMesh& mesh, const QString& id = QString("texmesh"));
+  void updatePolygonMesh(pcl::PolygonMesh::ConstPtr mesh, const QString& id = QString("polymesh"));
+  void updateTextureMesh(pcl::TextureMesh::ConstPtr mesh, const QString& id = QString("texmesh"));
   void updateCameraMesh(const pcl::PointXYZ& position, const Eigen::Quaternionf& rotation,
                         const QString& id = QString("camera"));
 

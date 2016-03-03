@@ -25,19 +25,18 @@ CPclView::~CPclView()
 
 }
 
-void CPclView::addPointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud, const QString& id)
+void CPclView::addPointCloud(pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr pointCloud,
+                             const QString& id)
 {
-  pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr cloudPtr(&pointCloud);
-
-  mpPclVisualizer->addPointCloud(cloudPtr, id.toStdString());
+  mpPclVisualizer->addPointCloud(pointCloud, id.toStdString());
 }
 
-void CPclView::addPolygonMesh(const pcl::PolygonMesh& mesh, const QString& id)
+void CPclView::addPolygonMesh(pcl::PolygonMesh::ConstPtr mesh, const QString& id)
 {
   mpPclVisualizer->addPolygonMesh(mesh, id.toStdString());
 }
 
-void CPclView::addTextureMesh(const pcl::TextureMesh& mesh, const QString& id)
+void CPclView::addTextureMesh(pcl::TextureMesh::ConstPtr mesh, const QString& id)
 {
   mpPclVisualizer->addTextureMesh(mesh, id.toStdString());
 }
@@ -99,20 +98,18 @@ void CPclView::removeCameraMesh(const QString& id)
   }
 }
 
-void CPclView::updatePointCloud(const pcl::PointCloud<pcl::PointXYZRGB>& pointCloud,
+void CPclView::updatePointCloud(pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr pointCloud,
                                 const QString& id)
 {
-  pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr cloudPtr(&pointCloud);
-
-  mpPclVisualizer->updatePointCloud(cloudPtr, id.toStdString());
+  mpPclVisualizer->updatePointCloud(pointCloud, id.toStdString());
 }
 
-void CPclView::updatePolygonMesh(const pcl::PolygonMesh& mesh, const QString& id)
+void CPclView::updatePolygonMesh(pcl::PolygonMesh::ConstPtr mesh, const QString& id)
 {
   mpPclVisualizer->updatePolygonMesh(mesh, id.toStdString());
 }
 
-void CPclView::updateTextureMesh(const pcl::TextureMesh& mesh, const QString& id)
+void CPclView::updateTextureMesh(pcl::TextureMesh::ConstPtr mesh, const QString& id)
 {
   removeTextureMesh(id);
   addTextureMesh(mesh, id);
