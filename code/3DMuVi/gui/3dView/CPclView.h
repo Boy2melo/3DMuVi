@@ -21,8 +21,8 @@ public:
 
   void addPointCloud(pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr pointCloud,
                      const QString& id = QString("cloud"));
-  void addPolygonMesh(pcl::PolygonMesh::ConstPtr mesh, const QString& id = QString("polymesh"));
-  void addTextureMesh(pcl::TextureMesh::ConstPtr mesh, const QString& id = QString("texmesh"));
+  void addPolygonMesh(const pcl::PolygonMesh& mesh, const QString& id = QString("polymesh"));
+  void addTextureMesh(const pcl::TextureMesh& mesh, const QString& id = QString("texmesh"));
   void addCameraMesh(const pcl::PointXYZ& position, const Eigen::Quaternionf& rotation,
                      const QString& id = QString("camera"));
 
@@ -33,8 +33,8 @@ public:
 
   void updatePointCloud(pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr pointCloud,
                         const QString& id = QString("cloud"));
-  void updatePolygonMesh(pcl::PolygonMesh::ConstPtr mesh, const QString& id = QString("polymesh"));
-  void updateTextureMesh(pcl::TextureMesh::ConstPtr mesh, const QString& id = QString("texmesh"));
+  void updatePolygonMesh(const pcl::PolygonMesh& mesh, const QString& id = QString("polymesh"));
+  void updateTextureMesh(const pcl::TextureMesh& mesh, const QString& id = QString("texmesh"));
   void updateCameraMesh(const pcl::PointXYZ& position, const Eigen::Quaternionf& rotation,
                         const QString& id = QString("camera"));
 

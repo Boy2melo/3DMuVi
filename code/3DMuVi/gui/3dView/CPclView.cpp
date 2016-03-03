@@ -31,12 +31,12 @@ void CPclView::addPointCloud(pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr pointCl
   mpPclVisualizer->addPointCloud(pointCloud, id.toStdString());
 }
 
-void CPclView::addPolygonMesh(pcl::PolygonMesh::ConstPtr mesh, const QString& id)
+void CPclView::addPolygonMesh(const pcl::PolygonMesh& mesh, const QString& id)
 {
   mpPclVisualizer->addPolygonMesh(mesh, id.toStdString());
 }
 
-void CPclView::addTextureMesh(pcl::TextureMesh::ConstPtr mesh, const QString& id)
+void CPclView::addTextureMesh(const pcl::TextureMesh &mesh, const QString& id)
 {
   mpPclVisualizer->addTextureMesh(mesh, id.toStdString());
 }
@@ -104,12 +104,12 @@ void CPclView::updatePointCloud(pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr poin
   mpPclVisualizer->updatePointCloud(pointCloud, id.toStdString());
 }
 
-void CPclView::updatePolygonMesh(pcl::PolygonMesh::ConstPtr mesh, const QString& id)
+void CPclView::updatePolygonMesh(const pcl::PolygonMesh &mesh, const QString& id)
 {
   mpPclVisualizer->updatePolygonMesh(mesh, id.toStdString());
 }
 
-void CPclView::updateTextureMesh(pcl::TextureMesh::ConstPtr mesh, const QString& id)
+void CPclView::updateTextureMesh(const pcl::TextureMesh &mesh, const QString& id)
 {
   removeTextureMesh(id);
   addTextureMesh(mesh, id);
