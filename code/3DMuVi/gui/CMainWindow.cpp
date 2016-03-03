@@ -1,3 +1,5 @@
+#include "CMainWindow.h"
+
 #include <QMessageBox>
 #include <QFileDialog>
 
@@ -6,7 +8,6 @@
 
 #include "CSettingsDialog.h"
 
-#include "CMainWindow.h"
 #include "ui_CMainWindow.h"
 
 CMainWindow::CMainWindow(QWidget *parent) :
@@ -15,8 +16,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
 {
   QVector<QString> workflows;
   AWorkflow* fourPhaseWorkflow = CWorkflowManager::Instance()->getWorkflow("4Phase Workflow");
-
   ui->setupUi(this);
+
+  ui->dataViewTabContainer->setImagePreviewWidget(ui->imagePreviewWidget);
 
   setWorkflow(fourPhaseWorkflow);
 
@@ -27,7 +29,6 @@ CMainWindow::CMainWindow(QWidget *parent) :
   }
 
   connect(ui->actionLoadImages, &QAction::triggered, this, &CMainWindow::onLoadImages);
-//TODO: advanced load files
   connect(ui->actionSettings, &QAction::triggered, this, &CMainWindow::onSettings);
   connect(ui->actionAbout, &QAction::triggered, this, &CMainWindow::onAbout);
 
@@ -39,6 +40,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
           &QAction::setDisabled);
   connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, ui->algorithmSettingsView,
           &CAlgorithmSettingsView::setDisabled);
+
+  connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, ui->algorithmSettingsView,
+          &CAlgorithmSettingsView::onAlgorithmChanged);
 }
 
 CMainWindow::~CMainWindow()
@@ -54,16 +58,6 @@ void CMainWindow::setWorkflow(AWorkflow* workflow)
 
   connect(workflow, &AWorkflow::sigDataStoreFinished, this,
           &CMainWindow::onDataStoreFinished);
-}
-
-void CMainWindow::onSaveWorkflow()
-{
-  //TODO: Doesn't need to be implemented
-}
-
-void CMainWindow::onSaveWorkflowAs()
-{
-  //TODO: Doesn't need to be implemented
 }
 
 void CMainWindow::onLoadImages()
@@ -88,12 +82,9 @@ void CMainWindow::onLoadImages()
 
     ui->imagePreviewWidget->setImages(imageItems);
     ui->algorithmSelector->setDataStore(dataStore->getId());
-  }
-}
 
-void CMainWindow::onAdvancedLoadFiles()
-{
-  //TODO: Doesn't need to be implemented
+    ui->dataViewTabContainer->applyDataStorage(dataStore);
+  }
 }
 
 void CMainWindow::onWorkflowSelected()

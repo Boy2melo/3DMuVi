@@ -44,10 +44,7 @@ private:
   void setWorkflow(AWorkflow* workflow);
 
 private slots:
-  void onSaveWorkflow();
-  void onSaveWorkflowAs();
   void onLoadImages();
-  void onAdvancedLoadFiles();
   void onWorkflowSelected();
   void onSettings();
   void onAbout();
