@@ -1,7 +1,7 @@
 #include "CTextIo.h"
 
 void CTextIo::save(QUrl path, QString  text) {
-    QFile file(path.toString());
+    QFile file(path.isLocalFile() ? path.toLocalFile() : path.path());
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         return;
 
