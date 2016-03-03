@@ -80,7 +80,7 @@ CLogController& operator<< (CLogController& logger, const QString& message) {
     struct tm *timeinfo = nullptr;
     char buffer[80];
     time(&rawtime);
-    localtime_s(timeinfo, &rawtime);
+    timeinfo = localtime(&rawtime);
     strftime(buffer, 80, "%A, %B %d, %Y %I:%M:%S %p", timeinfo);
     mtime = buffer;
 
