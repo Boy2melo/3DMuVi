@@ -101,7 +101,7 @@ void C3dView::updateView()
     {
       if(mPointCloud)
       {
-        addPointCloud(*mPointCloud);
+        addPointCloud(mPointCloud);
         mPointCloudAdded = true;
       }
     }
