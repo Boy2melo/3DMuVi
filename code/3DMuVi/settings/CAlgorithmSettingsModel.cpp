@@ -9,15 +9,6 @@ CAlgorithmSettingsModel::CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithm
             &controller, &CAlgorithmSettingController::saveQJson);
     this->workflow = &workflow;
     this->settingcontroller = &controller;
-    /*for (quint32 i = 0; i < workflow.getStepCount(); i++) {
-    QJsonObject object = workflow.getStep(i)->GetParameterJson();
-        this->loadQJson(object);
-        QUrl url = QUrl();
-        url.setPassword("a" + object.keys().value(0));
-        emit saveQJson(object, url);
-    }*/
-
-
 }
 
 CAlgorithmSettingsModel::CAlgorithmSettingsModel(QObject* parent, QVector<QJsonObject> list)
@@ -27,9 +18,16 @@ CAlgorithmSettingsModel::CAlgorithmSettingsModel(QObject* parent, QVector<QJsonO
 
 void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename) {
     QJsonObject data;
-    data = mRootItem->getChilds().value(row)->toJson();
+    CQJsonTreeItem* parentItem = mRootItem->getChilds().value(row);
+
+    for(CQJsonTreeItem* i : parentItem->getChilds())
+    {
+      QJsonObject o = i->toJson();
+      QString key = o.keys().at(0);
+      data.insert(key, o.take(key));
+    }
     if (filename.isEmpty() == true) {
-        filename.setPassword("a" + workflow->getStep(row)->GetPluginType());
+        filename.setPassword("a" + workflow->getStep(row)->Name());
     }
     if (workflow->getStep(row)->ValidateParameters(&data)) {
         emit saveQJson(data, filename);
@@ -39,12 +37,12 @@ void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename) {
 
 void CAlgorithmSettingsModel::loadSettings(int row, QUrl filename) {
     if (filename.isEmpty() == true) {
-        filename.setPassword("a" + workflow->getStep(row)->GetPluginType());
+        filename.setPassword("a" + workflow->getStep(row)->Name());
     }
     emit requestQJson(filename);
-    mRootItem->getChilds().removeAt(row);
-    int j = mRootItem->getChilds().size() - 1;
+    int j = mRootItem->getChilds().size();
     mRootItem->getChilds().swap(row, j);
+    mRootItem->getChilds().removeAt(j);
 }
 
 void CAlgorithmSettingsModel::algorithmChanged(int step) {
@@ -72,7 +70,7 @@ bool CAlgorithmSettingsModel::setData(const QModelIndex& index, const QVariant& 
       params.insert(key, o.take(key));
     }
 
-    //if(plugin->ValidateParameters(&params))
+    if(plugin->ValidateParameters(&params))
     {
       plugin->getAlgorithm()->setParameters(new QJsonObject(params));
     }

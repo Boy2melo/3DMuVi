@@ -24,10 +24,10 @@ public:
    */
   void setWorkflow(AWorkflow& workflow);
   /*!
-   * \brief setAlgorithmController sets a Algorithmcontroller, must be done before setWorkflow();
-   * \param controller the controller for the algorithms
+   * \brief gets the algorithmconrtoller of the view
+   * \return the conrtoller
    */
-  void setAlgorithmController(CAlgorithmSettingController& controller);
+  CAlgorithmSettingController* getAlgorithmController();
     
 public slots:
   void onAlgorithmChanged(int step);

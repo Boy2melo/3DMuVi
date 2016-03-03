@@ -65,12 +65,8 @@ bool CQJsonModel::setData(const QModelIndex& index, const QVariant& value, int r
         return false;
     if (role == Qt::EditRole) {
         CQJsonTreeItem* temp = static_cast<CQJsonTreeItem*>(index.internalPointer());
-        QJsonValue tempvalue = value.toJsonValue();
-        if (temp->type() == tempvalue.type())
-        {
-            temp->setValue(value.toString());
-            return true;
-        }
+        temp->setValue(value.toString());
+        return true;
     }
     return false;
 }
@@ -84,7 +80,6 @@ CQJsonTreeItem* CQJsonModel::backtrack(const QModelIndex& index) {
         QModelIndex tempindex = index.parent();
         QModelIndex& parent = tempindex;
         CQJsonTreeItem* temp = backtrack(parent);
-        //return temp->getChilds().at(index.row());
         return temp;
     }
 }
