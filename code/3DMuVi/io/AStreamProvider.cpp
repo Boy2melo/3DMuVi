@@ -12,6 +12,6 @@ QDir AStreamProvider::getDestination() const {
     return fileName;
 }
 
-void AStreamProvider::setFileName(const QString &fileName) {
-    this->fileName = fileName;
+void AStreamProvider::setFileName(const QString &file) {
+    this->fileName = file;
 }

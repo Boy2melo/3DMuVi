@@ -52,6 +52,7 @@ void CFeatureView::activate()
 //============================================================
 void CFeatureView::onImagesSelected(std::vector<uint32_t>& images)
 {
+    //BUG: missing implementation
 }
 
 void CFeatureView::updateView()

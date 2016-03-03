@@ -56,7 +56,8 @@ void CDataDepth::serialize(AStreamProvider *stream) {
 }
 
 void CDataDepth::deserialize(AStreamProvider *stream) {
-
+    //TODO: implement deserialize
+    Q_UNUSED(stream);
 }
 
 std::shared_ptr<std::vector<std::tuple<uint32_t, QImage>>> CDataDepth::getDepthMap() const {

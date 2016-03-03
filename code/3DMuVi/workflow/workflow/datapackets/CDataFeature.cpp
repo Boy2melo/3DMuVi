@@ -49,5 +49,6 @@ void CDataFeature::serialize(AStreamProvider* stream) {
 }
 
 void CDataFeature::deserialize(AStreamProvider *stream) {
-
+    //TODO: implement deserialize
+    Q_UNUSED(stream);
 }

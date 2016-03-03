@@ -65,7 +65,7 @@ bool CFourPhaseWorkflow::checkAvailableDataTypes() const {
     QStringList dataTypes;
     dataTypes.push_back(DT_INPUTIMAGES);
 
-    for (int i = 0; i < getStepCount(); i++) {
+    for (uint i = 0; i < getStepCount(); i++) {
         IPlugin *plugin = mPlugins[i];
 
         if (plugin == nullptr) {

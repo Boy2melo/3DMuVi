@@ -44,7 +44,7 @@ void CAlgorithmSelector::setWorkflow(AWorkflow& workflow) {
         delete child;
     }
 
-    for (int i = 0; i < steps; i++) {
+    for (uint i = 0; i < steps; i++) {
         const QVector<IPlugin*> plugins = CPluginManager::Instance()->getPlugins(workflow.getAlgorithmType(i));
 
         QGroupBox* groupBox = new QGroupBox(workflow.getAlgorithmType(i), this);
@@ -86,6 +86,8 @@ void CAlgorithmSelector::onCurrentIndexChanged(int index) {
 }
 
 void CAlgorithmSelector::startButtonPushed(bool isPushed) {
+    //BUG (?): isPushed is not used /!\
+
     QPushButton* startStopButton = nullptr;
 
     int steps = mpWorkflow->getStepCount();

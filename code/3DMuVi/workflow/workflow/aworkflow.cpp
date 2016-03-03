@@ -34,13 +34,13 @@ bool AWorkflow::run(const QString storeId) {
 
 
     this->moveToThread(thread);
-    QTimer::singleShot(0, [=]{
-      this->executeAlgorithm(store);
+    QTimer::singleShot(0, [=] {
+        this->executeAlgorithm(store);
     });
 
-        connect(thread, &QThread::finished, thread, &QThread::deleteLater);
-thread->start();
-    
+    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
+    thread->start();
+
     mMutex.unlock();
 
     return true;

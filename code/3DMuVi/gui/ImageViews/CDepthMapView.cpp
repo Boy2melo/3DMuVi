@@ -36,6 +36,7 @@ void CDepthMapView::activate()
 //============================================================
 void CDepthMapView::onImagesSelected(std::vector<uint32_t>& images)
 {
+    //BUG: missing implementation
 }
 
 void CDepthMapView::updateView()

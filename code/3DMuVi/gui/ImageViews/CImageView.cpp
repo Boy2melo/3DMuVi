@@ -59,10 +59,10 @@ void CImageView::paintEvent(QPaintEvent* event)
 
 
         //Paint List
-        for(uint g = 0; g < FeatureList[j].size(); g++){
-            QPoint cpoint = std::get<1> (FeatureList[j][g]);
-            for(uint h = g + 1; h < FeatureList[j].size(); h++){
-                 QPoint thisPoint = std::get<1> (FeatureList[j][h]);
+        for(uint m = 0; m < FeatureList[j].size(); m++){
+            QPoint cpoint = std::get<1> (FeatureList[j][m]);
+            for(uint n = m + 1; n < FeatureList[j].size(); n++){
+                 QPoint thisPoint = std::get<1> (FeatureList[j][n]);
                  painter.drawLine(cpoint,thisPoint);
             }
         }
@@ -83,7 +83,7 @@ void CImageView::wheelEvent(QWheelEvent* event)
     if(exp >= 15) {
         exp  = 15;
     }
-    float factor = powf(1.41, exp);
+    float factor = powf(1.41f, exp);
 
     QTransform transform;
     transform = m_transform.fromScale(factor, factor);

@@ -42,8 +42,8 @@ public:
 
     QString getDataType() const override;
     AStreamProvider* getStreamProvider() override;
-    void serialize(AStreamProvider* stream) override {}
-    void deserialize(AStreamProvider* stream) override {}
+    void serialize(AStreamProvider*) override {}
+    void deserialize(AStreamProvider*) override {}
 };
 
 #endif // INPUTDATASET_H

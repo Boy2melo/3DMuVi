@@ -11,6 +11,7 @@
 // Führe ein Plugin auf einem Store aus mit frei wählbarem Callback bei abschluss.
 #define __RUN_ALGORITHM(PLUGIN, CALLBACK) \
     IAlgorithm* algorithm = PLUGIN->getAlgorithm(); \
+    algorithm->setLogger(&CLogController::instance()); \
     if(!algorithm->IsBusy() && !store->IsAborted()){ \
         store->incCalculationStep(); \
         algorithm->run(store, [this](CContextDataStore *store){CALLBACK}); \

@@ -9,9 +9,9 @@
 //============================================================
 CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(parent)
 {
-    QTemporaryDir temp;
-    if(temp.isValid()) {
-        QUrl url = QUrl(temp.path());
+    QTemporaryDir temporary_dir;
+    if(temporary_dir.isValid()) {
+        QUrl url = QUrl(temporary_dir.path());
     settingcontroller = QPointer<CAlgorithmSettingController>(new CAlgorithmSettingController((url)));
     }
 }
@@ -30,6 +30,7 @@ void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow)
     model = QPointer<CAlgorithmSettingsModel>(new CAlgorithmSettingsModel(workflow, *settingcontroller));
     this->setModel(model);
     int algorithms = workflow.getStepCount();
+
     for (int i = 0; i < algorithms; i++) {
         QJsonObject object = workflow.getStep(i)->GetParameterJson();
         model->loadQJson(object);

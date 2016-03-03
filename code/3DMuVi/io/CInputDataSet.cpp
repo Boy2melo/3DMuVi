@@ -13,12 +13,11 @@ CInputDataSet::CInputDataSet(QUrl path) {
 
     auto files = inputDirectory.entryList();
 
-    CImageIo iio;
     uint32_t id = 0;
 
-    foreach(const QString file, files) {
+    for(auto file : files) {
         QUrl imagePath(inputDirectory.filePath(file));
-        auto imageCache = iio.load(imagePath);
+        auto imageCache = CImageIo::load(imagePath);
         CImagePreviewItem qlwiCache(QIcon(QPixmap::fromImage(imageCache)), file, id);
         std::tuple<uint32_t, QImage, CImagePreviewItem> item(id, imageCache, qlwiCache);
         inputData.push_back(item);

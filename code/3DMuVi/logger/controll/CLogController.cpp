@@ -13,14 +13,14 @@ using namespace QsLogging;
  * sets the private attrubute mDestSet to false;
  * use the function setLog(QUrl dest) to set an dest for the logger file
  */
- void CLogController::initilize(){
-     mHistory = CLogHistory();
-     mDestSet = false;
-     mCurrentLogLevel = LOG_INFO;
-     mLogToWindow = true;
-     mLogToFile = true;
-     mMinLogLevel = LOG_INFO;
- }
+void CLogController::initilize() {
+    mHistory = CLogHistory();
+    mDestSet = false;
+    mCurrentLogLevel = LOG_INFO;
+    mLogToWindow = true;
+    mLogToFile = true;
+    mMinLogLevel = LOG_INFO;
+}
 
 /*
 CLogController::CLogController() {
@@ -77,10 +77,10 @@ CLogController& operator<< (CLogController& logger, const QString& message) {
 
     QString mtime = "";
     time_t rawtime;
-    struct tm * timeinfo;
+    struct tm *timeinfo = nullptr;
     char buffer[80];
     time(&rawtime);
-    timeinfo = localtime(&rawtime);
+    localtime_s(timeinfo, &rawtime);
     strftime(buffer, 80, "%A, %B %d, %Y %I:%M:%S %p", timeinfo);
     mtime = buffer;
 
