@@ -6,11 +6,12 @@ TEMPLATE = lib
 TARGET = dumDepthMap
 DESTDIR = ../../../Win32/Debug
 QT += core widgets gui
-CONFIG += debug
+CONFIG += debug c++11
 DEFINES += QT_DLL QT_WIDGETS_LIB DUMDEPTHMAP_LIB
 INCLUDEPATH += ./GeneratedFiles \
     . \
-    ./GeneratedFiles/Debug
+    ./GeneratedFiles/Debug \
+    ../../../3DMuVi/
 DEPENDPATH += .
 MOC_DIR += ./GeneratedFiles/debug
 OBJECTS_DIR += debug

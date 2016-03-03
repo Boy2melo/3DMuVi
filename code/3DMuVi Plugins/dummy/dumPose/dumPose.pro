@@ -6,13 +6,12 @@ TEMPLATE = lib
 TARGET = dumPose
 DESTDIR = ../../../Win32/Debug
 QT += core opengl widgets gui
-CONFIG += debug
+CONFIG += debug c++11
 DEFINES += QT_DLL QT_OPENGL_LIB QT_WIDGETS_LIB DUMPOSE_LIB
 INCLUDEPATH += ./GeneratedFiles \
     . \
-    ./GeneratedFiles/Debug
-LIBS += -lopengl32 \
-    -lglu32
+    ./GeneratedFiles/Debug \
+    ../../../3DMuVi/
 DEPENDPATH += .
 MOC_DIR += ./GeneratedFiles/debug
 OBJECTS_DIR += debug
