@@ -6,17 +6,16 @@
 /*!
 @param workflow
  */
-//============================================================
-CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(parent)
-{
+ //============================================================
+CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(parent) {
     QTemporaryDir temporary_dir;
-    if(temporary_dir.isValid()) {
+    if (temporary_dir.isValid()) {
         QUrl url = QUrl(temporary_dir.path());
-    settingcontroller = QPointer<CAlgorithmSettingController>(new CAlgorithmSettingController((url)));
+        settingcontroller = QPointer<CAlgorithmSettingController>(new CAlgorithmSettingController((url)));
     }
 }
-CAlgorithmSettingsView::~CAlgorithmSettingsView()
-{
+
+CAlgorithmSettingsView::~CAlgorithmSettingsView() {
     temp.remove();
 }
 
@@ -24,9 +23,8 @@ CAlgorithmSettingsView::~CAlgorithmSettingsView()
 /*!
 @param workflow
  */
-//============================================================
-void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow)
-{
+ //============================================================
+void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow) {
     model = QPointer<CAlgorithmSettingsModel>(new CAlgorithmSettingsModel(workflow, *settingcontroller));
     this->setModel(model);
     int algorithms = workflow.getStepCount();
@@ -40,8 +38,7 @@ void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow)
     this->show();
 }
 
-CAlgorithmSettingController* CAlgorithmSettingsView::getAlgorithmController()
-{
+CAlgorithmSettingController* CAlgorithmSettingsView::getAlgorithmController() {
     return settingcontroller.data();
 }
 
@@ -49,9 +46,8 @@ CAlgorithmSettingController* CAlgorithmSettingsView::getAlgorithmController()
 /*!
 @param step
  */
-//============================================================
-void CAlgorithmSettingsView::onAlgorithmChanged(int step)
-{
+ //============================================================
+void CAlgorithmSettingsView::onAlgorithmChanged(int step) {
     this->hide();
     model->algorithmChanged(step);
     QModelIndex index = this->rootIndex().child(step, 2);
