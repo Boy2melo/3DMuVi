@@ -67,14 +67,14 @@ void CPclView::addCameraMesh(const pcl::PointXYZ& position, const Eigen::Quatern
                                        cameraShapeVertices[i](2));
   }
 
-  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[1], id.toStdString() + "0");
-  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[2], id.toStdString() + "1");
-  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[3], id.toStdString() + "2");
-  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[4], id.toStdString() + "3");
-  mpPclVisualizer->addLine(pclCameraPoints[1], pclCameraPoints[2], id.toStdString() + "4");
-  mpPclVisualizer->addLine(pclCameraPoints[1], pclCameraPoints[3], id.toStdString() + "5");
-  mpPclVisualizer->addLine(pclCameraPoints[2], pclCameraPoints[4], id.toStdString() + "6");
-  mpPclVisualizer->addLine(pclCameraPoints[3], pclCameraPoints[4], id.toStdString() + "7");
+  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[1], id.toStdString() + "_0");
+  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[2], id.toStdString() + "_1");
+  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[3], id.toStdString() + "_2");
+  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[4], id.toStdString() + "_3");
+  mpPclVisualizer->addLine(pclCameraPoints[1], pclCameraPoints[2], id.toStdString() + "_4");
+  mpPclVisualizer->addLine(pclCameraPoints[1], pclCameraPoints[3], id.toStdString() + "_5");
+  mpPclVisualizer->addLine(pclCameraPoints[2], pclCameraPoints[4], id.toStdString() + "_6");
+  mpPclVisualizer->addLine(pclCameraPoints[3], pclCameraPoints[4], id.toStdString() + "_7");
 }
 
 void CPclView::removePointCloud(const QString& id)
