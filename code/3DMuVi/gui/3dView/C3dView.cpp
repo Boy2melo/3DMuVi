@@ -44,7 +44,7 @@ void C3dView::applyData(CDataPose const* packet)
 
   for(uint64_t id : mPoseIds)
   {
-    removeCameraMesh(QString("camera") + id);
+    removeCameraMesh(QString("camera") + QString::number(id));
     mPoseIds.clear();
   }
 
@@ -54,7 +54,7 @@ void C3dView::applyData(CDataPose const* packet)
     Eigen::Quaternionf rotation(p.orientation.scalar(), p.orientation.x(), p.orientation.y(),
                        p.orientation.z());
 
-    addCameraMesh(position, rotation, QString("camera") + p.cameraId);
+    addCameraMesh(position, rotation, QString("camera") + QString::number(p.cameraId));
     mPoseIds.push_back(p.cameraId);
   }
 }
