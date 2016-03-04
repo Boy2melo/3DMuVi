@@ -9,7 +9,7 @@ void AStreamProvider::setDestination(QDir destinationFolder) {
 }
 
 QDir AStreamProvider::getDestination() const {
-    return fileName;
+    return folder;
 }
 
 void AStreamProvider::setFileName(const QString &file) {

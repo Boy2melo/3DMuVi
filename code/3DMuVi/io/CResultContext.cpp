@@ -24,9 +24,12 @@ void CResultContext::addDataPacket(std::shared_ptr<IDataPacket> data) {
     }
 
     AStreamProvider* streamProvider = data->getStreamProvider();
-    streamProvider->setDestination(folder);
-    data->serialize(streamProvider);
-    delete(streamProvider);
+    if(streamProvider)
+    {
+      streamProvider->setDestination(folder);
+      data->serialize(streamProvider);
+      delete(streamProvider);
+    }
 
     folder.cdUp();
 }
@@ -45,7 +48,7 @@ std::vector<QString> CResultContext::getDataPacketIds() {
     return list;
 }
 
-IDataPacket* CResultContext::getDataPacket(QString id) {
+IDataPacket* CResultContext::getDataPacket(QString /*id*/) {
     //TODO NYI
     return nullptr;
 }
