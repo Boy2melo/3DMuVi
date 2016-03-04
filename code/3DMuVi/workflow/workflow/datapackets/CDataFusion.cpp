@@ -44,23 +44,55 @@ void CDataFusion::serialize(AStreamProvider* stream)
 {
   QDir dir = stream->getDestination();
 
-  pcl::io::savePCDFile(dir.absoluteFilePath("point_cloud.pcd").toStdString(),
-                       *mPointCloudData);
-  pcl::io::savePLYFile(dir.absoluteFilePath("polygon_mesh.ply").toStdString(), *mPolygonMeshData);
-  pcl::io::saveOBJFile(dir.absoluteFilePath("texture_mesh.obj").toStdString(), *mTextureMeshData);
+  if(mPointCloudData)
+  {
+    pcl::io::savePCDFile(dir.absoluteFilePath("point_cloud.pcd").toStdString(),
+                         *mPointCloudData);
+  }
+  if(mPolygonMeshData)
+  {
+    pcl::io::savePLYFile(dir.absoluteFilePath("polygon_mesh.ply").toStdString(), *mPolygonMeshData);
+  }
+  if(mTextureMeshData)
+  {
+    pcl::io::saveOBJFile(dir.absoluteFilePath("texture_mesh.obj").toStdString(), *mTextureMeshData);
+  }
 }
 
 void CDataFusion::deserialize(AStreamProvider* stream)
 {
   QDir dir = stream->getDestination();
+  QString pointCloudFileName = dir.absoluteFilePath("point_cloud.pcd");
+  QString polygonMeshFileName = dir.absoluteFilePath("polygon_mesh.ply");
+  QString textureMeshFileName = dir.absoluteFilePath("texture_mesh.obj");
 
-  mPointCloudData = PointCloud::Ptr(new PointCloud);
-  mPolygonMeshData = pcl::PolygonMesh::Ptr(new pcl::PolygonMesh);
-  mTextureMeshData = pcl::TextureMesh::Ptr(new pcl::TextureMesh);
+  if(QFile::exists(pointCloudFileName))
+  {
+    mPointCloudData = PointCloud::Ptr(new PointCloud);
 
-  pcl::io::loadPCDFile(dir.absoluteFilePath("point_cloud.pcd").toStdString(), *mPointCloudData);
-  pcl::io::loadPLYFile(dir.absoluteFilePath("polygon_mesh.ply").toStdString(), *mPolygonMeshData);
-  pcl::io::loadOBJFile(dir.absoluteFilePath("texture_mesh.obj").toStdString(), *mTextureMeshData);
+    if(pcl::io::loadPCDFile(pointCloudFileName.toStdString(), *mPointCloudData) < 0)
+    {
+      mPointCloudData.reset();
+    }
+  }
+  if(QFile::exists(polygonMeshFileName))
+  {
+    mPolygonMeshData = pcl::PolygonMesh::Ptr(new pcl::PolygonMesh);
+
+    if(pcl::io::loadPLYFile(polygonMeshFileName.toStdString(), *mPolygonMeshData) < 0)
+    {
+      mPolygonMeshData.reset();
+    }
+  }
+  if(QFile::exists(textureMeshFileName))
+  {
+    mTextureMeshData = pcl::TextureMesh::Ptr(new pcl::TextureMesh);
+
+    if(pcl::io::loadOBJFile(textureMeshFileName.toStdString(), *mTextureMeshData) < 0)
+    {
+      mTextureMeshData.reset();
+    }
+  }
 }
 
 void CDataFusion::setPointCloud(PointCloud::Ptr cloud)
