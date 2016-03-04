@@ -4,6 +4,8 @@
 #include <QFileDialog>
 
 #include <io/CInputDataSet.h>
+#include <io/CResultContext.h>
+#include <settings/CGlobalSettingController.h>
 #include <workflow/workflow/cworkflowmanager.h>
 
 #include "CSettingsDialog.h"
@@ -16,6 +18,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
 {
   QVector<QString> workflows;
   AWorkflow* fourPhaseWorkflow = CWorkflowManager::Instance()->getWorkflow("4Phase Workflow");
+
   ui->setupUi(this);
 
   ui->dataViewTabContainer->setImagePreviewWidget(ui->imagePreviewWidget);
@@ -115,5 +118,11 @@ void CMainWindow::onAbout()
 
 void CMainWindow::onDataStoreFinished(CContextDataStore* dataStorage)
 {
+  CGlobalSettingController settings;
+  CResultContext resultContext(settings.getSetting("resultDirectory"),
+                               ui->algorithmSettingsView->getAlgorithmController(), &settings);
+
   ui->dataViewTabContainer->applyDataStorage(dataStorage);
+
+  dataStorage->Serialize(&resultContext);
 }
