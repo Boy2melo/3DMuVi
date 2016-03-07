@@ -16,10 +16,7 @@ void CTestAlgorithmSettings::setParameters(QJsonObject* settings)
 void CTestAlgorithmSettings::test()
 {
   AWorkflow* workflow = CWorkflowManager::Instance()->getWorkflow("4Phase Workflow");
-  CAlgorithmSettingsView* settingsView = new CAlgorithmSettingsView;
-  QAbstractItemModel* model = static_cast<QTreeView*>(settingsView)->model();
   QVector<IPlugin*> plugins = CPluginManager::Instance()->getPlugins();
-  QModelIndex index;
   bool pluginFound = false;
 
   for(IPlugin* p : plugins)
@@ -35,7 +32,12 @@ void CTestAlgorithmSettings::test()
 
   if(pluginFound)
   {
+    CAlgorithmSettingsView* settingsView = new CAlgorithmSettingsView;
+    QAbstractItemModel* model = nullptr;
+    QModelIndex index;
+
     settingsView->setWorkflow(*workflow);
+    model = static_cast<QTreeView*>(settingsView)->model();
 
     index = model->index(0, 0, settingsView->rootIndex());
     index = model->index(0, 1, index);
@@ -51,8 +53,9 @@ void CTestAlgorithmSettings::test()
     mpSettings = nullptr;
     model->setData(index, QVariant(TEST_VALUE_INVALID));
     QCOMPARE(mpSettings, static_cast<QJsonObject*>(nullptr));
+
+    delete settingsView;
   }
 
-  delete settingsView;
   delete workflow;
 }

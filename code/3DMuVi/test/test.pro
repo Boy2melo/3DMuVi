@@ -26,6 +26,8 @@ PCL{
   LIBS += -lvtkCommonDataModel-7.0 -lvtkCommonMath-7.0
 }
 
+unix:QMAKE_LFLAGS += -rdynamic
+
 INCLUDEPATH += ../
 
 HEADERS += gui/CTestCLogWidget.h \
