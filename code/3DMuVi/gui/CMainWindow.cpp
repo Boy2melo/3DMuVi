@@ -70,7 +70,7 @@ void CMainWindow::onLoadImages()
   if(!url.isEmpty() && mWorkflow)
   {
     CInputDataSet* dataSet = new CInputDataSet(url);
-    std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>>* images =
+    std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> const* images =
       dataSet->getInputImages();
     std::vector<CImagePreviewItem*> imageItems;
     CContextDataStore* dataStore = mWorkflow->addDataStore();

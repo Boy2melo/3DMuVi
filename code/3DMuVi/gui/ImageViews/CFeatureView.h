@@ -15,16 +15,16 @@ class CFeatureView : public CImageView, public IDataView
   Q_OBJECT
 
 public:
-  //TODO: Include data packets
-  void applyData(CInputDataSet* packet);
-  void applyData(CDataFeature* packet);
+  void applyData(const CInputDataSet* packet) override;
+  void applyData(const CDataFeature* packet) override;
   void activate();
 
 private:
 
   std::vector<uint32_t> mDataID;
-  CInputDataSet* appliedInputData;
-  CDataFeature* appliedFeatureData;
+  std::vector<QImage*> mImageList;
+  const CInputDataSet* appliedInputData;
+  const CDataFeature* appliedFeatureData;
 
 
   void updateView();

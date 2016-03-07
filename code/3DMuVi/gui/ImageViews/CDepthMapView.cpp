@@ -8,7 +8,7 @@
 @param packet
 */
 //============================================================
-void CDepthMapView::applyData(CDataDepth* packet)
+void CDepthMapView::applyData(const CDataDepth* packet)
 {
   appliedData = packet;
 
@@ -37,18 +37,30 @@ void CDepthMapView::activate()
 void CDepthMapView::onImagesSelected(std::vector<uint32_t>& images)
 {
     //BUG: missing implementation
+  mDataID = images;
+  updateView();
 }
 
 void CDepthMapView::updateView()
 {
   std::vector<std::tuple<uint32_t, QImage&>> updatedView;
 
+  for(QImage* i : mImageList)
+  {
+    delete i;
+  }
+  mImageList.clear();
+
   for(uint32_t i : mDataID)
   {
     for(std::tuple<uint32_t, QImage> j : *appliedData->getDepthMap())
     {
       if(std::get<0>(j) == i)
-      updatedView.push_back(std::tuple<uint32_t, QImage&>(i, std::get<1>(j)));
+      {
+        QImage* newImage = new QImage(std::get<1>(j));
+        mImageList.push_back(newImage);
+        updatedView.push_back(std::tuple<uint32_t, QImage&>(i, *newImage));
+      }
     }
   }
   showImages(updatedView);

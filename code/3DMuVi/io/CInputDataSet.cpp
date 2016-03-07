@@ -25,7 +25,7 @@ CInputDataSet::CInputDataSet(QUrl path) {
     }
 }
 
-std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>>* CInputDataSet::getInputImages() {
+std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> const* CInputDataSet::getInputImages() const{
     return &inputData;
 }
 

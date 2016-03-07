@@ -13,13 +13,13 @@ class CInputImageView : public CImageView, public IDataView
 
 public:
   explicit CInputImageView();
-  //TODO: Include data packets
-  void applyData(CInputDataSet* packet);
-  void activate();
+  void applyData(const CInputDataSet* packet) override;
+  void activate() override;
 
 private:
-  CInputDataSet* appliedData;
+  const CInputDataSet* appliedData;
   std::vector<uint32_t> mDataID;
+  std::vector<QImage*> mImageList;
 
   void updateView();
 

@@ -8,7 +8,7 @@
 @param packet
 */
 //============================================================
-void CFeatureView::applyData(CDataFeature* packet)
+void CFeatureView::applyData(const CDataFeature* packet)
 {
   appliedFeatureData = packet;
 
@@ -20,7 +20,7 @@ void CFeatureView::applyData(CDataFeature* packet)
 @param packet
 */
 //============================================================
-void CFeatureView::applyData(CInputDataSet* packet)
+void CFeatureView::applyData(const CInputDataSet* packet)
 {
   appliedInputData = packet;
 
@@ -52,13 +52,23 @@ void CFeatureView::activate()
 //============================================================
 void CFeatureView::onImagesSelected(std::vector<uint32_t>& images)
 {
-    //BUG: missing implementation
+  mDataID = images;
+  updateView();
 }
 
 void CFeatureView::updateView()
 {
   std::vector<std::tuple<uint32_t, QImage&>> updatedView;
   std::map<uint32_t, std::vector<ImageFeature>> features;
+
+  showImages(std::vector<std::tuple<uint32_t,QImage&>>());
+
+  for(QImage* i : mImageList)
+  {
+    delete i;
+  }
+  mImageList.clear();
+
   if(appliedInputData != nullptr && appliedFeatureData != nullptr)
   {
     for(uint32_t i : mDataID)
@@ -66,7 +76,11 @@ void CFeatureView::updateView()
       for(std::tuple<uint32_t, QImage, CImagePreviewItem> j : *appliedInputData->getInputImages())
       {
         if(std::get<0>(j) == i)
-        updatedView.push_back(std::tuple<uint32_t, QImage&>(i, std::get<1>(j)));
+        {
+        QImage* newImage = new QImage(std::get<1>(j));
+        mImageList.push_back(newImage);
+        updatedView.push_back(std::tuple<uint32_t, QImage&>(i, *newImage));
+        }
       }
     }
 

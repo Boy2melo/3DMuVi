@@ -41,6 +41,10 @@ void CAlgorithmSelector::setWorkflow(AWorkflow& workflow) {
 
     QLayoutItem *child;
     while ((child = layout()->takeAt(0)) != 0) {
+      if(child->widget())
+      {
+        delete child->widget();
+      }
         delete child;
     }
 
