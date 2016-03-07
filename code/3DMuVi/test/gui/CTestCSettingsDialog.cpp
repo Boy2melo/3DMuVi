@@ -19,6 +19,12 @@
 
 void CTestCSettingsDialog::test()
 {
+  CGlobalSettingController settings;
+  settings.setSetting("resultDirectory", "");
+  settings.setSetting("minLogLevel", QString::number(LOG_INFO));
+  settings.setSetting("logWindowEnabled", QString::number(0));
+  settings.setSetting("logDataEnabled", QString::number(0));
+
   CSettingsDialog settingsDialog;
   CGlobalSettingController settingController;
 
@@ -43,6 +49,7 @@ void CTestCSettingsDialog::test()
 
     if(resultDirectoryEdit)
     {
+      resultDirectoryEdit->setFocus(Qt::OtherFocusReason);
       QTest::keyClicks(resultDirectoryEdit, "/tmp/");
     }
 
