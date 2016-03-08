@@ -46,7 +46,7 @@ QJsonObject* CAlgorithmSettingController::getSetting(QString name) const {
     QString file;
     QJsonDocument docu;
     if (algorithms.contains(name)) {
-        url = QUrl(tempdirectory.url() + name + ".json");
+        url = QUrl(tempdirectory.url() + name);
         file = io.load(url);
         docu = QJsonDocument().fromJson(file.toUtf8());
         QJsonObject* object = new QJsonObject(docu.object());
@@ -103,6 +103,11 @@ void CAlgorithmSettingController::requestQJson(QUrl directory) {
         directory = QUrl(tempdirectory.url() + "/" + temp + ".json");
         if (!algorithms.contains(temp)) {
             algorithms.append(temp);
+        }
+    } else
+    {
+        if (!algorithms.contains(directory.fileName())) {
+            algorithms.append(directory.fileName());
         }
     }
     QString file = io.load(directory);
