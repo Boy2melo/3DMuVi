@@ -36,6 +36,15 @@ public:
   */
   ~CMainWindow();
 
+  /*!
+  \brief setLoadImage
+
+  Will load images from a input dataset and set them to the imagePreviewWidget and
+  algorithmSelector.
+  \param url to the input dataset.
+  */
+  void setLoadImage(QUrl url);
+
 private:
   Ui::CMainWindow *ui;
   std::unique_ptr<AWorkflow> mWorkflow;
