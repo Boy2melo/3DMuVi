@@ -38,7 +38,7 @@ public:
      * vom Typ CImagePreviewItem. Darin enthalten ist ein Thumbnail des Bildes welches
      * auf der GUI durch ein QListWidget angezeigt werden kann.
      */
-    std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>>* getInputImages();
+    std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> const* getInputImages() const;
 
     QString getDataType() const override;
     AStreamProvider* getStreamProvider() override;

@@ -5,19 +5,26 @@
 
 #include "CImageView.h"
 
+/*!
+ * \class CDepthMapView
+ * \brief CDepthMapView class
+ * \author Grigori Schapoval
+ *
+ */
+
 class CDataDeptht;
 
 class CDepthMapView : public CImageView, public IDataView {
   Q_OBJECT
 
 public:
-  //TODO: Include data packets
-  void applyData(CDataDepth* packet);
-  void activate();
+  void applyData(const CDataDepth* packet) override;
+  void activate() override;
 
 private:
-  CDataDepth* appliedData;
+  const CDataDepth* appliedData = nullptr;
   std::vector<uint32_t> mDataID;
+  std::vector<QImage*> mImageList;
 
   void updateView();
 

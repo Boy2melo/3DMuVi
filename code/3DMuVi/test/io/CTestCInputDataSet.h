@@ -43,5 +43,5 @@ private:
   QImage testImage0;
   QImage testImage1;
   QImage testImage2;
-  std::vector<std::tuple<uint32_t,QImage,CImagePreviewItem>>* data;
+  const std::vector<std::tuple<uint32_t,QImage,CImagePreviewItem>>* data;
 };

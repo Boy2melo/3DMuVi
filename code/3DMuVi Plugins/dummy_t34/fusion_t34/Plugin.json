@@ -1,0 +1,15 @@
+{
+    "Default" : {
+        "EinParameter": 1,
+        "ZweiParameter" : {
+            "Subtype1" : "asdf"
+        }
+    },
+    "Description" : {
+        "EinParameter" : "Erster Parameter",
+        "ZweiParameter" : {
+            "parent" : "Ein Test mit subtypes",
+            "Subtype1" : "Untertest"
+        }
+    }
+}

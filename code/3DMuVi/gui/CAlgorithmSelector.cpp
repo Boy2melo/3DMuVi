@@ -1,6 +1,5 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
-#include <QPushButton>
 #include <QMessageBox>
 
 #include <workflow/plugin/cpluginmanager.h>
@@ -34,13 +33,25 @@ CAlgorithmSelector::~CAlgorithmSelector() {
 void CAlgorithmSelector::setWorkflow(AWorkflow& workflow) {
     uint32_t steps = workflow.getStepCount();
     QPushButton* start = new QPushButton("Start", this);
+    mStatus = new QStatusBar(start);
+    mStatus->showMessage("Choose Images");
+    mStartButton = start;
+    start->setDisabled(true);
     connect(start, &QPushButton::clicked, this, &CAlgorithmSelector::startButtonPushed);
 
+    if(mpWorkflow != nullptr)
+    {
+      disconnect(mpWorkflow, &AWorkflow::sigDataStoreFinished, this, &CAlgorithmSelector::onDataStoreFinished);
+    }
 
     mpWorkflow = &workflow;
 
     QLayoutItem *child;
     while ((child = layout()->takeAt(0)) != 0) {
+      if(child->widget())
+      {
+        delete child->widget();
+      }
         delete child;
     }
 
@@ -56,6 +67,7 @@ void CAlgorithmSelector::setWorkflow(AWorkflow& workflow) {
         groupBox->layout()->addWidget(comboBox);
         layout()->addWidget(groupBox);
         layout()->addWidget(start);
+        layout()->addWidget(mStatus);
         if (plugins.size() > 0) {
             workflow.trySetStep(i, plugins.at(0));
         }
@@ -64,6 +76,8 @@ void CAlgorithmSelector::setWorkflow(AWorkflow& workflow) {
 
 void CAlgorithmSelector::setDataStore(const QString& storeId) {
     mDataStoreId = storeId;
+    mStartButton->setDisabled(false);
+    mStatus->showMessage("Ready to Start");
 }
 
 //============================================================
@@ -99,6 +113,7 @@ void CAlgorithmSelector::startButtonPushed(bool isPushed) {
         }
     }
 
+    mStatus->showMessage("Running...");
 
     startStopButton = qobject_cast<QPushButton*>(sender());
     if (startStopButton) {
@@ -125,4 +140,11 @@ void CAlgorithmSelector::onDataStoreFinished(CContextDataStore* dataStore) {
         emit workflowRunning(false);
     }
 
+    if(dataStore->IsAborted())
+    {
+      mStatus->showMessage("Error: Failed to compute the workflow");
+    }
+    else{
+      mStatus->showMessage("Workflow finished.");
+    }
 }

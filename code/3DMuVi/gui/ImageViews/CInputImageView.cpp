@@ -7,7 +7,7 @@
 @param packet
 */
 //============================================================
-void CInputImageView::applyData(CInputDataSet* packet)
+void CInputImageView::applyData(const CInputDataSet* packet)
 {
     appliedData = packet;
 
@@ -50,12 +50,24 @@ void CInputImageView::updateView()
 {
   std::vector<std::tuple<uint32_t, QImage&>> updatedView;
 
+  showImages(std::vector<std::tuple<uint32_t,QImage&>>());
+
+  for(QImage* i : mImageList)
+  {
+    delete i;
+  }
+  mImageList.clear();
+
   for(uint32_t i : mDataID)
   {
     for(std::tuple<uint32_t, QImage, CImagePreviewItem> j : *appliedData->getInputImages())
     {
       if(std::get<0>(j) == i)
-      updatedView.push_back(std::tuple<uint32_t, QImage&>(i, std::get<1>(j)));
+      {
+      QImage* newImage = new QImage(std::get<1>(j));
+      mImageList.push_back(newImage);
+      updatedView.push_back(std::tuple<uint32_t, QImage&>(i, *newImage));
+      }
     }
   }
 

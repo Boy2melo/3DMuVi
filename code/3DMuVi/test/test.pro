@@ -26,6 +26,8 @@ PCL{
   LIBS += -lvtkCommonDataModel-7.0 -lvtkCommonMath-7.0
 }
 
+unix:QMAKE_LFLAGS += -rdynamic
+
 INCLUDEPATH += ../
 
 HEADERS += gui/CTestCLogWidget.h \
@@ -37,6 +39,8 @@ HEADERS += gui/CTestCLogWidget.h \
            io/CTestCResultContext.h \
            logger/CTestLoggerHistory.h \
            logger/CTestLoggerControll.h \
+           components/CTestAlgorithmSettings.h \
+           components/CTestAlgorithmExecution.h \
            settings/CTestCGlobalSettingController.h\
            settings/CTestCAlgorithmSettingController.h\
            ../gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
@@ -94,6 +98,8 @@ SOURCES += gui/CTestCLogWidget.cpp \
            io/CTestCResultContext.cpp \
            logger/CTestLoggerHistory.cpp \
            logger/CTestLoggerControll.cpp \
+           components/CTestAlgorithmSettings.cpp \
+           components/CTestAlgorithmExecution.cpp \
            settings/CTestCGlobalSettingController.cpp\
            settings/CTestCAlgorithmSettingController.cpp\
            ../gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \

@@ -58,9 +58,9 @@ void CTestCMainWindow::workflowSelection()
   });
 
   workflowSelectionCheckGroupBox(algorithmBoxes.at(0), "Feature Matcher");
-  workflowSelectionCheckGroupBox(algorithmBoxes.at(1), "Depth Mapper");
-  workflowSelectionCheckGroupBox(algorithmBoxes.at(2), "Pose Estimator");
-  workflowSelectionCheckGroupBox(algorithmBoxes.at(3), "PCL Reconstructor");
+  workflowSelectionCheckGroupBox(algorithmBoxes.at(1), "Pose Estimator");
+  workflowSelectionCheckGroupBox(algorithmBoxes.at(2), "Depth Estimator");
+  workflowSelectionCheckGroupBox(algorithmBoxes.at(3), "Fusion");
 }
 
 void CTestCMainWindow::aboutClickAbout()
@@ -105,6 +105,7 @@ void CTestCMainWindow::settingsClickSettings()
     {
       QTimer::singleShot(WAITING_TIME, this, &CTestCMainWindow::settingsCheckDialog);
       QTest::mouseClick(menu, Qt::LeftButton, 0, QPoint(3, 3));
+      break;
     }
   }
 }
@@ -123,6 +124,7 @@ void CTestCMainWindow::settingsCheckDialog()
       }
 
       QTest::keyClick(dialog, Qt::Key_Escape);
+      break;
     }
   }
 }
@@ -136,6 +138,7 @@ void CTestCMainWindow::workflowSelectionClickFourPhase()
     if(menu && menu->title() == "Workflow")
     {
       QTest::mouseClick(menu, Qt::LeftButton, 0, QPoint(3, 3));
+      break;
     }
   }
 }
@@ -159,6 +162,8 @@ void CTestCMainWindow::openMenu(QString title, Func member)
           m->exec();
         }
       }
+
+      break;
     }
   }
 }
@@ -169,8 +174,6 @@ void CTestCMainWindow::workflowSelectionCheckGroupBox(QGroupBox* groupBox, QStri
 
   if(groupBox)
   {
-    QEXPECT_FAIL("", "A bug in CAlgorithmSelector prevents this test from passing. " \
-                     "It's currently unknown how to fix this bug.", Continue);
     QCOMPARE(groupBox->title(), reference);
   }
 }
