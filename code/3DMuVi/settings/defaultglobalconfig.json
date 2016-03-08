@@ -1,6 +1,6 @@
 {
 	"resultDirectory" : "none",
-	"minLogKevel" : 1,
+	"minLogLevel" : 1,
 	"logWindowEnabled" : 1,
 	"logDataEnabled" : 1
 }

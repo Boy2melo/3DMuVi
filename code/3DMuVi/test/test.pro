@@ -37,6 +37,8 @@ HEADERS += gui/CTestCLogWidget.h \
            io/CTestCResultContext.h \
            logger/CTestLoggerHistory.h \
            logger/CTestLoggerControll.h \
+           settings/CTestCGlobalSettingController.h\
+           settings/CTestCAlgorithmSettingController.h\
            ../gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.h \
            ../gui/ImageViews/CDepthMapView.h \
@@ -92,6 +94,8 @@ SOURCES += gui/CTestCLogWidget.cpp \
            io/CTestCResultContext.cpp \
            logger/CTestLoggerHistory.cpp \
            logger/CTestLoggerControll.cpp \
+           settings/CTestCGlobalSettingController.cpp\
+           settings/CTestCAlgorithmSettingController.cpp\
            ../gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
            ../gui/ImageViews/CDepthMapView.cpp \

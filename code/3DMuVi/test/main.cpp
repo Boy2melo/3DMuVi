@@ -10,6 +10,8 @@
 #include "logger/CTestLoggerControll.h"
 #include "logger/CTestLoggerHistory.h"
 
+#include "settings/CTestCGlobalSettingController.h"
+
 
 int main(int argc, char* argv[])
 {
@@ -21,7 +23,9 @@ int main(int argc, char* argv[])
   CTestCInputDataSet inputDataSet;
   CTestCResultContext resultContext;
   CTestLoggerControll logControll;
-  CTestLoggerHistory logHistory;	
+  CTestLoggerHistory logHistory;
+
+  CTestCGlobalSettingController globalcontroller;
 
   QApplication app(argc, argv);
 
@@ -35,6 +39,8 @@ int main(int argc, char* argv[])
   failCounter += QTest::qExec(&resultContext, argc, argv);
   failCounter += QTest::qExec(&logControll, argc, argv);
   failCounter += QTest::qExec(&logHistory, argc, argv);
+
+  failCounter += QTest::qExec(&globalcontroller, argc, argv);
   std::cout << "Total number of fails: " << failCounter << "\n";
 
   return 0;
