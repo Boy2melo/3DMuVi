@@ -105,6 +105,7 @@ SOURCES += gui/CTestCLogWidget.cpp \
 	   components/CTestResultDir.cpp \
            components/CTestGlobalParameterSL.cpp \
            settings/CTestCGlobalSettingController.cpp\
+           settings/CTestCAlgorithmSettingController.cpp\
            ../gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
            ../gui/ImageViews/CDepthMapView.cpp \
