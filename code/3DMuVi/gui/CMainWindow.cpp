@@ -53,6 +53,30 @@ CMainWindow::~CMainWindow()
   delete ui;
 }
 
+void CMainWindow::setLoadImage(QUrl url){
+    if(!url.isEmpty() && mWorkflow)
+    {
+      CInputDataSet* dataSet = new CInputDataSet(url);
+      std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> const* images =
+        dataSet->getInputImages();
+      std::vector<CImagePreviewItem*> imageItems;
+      CContextDataStore* dataStore = mWorkflow->addDataStore();
+
+      dataStore->InitializeFromStorage(dataSet);
+      mDataStore.reset(dataStore);
+
+      for(std::tuple<uint32_t, QImage, CImagePreviewItem> i : *images)
+      {
+        imageItems.push_back(new CImagePreviewItem(std::get<2>(i)));
+      }
+
+      ui->imagePreviewWidget->setImages(imageItems);
+      ui->algorithmSelector->setDataStore(dataStore->getId());
+
+      ui->dataViewTabContainer->applyDataStorage(dataStore);
+    }
+}
+
 void CMainWindow::setWorkflow(AWorkflow* workflow)
 {
   ui->algorithmSelector->setWorkflow(*workflow);
@@ -66,28 +90,7 @@ void CMainWindow::setWorkflow(AWorkflow* workflow)
 void CMainWindow::onLoadImages()
 {
   QUrl url = QFileDialog::getExistingDirectoryUrl(this, "Select image directory");
-
-  if(!url.isEmpty() && mWorkflow)
-  {
-    CInputDataSet* dataSet = new CInputDataSet(url);
-    std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> const* images =
-      dataSet->getInputImages();
-    std::vector<CImagePreviewItem*> imageItems;
-    CContextDataStore* dataStore = mWorkflow->addDataStore();
-
-    dataStore->InitializeFromStorage(dataSet);
-    mDataStore.reset(dataStore);
-
-    for(std::tuple<uint32_t, QImage, CImagePreviewItem> i : *images)
-    {
-      imageItems.push_back(new CImagePreviewItem(std::get<2>(i)));
-    }
-
-    ui->imagePreviewWidget->setImages(imageItems);
-    ui->algorithmSelector->setDataStore(dataStore->getId());
-
-    ui->dataViewTabContainer->applyDataStorage(dataStore);
-  }
+  setLoadImage(url);
 }
 
 void CMainWindow::onWorkflowSelected()

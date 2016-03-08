@@ -46,6 +46,8 @@ void CAlgorithmSelector::setWorkflow(AWorkflow& workflow) {
 
     mpWorkflow = &workflow;
 
+    connect(mpWorkflow, &AWorkflow::sigDataStoreFinished, this, &CAlgorithmSelector::onDataStoreFinished);
+
     QLayoutItem *child;
     while ((child = layout()->takeAt(0)) != 0) {
       if(child->widget())
@@ -100,7 +102,7 @@ void CAlgorithmSelector::onCurrentIndexChanged(int index) {
 }
 
 void CAlgorithmSelector::startButtonPushed(bool isPushed) {
-    //BUG (?): isPushed is not used /!\
+    Q_UNUSED(isPushed);
 
     QPushButton* startStopButton = nullptr;
 
