@@ -17,7 +17,7 @@ public:
   void activate() override;
 
 private:
-  const CInputDataSet* appliedData;
+  const CInputDataSet* appliedData = nullptr;
   std::vector<uint32_t> mDataID;
   std::vector<QImage*> mImageList;
 

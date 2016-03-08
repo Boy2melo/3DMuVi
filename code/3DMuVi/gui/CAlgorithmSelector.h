@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include <QObject>
+#include <QPushButton>
+#include <QStatusBar>
+
 #include <workflow/workflow/aworkflow.h>
 
 /*!
@@ -47,6 +50,8 @@ signals:
 
 private:
   AWorkflow* mpWorkflow = nullptr;
+  QPushButton* mStartButton = nullptr;
+  QStatusBar* mStatus = nullptr;
   QString mDataStoreId;
 private slots:
   void onCurrentIndexChanged(int index);

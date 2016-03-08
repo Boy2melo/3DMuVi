@@ -19,10 +19,10 @@ class CDepthMapView : public CImageView, public IDataView {
 
 public:
   void applyData(const CDataDepth* packet) override;
-  void activate();
+  void activate() override;
 
 private:
-  const CDataDepth* appliedData;
+  const CDataDepth* appliedData = nullptr;
   std::vector<uint32_t> mDataID;
   std::vector<QImage*> mImageList;
 

@@ -17,14 +17,14 @@ class CFeatureView : public CImageView, public IDataView
 public:
   void applyData(const CInputDataSet* packet) override;
   void applyData(const CDataFeature* packet) override;
-  void activate();
+  void activate() override;
 
 private:
 
   std::vector<uint32_t> mDataID;
   std::vector<QImage*> mImageList;
-  const CInputDataSet* appliedInputData;
-  const CDataFeature* appliedFeatureData;
+  const CInputDataSet* appliedInputData = nullptr;
+  const CDataFeature* appliedFeatureData = nullptr;
 
 
   void updateView();

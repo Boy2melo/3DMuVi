@@ -50,6 +50,8 @@ void CInputImageView::updateView()
 {
   std::vector<std::tuple<uint32_t, QImage&>> updatedView;
 
+  showImages(std::vector<std::tuple<uint32_t,QImage&>>());
+
   for(QImage* i : mImageList)
   {
     delete i;

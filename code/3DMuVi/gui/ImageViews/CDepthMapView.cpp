@@ -45,24 +45,29 @@ void CDepthMapView::updateView()
 {
   std::vector<std::tuple<uint32_t, QImage&>> updatedView;
 
+  showImages(std::vector<std::tuple<uint32_t,QImage&>>());
+
   for(QImage* i : mImageList)
   {
     delete i;
   }
   mImageList.clear();
 
-  for(uint32_t i : mDataID)
+  if(appliedData != nullptr)
   {
-    for(std::tuple<uint32_t, QImage> j : *appliedData->getDepthMap())
+    for(uint32_t i : mDataID)
     {
-      if(std::get<0>(j) == i)
+      for(std::tuple<uint32_t, QImage> j : *appliedData->getDepthMap())
       {
-        QImage* newImage = new QImage(std::get<1>(j));
-        mImageList.push_back(newImage);
-        updatedView.push_back(std::tuple<uint32_t, QImage&>(i, *newImage));
+        if(std::get<0>(j) == i)
+        {
+          QImage* newImage = new QImage(std::get<1>(j));
+          mImageList.push_back(newImage);
+          updatedView.push_back(std::tuple<uint32_t, QImage&>(i, *newImage));
+        }
       }
     }
+    showImages(updatedView);
   }
-  showImages(updatedView);
 }
 
