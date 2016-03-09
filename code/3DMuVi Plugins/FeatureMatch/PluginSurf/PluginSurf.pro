@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui widgets
 
 TARGET = PluginSurf
 TEMPLATE = lib
@@ -13,6 +13,8 @@ QMAKE_CXXFLAGS += --std=c++11
 
 CONFIG += link_pkgconfig
 PKGCONFIG += opencv
+
+LIBS += -L$$PWD/OpenSURFcpp/ -lsurf
 
 SOURCES += \
     plugin.cpp \

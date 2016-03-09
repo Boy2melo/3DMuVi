@@ -5,6 +5,7 @@
 #include "opencv2/core.hpp"
 #include "opencv2/imgproc.hpp"
 
+#define MAX_VALUE_UCHAR 255
 
 //----------------------------------------
 // Adjust these functions to your needs
@@ -53,12 +54,12 @@ bool CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
 void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
 
     auto mat2Qimage = [](cv::Mat const& src){
-        //TODO support conversion of single channel float.
-
-       cv::Mat temp(src.cols,src.rows,src.type()); // make the same cv::Mat
-       cvtColor(src, temp,CV_BGR2RGB); // cvtColor Makes a copt, that what i need
-       QImage dest= QImage((uchar*) temp.data, temp.cols, temp.rows, temp.step, QImage::Format_RGB888);
-       return dest;
+       cv::Mat temp;
+       double max;
+       cv::minMaxLoc(src, nullptr, &max);
+       src.convertTo(temp, CV_8UC1, 1.f / max * MAX_VALUE_UCHAR);
+       QImage dest = QImage((uchar*) temp.data, temp.cols, temp.rows, temp.step, QImage::Format_Grayscale8);
+       return dest.copy();
     };
 
     // get input files
@@ -68,11 +69,16 @@ void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
     auto depthMaps = new std::vector<std::tuple<uint32_t, QImage>>;
     int frameCounter = 0;
 
+    QDir dir = QDir(mSettings->value("GtSrcDir").toString());
+    dir.setNameFilters(QStringList() << "*.xml");
+    dir.setSorting(QDir::Name);
+    mFileList = dir.entryList();
+    mFileItr = mFileList.begin();
+
     // read data from file
     for(std::tuple<uint32_t, QImage, CImagePreviewItem> img : *pInputImages->getInputImages())
     {
       frameCounter++;
-      mFileItr++;
 
       if(frameCounter == mSettings->value("NumOfFrames").toInt())
       {
@@ -87,6 +93,8 @@ void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
 
         depthMaps->push_back(std::tuple<uint32_t, QImage>(std::get<0>(img), mat2Qimage(depthMap)));
       }
+
+      mFileItr++;
     }
 
     CDataDepth* depthData = new CDataDepth;

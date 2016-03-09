@@ -37,7 +37,7 @@ HEADERS += \
     algorithm.h \
     plugin_config.h
 OTHER_FILES += \
-    Plugin.json
+    PluginDepthFusor.json
 
 unix {
     target.path = /usr/lib

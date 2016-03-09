@@ -75,6 +75,7 @@ void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
 
 
 
+          newPose.cameraId = std::get<0>(img);
           newPose.focalLength = std::vector<float>(2, 615.f);
           newPose.principalPoint = QVector2D(320, 240);
           newPose.translation = QVector3D(poseVals[0], poseVals[1], poseVals[2]);

@@ -68,7 +68,7 @@ FeatureTable findSurfMatches(vector<Mat> imgs, bool upright, int octaves, int in
   {
     for (auto const & feature : ids[img])
     {
-      features.push_back(make_tuple(feature.second, feature.first.first, feature.first.second, img));
+      features.push_back(make_tuple(img, feature.first.first, feature.first.second, feature.second));
     }
   }
 

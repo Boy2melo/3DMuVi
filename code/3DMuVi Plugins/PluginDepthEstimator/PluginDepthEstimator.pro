@@ -37,7 +37,7 @@ HEADERS += \
     algorithm.h \
     plugin_config.h
 OTHER_FILES += \
-    Plugin.json
+    PluginDepthEstimator.json
 
 unix {
     target.path = /usr/lib
@@ -51,5 +51,5 @@ unix {
   DEPENDPATH += /home/rufboi/3rd_party/OpenCV_3.1.0_gcc4.8/include/
 
   LIBS += -L/home/rufboi/3rd_party/OpenCV_3.1.0_gcc4.8/lib/
-  LIBS += -lopencv_core
+  LIBS += -lopencv_core -lopencv_imgproc
 }

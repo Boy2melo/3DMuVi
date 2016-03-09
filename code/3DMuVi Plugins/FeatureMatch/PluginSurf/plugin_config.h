@@ -19,6 +19,7 @@
 #define _concat1(x,y) _concat2(x, y)    //Double layer of indirection - otherwise PLUGIN_NAME will not be resolved
 #define _concat2(x,y) _concat3(x, y)
 #define _concat3(x,y) x ## y
-#define STRINGIFY(x) #x
+#define STRINGIFY(x) STRINGIFY2(x)
+#define STRINGIFY2(x) #x
 
 #endif // PLUGIN_CONFIG_H

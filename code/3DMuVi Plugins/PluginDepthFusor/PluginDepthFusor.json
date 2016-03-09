@@ -18,5 +18,10 @@
             "default" : "none",
             "description" : "Path to source file holding the textured mesh."
         }
+    },
+    "Default" : {
+        "PcSrcFile" : "none",
+        "MeshSrcFile" : "none",
+        "TexMeshSrcFile" : "none"
     }
 }

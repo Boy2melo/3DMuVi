@@ -13,5 +13,9 @@
             "default" : ",",
             "description" : "Delimiter between each pose."
         }
+    },
+    "Default" : {
+        "GtSrcFile" : "none",
+        "Delimiter" : ","
     }
 }

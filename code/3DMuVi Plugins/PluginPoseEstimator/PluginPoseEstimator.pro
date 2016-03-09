@@ -37,7 +37,7 @@ HEADERS += \
     algorithm.h \
     plugin_config.h
 OTHER_FILES += \
-    Plugin.json
+    PluginPoseEstimator.json
 
 unix {
     target.path = /usr/lib

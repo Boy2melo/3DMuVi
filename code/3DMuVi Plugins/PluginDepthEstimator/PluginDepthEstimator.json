@@ -18,5 +18,10 @@
             "default" : "5",
             "description" : "Number of frames that are to be used for reconstruction. Must be larger than 1."
         }
+    },
+    "Default" : {
+        "GtSrcDir" : "none",
+        "XmlDataId" : "depth",
+        "NumOfFrames": 5
     }
 }

@@ -42,7 +42,7 @@ void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
   if (pInputPacket == nullptr) return;
 
   using TupleType = std::tuple<uint32_t, QImage, CImagePreviewItem>;
-  vector<TupleType>* inputImages = pInputPacket->getInputImages();
+  const vector<TupleType>* inputImages = pInputPacket->getInputImages();
 
   vector<Mat> imgs(inputImages->size());
   transform(inputImages->begin(), inputImages->end(), imgs.begin(), [](TupleType const & tup) {
