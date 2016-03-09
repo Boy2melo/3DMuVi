@@ -10,6 +10,9 @@ void CTestAlgorithmExecution::test(){
     CMainWindow mw;  
     QStatusBar* statusBar;
     QPushButton* startButton;
+    bool featureMatcherFound = false, poseEstimatorFound = false;
+    bool depthEstimatorFound = false, fusionPluginFound = false;
+
 
     for(QWidget* w : QApplication::allWidgets())
     {
@@ -29,13 +32,29 @@ void CTestAlgorithmExecution::test(){
 
       if(comboBox)
       {
-          QString name = comboBox->currentText();
-          QCOMPARE((name == QString("featureMatch_t34") ||
-                    name == QString("pose_t34") ||
-                    name == QString("depthMap_t34") ||
-                    name == QString("dummyFusion_t34") ),true);
+          if(setPluginIfValid(comboBox, "featureMatch_t34"))
+          {
+            featureMatcherFound = true;
+          }
+          if(setPluginIfValid(comboBox, "pose_t34"))
+          {
+            poseEstimatorFound = true;
+          }
+          if(setPluginIfValid(comboBox, "depthMap_t34"))
+          {
+            depthEstimatorFound = true;
+          }
+          if(setPluginIfValid(comboBox, "dummyFusion_t34"))
+          {
+            fusionPluginFound = true;
+          }
       }
     }
+
+    QVERIFY2(featureMatcherFound, "Dummy feature match plugin not found.");
+    QVERIFY2(poseEstimatorFound, "Dummy pose estimator plugin not found.");
+    QVERIFY2(depthEstimatorFound, "Dummy depth estimator plugin not found.");
+    QVERIFY2(fusionPluginFound, "Dummy fusion plugin not found.");
 
     //initial state
     QCOMPARE(statusBar->currentMessage() , QString("Choose Images"));
@@ -47,9 +66,24 @@ void CTestAlgorithmExecution::test(){
 
     QTest::mouseClick(startButton, Qt::LeftButton,0 ,QPoint(3,3));
 
-    QTest::qWait(1000);
-
     //state running
     QCOMPARE(statusBar->currentMessage() , QString("Running..."));
     QCOMPARE(startButton->text(), QString("Stop"));
+
+    QTest::qWait(100);
+
+    //state finished
+    QCOMPARE(statusBar->currentMessage() , QString("Workflow finished."));
+    QCOMPARE(startButton->text(), QString("Start"));
+}
+
+bool CTestAlgorithmExecution::setPluginIfValid(QComboBox* comboBox, QString pluginName)
+{
+  int index = comboBox->findText(pluginName);
+  if(index > -1)
+  {
+    comboBox->setCurrentIndex(index);
+    return true;
+  }
+  return false;
 }

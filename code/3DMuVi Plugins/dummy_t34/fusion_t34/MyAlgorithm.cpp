@@ -7,10 +7,6 @@
 //----------------------------------------
 
 void _CLASS_GEN(Algorithm)::OnInitialize(){
-    mOutputTypes.push_back(DT_POSE);
-
-    mInputTypes.push_back(DT_FEATURE_MATCH);
-    mInputTypes.push_back(DT_INPUTIMAGES);
 }
 
 bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
