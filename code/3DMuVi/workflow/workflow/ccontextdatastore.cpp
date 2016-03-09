@@ -107,7 +107,8 @@ bool CContextDataStore::appendData(std::shared_ptr<T> data, bool overwrite) {
 }
 
 //Compiler muss Template Implementierungen anlegen, damit diese von den Plugins aufrufbar sind
-template bool CContextDataStore::appendData<CDataFeature>(std::shared_ptr<CDataFeature>,bool);
+template bool CContextDataStore::appendData<CInputDataSet>(std::shared_ptr<CInputDataSet>,bool);
+template bool CContextDataStore::appendData<CDataFeature>(std::shared_ptr<CDataFeature>, bool);
 template bool CContextDataStore::appendData<CDataDepth>(std::shared_ptr<CDataDepth>, bool);
 template bool CContextDataStore::appendData<CDataPose>(std::shared_ptr<CDataPose>, bool);
 //TODO: merge CDataFusion from pcl branch
