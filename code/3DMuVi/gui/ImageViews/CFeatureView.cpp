@@ -105,6 +105,8 @@ void CFeatureView::updateView()
       }
     }
 
+    showImages(updatedView);
+
     for(auto f : features)
     {
       addConnectedMarkers(f.second);
