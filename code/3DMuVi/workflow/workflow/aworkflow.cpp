@@ -42,7 +42,7 @@ bool AWorkflow::run(const QString storeId, bool multiThread) {
         auto *currentThread = this->thread();
 
         this->moveToThread(thread);
-        QTimer::singleShot(0, [=] {
+        QTimer::singleShot(0, this, [=] {
             this->executeAlgorithm(store);
         });
 
