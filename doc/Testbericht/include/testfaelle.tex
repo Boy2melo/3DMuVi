@@ -1,11 +1,9 @@
-% Testfälle  für  die  einzelnen  Produktfunktionen,  die  alle  abgedeckt  sein müssen. Testszenarien für typische Anwendungsszenarien.
+% Bei Funktionstests beschreiben, warum manche Teste nicht oder nicht vollständig getestet werden konnten und ob Fehler auftreten bei der Durchführung. Bei Kompnenten- und Oberflächentests einzeln beschreiben, ob die Ausführung erfolgreich war bzw. warum der Test nicht implementiert wurde (siehe Google Docs Tabelle). Einleitungstexte überarbeiten.
 Die Testfälle und Testszenarien dienen der Überprüfung der Software bezüglich ihrer Funktionalität und Konsistenz. Testfälle unterscheiden sich von den Testszenarien darin, dass diese automatisierte, somit atomare Funktionstests darstellen, während Testszenarien manuelle Testanweisungen sind, die durch eine ungeschulte Testperson durchgeführt werden sollen.
 
 Die Testfälle sind alle Automatisiert und werden mit der in Qt integrierten Test-Suite durchgeführt.
 \section{Funktionstests}
 Zuerst wird jede Klasse einzeln bearbeitet. Jede Öffentliche Methode wird mit zwei Testfällen getestet. Der erste Testfall testet das Verhalten einer Funktion im normalen Umfeld mit gewöhnlichen Parametern. Dieser Test dient dazu, Fehler in Berechnungsvorschriften und Implementierungen zu finden. Der zweite Testfall ruft die Funktion mit ungewöhnlichen Parametern auf, eventuell auch mit falschen Datentypen. Diese Tests dienen dazu, die Robustheit der Funktionen zu garantieren. Die Argumente, die an eine Funktion übergeben werden, sind so weit wie möglich Zufällig verteilt zu wählen. Für das nachvollziehen von Fehlern werden die getesteten Parameter zusätzlich zu der Fehlerbeschreibung ausgegeben.
-\subsection{Aufgetretene Fehler}
-\subsection{Codeüberdeckung}
 
 \section{Komponententests}
 Komponententests testen das Verhalten eines isolierten Moduls der Anwendung. Viele der Tests lassen sich allerdings erst nach der Entwurfsphase festlegen, weshalb dieser Abschnitt bis zum Vollständigen Entwurf der Anwendung noch nicht vollständig sein wird.
@@ -106,7 +104,6 @@ Komponententests testen das Verhalten eines isolierten Moduls der Anwendung. Vie
 		\end{tabular}\\
 		\subitem Platzhalter für weitere Komponententests
 	\end{enumerate}
-\subsection{Codeüberdeckung}
 
 \section{Oberflächentests}
 Die Oberflächentests lassen sich mit der Qt Test-Suite ebenfalls automatisieren, eventuell muss allerdings bei der Designphase daran gedacht werden, gerade was das Laden von Dateien angeht.\\
@@ -136,4 +133,3 @@ Die Oberflächentests lassen sich mit der Qt Test-Suite ebenfalls automatisieren
 	\end{itemize}
 	\subitem \textbf{Ablauf:}\\ Der Algorithmus wird im Backend aktiviert. Der Test setzt nun in der Oberfläche Werte für die verschiedenen Einstellungen. Es wird geprüft, ob die Werte in den Algorithmus übernommen werden. Danach werden Werte gewählt, die zu Validierungsfehlern führen. Es wird geprüft, ob die Werte im Algorithmus fälschlicherweise geändert wurden. Zudem wird das entsprechende Feld auf eine Visuelle Signalisierung des Fehlers geprüft.
 \end{enumerate}
-\subsection{Codeüberdeckung}
