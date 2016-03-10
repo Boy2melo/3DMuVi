@@ -1,0 +1,835 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;moc;h;def;odl;idl;res;</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Distribution Files">
+      <UniqueIdentifier>{B83CAF91-C7BF-462F-B76C-EA11631F866C}</UniqueIdentifier>
+      <Extensions>*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Distribution Files">
+      <UniqueIdentifier>{B83CAF91-C7BF-462F-B76C-EA11631F866C}</UniqueIdentifier>
+      <Extensions>*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{72a6a5f7-b699-40e6-b542-a0142bca5417}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{a0fdb210-234e-41d8-9b07-20f1224ebd71}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="3DMuVi">
+      <UniqueIdentifier>{ecffccb3-3f6e-4c71-8659-cc02e7350cdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DMuVi\io">
+      <UniqueIdentifier>{93a73606-5f0b-498f-98a7-b1672b9e861c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DMuVi\workflow">
+      <UniqueIdentifier>{deb03db2-efae-4b1b-b6eb-5843dfe9b996}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DMuVi\plugins">
+      <UniqueIdentifier>{fb2e8b26-b394-4857-9daa-6a6f83600db5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DMuVi\workflow\datastores">
+      <UniqueIdentifier>{5028b825-360b-49df-95ad-a9a28aba8e17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DMuVi\settings">
+      <UniqueIdentifier>{6fc43044-313f-40ef-965e-52a48f03700e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DMuVi\logger">
+      <UniqueIdentifier>{07de06e4-0fbf-454e-9a86-6d58559aa2ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DMuVi\gui">
+      <UniqueIdentifier>{7acc5445-7833-42ee-a722-fe2e4d4883fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3DMuVi\gui\views">
+      <UniqueIdentifier>{0719a403-d2ad-4294-aad5-a6d3b8f6d1f1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="components\CTestAlgorithmExecution.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="components\CTestAlgorithmSettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="settings\CTestCGlobalSettingController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\CTestCImageIo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\CTestCInputDataSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CTestCLogWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CTestCMainWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\CTestCResultContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gui\CTestCSettingsDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="io\CTestCTextIo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="components\CTestGlobalParameterSL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\CTestLoggerControll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="logger\CTestLoggerHistory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="components\CTestResultDir.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestAlgorithmExecution.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestAlgorithmExecution.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestAlgorithmSettings.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestAlgorithmSettings.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCGlobalSettingController.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCGlobalSettingController.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCImageIo.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCImageIo.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCInputDataSet.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCInputDataSet.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCLogWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCLogWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCMainWindow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCMainWindow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCResultContext.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCResultContext.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCSettingsDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCSettingsDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCTextIo.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCTextIo.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestGlobalParameterSL.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestGlobalParameterSL.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestLoggerControll.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestLoggerControll.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestLoggerHistory.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestLoggerHistory.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestResultDir.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestResultDir.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_test.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\io\AStreamProvider.cpp">
+      <Filter>3DMuVi\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\io\CImageIo.cpp">
+      <Filter>3DMuVi\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\io\CInputDataSet.cpp">
+      <Filter>3DMuVi\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\io\CMFStreamProvider.cpp">
+      <Filter>3DMuVi\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\io\CResultContext.cpp">
+      <Filter>3DMuVi\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\io\CSFStreamProvider.cpp">
+      <Filter>3DMuVi\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\io\CTextIo.cpp">
+      <Filter>3DMuVi\io</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\plugin\cpluginmanager.cpp">
+      <Filter>3DMuVi\plugins</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\workflow\aworkflow.cpp">
+      <Filter>3DMuVi\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_aworkflow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_aworkflow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\workflow\ccontextdatastore.cpp">
+      <Filter>3DMuVi\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\workflow\cworkflowmanager.cpp">
+      <Filter>3DMuVi\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\workflow\idatapacket.cpp">
+      <Filter>3DMuVi\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\workflow\idataview.cpp">
+      <Filter>3DMuVi\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\workflow\fourphase\cfourphaseworkflow.cpp">
+      <Filter>3DMuVi\workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\workflow\datapackets\CDataDepth.cpp">
+      <Filter>3DMuVi\workflow\datastores</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\workflow\datapackets\CDataFeature.cpp">
+      <Filter>3DMuVi\workflow\datastores</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\workflow\datapackets\CDataFusion.cpp">
+      <Filter>3DMuVi\workflow\datastores</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\workflow\datapackets\CDataPose.cpp">
+      <Filter>3DMuVi\workflow\datastores</Filter>
+    </ClCompile>
+    <ClCompile Include="..\workflow\workflow\datapackets\exampledata.cpp">
+      <Filter>3DMuVi\workflow\datastores</Filter>
+    </ClCompile>
+    <ClCompile Include="..\settings\CAlgorithmSettingController.cpp">
+      <Filter>3DMuVi\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CAlgorithmSettingController.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CAlgorithmSettingController.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\settings\CAlgorithmSettingsModel.cpp">
+      <Filter>3DMuVi\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\settings\CGlobalSettingController.cpp">
+      <Filter>3DMuVi\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\settings\CQJsonItem.cpp">
+      <Filter>3DMuVi\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="..\settings\CQJsonModel.cpp">
+      <Filter>3DMuVi\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CQJsonModel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CQJsonModel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\logger\controll\CAlgoMessage.cpp">
+      <Filter>3DMuVi\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\logger\controll\CLogController.cpp">
+      <Filter>3DMuVi\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CLogController.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CLogController.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\logger\controll\CLogHistory.cpp">
+      <Filter>3DMuVi\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\logger\qslogging\QsLog.cpp">
+      <Filter>3DMuVi\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\logger\qslogging\QsLogDest.cpp">
+      <Filter>3DMuVi\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\logger\qslogging\QsLogDestConsole.cpp">
+      <Filter>3DMuVi\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\logger\qslogging\QsLogDestFile.cpp">
+      <Filter>3DMuVi\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\logger\qslogging\QsLogDestFunctor.cpp">
+      <Filter>3DMuVi\logger</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_QsLogDestFunctor.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_QsLogDestFunctor.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\CAlgorithmSelector.cpp">
+      <Filter>3DMuVi\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CAlgorithmSelector.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CAlgorithmSelector.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\CDatasetSelector.cpp">
+      <Filter>3DMuVi\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\CDataViewTabContainer.cpp">
+      <Filter>3DMuVi\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CDataViewTabContainer.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CDataViewTabContainer.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\CImagePreviewItem.cpp">
+      <Filter>3DMuVi\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\CImagePreviewWidget.cpp">
+      <Filter>3DMuVi\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CImagePreviewWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CImagePreviewWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\CLogWidget.cpp">
+      <Filter>3DMuVi\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\CMainWindow.cpp">
+      <Filter>3DMuVi\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CMainWindow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CMainWindow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\CSettingsDialog.cpp">
+      <Filter>3DMuVi\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CSettingsDialog.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CSettingsDialog.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\CStepComboBox.cpp">
+      <Filter>3DMuVi\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CStepComboBox.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CStepComboBox.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\ImageViews\CDepthMapView.cpp">
+      <Filter>3DMuVi\gui\views</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CDepthMapView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CDepthMapView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\ImageViews\CFeatureView.cpp">
+      <Filter>3DMuVi\gui\views</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CFeatureView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CFeatureView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\ImageViews\CImageView.cpp">
+      <Filter>3DMuVi\gui\views</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CImageView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CImageView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\ImageViews\CInputImageView.cpp">
+      <Filter>3DMuVi\gui\views</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CInputImageView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CInputImageView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\AlgorithmSettings\CAlgorithmSettingsSaveLoadWidget.cpp">
+      <Filter>3DMuVi\gui\views</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CAlgorithmSettingsSaveLoadWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CAlgorithmSettingsSaveLoadWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\AlgorithmSettings\CAlgorithmSettingsView.cpp">
+      <Filter>3DMuVi\gui\views</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\3dView\C3dView.cpp">
+      <Filter>3DMuVi\gui\views</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_C3dView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_C3dView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="..\gui\3dView\CPclView.cpp">
+      <Filter>3DMuVi\gui\views</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CPclView.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CPclView.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCPluginmanager.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCPluginmanager.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\plugin\CTestCPluginmanager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCWorkflowmanager.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCWorkflowmanager.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\CTestCWorkflowmanager.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\CTestCContextDataStore.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCContextDataStore.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCContextDataStore.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\CTestCFeatureView.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\testplugin\algorithm.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\testplugin\plugin.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_plugin.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_plugin.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="workflow\CTestCWorkflow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCWorkflow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCWorkflow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="components\CTestAlgorithmExecution.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="components\CTestAlgorithmSettings.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <ClInclude Include="settings\CTestCAlgorithmSettingController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <CustomBuild Include="settings\CTestCGlobalSettingController.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="io\CTestCImageIo.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="io\CTestCInputDataSet.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\CTestCLogWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\CTestCMainWindow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="io\CTestCResultContext.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gui\CTestCSettingsDialog.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="io\CTestCTextIo.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="components\CTestGlobalParameterSL.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="logger\CTestLoggerControll.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="logger\CTestLoggerHistory.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="components\CTestResultDir.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\workflow\workflow\aworkflow.h">
+      <Filter>3DMuVi\workflow</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\settings\CAlgorithmSettingController.h">
+      <Filter>3DMuVi\settings</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\settings\CQJsonModel.h">
+      <Filter>3DMuVi\settings</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\logger\controll\CLogController.h">
+      <Filter>3DMuVi\logger</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\logger\qslogging\QsLogDestFunctor.h">
+      <Filter>3DMuVi\logger</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\CAlgorithmSelector.h">
+      <Filter>3DMuVi\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\CDataViewTabContainer.h">
+      <Filter>3DMuVi\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\CImagePreviewWidget.h">
+      <Filter>3DMuVi\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\CMainWindow.h">
+      <Filter>3DMuVi\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\CSettingsDialog.h">
+      <Filter>3DMuVi\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\CStepComboBox.h">
+      <Filter>3DMuVi\gui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\forms\CAlgorithmSettingsSaveLoad.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\forms\CMainWindow.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\forms\CSettingsDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\ImageViews\CDepthMapView.h">
+      <Filter>3DMuVi\gui\views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\ImageViews\CFeatureView.h">
+      <Filter>3DMuVi\gui\views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\ImageViews\CImageView.h">
+      <Filter>3DMuVi\gui\views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\ImageViews\CInputImageView.h">
+      <Filter>3DMuVi\gui\views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\AlgorithmSettings\CAlgorithmSettingsSaveLoadWidget.h">
+      <Filter>3DMuVi\gui\views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\3dView\C3dView.h">
+      <Filter>3DMuVi\gui\views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\gui\3dView\CPclView.h">
+      <Filter>3DMuVi\gui\views</Filter>
+    </CustomBuild>
+    <CustomBuild Include="workflow\plugin\CTestCPluginmanager.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="workflow\CTestCWorkflowmanager.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="workflow\CTestCContextDataStore.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="workflow\testplugin\plugin.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="workflow\CTestCWorkflow.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="io\data\testInputDataSet\0.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="io\data\testInputDataSet\1.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="io\data\testInputDataSet\2.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <CustomBuild Include="test.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <None Include="io\data\testImage.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="io\data\testText.txt">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="io\data\testImage.png" />
+    <None Include="io\data\testText.txt" />
+    <None Include="io\data\testImage.png" />
+    <None Include="io\data\testText.txt" />
+    <None Include="..\settings\defaultglobalconfig.json">
+      <Filter>3DMuVi\settings</Filter>
+    </None>
+    <None Include="..\settings\globalconfig.json">
+      <Filter>3DMuVi\settings</Filter>
+    </None>
+    <None Include="io\data\testImage.png" />
+    <None Include="io\data\testText.txt" />
+    <None Include="io\data\testImage.png" />
+    <None Include="io\data\testText.txt" />
+    <None Include="io\data\testImage.png" />
+    <None Include="io\data\testText.txt" />
+    <None Include="io\data\testImage.png" />
+    <None Include="io\data\testText.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="io\data\testImage.png">
+      <Filter>Distribution Files</Filter>
+    </None>
+    <None Include="io\data\testText.txt">
+      <Filter>Distribution Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\io\AStreamProvider.h">
+      <Filter>3DMuVi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\io\CImageIo.h">
+      <Filter>3DMuVi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\io\CInputDataSet.h">
+      <Filter>3DMuVi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\io\CMFStreamProvider.h">
+      <Filter>3DMuVi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\io\CResultContext.h">
+      <Filter>3DMuVi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\io\CSFStreamProvider.h">
+      <Filter>3DMuVi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\io\CTextIo.h">
+      <Filter>3DMuVi\io</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\plugin\cpluginmanager.h">
+      <Filter>3DMuVi\plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\plugin\ialgorithm.h">
+      <Filter>3DMuVi\plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\plugin\iplugin.h">
+      <Filter>3DMuVi\plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\workflow\ccontextdatastore.h">
+      <Filter>3DMuVi\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\workflow\cworkflowmanager.h">
+      <Filter>3DMuVi\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\workflow\idatapacket.h">
+      <Filter>3DMuVi\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\workflow\idataview.h">
+      <Filter>3DMuVi\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\workflow\fourphase\cfourphaseworkflow.h">
+      <Filter>3DMuVi\workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\workflow\datapackets\CDataDepth.h">
+      <Filter>3DMuVi\workflow\datastores</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\workflow\datapackets\CDataFeature.h">
+      <Filter>3DMuVi\workflow\datastores</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\workflow\datapackets\CDataFusion.h">
+      <Filter>3DMuVi\workflow\datastores</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\workflow\datapackets\CDataPose.h">
+      <Filter>3DMuVi\workflow\datastores</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\workflow\datapackets\exampledata.h">
+      <Filter>3DMuVi\workflow\datastores</Filter>
+    </ClInclude>
+    <ClInclude Include="..\workflow\workflow\datapackets\SPose.h">
+      <Filter>3DMuVi\workflow\datastores</Filter>
+    </ClInclude>
+    <ClInclude Include="..\settings\CAlgorithmSettingsModel.h">
+      <Filter>3DMuVi\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\settings\CGlobalSettingController.h">
+      <Filter>3DMuVi\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\settings\CQJsonItem.h">
+      <Filter>3DMuVi\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="..\logger\controll\CAlgoMessage.h">
+      <Filter>3DMuVi\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\logger\controll\CLogHistory.h">
+      <Filter>3DMuVi\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\logger\qslogging\QsLog.h">
+      <Filter>3DMuVi\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\logger\qslogging\QsLogDest.h">
+      <Filter>3DMuVi\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\logger\qslogging\QsLogDestConsole.h">
+      <Filter>3DMuVi\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\logger\qslogging\QsLogDestFile.h">
+      <Filter>3DMuVi\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\logger\qslogging\QsLogDisableForThisFile.h">
+      <Filter>3DMuVi\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\logger\qslogging\QsLogLevel.h">
+      <Filter>3DMuVi\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gui\CDatasetSelector.h">
+      <Filter>3DMuVi\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gui\CImagePreviewItem.h">
+      <Filter>3DMuVi\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gui\CLogWidget.h">
+      <Filter>3DMuVi\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gui\IGuiDataView.h">
+      <Filter>3DMuVi\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_CAlgorithmSettingsSaveLoad.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_CMainWindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_CSettingsDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\gui\AlgorithmSettings\CAlgorithmSettingsView.h">
+      <Filter>3DMuVi\gui\views</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\CTestCFeatureView.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="workflow\testplugin\algorithm.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dumDepthMap", "3DMuVi Plugi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dumFusion", "3DMuVi Plugins\dummy\dumFusion\dumFusion.vcxproj", "{564240E2-8C83-4280-8452-B7DFB74338F2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "E:\Projekte\3DMuVi\code\3DMuVi\test\test.vcxproj", "{89E5B108-065C-308B-BCB4-FEF8CB5046F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,12 @@ Global
 		{564240E2-8C83-4280-8452-B7DFB74338F2}.Release|x64.Build.0 = Release|x64
 		{564240E2-8C83-4280-8452-B7DFB74338F2}.Release|x86.ActiveCfg = Release|Win32
 		{564240E2-8C83-4280-8452-B7DFB74338F2}.Release|x86.Build.0 = Release|Win32
+		{89E5B108-065C-308B-BCB4-FEF8CB5046F8}.Debug|x64.ActiveCfg = Debug|x64
+		{89E5B108-065C-308B-BCB4-FEF8CB5046F8}.Debug|x64.Build.0 = Debug|x64
+		{89E5B108-065C-308B-BCB4-FEF8CB5046F8}.Debug|x86.ActiveCfg = Debug|x64
+		{89E5B108-065C-308B-BCB4-FEF8CB5046F8}.Release|x64.ActiveCfg = Release|x64
+		{89E5B108-065C-308B-BCB4-FEF8CB5046F8}.Release|x64.Build.0 = Release|x64
+		{89E5B108-065C-308B-BCB4-FEF8CB5046F8}.Release|x86.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -55,10 +55,47 @@ void CFourPhaseWorkflow::executeAlgorithm(CContextDataStore* store) {
     if (mPlugins[0]->getAlgorithm()->IsBusy()) {
         return;
     }
+
+#define DEBUG_MACRO
+#ifndef DEBUG_MACRO
     __RUN_ALGORITHM(mPlugins[0],
         __RUN_ALGORITHM(mPlugins[1],
             __RUN_ALGORITHM(mPlugins[2],
                 __RUN_ALGORITHM(mPlugins[3], emit sigDataStoreFinished(store); ))));
+#else
+    IAlgorithm* algorithm = mPlugins[0]->getAlgorithm();
+    algorithm->setLogger(&CLogController::instance());
+
+    if (!algorithm->IsBusy() && !store->IsAborted()) {
+        store->incCalculationStep();
+        algorithm->run(store, [this](CContextDataStore *store) {
+            IAlgorithm* algorithm = mPlugins[1]->getAlgorithm();
+            algorithm->setLogger(&CLogController::instance());
+
+            if (!algorithm->IsBusy() && !store->IsAborted()) {
+                store->incCalculationStep();
+                algorithm->run(store, [this](CContextDataStore *store) {
+                    IAlgorithm* algorithm = mPlugins[2]->getAlgorithm();
+                    algorithm->setLogger(&CLogController::instance());
+
+                    if (!algorithm->IsBusy() && !store->IsAborted()) {
+                        store->incCalculationStep();
+                        algorithm->run(store, [this](CContextDataStore *store) {
+                            IAlgorithm* algorithm = mPlugins[3]->getAlgorithm();
+                            algorithm->setLogger(&CLogController::instance());
+                            if (!algorithm->IsBusy() && !store->IsAborted()) {
+                                store->incCalculationStep();
+                                algorithm->run(store, [this](CContextDataStore *store) {
+                                    sigDataStoreFinished(store);
+                                });
+                            } else { sigDataStoreFinished(store); }
+                        });
+                    } else { sigDataStoreFinished(store); }
+                });
+            } else { sigDataStoreFinished(store); }
+        });
+    } else { sigDataStoreFinished(store); };
+#endif
 }
 
 bool CFourPhaseWorkflow::checkAvailableDataTypes() const {
@@ -75,13 +112,13 @@ bool CFourPhaseWorkflow::checkAvailableDataTypes() const {
         auto input = plugin->getAlgorithm()->getInputDataTypes();
         auto output = plugin->getAlgorithm()->getOutputDataTypes();
 
-        for(QString type : input) {
+        for (QString type : input) {
             if (!dataTypes.contains(type)) {
                 return false;
             }
         }
 
-        for(QString type : output) {
+        for (QString type : output) {
             dataTypes.push_back(type);
         }
     }

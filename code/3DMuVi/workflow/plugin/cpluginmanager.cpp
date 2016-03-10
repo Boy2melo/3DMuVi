@@ -1,6 +1,8 @@
 #include "cpluginmanager.h"
 #include <QtCore/qcoreapplication.h>
 
+//TODO: store plugins as shared_ptr and make them reloadable
+
 CPluginManager* CPluginManager::mInstance = nullptr;
 
 CPluginManager::CPluginManager() {}

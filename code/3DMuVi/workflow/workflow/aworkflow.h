@@ -37,7 +37,7 @@ protected:
     QList<CContextDataStore *>* mDataStores;
 
 public:
-    virtual ~AWorkflow() {}
+    virtual ~AWorkflow();
 
     /*!
     \brief Die Anzahl an verfügbaren Ausführungsschritten bzw. Algorithmenslots
@@ -75,7 +75,7 @@ public:
     /*!
     \brief Führe den Workflow auf einem gegebenen DataStore aus
     */
-    bool run(const QString storeId);
+    bool run(const QString storeId, bool multiThread = true);
     /*!
     \brief Gib den aktuellen ausführungsschritt für einen Datastore zurück
     */
@@ -89,10 +89,9 @@ public:
     */
     virtual bool checkAvailableDataTypes() const = 0;
 
+    AWorkflow();
 protected:
     CContextDataStore *FindStore(QString id) const;
-
-    AWorkflow();
 
     protected slots:
     virtual void executeAlgorithm(CContextDataStore* store) = 0;

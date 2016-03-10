@@ -4,7 +4,8 @@
 #include <QTest>
 
 /*!
-\brief Testing algorithm settings in connection with workflow.
+\brief Testing algorithm sett
+ings in connection with workflow.
 \author Stefan Wolf
 
 This test is specified as user interface test T3.5 in the specification sheet. It requires the

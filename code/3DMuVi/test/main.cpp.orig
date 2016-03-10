@@ -10,9 +10,13 @@
 #include "logger/CTestLoggerControll.h"
 #include "logger/CTestLoggerHistory.h"
 #include "components/CTestAlgorithmSettings.h"
+<<<<<<< origin/master
 #include "settings/CTestCAlgorithmSettingController.h"
-#include "workflow/plugin/CTestCPluginmanager.h"
 #include "components/CTestAlgorithmExecution.h"
+=======
+#include "workflow/plugin/CTestCPluginmanager.h"
+
+>>>>>>> local
 #include "settings/CTestCGlobalSettingController.h"
 #include "workflow/CTestCWorkflowmanager.h"
 #include "workflow/CTestCContextDataStore.h"
@@ -43,22 +47,38 @@ int main(int argc, char* argv[])
   QApplication app(argc, argv);
 
   int failCounter = 0;
-  //failCounter += QTest::qExec(&logWidget, argc, argv);
-  //failCounter += QTest::qExec(&mainWindow, argc, argv);
-  //failCounter += QTest::qExec(&settingsDialog, argc, argv);
-  //failCounter += QTest::qExec(&imageIo, argc, argv);
-  //failCounter += QTest::qExec(&textIo, argc, argv);
-  //failCounter += QTest::qExec(&inputDataSet, argc, argv);
+<<<<<<< origin/master
+  failCounter += QTest::qExec(&logWidget, argc, argv);
+  failCounter += QTest::qExec(&mainWindow, argc, argv);
+  failCounter += QTest::qExec(&settingsDialog, argc, argv);
+  failCounter += QTest::qExec(&imageIo, argc, argv);
+  failCounter += QTest::qExec(&textIo, argc, argv);
+  failCounter += QTest::qExec(&inputDataSet, argc, argv);
   //failCounter += QTest::qExec(&resultContext, argc, argv); Fehler in Datapackets führt zu einem seg fault.
-  //failCounter += QTest::qExec(&logControll, argc, argv);
-  //failCounter += QTest::qExec(&logHistory, argc, argv);
-  //failCounter += QTest::qExec(&algorithmSettings, argc, argv);
-  //failCounter += QTest::qExec(&algorithmcontroller, argc, argv);
-  //failCounter += QTest::qExec(&algorithmExecution, argc, argv);
+  failCounter += QTest::qExec(&logControll, argc, argv);
+  failCounter += QTest::qExec(&logHistory, argc, argv);
+  failCounter += QTest::qExec(&algorithmSettings, argc, argv);
+  failCounter += QTest::qExec(&algorithmcontroller, argc, argv);
+  failCounter += QTest::qExec(&algorithmExecution, argc, argv);
+  failCounter += QTest::qExec(&globalcontroller, argc, argv);
+  std::cout << "Total number of fails: " << failCounter << "\n";
+=======
+  failCounter += QTest::qExec(&logWidget, argc, argv);
+  failCounter += QTest::qExec(&mainWindow, argc, argv);
+  failCounter += QTest::qExec(&settingsDialog, argc, argv);
+  failCounter += QTest::qExec(&imageIo, argc, argv);
+  failCounter += QTest::qExec(&textIo, argc, argv);
+  failCounter += QTest::qExec(&inputDataSet, argc, argv);
+  //failCounter += QTest::qExec(&resultContext, argc, argv);
+  failCounter += QTest::qExec(&logControll, argc, argv);
+  failCounter += QTest::qExec(&logHistory, argc, argv);
+  failCounter += QTest::qExec(&algorithmSettings, argc, argv);
+  failCounter += QTest::qExec(&globalcontroller, argc, argv);
   failCounter += QTest::qExec(&pluginmanager, argc, argv);
   failCounter += QTest::qExec(&workflowmanager, argc, argv);
   failCounter += QTest::qExec(&datastore, argc, argv);
   failCounter += QTest::qExec(&workflow, argc, argv);
+>>>>>>> local
 
   std::cout << "Total number of fails: " << failCounter << "\n";
   system("pause");

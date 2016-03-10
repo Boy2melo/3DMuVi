@@ -9,12 +9,13 @@
 #include "datapackets/CDataFusion.h"
 #endif
 
-CContextDataStore::~CContextDataStore() {}
+CContextDataStore::~CContextDataStore() { }
 
 CContextDataStore::CContextDataStore() {
     QUuid uuid = QUuid().createUuid();
     mContextId = uuid.toString();
     resetCalculationStep();
+    mAborted = false;
 }
 
 void CContextDataStore::InitializeFromStorage(CInputDataSet* inputData) {
@@ -78,7 +79,7 @@ std::shared_ptr<T> CContextDataStore::createData(bool overwrite) {
     // T muss von IDataPacket erben
     (void)static_cast<IDataPacket*>((T*)0);
 
-    std::shared_ptr<T> obj();
+    std::shared_ptr<T> obj = std::make_shared<T>();
     
     if(appendData(obj, overwrite)) {
         return obj;
@@ -100,7 +101,7 @@ bool CContextDataStore::appendData(std::shared_ptr<T> data, bool overwrite) {
         return true;
     } else if (reference == nullptr) {
         mDataPackets.push_back(data);
-        return false;
+        return true;
     }
 
     return false;
@@ -111,7 +112,11 @@ template bool CContextDataStore::appendData<CInputDataSet>(std::shared_ptr<CInpu
 template bool CContextDataStore::appendData<CDataFeature>(std::shared_ptr<CDataFeature>, bool);
 template bool CContextDataStore::appendData<CDataDepth>(std::shared_ptr<CDataDepth>, bool);
 template bool CContextDataStore::appendData<CDataPose>(std::shared_ptr<CDataPose>, bool);
-//TODO: merge CDataFusion from pcl branch
+template std::shared_ptr<CInputDataSet> CContextDataStore::createData<CInputDataSet>(bool);
+template std::shared_ptr<CDataFeature> CContextDataStore::createData<CDataFeature>(bool);
+template std::shared_ptr<CDataDepth> CContextDataStore::createData<CDataDepth>(bool);
+template std::shared_ptr<CDataPose> CContextDataStore::createData<CDataPose>(bool);
 #if PCL
 template bool CContextDataStore::appendData<CDataFusion>(std::shared_ptr<CDataFusion>, bool);
+template std::shared_ptr<CDataFusion> CContextDataStore::createData<CDataFusion>(bool);
 #endif

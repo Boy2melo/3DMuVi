@@ -1,11 +1,18 @@
 #include "aworkflow.h"
 #include <QTimer>
 
+AWorkflow::~AWorkflow() {
+    //TODO: datastores in shared_ptr
+    for(auto store : *mDataStores) {
+        delete store;
+    }
+}
+
 AWorkflow::AWorkflow() {
     mDataStores = new QList<CContextDataStore*>();
 }
 
-bool AWorkflow::run(const QString storeId) {
+bool AWorkflow::run(const QString storeId, bool multiThread) {
     mMutex.lock();      // Only one thread can do a check, so a data store is guaranteed to only be executed once
 
     // do a basic check
@@ -29,17 +36,22 @@ bool AWorkflow::run(const QString storeId) {
     store->SetIsAborted(false);
     store->resetCalculationStep();
 
-    // Start a new Thread
-    auto *thread = new QThread(this);
+    if (multiThread) {
+        // Start a new Thread
+        auto *thread = new QThread(this);
+        auto *currentThread = this->thread();
 
+        this->moveToThread(thread);
+        QTimer::singleShot(0, [=] {
+            this->executeAlgorithm(store);
+        });
 
-    this->moveToThread(thread);
-    QTimer::singleShot(0, [=] {
+        connect(thread, &QThread::finished, thread, &QThread::deleteLater);
+        thread->start();
+        //this->moveToThread(currentThread);
+    }else {
         this->executeAlgorithm(store);
-    });
-
-    connect(thread, &QThread::finished, thread, &QThread::deleteLater);
-    thread->start();
+    }
 
     mMutex.unlock();
 
@@ -63,6 +75,7 @@ bool AWorkflow::removeDataStore(QString id) const {
     if (result != nullptr) {
         mDataStores->removeAll(result);
         delete result;
+        result = nullptr;
         return true;
     } else {
         return false;
