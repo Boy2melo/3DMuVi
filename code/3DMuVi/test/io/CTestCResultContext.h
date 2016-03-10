@@ -1,5 +1,9 @@
 #include <QTest>
 #include <io/CResultContext.h>
+#include <workflow/workflow/datapackets/CDataFeature.h>
+#include "workflow/workflow/ccontextdatastore.h"
+
+using FeatureMatch = std::vector<std::tuple<uint64_t, float, float, uint32_t>>;
 
 /*!
 \brief Test for CResultContext.
@@ -23,5 +27,8 @@ private slots:
   void test();
 
 private:
-
+  bool removeDir(const QString & dirName);
+  CAlgorithmSettingController* algoController;
+  CGlobalSettingController* globalController;
+  QDir workingDir;
 };
