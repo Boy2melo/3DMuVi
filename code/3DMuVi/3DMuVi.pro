@@ -24,16 +24,6 @@ PCL{
   LIBS += -lvtkCommonDataModel-7.0 -lvtkCommonMath-7.0
 }
 
-win32{
-  LIBS += -lopengl32 \
-          -lglu32
-}
-unix
-{
- LIBS += -lGL \
-          -lGLU
-}
-
 #TODO: How to solve this on Windows?
 unix:QMAKE_LFLAGS += -rdynamic
 
