@@ -1,6 +1,8 @@
 #ifndef CIMAGEVIEW_H
 #define CIMAGEVIEW_H
 
+#include <cstdint>
+
 #include <QVector2D>
 #include <vector>
 #include <tuple>

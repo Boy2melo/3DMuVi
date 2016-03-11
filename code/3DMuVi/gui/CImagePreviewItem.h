@@ -1,6 +1,8 @@
 #ifndef CIMAGEPREVIEWITEM_H
 #define CIMAGEPREVIEWITEM_H
 
+#include <cstdint>
+
 #include <QListWidgetItem>
 /*!
  * \brief The the class for pictures in picture preview.
