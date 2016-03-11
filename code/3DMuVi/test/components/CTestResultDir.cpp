@@ -4,6 +4,7 @@
 #include<workflow/workflow/datapackets/CDataFeature.h>
 #include<workflow/workflow/idatapacket.h>
 using FeatureMatch = std::vector<std::tuple<uint64_t, float, float, uint32_t>>;
+using DepthMaps = std::vector<std::tuple<uint32_t, QImage>>;
 
 
 void CTestResultDir::test(){
@@ -15,7 +16,7 @@ CGlobalSettingController gbs;
 CGlobalSettingController* globalSCT = &gbs;
 CResultContext rConT = CResultContext(path,algoSCT,globalSCT);
 
-std::shared_ptr<std::vector<std::tuple<uint32_t, QImage>>> depthM;
+std::shared_ptr<DepthMaps> depthM(new DepthMaps);
 uint32_t x = 1;
 QImage y = QImage(200,200,QImage::Format_RGB32);
 y.fill(Qt::darkYellow);
