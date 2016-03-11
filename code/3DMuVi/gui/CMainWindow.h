@@ -48,7 +48,7 @@ public:
 private:
   Ui::CMainWindow *ui;
   std::unique_ptr<AWorkflow> mWorkflow;
-  std::unique_ptr<CContextDataStore> mDataStore;
+  CContextDataStore* mDataStore = nullptr;
 
   void setWorkflow(AWorkflow* workflow);
 

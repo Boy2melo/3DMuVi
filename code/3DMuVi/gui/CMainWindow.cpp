@@ -63,7 +63,6 @@ void CMainWindow::setLoadImage(QUrl url){
       CContextDataStore* dataStore = mWorkflow->addDataStore();
 
       dataStore->InitializeFromStorage(dataSet);
-      mDataStore.reset(dataStore);
 
       for(std::tuple<uint32_t, QImage, CImagePreviewItem> i : *images)
       {
@@ -74,6 +73,12 @@ void CMainWindow::setLoadImage(QUrl url){
       ui->algorithmSelector->setDataStore(dataStore->getId());
 
       ui->dataViewTabContainer->applyDataStorage(dataStore);
+
+      if(mDataStore)
+      {
+        mWorkflow->removeDataStore(mDataStore->getId());
+      }
+      mDataStore = dataStore;
     }
 }
 
