@@ -70,7 +70,7 @@ void CTestAlgorithmExecution::test(){
     QCOMPARE(statusBar->currentMessage() , QString("Running..."));
     QCOMPARE(startButton->text(), QString("Stop"));
 
-    QTest::qWait(100);
+    QTest::qWait(9000);
 
     //state finished
     QCOMPARE(statusBar->currentMessage() , QString("Workflow finished."));
