@@ -39,7 +39,6 @@ bool AWorkflow::run(const QString storeId, bool multiThread) {
     if (multiThread) {
         // Start a new Thread
         auto *thread = new QThread(this);
-        auto *currentThread = this->thread();
 
         this->moveToThread(thread);
         QTimer::singleShot(0, this, [=] {
@@ -48,7 +47,6 @@ bool AWorkflow::run(const QString storeId, bool multiThread) {
 
         connect(thread, &QThread::finished, thread, &QThread::deleteLater);
         thread->start();
-        //this->moveToThread(currentThread);
     }else {
         this->executeAlgorithm(store);
     }

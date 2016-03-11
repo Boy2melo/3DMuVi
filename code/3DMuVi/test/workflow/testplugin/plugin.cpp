@@ -61,6 +61,7 @@ QString TestPlugin ::GetPluginType() const {
 }
 
 void TestPlugin::Initialize(QPluginLoader* loader) {
+    Q_UNUSED(loader);
     // do nothing, will never happen
 }
 

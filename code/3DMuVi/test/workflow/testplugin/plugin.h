@@ -9,6 +9,7 @@
 class TestPlugin : public QObject, public IPlugin
 {
     Q_OBJECT
+    Q_INTERFACES(IPlugin)
 
 private:
     QString mName;

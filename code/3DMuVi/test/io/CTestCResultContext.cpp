@@ -6,7 +6,6 @@ void CTestCResultContext::initTestCase()
     workingDir.mkdir("CTestResultContextTempData");
     workingDir.cd("CTestResultContextTempData");
 
-    CLogController& lc = CLogController::instance();
     algoController = new CAlgorithmSettingController(QUrl("."));
     algoController->setSetting(QString("algorithmConfig"),QJsonObject());
     globalController = new CGlobalSettingController();

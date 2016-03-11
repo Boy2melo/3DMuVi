@@ -10,7 +10,7 @@ void CTestCWorkflow::TestAlgorithmAssign() {
         QFAIL("Not enough steps in the workflow");
     }
 
-    for (int i = 0; i < workflow.getStepCount(); i++) {
+    for (quint32 i = 0; i < workflow.getStepCount(); i++) {
         TestPlugin correct{ workflow.getAlgorithmType(i), "CorrectPlugin",QStringList(), QStringList() };
         TestPlugin wrong{ workflow.getAlgorithmType(i).append("falseOne"), "FalsePlugin", QStringList(), QStringList() };
 
@@ -63,7 +63,7 @@ void CTestCWorkflow::TestDataTypeValidation() {
     // Use first two steps to test
     QList<TestPlugin*> plugins;
 
-    for (int i = 2; i < workflow.getStepCount(); i++) {
+    for (quint32 i = 2; i < workflow.getStepCount(); i++) {
         auto plugin = new TestPlugin{ workflow.getAlgorithmType(i), "Test", QStringList(), QStringList() };
         plugins.push_back(plugin);
         workflow.trySetStep(i, plugin);
@@ -96,7 +96,7 @@ void CTestCWorkflow::TestExecuteAlgorithms() {
     // Use first two steps to test
     QList<TestPlugin*> plugins;
 
-    for (int i = 2; i < workflow.getStepCount(); i++) {
+    for (quint32 i = 2; i < workflow.getStepCount(); i++) {
         auto plugin = new TestPlugin{ workflow.getAlgorithmType(i), "Test", QStringList(), QStringList() };
         plugins.push_back(plugin);
         workflow.trySetStep(i, plugin);

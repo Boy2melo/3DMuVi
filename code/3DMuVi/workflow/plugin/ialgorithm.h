@@ -18,6 +18,7 @@
  */
 class IAlgorithm {
 public:
+  virtual ~IAlgorithm() { }
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */
