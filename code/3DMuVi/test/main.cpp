@@ -43,18 +43,18 @@ int main(int argc, char* argv[])
   QApplication app(argc, argv);
 
   int failCounter = 0;
-  //failCounter += QTest::qExec(&logWidget, argc, argv);
-  //failCounter += QTest::qExec(&mainWindow, argc, argv);
-  //failCounter += QTest::qExec(&settingsDialog, argc, argv);
-  //failCounter += QTest::qExec(&imageIo, argc, argv);
-  //failCounter += QTest::qExec(&textIo, argc, argv);
-  //failCounter += QTest::qExec(&inputDataSet, argc, argv);
+  failCounter += QTest::qExec(&logWidget, argc, argv);
+  failCounter += QTest::qExec(&mainWindow, argc, argv);
+  failCounter += QTest::qExec(&settingsDialog, argc, argv);
+  failCounter += QTest::qExec(&imageIo, argc, argv);
+  failCounter += QTest::qExec(&textIo, argc, argv);
+  failCounter += QTest::qExec(&inputDataSet, argc, argv);
   //failCounter += QTest::qExec(&resultContext, argc, argv); Fehler in Datapackets führt zu einem seg fault.
-  //failCounter += QTest::qExec(&logControll, argc, argv);
-  //failCounter += QTest::qExec(&logHistory, argc, argv);
-  //failCounter += QTest::qExec(&algorithmSettings, argc, argv);
-  //failCounter += QTest::qExec(&algorithmcontroller, argc, argv);
-  //failCounter += QTest::qExec(&algorithmExecution, argc, argv);
+  failCounter += QTest::qExec(&logControll, argc, argv);
+  failCounter += QTest::qExec(&logHistory, argc, argv);
+  failCounter += QTest::qExec(&algorithmSettings, argc, argv);
+  failCounter += QTest::qExec(&algorithmcontroller, argc, argv);
+  failCounter += QTest::qExec(&algorithmExecution, argc, argv);
   failCounter += QTest::qExec(&pluginmanager, argc, argv);
   failCounter += QTest::qExec(&workflowmanager, argc, argv);
   failCounter += QTest::qExec(&datastore, argc, argv);

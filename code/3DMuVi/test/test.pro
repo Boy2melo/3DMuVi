@@ -41,10 +41,17 @@ HEADERS += gui/CTestCLogWidget.h \
            logger/CTestLoggerControll.h \
            components/CTestAlgorithmSettings.h \
            components/CTestAlgorithmExecution.h \
-	   components/CTestResultDir.h \
+           components/CTestResultDir.h \
            components/CTestGlobalParameterSL.h \	
            settings/CTestCGlobalSettingController.h\
            settings/CTestCAlgorithmSettingController.h\
+           workflow/CTestCContextDataStore.h \
+           workflow/CTestCFeatureView.h \
+           workflow/CTestCWorkflow.h \
+           workflow/CTestCWorkflowmanager.h \
+           workflow/plugin/CTestCPluginmanager.h \
+           workflow/testplugin/algorithm.h \
+           workflow/testplugin/plugin.h \
            ../gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.h \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.h \
            ../gui/ImageViews/CDepthMapView.h \
@@ -102,10 +109,17 @@ SOURCES += gui/CTestCLogWidget.cpp \
            logger/CTestLoggerControll.cpp \
            components/CTestAlgorithmSettings.cpp \
            components/CTestAlgorithmExecution.cpp \
-	   components/CTestResultDir.cpp \
+           components/CTestResultDir.cpp \
            components/CTestGlobalParameterSL.cpp \
            settings/CTestCGlobalSettingController.cpp\
            settings/CTestCAlgorithmSettingController.cpp\
+           workflow/CTestCContextDataStore.cpp \
+           workflow/CTestCFeatureView.cpp \
+           workflow/CTestCWorkflow.cpp \
+           workflow/CTestCWorkflowmanager.cpp \
+           workflow/plugin/CTestCPluginmanager.cpp \
+           workflow/testplugin/algorithm.cpp \
+           workflow/testplugin/plugin.cpp \
            ../gui/AlgorithmSettings/CAlgorithmSettingsSaveLoadWidget.cpp \
            ../gui/AlgorithmSettings/CAlgorithmSettingsView.cpp \
            ../gui/ImageViews/CDepthMapView.cpp \
