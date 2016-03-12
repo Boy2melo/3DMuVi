@@ -44,7 +44,7 @@ CMainWindow::CMainWindow(QWidget *parent) :
   connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, ui->algorithmSettingsView,
           &CAlgorithmSettingsView::setDisabled);
 
-  connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, ui->algorithmSettingsView,
+  connect(ui->algorithmSelector, &CAlgorithmSelector::algorithmChanged, ui->algorithmSettingsView,
           &CAlgorithmSettingsView::onAlgorithmChanged);
 }
 

@@ -68,12 +68,16 @@ void CAlgorithmSelector::setWorkflow(AWorkflow& workflow) {
         groupBox->setLayout(new QVBoxLayout);
         groupBox->layout()->addWidget(comboBox);
         layout()->addWidget(groupBox);
-        layout()->addWidget(start);
-        layout()->addWidget(mStatus);
+        connect(comboBox,
+                static_cast<void(CStepComboBox::*)(int)>(&CStepComboBox::currentIndexChanged), this,
+                &CAlgorithmSelector::onCurrentIndexChanged);
         if (plugins.size() > 0) {
             workflow.trySetStep(i, plugins.at(0));
         }
     }
+
+    layout()->addWidget(start);
+    layout()->addWidget(mStatus);
 }
 
 void CAlgorithmSelector::setDataStore(const QString& storeId) {
