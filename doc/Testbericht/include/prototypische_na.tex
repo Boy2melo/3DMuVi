@@ -22,6 +22,13 @@ Der Nutzer führt folgende Schritte aus (Schritte \ref{TN3DModellBilderauswahl} 
 	\item Kopieren des 3D-Modells aus dem Verzeichnisbaum der Ergebnisse an den gewünschten Ort.
 \end{enumerate} 
 
+\textbf{Durchführung:} Erzeugen eines 3D-Modells \newline
+\textbf{zusätliche Vorrausetzungen:} Zusätzlich müssen Algorithmenplugins compiliert und für das Framework zur Verfügung gestellt werden.
+Nach dem starten, der Bilderauswahl. Können die Algorithmen wie erwartet ausgewählt und deren Parameter eingestellt werden. \newline
+Nachdem die Algorithmen erfolgreich durchlaufen wurden, sind die Ergebnisse sowohl in der Ergebnisansicht visualisiert, als auch im entsprechenden Verzeichnis gespeichert. \newline
+Zusätzlich kann durch an und abwählen der Bilder, die Ergebnisansicht gesteuert werden.
+
+
 \section{Evaluierung von Algorithmen für Feature Extraktion / Matching}
 \label{TNEvalAlgo}
 \textbf{Vorbedingung:} Bilder eines Modells wurden erstellt. \newline
@@ -44,6 +51,10 @@ Der Nutzer führt folgende Schritte aus (Alle Schritte ab \ref{TNEvalAlgoBilderA
 	\item Erneute Betrachtung der Ergebnisse.
 \end{enumerate}
 
+\textbf{Durchführung} Evaluation von Algorithmen \newline
+Nach erfolgreichem 1. Durchlauf, kann das Algorithmenplugin geändert werden und erneut gestartet werden.
+Known Bug: Die Settings des geänderten Algorithmenplugins können nicht angepasst werden. Das Geänderte Plugin kann nur mit Default-Parameter gestartet werden. 
+
 \section{Überprüfen des Logs von Algorithmen}
 \textbf{Vorbedingung:} Bilder eines Modells wurden erstellt. \newline
 \textbf{Ergebnis:} Der Nutzer kann anhand der Meldungen im Log die Eignung der gewählten Algorithmen für die Bilder einschätzen und Verbesserungen an den Algorithmen vornehmen. \newline
@@ -63,6 +74,10 @@ Der Nutzer führt folgende Schritte aus (Schritte \ref{TNLogBilderAuswahl} bis \
 	\item \label{TNLogSuchen} Auffälligkeiten in den Meldungen des Logs werden gesucht.
 	\item Algorithmen werden bei Bedarf überarbeitet.
 \end{enumerate}
+
+\textbf{Durchführung} Überprüfen von Logs \newline
+Nach dem Ausführen von 3D-Muvi und erfolgreichem Durchlauf eines Workflows. Sind die Lognachrichten sowohl als Datein im Ergebnisverzeichnis, als auch im Framework vorhanden und können durch die Checkboxen gefiltert werden.
+
 
 \section{Evaluierung eines Workflows nach Entfernung eines Features in den Zwischenergebnissen}
 Dieser Nutzungsablauf ist eine Erweiterung von \ref{TNEvalAlgo}. Sinn der Erweiterung ist es, dem Nutzer die Möglichkeit zu geben, das Entfernen einzelner Features zu testen, bevor er den Algorithmus entsprechend anpasst. Als optionale Funktion muss das Löschen einzelner Features in den Zwischenergebnissen und das Starten ab einem bestimmten Schritt implementiert sein. \newline
@@ -85,6 +100,8 @@ Der Nutzer führt folgende Schritte aus (Alle Schritte ab \ref{TNOFeatureEntfBil
 	\item Button zum Starten der Verarbeitung ab dem Schritt Posenschätzung wird gedrückt.
 	\item Erneute Betrachtung der Ergebnisse.
 \end{enumerate}
+\textbf{Durchführung} Manipulation von Zwischenergebnissen \newline
+Das Manipulieren von Zwischenergebnissen wurde nicht Umgesetzt. Außerdem kann der Workflow nur von Anfang an gestartet werden. Somit ist dieser Prototypische Ablauf nur bis Punkt 5 möglich.
 
 \section{Evaluierung von Algorithmen für Feature Extraktion / Matching auf mehreren Datensätzen}
 Dieser Nutzungsablauf ist eine Erweiterung von \ref{TNEvalAlgo}. Sinn der Erweiterung ist es, dem Nutzer die Möglichkeit zu geben, Workflows schnell auf mehreren Sätzen von Bildern zu evaluieren. Als optionale Funktion muss das Erstellen und Auswählen mehrerer Datensätze umgesetzt sein.\newline
@@ -113,3 +130,6 @@ Der Nutzer führt folgende Schritte aus (Alle Schritte ab \ref{TNOEvalAlgoBilder
 	\item Datensatz von Modell1 wird gewählt.
 	\item Betrachtung der Ergebnisse.
 \end{enumerate}
+
+\textbf{Durchführung} Evaluation von Algorithmen auf mehren Datensätzen \newline
+Das Kriterium mehre Datensätze zu erstellen wurde nicht umgesetzt. Der prototypische Workflow ist somit nicht in dieser Form umsetzbar. Allerdings kann nach dem erfolgreichen Durchlauf des Datensatzes neue Bilder geladen werden und der Workflow erneut ausgeführt werden.
