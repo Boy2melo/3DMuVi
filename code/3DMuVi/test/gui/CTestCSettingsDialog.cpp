@@ -26,7 +26,6 @@ void CTestCSettingsDialog::test()
   settings.setSetting("logDataEnabled", QString::number(0));
 
   CSettingsDialog settingsDialog;
-  CGlobalSettingController settingController;
 
   for(QWidget* w : QApplication::allWidgets())
   {
@@ -76,6 +75,7 @@ void CTestCSettingsDialog::test()
     }
   }
 
+  CGlobalSettingController settingController;
   QCOMPARE(settingController.getSetting("resultDirectory"), QString("/tmp/"));
   QCOMPARE(settingController.getSetting("minLogLevel"), QString::number(LOG_ERROR));
   QCOMPARE(settingController.getSetting("logWindowEnabled"), QString::number(1));
