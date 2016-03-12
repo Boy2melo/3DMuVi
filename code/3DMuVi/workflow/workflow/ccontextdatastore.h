@@ -9,6 +9,7 @@
 #include <memory>
 #include "io/CInputDataSet.h"
 #include "io/CResultContext.h"
+#include <macros.h>
 
 /*!
    \class CContextDataStore
@@ -17,7 +18,7 @@
  *
  * Enthält die Daten, welche für einen Bestimmten [Workflow](@ref AWorkflow) zur Verfügung gestellt werden. Jeder Datentyp kann genau einmal im Store vorkommen. Für mehrere gleiche Daten an unterschiedlichen Schritten sind unterschiedliche Klassen anzulegen.
  */
-class CContextDataStore {
+class EXPORTED CContextDataStore {
 private:
     QString mContextId;
     qint32 mCalculationStep;

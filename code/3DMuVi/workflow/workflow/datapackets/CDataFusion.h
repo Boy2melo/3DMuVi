@@ -7,6 +7,7 @@
 #include <pcl/PolygonMesh.h>
 #include <pcl/TextureMesh.h>
 
+#include "macros.h"
 #include "workflow/workflow/idatapacket.h"
 
 using PointCloud = pcl::PointCloud<pcl::PointXYZRGB>;
@@ -16,7 +17,7 @@ using PointCloud = pcl::PointCloud<pcl::PointXYZRGB>;
  * \brief The CDataFusion class
  * \author Stefan Wolf
  */
-class CDataFusion : public IDataPacket
+class EXPORTED CDataFusion : public IDataPacket
 {
 public:
   /*!

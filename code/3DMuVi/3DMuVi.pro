@@ -24,7 +24,7 @@ PCL{
   LIBS += -lvtkCommonDataModel-7.0 -lvtkCommonMath-7.0
 }
 
-#TODO: How to solve this on Windows?
+win32:DEFINES += EXPORTING_3DMUVI
 unix:QMAKE_LFLAGS += -rdynamic
 
 DEPENDPATH += .
@@ -33,7 +33,8 @@ OBJECTS_DIR += debug
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
 win32:RC_FILE = 3DMuVi.rc
-HEADERS += ./workflow/workflow/ccontextdatastore.h \
+HEADERS += ./macros.h \
+    ./workflow/workflow/ccontextdatastore.h \
     ./workflow/workflow/aworkflow.h \
     ./workflow/workflow/cworkflowmanager.h \
     ./workflow/workflow/idatapacket.h \

@@ -1,6 +1,7 @@
 #ifndef CDATAFEATURE_H
 #define CDATAFEATURE_H
 
+#include "macros.h"
 #include "workflow/workflow/idatapacket.h"
 #include "io/AStreamProvider.h"
 #include "io/CSFStreamProvider.h"
@@ -15,7 +16,7 @@ using FeatureMatch = std::vector<std::tuple<uint64_t, float, float, uint32_t>>;
  * Datapacket which contains the FeatureMatch data.
  * It can be serialized into a stream and deserialized from a stream.
  */
-class CDataFeature : public IDataPacket {
+class EXPORTED CDataFeature : public IDataPacket {
 public:
     CDataFeature();
     ~CDataFeature();

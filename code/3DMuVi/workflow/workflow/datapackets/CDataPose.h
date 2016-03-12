@@ -3,6 +3,7 @@
 
 #include <tuple>
 
+#include "macros.h"
 #include "workflow/workflow/idatapacket.h"
 #include "workflow/workflow/datapackets/SPose.h"
 #include "workflow/workflow/ccontextdatastore.h"
@@ -19,7 +20,7 @@ using FeatureMap = std::vector<std::tuple<uint32_t, float, float, float, float>>
  * Datapacket which contains the FeatureMap and Pose data.
  * It can be serialized into a stream and deserialized from a stream.
  */
-class CDataPose : public IDataPacket {
+class EXPORTED CDataPose : public IDataPacket {
 public:
     CDataPose();
     ~CDataPose();

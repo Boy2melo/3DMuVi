@@ -5,6 +5,7 @@
 #include <QImage>
 #include <QBuffer>
 
+#include "macros.h"
 #include "workflow/workflow/idatapacket.h"
 #include "workflow/workflow/datapackets/SPose.h"
 #include "workflow/workflow/ccontextdatastore.h"
@@ -19,7 +20,7 @@
  * Datapacket which contains the depth maps.
  * It can be serialized into a stream and deserialized from a stream.
  */
-class CDataDepth : public IDataPacket {
+class EXPORTED CDataDepth : public IDataPacket {
 public:
     CDataDepth();
     ~CDataDepth();

@@ -108,15 +108,20 @@ bool CContextDataStore::appendData(std::shared_ptr<T> data, bool overwrite) {
 }
 
 //Compiler muss Template Implementierungen anlegen, damit diese von den Plugins aufrufbar sind
-template bool CContextDataStore::appendData<CInputDataSet>(std::shared_ptr<CInputDataSet>,bool);
-template bool CContextDataStore::appendData<CDataFeature>(std::shared_ptr<CDataFeature>, bool);
-template bool CContextDataStore::appendData<CDataDepth>(std::shared_ptr<CDataDepth>, bool);
-template bool CContextDataStore::appendData<CDataPose>(std::shared_ptr<CDataPose>, bool);
-template std::shared_ptr<CInputDataSet> CContextDataStore::createData<CInputDataSet>(bool);
-template std::shared_ptr<CDataFeature> CContextDataStore::createData<CDataFeature>(bool);
-template std::shared_ptr<CDataDepth> CContextDataStore::createData<CDataDepth>(bool);
-template std::shared_ptr<CDataPose> CContextDataStore::createData<CDataPose>(bool);
+template EXPORTED bool CContextDataStore::appendData<CInputDataSet>(std::shared_ptr<CInputDataSet>,bool);
+template EXPORTED bool CContextDataStore::appendData<CDataFeature>(std::shared_ptr<CDataFeature>, bool);
+template EXPORTED bool CContextDataStore::appendData<CDataDepth>(std::shared_ptr<CDataDepth>, bool);
+template EXPORTED bool CContextDataStore::appendData<CDataPose>(std::shared_ptr<CDataPose>, bool);
+template EXPORTED std::shared_ptr<CInputDataSet> CContextDataStore::createData<CInputDataSet>(bool);
+template EXPORTED std::shared_ptr<CDataFeature> CContextDataStore::createData<CDataFeature>(bool);
+template EXPORTED std::shared_ptr<CDataDepth> CContextDataStore::createData<CDataDepth>(bool);
+template EXPORTED std::shared_ptr<CDataPose> CContextDataStore::createData<CDataPose>(bool);
+template EXPORTED std::shared_ptr<CInputDataSet> CContextDataStore::getData<CInputDataSet>();
+template EXPORTED std::shared_ptr<CDataFeature> CContextDataStore::getData<CDataFeature>();
+template EXPORTED std::shared_ptr<CDataDepth> CContextDataStore::getData<CDataDepth>();
+template EXPORTED std::shared_ptr<CDataPose> CContextDataStore::getData<CDataPose>();
 #if PCL
-template bool CContextDataStore::appendData<CDataFusion>(std::shared_ptr<CDataFusion>, bool);
-template std::shared_ptr<CDataFusion> CContextDataStore::createData<CDataFusion>(bool);
+template EXPORTED bool CContextDataStore::appendData<CDataFusion>(std::shared_ptr<CDataFusion>, bool);
+template EXPORTED std::shared_ptr<CDataFusion> CContextDataStore::createData<CDataFusion>(bool);
+template EXPORTED std::shared_ptr<CDataFusion> CContextDataStore::getData<CDataFusion>();
 #endif
