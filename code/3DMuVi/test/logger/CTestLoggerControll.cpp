@@ -3,8 +3,7 @@ CLogController& controll = CLogController::instance();
 CLogHistory& h = controll.getHistory();
 void CTestLoggerControll::initTestCase()
 {
-    QUrl x;
-    controll.setLog(x);
+
 }
 void CTestLoggerControll::testgetHistory(){
     std::vector<std::tuple<QString,QString,QString>>  historylist =  h.getHistory();

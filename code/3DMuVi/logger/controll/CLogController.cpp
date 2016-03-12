@@ -144,7 +144,8 @@ void CLogController::setLog(QUrl dest) {
 
     Logger& logger = Logger::instance();
     logger.setLoggingLevel(TraceLevel);
-    const QString sLogPath = dest.toString();
+    QDir d(dest.isLocalFile() ? dest.toLocalFile() : dest.path());
+    const QString sLogPath = d.filePath("log.txt");
     DestinationPtr fileDestination(DestinationFactory::MakeFileDestination(
         sLogPath, EnableLogRotation, MaxSizeBytes(20000000), MaxOldLogCount(2000000)));
     DestinationPtr debugDestination(DestinationFactory::MakeDebugOutputDestination());
