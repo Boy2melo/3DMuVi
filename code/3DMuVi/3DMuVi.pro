@@ -148,3 +148,7 @@ DISTFILES += \
     gui/forms/CAlgorithmSettingsSaveLoad.ui.qml \
     gui/forms/CAlgorithmSettingsSaveLoad.qml
 
+globalconfig_install.path = $$OUT_PWD/$$DESTDIR
+globalconfig_install.files = $$PWD/settings/globalconfig.json
+
+INSTALLS += globalconfig_install

@@ -184,3 +184,8 @@ DISTFILES += \
 
 RESOURCES += \
     test.qrc
+
+globalconfig_install.path = $$OUT_PWD
+globalconfig_install.files = $$PWD/../settings/globalconfig.json
+
+INSTALLS += globalconfig_install
