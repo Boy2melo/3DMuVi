@@ -65,7 +65,7 @@ Komponententests testen das Verhalten eines isolierten Moduls der Anwendung. Vie
 		\subitem \textbf{Erwartetes Verhalten:}\\
 		Nach dem Anlegen der Logs und dem Abspeichern wird eine Datei an dem spezifizierten Pfad vorgefunden.
 		\subitem \textbf{Ergebnis:}\\
-		Funktion getestet in CTestCResultContext.
+		Test wird erfolgreich durchgeführt.
 		\\\item \begin{tabular}{|c|c|}
 			\hline Modul & Funktion \\
 			\hline Einstellungen & FM510 \\
@@ -78,7 +78,8 @@ Komponententests testen das Verhalten eines isolierten Moduls der Anwendung. Vie
 		\subitem \textbf{Erwartetes Verhalten:}\\
 		Nach dem Abspeichern findet sich eine Datei an dem spezifizierten Pfad. Nach dem Laden dieser Datei enthält ein neu Instantiierter Algorithmus dieselben Einstellungen wie der erste Algorithmus, welcher zur Speicherung verwendet wurde.
 		\subitem \textbf{Ergebnis:}\\
-		Test schlägt fehl, aufgrund eines Fehlers.
+		Der Test kann nur Teilweise durchgeführt werden, da es keine Möglichkeit gibt, die aktuellen Parameter geladenen eines Algorithmus aus diesem zu bekommen, dies Funktion wurde im Entwurf entfernt.
+		Der andere Teil des Test, Abspeichern und laden einer Einstellungsdatei funktioniert nicht richtig.
 		%Es lassen sich nur die Einstellungen aller Algorithmen, die aktuell geladen sich speichern und diese finden sich im ResultContext. Ebenfalls ist das laden von einzelnen Algorithmeneinstellungen aus externen Dateien nicht möglich, aufgrund von Änderungen im Design und Implementierung.
 		\\\item \begin{tabular}{|c|c|}
 			\hline Modul & Funktion \\

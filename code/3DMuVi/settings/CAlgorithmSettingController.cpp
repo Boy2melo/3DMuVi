@@ -63,11 +63,10 @@ bool CAlgorithmSettingController::setSetting(QString name, QJsonObject data) {
     if (!algorithms.contains(name)) {
         algorithms.append(name);
     }
-    
-    //Algorithmen checks if parameters are legal
+
     docu = QJsonDocument(data);
     file = QString(docu.toJson());
-    url = QUrl(tempdirectory.url() + name + ".json");
+    url = QUrl(tempdirectory.url() + "/" + name + ".json");
     io.save(url, file);
     return true;
 }
