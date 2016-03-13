@@ -29,4 +29,6 @@ void CTestAlgorithmControllerOutput::test()
     QCOMPARE(testdata->value("test"), data.value("test"));
     QCOMPARE(testdata->value("testint"), data.value("testint"));
     QCOMPARE(testdata->value("testbool"), data.value("testbool"));
+    delete testdata;
+    delete controller;
 }

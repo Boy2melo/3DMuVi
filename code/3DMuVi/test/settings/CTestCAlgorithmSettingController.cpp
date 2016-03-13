@@ -16,6 +16,7 @@ void CTestCAlgorithmSettingController::testrequestJson()
     controller->requestQJson(directory);
     QJsonObject* temp = controller->getSetting("test.json");
     QCOMPARE(temp->value("test"), testdata.value("test"));
+    delete temp;
 }
 
 void CTestCAlgorithmSettingController::testsaveJson()
@@ -26,4 +27,10 @@ void CTestCAlgorithmSettingController::testsaveJson()
     controller->requestQJson(directory);
     QJsonObject* temp = controller->getSetting("test.json");
     QCOMPARE(temp->value("test"), testdata.value("test"));
+    delete temp;
+}
+
+void CTestCAlgorithmSettingController::cleanUpTestCase()
+{
+    delete controller;
 }

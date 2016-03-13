@@ -10,6 +10,11 @@ CFourPhaseWorkflow::CFourPhaseWorkflow() : AWorkflow() {
     }
 }
 
+CFourPhaseWorkflow::~CFourPhaseWorkflow()
+{
+    delete [] mPlugins;
+}
+
 
 quint32 CFourPhaseWorkflow::getStepCount() const {
     return 4;

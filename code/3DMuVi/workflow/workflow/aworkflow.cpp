@@ -6,6 +6,7 @@ AWorkflow::~AWorkflow() {
     for(auto store : *mDataStores) {
         delete store;
     }
+    delete mDataStores;
 }
 
 AWorkflow::AWorkflow() {

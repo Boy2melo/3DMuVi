@@ -19,5 +19,7 @@ void CTestCWorkflowmanager::testInstanciate() {
         if (workflow == nullptr) {
             QFAIL("A Workflow reported as available was not instanciated");
         }
+
+        delete workflow;
     }
 }

@@ -15,6 +15,7 @@ private:
 
 public:
     CFourPhaseWorkflow();
+    ~CFourPhaseWorkflow();
 
     /*!
     \brief Die Anzahl an verfügbaren Ausführungsschritten bzw. Algorithmenslots

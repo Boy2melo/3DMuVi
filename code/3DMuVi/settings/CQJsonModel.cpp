@@ -36,6 +36,11 @@ CQJsonModel::CQJsonModel(QObject* parent, QVector<QJsonObject> list) :
 
 }
 
+CQJsonModel::~CQJsonModel()
+{
+    delete mRootItem;
+}
+
 void CQJsonModel::saveSettings(int row, QUrl filename) {
     QJsonObject data;
     data = mRootItem->getChilds()->value(row)->toJson();

@@ -24,6 +24,10 @@ public:
       */
     explicit CQJsonModel(QObject* parent = 0, QVector<QJsonObject> list = QVector<QJsonObject>());
     /*!
+      * \brief ~CQJsonModel cleans up this qjosnmodel
+      */
+    ~CQJsonModel();
+    /*!
      * \brief saveSettings saves an Algorithmsetting as Jsonfile
      * \param row which setting will be saved
      * \param filename url for the file

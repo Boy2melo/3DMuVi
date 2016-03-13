@@ -6,6 +6,7 @@ private slots:
   void initTestCase();
   void testrequestJson();
   void testsaveJson();
+  void cleanUpTestCase();
 private:
   CAlgorithmSettingController* controller;
   QUrl testurl;
