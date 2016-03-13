@@ -13,6 +13,8 @@ This widget show the log of a program in a text box.
 */
 class CLogWidget : public QPlainTextEdit
 {
+  Q_OBJECT
+
 public:
   //============================================================
   /*!
