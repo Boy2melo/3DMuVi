@@ -1,4 +1,6 @@
+Nachfolgend sind grobe Fehler aufgelistet, die während der Testphase gefunden wurden:
 \begin{itemize}
 \item\fehler{Fehlerbeschreibung}{Grund für den Fehler}{Behebung des Fehlers}
 \item\fehler{Der Test T3.2 (CTestCImageTab) stürzt mit einem Speicherzugriffsfehler ab.}{In CMainWindow wird beim Wechsel des Workflows die interne Referenz auf den aktuellen Data Store nicht gelöscht, jedoch wird beim Löschen des alten Workflows der alte Data Store aus dem Speicher entfernt. Als Folge greift CMainWindow beim Erstellen eines neuen Data Stores auf den alten und mittlerweile nicht mehr im Speicher liegenden Data Store zu.}{Vor dem Wechsel des Workflows wird der alte Data Store ordnungsgemäß gelöscht, alle Referenzen in CMainWindow zurück gesetzt und alle Views werden geleert.}
+\item\fehler{Die Logdatei wurde zwar angelegt, enthielt jedoch keine Nachrichten.}{Der Logger benötigt für die korrekte Funktion bereits bei Beginn der Workflowausführung den Pfad für die Datei. Diese wurde jedoch erst nach der Ausführung durch den CResultContext gesetzt.}{CMainWindo erstellt nun beim Start der Ausführung einen CResultContext, der den Pfad für die Logdatei an den Logger übergibt. Die Serialisierung der Datenpakete über den CResultContext erfolgt immer noch nach der Ausführung.}
 \end{itemize}
