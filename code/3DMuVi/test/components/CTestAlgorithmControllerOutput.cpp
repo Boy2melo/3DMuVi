@@ -14,7 +14,7 @@ void CTestAlgorithmControllerOutput::test()
     QJsonObject data = QJsonObject();
     data.insert("test", QJsonValue("deadbeef"));
     data.insert("testint", QJsonValue(1337));
-    data.insert("testboll", QJsonValue("false"));
+    data.insert("testbool", QJsonValue("false"));
     controller->setSetting(QString("settings"), data);
     controller->exportTo(QUrl(workingDir.path()));
     QStringList allEntries = workingDir.entryList(QDir::AllEntries);
@@ -25,6 +25,8 @@ void CTestAlgorithmControllerOutput::test()
     }
     QVERIFY2(settingsfound, "could not find settings");
     controller->requestQJson(QUrl(workingDir.path()));
-    QCOMPARE(testdata, data);
-
+    QJsonObject* testdata = controller->getSetting(QString("settings"));
+    QCOMPARE(testdata->value("test"), data.value("test"));
+    QCOMPARE(testdata->value("testint"), data.value("testint"));
+    QCOMPARE(testdata->value("testbool"), data.value("testbool"));
 }
