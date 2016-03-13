@@ -6,7 +6,7 @@ Die Testfälle sind alle Automatisiert und werden mit der in Qt integrierten Tes
 Zuerst wird jede Klasse einzeln bearbeitet. Jede Öffentliche Methode wird mit zwei Testfällen getestet. Der erste Testfall testet das Verhalten einer Funktion im normalen Umfeld mit gewöhnlichen Parametern. Dieser Test dient dazu, Fehler in Berechnungsvorschriften und Implementierungen zu finden. Der zweite Testfall ruft die Funktion mit ungewöhnlichen Parametern auf, eventuell auch mit falschen Datentypen. Diese Tests dienen dazu, die Robustheit der Funktionen zu garantieren. Die Argumente, die an eine Funktion übergeben werden, sind so weit wie möglich Zufällig verteilt zu wählen. Für das nachvollziehen von Fehlern werden die getesteten Parameter zusätzlich zu der Fehlerbeschreibung ausgegeben.
 
 Es wurden hauptsächlich die Test für die normalen Funktionen der Klassen durchgeführt, nur wenige Tests für die Robustheit, aufgrund von fehlender Zeit. Das Abspeichern der Json-Dateien funktioniert nicht.
-Folgende Test schlagen aktuell bei der Durchführung fehl: CTestCSettingsDialog::test(), CTestLoggerControll::testmanageNewLogMessage(), CTestCAlgotihmSettings::test(),CTestAlgorithmExecution::test(), CTestGlobalParametersSL::test().
+Folgende Test schlagen aktuell bei der Durchführung fehl: CTestCSettingsDialog::test(), CTestLoggerControll::testmanageNewLogMessage(), CTestCAlgotihmSettings::test(),CTestAlgorithmExecution::test(), CTestCImageTab::test().
 
 
 \section{Komponententests}
@@ -93,7 +93,7 @@ Komponententests testen das Verhalten eines isolierten Moduls der Anwendung. Vie
 		\subitem \textbf{Erwartetes Verhalten:}\\
 		Nach dem Sichern globaler Einstellungen findet sich eine Datei an dem spezifizierten Pfad. Nach dem Lesen dieser Datei in eine neue Einstellungs-Instanz enthält diese dieselben Daten wie die Instanz, die zur Speicherung verwendet wurde.
 		\subitem \textbf{Ergebnis:}\\
-		Der Test schlägt fehl, aufgrund eines Fehlers.
+		Der Test wird erfolgreich ausgeführt.
 		\\\item \begin{tabular}{|c|c|}
 			\hline Modul & Funktion \\
 			\hline Workflows & FK230 \\
@@ -119,14 +119,7 @@ Komponententests testen das Verhalten eines isolierten Moduls der Anwendung. Vie
 		\subitem \textbf{Erwartetes Verhalten (Ergänzung):}\\ Nach dem Laden der Zwischenergebnisse kann der zweite Algorithmus die Daten erfolgreich Validieren.
 		\subitem \textbf{Ergebnis:}\\
 		Der Test entfällt, da er sich auf ein nicht implementiertes Kann-Kriterium bezieht.
-		\\\item \begin{tabular}{|c|c|}
-			\hline Modul & Funktion \\
-			\hline Foo & Bar \\
-			\hline
-		\end{tabular}\\
-		\subitem Platzhalter für weitere Komponententests
-	\end{enumerate}
-
+	
 \section{Oberflächentests}
 Die Oberflächentests lassen sich mit der Qt Test-Suite ebenfalls automatisieren, eventuell muss allerdings bei der Designphase daran gedacht werden, gerade was das Laden von Dateien angeht.\\
 \begin{enumerate}[align=left, leftmargin=4em, label={\textbf{\textbackslash T3.\arabic*\textbackslash}} ]
@@ -136,32 +129,32 @@ Die Oberflächentests lassen sich mit der Qt Test-Suite ebenfalls automatisieren
 	\end{itemize}
 	\subitem\textbf{Ablauf:}\\ Der Nachrichtendummy schreibt für jeden Loglevel eine Nachricht in den Log. Danach wird jeder Loglevel einzeln ausgewählt und die Textbox auf die erwartete Lognachricht überprüft.
 	\subitem\textbf{Ergebnis:}\\
-	Der Test entspricht im groben Funktionstest für CLogWidget.
+	Der Test wird erfolgreich durchgeführt.
 	\\\item \textbf{Tab Images}
 	\subitem \textbf{Ablauf:}\\ Der Test lädt über die GUI Bilder in das Programm und prüft dann im Tab Images, ob die erwartete Anzahl an Vorschaubildern vorhanden ist.
 	\subitem \textbf{Hinweis:}\\
 	Das Menü "{}Load Images" kann nicht direkt getestet werden, da ein Dateidialog geöffnet wird. Stadtessen übergeht der Test den Dialog und ruft direkt die Lade-Funktion auf. Die GUI-Klasse muss entsprechend geplant werden.
 	\subitem\textbf{Ergebnis:}\\
-	/todo
+	Der Test schlägt fehl. Der Fehler kann nicht gefunden werden.
 	\\\item \textbf{Algorithmenwahl}
 	\subitem \textbf{Dummies:}\begin{itemize}
 		\item Algorithmus, der als auffindbarer Platzhalter dient
 	\end{itemize}
 	\subitem \textbf{Ablauf:}\\ Es wird für jeden Schritt ein Algorithmus aus der ComboBox ausgewählt. Danach wird im Backend überprüft, ob der Algorithmus auch an die Kontrollschicht weitergegeben wurde und ob es der richtige ist.
 	\subitem\textbf{Ergebnis:}\\
-	/todo
+	Test fehlt.
 	\\\item \textbf{Ausführung der Algorithmen}
 	\subitem \textbf{Dummies:}\begin{itemize}
 		\item Ein Algorithmus für jeden Verarbeitungsschritt, der etwa zwei Sekunden wartet. Daten sind egal.
 	\end{itemize}
 	\subitem \textbf{Ablauf:}\\ Im Backend werden die Dummy-Algorithmen aktiviert. In der GUI wird dann der Button "{}Start" gedrückt. Nun müssen alle Interaktiven Elemente, die Einfluss auf die Verarbeitung nehmen, deaktiviert sein. Bekannt sind die Einstellungen für den Algorithmus, die Bilderliste und die Auswahl der Algorithmen. Als nächstes wird geprüft, ob der Arbeitsindikator des ersten und zweiten Algorithmus funktionieren. Ist die Ausführung beim dritten Algorithmus angelangt, wird geprüft, ob die ersten beiden Schritte ihren Zustand in "{}Finished" geändert haben. Zudem wird die Ausführung angehalten. Sobald auch der dritte Algorithmus den Zustand "{}Finished" eingenommen hat, wird geprüft, ob der vierte Algorithmus wie gewünscht nicht gestartet wurde. Zuletzt wird noch geprüft, ob die Oberfläche wieder Interaktiv geschaltet wurde.
 	\subitem\textbf{Ergebnis:}\\
-	/todo
+	Der Test wird erfolgreich durchgeführt.
 	\\\item \textbf{Einstellungen}
 	\subitem \textbf{Dummies:}\begin{itemize}
 		\item Ein Algorithmus mit verschiedenen Einstellungen und Validierungen, die dem Test bekannt sind.
 	\end{itemize}
 	\subitem \textbf{Ablauf:}\\ Der Algorithmus wird im Backend aktiviert. Der Test setzt nun in der Oberfläche Werte für die verschiedenen Einstellungen. Es wird geprüft, ob die Werte in den Algorithmus übernommen werden. Danach werden Werte gewählt, die zu Validierungsfehlern führen. Es wird geprüft, ob die Werte im Algorithmus fälschlicherweise geändert wurden. Zudem wird das entsprechende Feld auf eine Visuelle Signalisierung des Fehlers geprüft.
 	\subitem\textbf{Ergebnis:}\\
-	
+	Der Test schlägt fehl.
 \end{enumerate}
