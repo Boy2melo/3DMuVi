@@ -27,3 +27,19 @@ Geplant war eine drei Klassen Konstellation pro Plugin. Einmal die Pluginschnitt
 Zum einen ist ein abstrakter Zugriff auf den ContextStore nicht nötig, zum anderen sind es zu viele Klassen, die implementiert werden müssen für ein Plugin.
 \subsubsection{Umsetzung}
 IDataAccess ist ganz rausgeflogen, IAlgorithm wird nicht mehr typisiert und arbeitet jetzt direkt auf dem ContextStore.
+\section{Logger}
+\subsection{Änderungen beim Loggen von Meldungen}
+\subsubsection{Geplant}
+Für jede Meldung wird eine Instanz einer Nachricht erzeugt, die sich dann um alles kümmert.
+\subsubsection{Probleme}
+Für das Loggen waren jedes mal mehrere Zeilen Code notwendig.
+\subsubsection{Umsetzung}
+Die Klasse für die Nachricht wurde entfernt. Stattdessen kann man jetzt mit dem stream write operator in den Controller schreiben. Das ermöglichte es, ein Makro aufzusetzen, mit dem man in einer Zeile eine Nachricht effizient loggen kann.
+\section{IO}
+\subsection{Speichern von Einzeldateien vs mehrere Dateien}
+\subsubsection{Geplant}
+Ursprünglich sollte es zwei Klassen für den Dateizugriff geben, eine für einzelne Dateien und eine andere, die aus mehreren Dateien ein DataPacket schnürt. Die Zuweisung der Datenpakete zu den Verhaltensmustern wäre dann in der IO festgesetzt.
+\subsubsection{Probleme}
+Die Umsetzung ist unsauber.
+\subsubsection{Umsetzung}
+Es gibt wieder zwei Verhaltensmuster. Diesmal wird vom Paket für jede Dateneinheit ein Stream angefordert, der dann entweder der gleiche ist oder auf eine neue Datei zeigt. Das zu verwendende Verhaltensmuster wird zuerst vom Paket erfragt, dann extern initialisiert und dem Paket zum Serialisieren übergeben.
