@@ -45,6 +45,8 @@ CDataViewTabContainer::CDataViewTabContainer(QWidget* parent) : QTabWidget(paren
   container3dView->layout()->addWidget(mp3dView);
   addTab(container3dView, "3D view");
 #endif
+
+  connect(this, &QTabWidget::currentChanged, this, &CDataViewTabContainer::onCurrentChanged);
 }
 
 void CDataViewTabContainer::setImagePreviewWidget(CImagePreviewWidget* imagePreview)
@@ -78,10 +80,22 @@ void CDataViewTabContainer::applyDataStorage(CContextDataStore* dataStorage)
 
 void CDataViewTabContainer::onCurrentChanged(int index)
 {
-  IGuiDataView* dataView = dynamic_cast<IGuiDataView*>(widget(index));
-
-  if(dataView)
+  if(tabText(index) == "Input Images")
   {
-    dataView->activate();
+    mpInputImageView->activate();
   }
+  else if(tabText(index) == "Features")
+  {
+    mpFeatureView->activate();
+  }
+  else if(tabText(index) == "Depth maps")
+  {
+    mpDepthMapView->activate();
+  }
+#ifdef PCL
+  else if(tabText(index) == "3D view")
+  {
+    mp3dView->activate();
+  }
+#endif
 }
