@@ -38,15 +38,15 @@ CQJsonModel::CQJsonModel(QObject* parent, QVector<QJsonObject> list) :
 
 void CQJsonModel::saveSettings(int row, QUrl filename) {
     QJsonObject data;
-    data = mRootItem->getChilds().value(row)->toJson();
+    data = mRootItem->getChilds()->value(row)->toJson();
     emit saveQJson(data, filename);
 }
 
 void CQJsonModel::loadSettings(int row, QUrl filename) {
     emit requestQJson(filename);
-    mRootItem->getChilds().removeAt(row);
-    int j = mRootItem->getChilds().size() - 1;
-    mRootItem->getChilds().swap(row, j);
+    mRootItem->getChilds()->removeAt(row);
+    int j = mRootItem->getChilds()->size() - 1;
+    mRootItem->getChilds()->swap(row, j);
 }
 
 Qt::ItemFlags CQJsonModel::flags(const QModelIndex& index) const {
@@ -74,7 +74,7 @@ bool CQJsonModel::setData(const QModelIndex& index, const QVariant& value, int r
 CQJsonTreeItem* CQJsonModel::backtrack(const QModelIndex& index) {
     if (index.parent().isValid() == false) //one row under root
     {
-        return mRootItem->getChilds().at(index.row());
+        return mRootItem->getChilds()->at(index.row());
     }
     else {
         QModelIndex tempindex = index.parent();

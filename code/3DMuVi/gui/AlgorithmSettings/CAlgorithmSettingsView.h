@@ -35,6 +35,7 @@ public slots:
   QPointer<CAlgorithmSettingsModel> model;
   QPointer<CAlgorithmSettingController> settingcontroller;
   QTemporaryDir temp;
+  int stepcount;
 };
 
 #endif // CALGORITMSETTINGSVIEW_H

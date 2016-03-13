@@ -20,7 +20,7 @@ public:
     QString value() const;
     QJsonValue::Type type() const;
 
-    QList<CQJsonTreeItem *> getChilds();
+    QList<CQJsonTreeItem *> *getChilds();
     /*!
      * \brief toJson converts a treeitem to a jsonobject
      * \return the treeitem as QJsonObject

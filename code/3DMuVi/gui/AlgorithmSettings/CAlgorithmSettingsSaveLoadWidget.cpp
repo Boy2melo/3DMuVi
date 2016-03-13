@@ -29,7 +29,7 @@ CAlgorithmSettingsSaveLoadWidget::~CAlgorithmSettingsSaveLoadWidget()
 }
 void CAlgorithmSettingsSaveLoadWidget::loadbutton()
 {
-    this->settingmodel->loadSettings(settingrow, QUrl());
+    //this->settingmodel->loadSettings(settingrow, QUrl());
 }
 void CAlgorithmSettingsSaveLoadWidget::savebutton()
 {

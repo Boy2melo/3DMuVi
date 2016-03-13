@@ -122,9 +122,9 @@ void CAlgorithmSettingController::saveQJson(QJsonObject data, QUrl directory) {
         directory = QUrl(tempdirectory.url() + "/" + temp + ".json");
         if (!algorithms.contains(temp)) {
             algorithms.append(temp);
+            QJsonDocument docu = QJsonDocument(data);
+            QString file = QString(docu.toJson());
+            io.save(directory, file);
         }
     }
-    QJsonDocument docu = QJsonDocument(data);
-    QString file = QString(docu.toJson());
-    io.save(directory, file);
 }

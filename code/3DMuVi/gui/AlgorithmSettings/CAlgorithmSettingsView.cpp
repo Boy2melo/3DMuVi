@@ -13,6 +13,7 @@ CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(pare
         QUrl url = QUrl(temporary_dir.path());
         settingcontroller = QPointer<CAlgorithmSettingController>(new CAlgorithmSettingController((url)));
     }
+    stepcount = 0;
 }
 
 CAlgorithmSettingsView::~CAlgorithmSettingsView() {
@@ -25,11 +26,12 @@ CAlgorithmSettingsView::~CAlgorithmSettingsView() {
  */
  //============================================================
 void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow) {
+    this->reset();
     model = QPointer<CAlgorithmSettingsModel>(new CAlgorithmSettingsModel(workflow, *settingcontroller));
     this->setModel(model);
-    int algorithms = workflow.getStepCount();
+    stepcount = workflow.getStepCount();
 
-    for (int i = 0; i < algorithms; i++) {
+    for (int i = 0; i < stepcount; i++) {
         IPlugin* plugin = workflow.getStep(i);
         QJsonObject object = plugin ? plugin->GetParameterJson() : QJsonObject();
         model->loadQJson(object);
@@ -54,7 +56,12 @@ CAlgorithmSettingController* CAlgorithmSettingsView::getAlgorithmController() {
 void CAlgorithmSettingsView::onAlgorithmChanged(int step) {
     this->hide();
     model->algorithmChanged(step);
-    QModelIndex index = this->rootIndex().child(step, 2);
-    this->setIndexWidget(index, new CAlgorithmSettingsSaveLoadWidget(this, step, *model));
+    this->reset();
+    this->setModel(model);
+    for (int i = 0; i < stepcount; i++)
+    {
+        this->setIndexWidget(model->index(i, 1),
+                             new CAlgorithmSettingsSaveLoadWidget(this, step, *model));
+    }
     this->show();
 }

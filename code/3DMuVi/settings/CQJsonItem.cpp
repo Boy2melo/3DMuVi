@@ -31,8 +31,8 @@ CQJsonTreeItem::~CQJsonTreeItem() {
 
 }
 
-QList<CQJsonTreeItem*> CQJsonTreeItem::getChilds() {
-    return mChilds;
+QList<CQJsonTreeItem*>* CQJsonTreeItem::getChilds() {
+    return &mChilds;
 }
 
 QJsonObject CQJsonTreeItem::toJson() {
