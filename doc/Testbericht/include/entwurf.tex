@@ -1,0 +1,29 @@
+\section{Änderungen im Workflow}
+\subsection{Änderung der Datenpakete}
+\subsubsection{Geplant}
+Die Daten sollten als Interface IDataPacket zur Verfügung gestellt werden. Diese Klasse sollte zum Verwalten der Datenpakete außerhalb des Workflows dienen, sofern der Typ nicht benötigt wurde. IDataPacket hat außer einem Typspezifizierer keinen Zugriff auf die Daten, die in ihm Liegen. Dazu erbt TDataPacket von IDataPacket und implementiert template Methoden zum setzen und lesen der Daten. Die Klassen für das Datenformat sollten komplett losgelöst von den Paketdefinitionen sein. Jedes verschiedene Paket würde dann TDataPacket implementieren und die Datenklasse privat verwalten. IDataPacket sollte TDataPacket nur die Eigenschaften der Polymorphie für die Templates geben.
+\subsubsection{Probleme}
+Templates können nicht virtual sein und in subklassen überschrieben werden.
+\subsubsection{Umsetzung}
+IDataPacket hat immer noch keinen Zugriff auf die Daten. TDataPacket wurde ersatzlos gestrichen und die einzelnen Datenstrukturen erben von IDataPacket und implementieren den Datenzugriff in ihrer eigenen Klasse.
+\subsection{Änderung des Context Stores}
+\subsubsection{Geplant}
+Context Stores sollten mit einer Abstrakten Klasse IContextDataStore und einer konkreten Implementierung pro Workflow umgesetzt werden. Die abstrakte Klasse würde nur Template zugriffe zur Verfügung stellen und die konkrete Implementierung leitet die dann um und verwaltet auch die Konkreten typisierten Instanzen von TDataPacket.
+\subsubsection{Probleme}
+Templates können immer noch nicht virtual sein. Zudem wurden Data Packages neu entworfen und dementsprechend ließ sich der Context Store anpassen.
+\subsubsection{Umsetzung}
+Es gibt nur noch eine Klasse für alle Context Stores. Templates wurden beibehalten, die Typbestimmung wurde über die typidentifikation, welche die einzelnen Packete bereitstellen, umgesetzt.
+\subsection{Änderung der IDataView-Schnittstelle}
+\subsubsection{Geplant}
+Geplant war es ganz schlau und kurz. Ein Interface und ein paar Implementierungen für jede Ansicht, gemäß dem Visitor Pattern. Eine Template Methode im Interface, die alle Packete abfängt. Die einzelnen Implementierungen würden dann ein spezialisiertes Template für ihr Datenpaket zur Verfügung stellen. Somit muss das Interface nie angepasst werden.
+\subsubsection{Probleme}
+Templates sind auch jetzt noch nicht überschreibbar. Zudem wurde das Visitor Pattern nicht Konsequent genug umgesetzt.
+\subsubsection{Umsetzung}
+Das Prinzip bleibt, nur jetzt ohne Templates. Somit muss jedes neue Paket einmal im Interface vermerkt werden. Zudem funktioniert Polymorphie nicht auf Funktionsargumenten. Deshalb gibt es jetzt eine Funktion für alle Pakete, welche die Pakete parst und die entsprechende Spezialisierte Funktion aufruft. Anm.: Ja es geht sauberer, wenn man das Visitor Pattern bis zum Ende durchgezogen hätte. Momentan ruft der ContextStore mit dem abstrakten IDataPacket die View auf. Lösung wäre, dass jedes Paket selbst die Funktion aus der konkreten Implementierung heraus aufruft.
+\subsection{Änderung von der Plugin Schnittstelle}
+\subsubsection{Geplant}
+Geplant war eine drei Klassen Konstellation pro Plugin. Einmal die Pluginschnittstelle IPlugin, die Abstraktionsschicht zum Datencontainer IDataAccess, und einmal den Algorithmus IAlgorithm selber, der wieder nur Polymorphie für ein template TAlgorithm zur verfügung stellt, welches auf den Konkreten IDataAccess typisiert ist. Gedacht war es so, um den Datenzugriff unabhängig von dem ContextStore zu halten, Daten maßgeschneidert für die Algorithmen zu bieten und Daten sowie Algorithmus sauber zu trennen.
+\subsubsection{Probleme}
+Zum einen ist ein abstrakter Zugriff auf den ContextStore nicht nötig, zum anderen sind es zu viele Klassen, die implementiert werden müssen für ein Plugin.
+\subsubsection{Umsetzung}
+IDataAccess ist ganz rausgeflogen, IAlgorithm wird nicht mehr typisiert und arbeitet jetzt direkt auf dem ContextStore.

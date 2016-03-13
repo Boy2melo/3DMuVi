@@ -13,6 +13,19 @@
 	}
 }
 
+\definecolor{darkgreen}{rgb}{.0,.5,.0}
+\definecolor{orange}{rgb}{1,.5,.0}
+
+\newcommand{\result}[1]{
+	\\\textbf{Ergebnis:}
+	\IfEqCase{#1}{
+		{1}{\textcolor{darkgreen}{\textbf{Erfolgreich}}}
+		{2}{\textcolor{orange}{\textbf{Erfolgreich unter Vorbehalt}}}
+		{3}{\textcolor{red}{\textbf{Fehlgeschlagen}}}
+		{4}{\textcolor{blue}{\textbf{Nicht Implementiert}}}
+	}\\\textbf{Testkommentar:}\\
+}
+
 \newcommand{\usecase}[1]{
 	\IfEqCase{#1}{
 		{1}{
