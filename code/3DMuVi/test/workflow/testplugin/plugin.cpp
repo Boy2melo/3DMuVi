@@ -44,7 +44,7 @@ TestPlugin ::~TestPlugin () {
 
 bool TestPlugin::ValidateParameters(QJsonObject *params) const {
     // First level type check over given parameters
-    for(QJsonObject::iterator itr = params->begin(); itr != params->end(); itr++){
+    for(QJsonObject::iterator itr = params->begin(); itr != params->end(); ++itr){
         // Get reference type
         auto ref = GetParameterJson().value(itr.key());
 

@@ -39,7 +39,7 @@ public:
   \brief Initializes the object.
   \param parent The parent of this widget.
   */
-  C3dView(QWidget* parent = nullptr);
+  explicit C3dView(QWidget* parent = nullptr);
 
   /*!
   \brief Sets the combo box for the model type selection.

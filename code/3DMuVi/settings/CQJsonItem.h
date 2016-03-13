@@ -6,7 +6,7 @@
 #include <QJsonObject>
 class CQJsonTreeItem {
 public:
-    CQJsonTreeItem(CQJsonTreeItem * parent);
+    explicit CQJsonTreeItem(CQJsonTreeItem * parent);
     ~CQJsonTreeItem();
     void appendChild(CQJsonTreeItem * item);
     CQJsonTreeItem *child(int row);

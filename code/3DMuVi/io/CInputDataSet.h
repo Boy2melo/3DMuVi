@@ -27,7 +27,7 @@ public:
      * \param path Pfad zum Ordner in dem die Eingabebilder liegen.
      * \return void
      */
-    CInputDataSet(QUrl path);
+    explicit CInputDataSet(QUrl path);
 
     CInputDataSet() {}
 

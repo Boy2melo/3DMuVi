@@ -91,7 +91,7 @@ void CTestCImageTab::validateView(QDir dir, int expected) {
 void CTestCImageTab::createImages(QDir path, uint images, const char ext[]) {
     uchar* data = new uchar[4]{ 0xFF, 0xFF, 0xFF, 0xFF };
 
-    for (int i = 0; i < images; i++) {
+    for (uint i = 0; i < images; i++) {
         QImage img = QImage(data, 1, 1, QImage::Format_ARGB32);
         QString file = path.filePath(QString::number(i) + "." + ext);
         img.save(file, ext);

@@ -40,7 +40,7 @@ public:
     * \Constructor for the Controller
     * \param directory temporal workdirectory
     */
-    CAlgorithmSettingController(QUrl directory);
+    explicit CAlgorithmSettingController(QUrl directory);
     /*!
     * \Returns the setting for a certain algorithm
     * \param name name of the algorithm

@@ -94,7 +94,7 @@ public:
     * \param parent
     * initilize classvariables
     */
-   CImageView(QWidget *parent = 0);
+   explicit CImageView(QWidget *parent = 0);
 };
 
 #endif // CIMAGEVIEW_H

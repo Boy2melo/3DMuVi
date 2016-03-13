@@ -14,6 +14,8 @@ CImageView::CImageView(QWidget *parent){
   sizeX = 480;
   sizeY = 480;
   this->resize(sizeX,sizeY);
+  v = 0;
+  h = 0;
 }
 void CImageView::setScrollBars(QScrollBar* horizontal, QScrollBar* vertical)
 {

@@ -14,7 +14,7 @@ public:
    * \brief CAlgorithmSettingsView creates a new algorithmsettingsview
    * \param parent parent of the view
    */
-  CAlgorithmSettingsView(QWidget* parent = nullptr);
+  explicit CAlgorithmSettingsView(QWidget* parent = nullptr);
   /*! \brief destructor
    */
   ~CAlgorithmSettingsView();
