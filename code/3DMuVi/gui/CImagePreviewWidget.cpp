@@ -1,6 +1,4 @@
-﻿#include <QMessageBox>
-
-#include "CImagePreviewWidget.h"
+﻿  #include "CImagePreviewWidget.h"
 
 //============================================================
 /*!
@@ -15,6 +13,14 @@ CImagePreviewWidget::CImagePreviewWidget(QWidget* parent) : QListWidget(parent)
   connect(this, &CImagePreviewWidget::itemSelectionChanged, this, &CImagePreviewWidget::onItemSelectionChanged);
 }
 
+CImagePreviewWidget::~CImagePreviewWidget()
+{
+  for(auto i : mImages)
+  {
+    delete i;
+  }
+}
+
 //============================================================
 /*!
 @param images
@@ -26,7 +32,7 @@ void CImagePreviewWidget::setImages(std::vector<CImagePreviewItem*> images)
   clear();
   for(CImagePreviewItem* i : images)
   {
-    addItem(i);
+    addItem(new CImagePreviewItem(*i));
   }
 }
 
@@ -37,8 +43,6 @@ void CImagePreviewWidget::setImages(std::vector<CImagePreviewItem*> images)
 //============================================================
 void CImagePreviewWidget::onRelevantImagesChanged(std::vector<uint32_t>& images)
 {
-  QMessageBox::warning(nullptr, "Atemlos durch die Nacht", "Atemlos durch die Nacht");
-
   clear();
   for(uint32_t i : images)
   {
@@ -46,7 +50,7 @@ void CImagePreviewWidget::onRelevantImagesChanged(std::vector<uint32_t>& images)
     {
       if(i == j->getImageId())
       {
-        addItem(j);
+        addItem(new CImagePreviewItem(*j));
       }
     }
   }

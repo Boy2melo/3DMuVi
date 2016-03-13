@@ -15,6 +15,7 @@ class CImagePreviewWidget : public QListWidget
 
 public: 
   explicit CImagePreviewWidget(QWidget* parent = nullptr);
+  ~CImagePreviewWidget();
   /*!
    * \brief sets Images
    * \param images

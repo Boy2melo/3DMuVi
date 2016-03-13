@@ -25,13 +25,15 @@ CInputImageView::CInputImageView()
 
 void CInputImageView::activate()
 {
-
-  std::vector<uint32_t> images;
-  for(std::tuple<uint32_t, QImage, CImagePreviewItem> i : *appliedData->getInputImages())
+  if(appliedData)
   {
-    images.push_back(std::get<0>(i));
+      std::vector<uint32_t> images;
+      for(std::tuple<uint32_t, QImage, CImagePreviewItem> i : *appliedData->getInputImages())
+      {
+        images.push_back(std::get<0>(i));
+      }
+      emit relevantImagesChanged(images);
   }
-  emit relevantImagesChanged(images);
 }
 
 //============================================================
