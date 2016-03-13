@@ -50,6 +50,11 @@ public:
    */
   void applyDataStorage(CContextDataStore* dataStorage);
 
+  /*!
+  \brief Clears the shown data on all contained views.
+  */
+  void clearData();
+
 private slots:
   void onCurrentChanged(int index);
 

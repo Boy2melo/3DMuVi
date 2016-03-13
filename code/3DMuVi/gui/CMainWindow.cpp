@@ -95,12 +95,31 @@ void CMainWindow::setLoadImage(QUrl url){
 
 void CMainWindow::setWorkflow(AWorkflow* workflow)
 {
+  if(mDataStore)
+  {
+    resetDataStore();
+  }
+
   ui->algorithmSelector->setWorkflow(*workflow);
   ui->algorithmSettingsView->setWorkflow(*workflow);
   mWorkflow.reset(workflow);
 
   connect(workflow, &AWorkflow::sigDataStoreFinished, this,
           &CMainWindow::onDataStoreFinished);
+}
+
+void CMainWindow::resetDataStore()
+{
+  ui->imagePreviewWidget->setImages(std::vector<CImagePreviewItem*>());
+  ui->algorithmSelector->setDataStore(QString());
+
+  ui->dataViewTabContainer->clearData();
+
+  if(mDataStore && mWorkflow)
+  {
+    mWorkflow->removeDataStore(mDataStore->getId());
+  }
+  mDataStore = nullptr;
 }
 
 void CMainWindow::onLoadImages()

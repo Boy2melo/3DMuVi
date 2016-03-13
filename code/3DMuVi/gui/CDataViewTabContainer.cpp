@@ -78,6 +78,17 @@ void CDataViewTabContainer::applyDataStorage(CContextDataStore* dataStorage)
 #endif
 }
 
+void CDataViewTabContainer::clearData()
+{
+  mpInputImageView->clearData();
+  mpFeatureView->clearData();
+  mpDepthMapView->clearData();
+
+#ifdef PCL
+  mp3dView->clearData();
+#endif
+}
+
 void CDataViewTabContainer::onCurrentChanged(int index)
 {
   if(tabText(index) == "Input Images")

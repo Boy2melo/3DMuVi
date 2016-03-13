@@ -53,7 +53,7 @@ private:
   CContextDataStore* mDataStore = nullptr;
   std::unique_ptr<CResultContext> mCurrentResultContext;
 
-  
+  void resetDataStore();
 
 private slots:
   void onLoadImages();
