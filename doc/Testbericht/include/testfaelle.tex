@@ -5,9 +5,8 @@ Die Testfälle sind alle Automatisiert und werden mit der in Qt integrierten Tes
 \section{Funktionstests}
 Zuerst wird jede Klasse einzeln bearbeitet. Jede Öffentliche Methode wird mit zwei Testfällen getestet. Der erste Testfall testet das Verhalten einer Funktion im normalen Umfeld mit gewöhnlichen Parametern. Dieser Test dient dazu, Fehler in Berechnungsvorschriften und Implementierungen zu finden. Der zweite Testfall ruft die Funktion mit ungewöhnlichen Parametern auf, eventuell auch mit falschen Datentypen. Diese Tests dienen dazu, die Robustheit der Funktionen zu garantieren. Die Argumente, die an eine Funktion übergeben werden, sind so weit wie möglich Zufällig verteilt zu wählen. Für das nachvollziehen von Fehlern werden die getesteten Parameter zusätzlich zu der Fehlerbeschreibung ausgegeben.
 
-Es wurden hauptsächlich die Test für die normalen Funktionen der Klassen durchgeführt, nur wenige Tests für die Robustheit, aufgrund von fehlender Zeit. Das Abspeichern der Json-Dateien funktioniert nicht.
-Folgende Test schlagen aktuell bei der Durchführung fehl: CTestCSettingsDialog::test(), CTestLoggerControll::testmanageNewLogMessage(), CTestCAlgotihmSettings::test(),CTestAlgorithmExecution::test(), CTestCImageTab::test().
-
+Es wurden hauptsächlich die Test für die normalen Funktionen der Klassen durchgeführt, nur wenige Tests für die Robustheit, aufgrund von fehlender Zeit. Das Abspeichern der Json-Dateien funktioniert nicht immer.
+Folgende Test schlagen aktuell bei der Durchführung fehl: CTestCSettingsDialog::test(), CTestLoggerControll::testmanageNewLogMessage(), CTestCAlgotihmSettings::test(),CTestAlgorithmExecution::test(), CTestAlgorithmControllerOutput::test(), CTestResultDir::test(), CTestCImageTab::test500Images(), CTestCImageTab::testTypes(), CTestCImageTab::test2Images(), CTestCResultContext::test().
 
 \section{Komponententests}
 Komponententests testen das Verhalten eines isolierten Moduls der Anwendung. Viele der Tests lassen sich allerdings erst nach der Entwurfsphase festlegen, weshalb dieser Abschnitt bis zum Vollständigen Entwurf der Anwendung noch nicht vollständig sein wird.
@@ -39,7 +38,7 @@ Komponententests testen das Verhalten eines isolierten Moduls der Anwendung. Vie
 		\subitem \textbf{Erwartetes Verhalten:}\\
 		Es wird eine Ordnerstruktur in dem vom Test vorgegebenen Verzeichnis angelegt mit den gespeicherten Daten.
 		\subitem \textbf{Ergebnis:}\\
-		Nicht möglich, da ein Fehler in Datapackets zu einem SegmentationFault führt.
+		Test schlägt fehl.
 		\\\item \begin{tabular}{|c|c|}
 			\hline Modul & Funktion \\
 			\hline Logger & FM410 \\
