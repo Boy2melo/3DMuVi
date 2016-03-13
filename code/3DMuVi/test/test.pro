@@ -47,7 +47,7 @@ HEADERS += gui/CTestCLogWidget.h \
            components/CTestLoggerOutput.h \
            components/CTestAlgorithmControllerOutput.h \
            components/CTestGlobalParameterSL.h \
-           #components/CTestAlgorithmSelection.h \
+           components/CTestAlgorithmSelection.h \
            components/CTestTabLog.h \
            settings/CTestCGlobalSettingController.h\
            settings/CTestCAlgorithmSettingController.h\
@@ -121,7 +121,7 @@ SOURCES += gui/CTestCLogWidget.cpp \
            components/CTestLoggerOutput.cpp \
            components/CTestAlgorithmControllerOutput.cpp \
            components/CTestGlobalParameterSL.cpp \
-           #components/CTestAlgorithmSelection.cpp \
+           components/CTestAlgorithmSelection.cpp \
            components/CTestTabLog.cpp \
            settings/CTestCGlobalSettingController.cpp\
            settings/CTestCAlgorithmSettingController.cpp\

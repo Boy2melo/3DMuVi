@@ -28,6 +28,7 @@
 #include "components/CTestLoggerOutput.h"
 #include "components/CTestAlgorithmControllerOutput.h"
 #include "components/CTestTabLog.h"
+#include "components/CTestAlgorithmSelection.h"
 
 
 int main(int argc, char* argv[])
@@ -58,7 +59,8 @@ int main(int argc, char* argv[])
   CTestResultDir resultDir;
   CTestLoggerOutput logoutput;
   CTestAlgorithmControllerOutput algorithmoutput;
-  CTestTabLog tablog;
+  CTestTabLog tabLog;
+  CTestAlgorithmSelection algorithmSelection;
 
   QApplication app(argc, argv);
 
@@ -92,7 +94,8 @@ int main(int argc, char* argv[])
   failCounter += QTest::qExec(&resultDir, argc, argv);
   failCounter += QTest::qExec(&logoutput, argc, argv);
   failCounter += QTest::qExec(&algorithmoutput, argc, argv);
-  failCounter += QTest::qExec(&tablog, argc, argv);
+  failCounter += QTest::qExec(&tabLog, argc, argv);
+  failCounter += QTest::qExec(&algorithmSelection, argc, argv);
 
   std::cout << "Total number of fails: " << failCounter << "\n";
   return 0;  
