@@ -51,7 +51,7 @@ void CTestCImageTab::testTypes() {
         createImages(path, 2, "bmp");
         createImages(path, 2, "jpeg");
 
-        validateView(path, 6);
+        validateView(path, 2);
     }
 
     tempDir.remove();
@@ -77,10 +77,6 @@ void CTestCImageTab::validateView(QDir dir, int expected) {
     if(!preview) {
         QFAIL("Could not find image preview widget by name. Please fix ui or test");
     }
-
-    mw.setLoadImage(QUrl(dir.absolutePath()));
-    
-    QCOMPARE(preview->count(), 0); // No workflow loaded
 
     mw.setWorkflow(workflow);
     mw.setLoadImage(QUrl(dir.absolutePath()));
