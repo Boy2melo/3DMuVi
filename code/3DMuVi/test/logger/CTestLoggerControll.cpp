@@ -1,34 +1,41 @@
 #include "CTestLoggerControll.h"
-CLogController& controll = CLogController::instance();
-CLogHistory& h = controll.getHistory();
+
 void CTestLoggerControll::initTestCase()
 {
-
+    CLogController::instance().getHistory().clearHistory();
 }
 void CTestLoggerControll::testgetHistory(){
+    //clear History (Singleton in QT Unitests..)
+    CLogController::instance().getHistory().clearHistory();
+    CLogHistory h = CLogController::instance().getHistory();
     std::vector<std::tuple<QString,QString,QString>>  historylist =  h.getHistory();
-    std::vector<std::tuple<QString,QString,QString>>  historylist2 =  controll.getHistory().getHistory();
 
-    QCOMPARE(historylist.size(),historylist2.size());
+    QCOMPARE(historylist.size(),0);
+    //clear History (Singleton in QT Unitests..)
+    CLogController::instance().getHistory().clearHistory();
 }
 void CTestLoggerControll::testmanageNewLogMessage(){
-    controll.manageNewLogMessage("A","B","");
-    controll.manageNewLogMessage("A","B","C");
-    controll.manageNewLogMessage("A","B","DEBUG");
+    //clear History (Singleton in QT Unitests..)
+    CLogController::instance().getHistory().clearHistory();
+    CLogHistory h = CLogController::instance().getHistory();
 
-    CLogHistory h2;
-    h2.addHistory("A","B","INFO");
-    h2.addHistory("A","B","INFO");
-    h2.addHistory("A","B","DEBUG");
+    CLogController::instance().manageNewLogMessage("Hallo","00:34","");
+    CLogController::instance().manageNewLogMessage("TestNachricht","06:20","C");
+    CLogController::instance().manageNewLogMessage("Fatal Error","20:34","DEBUG");
+
+    QString text[3] = {"Hallo","TestNachricht","Fatal Error"};
+    QString time[3] = {"00:34","06:20","20:34"};
+    QString type[3] = {"INFO","INFO","DEBUG"};
 
     std::vector<std::tuple<QString,QString,QString>>  historylist =  h.getHistory();
-    std::vector<std::tuple<QString,QString,QString>>  historylist2 =  h2.getHistory();
 
-    QCOMPARE(historylist.size(),historylist2.size());
+    QCOMPARE(historylist.size(),3);
 
         for (int j = 0; j < 3; j++){
-    QCOMPARE(std::get<0> (historylist[j]),std::get<0> (historylist2[j]));
-    QCOMPARE(std::get<1> (historylist[j]),std::get<1> (historylist2[j]));
-    QCOMPARE(std::get<1> (historylist[j]),std::get<1> (historylist2[j]));
+    QCOMPARE(std::get<0> (historylist[j]),text[j]);
+    QCOMPARE(std::get<1> (historylist[j]),time[j]);
+    QCOMPARE(std::get<2> (historylist[j]),type[j]);
+    //clear History (Singleton in QT Unitests..)
+     CLogController::instance().getHistory().clearHistory();
    }
 }

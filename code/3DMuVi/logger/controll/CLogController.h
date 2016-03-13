@@ -26,6 +26,12 @@ private:
     bool mLogToFile;
     uchar mCurrentLogLevel;
     uchar mMinLogLevel;
+
+    /**
+     * \brief CLogController::CLogController constructor
+     * sets the private attrubute mDestSet to false;
+     * use the function setLog(QUrl dest) to set an dest for the logger file
+     */
     void initilize();
     // copy Constructor is not possible because of  :public QObject
     // CLogController( const CLogController& ){}

@@ -8,11 +8,7 @@
 using namespace QsLogging;
 
 
-/**
- * @brief CLogController::CLogController constructor
- * sets the private attrubute mDestSet to false;
- * use the function setLog(QUrl dest) to set an dest for the logger file
- */
+
 void CLogController::initilize() {
     mHistory = CLogHistory();
     mDestSet = false;

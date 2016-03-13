@@ -31,7 +31,7 @@ private slots:
 
 
 private:
- // CLogHistory& h2;
+
 };
 
 #endif // CTESTLOGGERHISTORY_H

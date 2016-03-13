@@ -31,8 +31,7 @@ private slots:
   void testmanageNewLogMessage();
 
 private:
-  //CLogController& controll;
-  //CLogHistory& h;
+
 };
 
 #endif // CTESTLOGGERCONTROLL_H
