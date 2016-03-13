@@ -89,9 +89,9 @@ void CAlgorithmSettingController::exportTo(QUrl directory) const {
     QString name;
     for (int i = 0; i < algorithms.length(); i++) {
         name = algorithms.value(i);
-        url = QUrl(tempdirectory.toString() + name);
+        url = QUrl(tempdirectory.path() + QDir::separator() + name + ".json");
         file = io.load(url);
-        url = QUrl(directory.toString() + name);
+        url = QUrl(directory.toString() + QDir::separator() + name + ".json");
         io.save(url, file);
     }
 }
