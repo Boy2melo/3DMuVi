@@ -156,7 +156,7 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QCheckBox" name="checkBox">
+            <widget class="QCheckBox" name="logDebugCheckBox">
              <property name="text">
               <string>Debug</string>
              </property>
@@ -166,7 +166,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox_2">
+            <widget class="QCheckBox" name="logInfoCheckBox">
              <property name="text">
               <string>Info</string>
              </property>
@@ -176,7 +176,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox_3">
+            <widget class="QCheckBox" name="logWarningCheckBox">
              <property name="text">
               <string>Warning</string>
              </property>
@@ -186,7 +186,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QCheckBox" name="checkBox_4">
+            <widget class="QCheckBox" name="logErrorCheckBox">
              <property name="text">
               <string>Error</string>
              </property>
@@ -211,7 +211,7 @@
           </layout>
          </item>
          <item>
-          <widget class="QPlainTextEdit" name="plainTextEdit">
+          <widget class="CLogWidget" name="logWidget">
            <property name="undoRedoEnabled">
             <bool>false</bool>
            </property>
@@ -302,6 +302,11 @@
    <extends>QTabWidget</extends>
    <header location="global">gui/CDataViewTabContainer.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CLogWidget</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">gui/CLogWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

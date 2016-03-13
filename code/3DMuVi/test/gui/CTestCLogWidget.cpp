@@ -5,6 +5,7 @@
 void CTestCLogWidget::initTestCase()
 {
   CLogController& log = CLogController::instance();
+  log.getHistory().clearHistory();
   log.manageNewLogMessage("Test message", "01.01.2016 00:30", "INFO");
   log.manageNewLogMessage("Another test message", "10.01.2016 12:30", "DEBUG");
   log.manageNewLogMessage("Third message", "15.01.2016 00:30", "WARNING");
@@ -67,4 +68,9 @@ void CTestCLogWidget::onStateChangedError()
 void CTestCLogWidget::cleanup()
 {
   delete mWidget;
+}
+
+void CTestCLogWidget::cleanupTestCase()
+{
+  CLogController::instance().getHistory().clearHistory();
 }

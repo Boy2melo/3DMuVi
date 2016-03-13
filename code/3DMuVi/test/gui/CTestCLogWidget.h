@@ -50,6 +50,7 @@ private slots:
   void onStateChangedError();
 
   void cleanup();
+  void cleanupTestCase();
 
 private:
   CLogWidget* mWidget;
