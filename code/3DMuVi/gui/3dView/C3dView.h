@@ -58,6 +58,13 @@ public:
   void activate() override;
 
   /*!
+  \brief Clears the applied fuison and pose data.
+
+  Safely removes the fusion and pose data from the view.
+  */
+  void clearData() override;
+
+  /*!
   \brief Shows the given fusion data.
   \param packet The data to show.
 

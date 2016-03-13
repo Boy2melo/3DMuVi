@@ -15,6 +15,10 @@ public:
     IDataView();
 
     /**
+    @brief Löscht alle bisher angewendeten Daten
+    */
+    virtual void clearData() {}
+    /**
     @brief Castet das packet und ruft die spezialisierte Methode auf
     */
     void applyData(IDataPacket const *data);

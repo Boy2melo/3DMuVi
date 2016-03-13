@@ -29,6 +29,20 @@ void C3dView::activate()
   emit relevantImagesChanged(imageIds);
 }
 
+void C3dView::clearData()
+{
+  for(uint64_t id : mPoseIds)
+  {
+    removeCameraMesh(QString("camera") + QString::number(id));
+  }
+  mPoseIds.clear();
+
+  mPointCloud.reset();
+  mPolygonMesh.reset();
+  mTextureMesh.reset();
+  updateView();
+}
+
 void C3dView::applyData(CDataFusion const* packet)
 {
   mPointCloud = packet->getPointCloud();
@@ -41,12 +55,6 @@ void C3dView::applyData(CDataFusion const* packet)
 void C3dView::applyData(CDataPose const* packet)
 {
   std::vector<SPose> poses = *packet->getPose();
-
-  for(uint64_t id : mPoseIds)
-  {
-    removeCameraMesh(QString("camera") + QString::number(id));
-    mPoseIds.clear();
-  }
 
   for(SPose p : poses)
   {

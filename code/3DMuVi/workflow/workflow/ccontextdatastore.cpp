@@ -53,6 +53,7 @@ void CContextDataStore::incCalculationStep() {
 }
 
 void CContextDataStore::ApplyToDataView(IDataView* view) const {
+    view->clearData();
     for (auto packet : mDataPackets) {
         packet->ApplyToDataview(view);
     }
