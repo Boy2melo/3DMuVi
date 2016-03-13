@@ -93,6 +93,10 @@ Um ein neues Plugin mit VisualStudio zu bauen, wird zuerst eine neue Qt Library 
 
 <hr/>
 
+## Errata
+### VisualStudio
+Falls es zu Linkerproblemen mit fehlenden Referenzen auf das Qt metasystem kommt, einfach die entsprechende Headerdatei öffnen, das Q_OBJECT makro entfernen, speichern, wieder einfügen und neu erstellen. Jetzt sollte statt dem Linkerfehler ein Compilerfehler kommen, dass das moc_ objekt nicht gefunden werden konnte. Die ganze Prozedur nochmals wiederholen.
+
 ## Software und Bibliotheken ##
  - C++11/14
  - [Qt5](http://http://www.qt.io/)

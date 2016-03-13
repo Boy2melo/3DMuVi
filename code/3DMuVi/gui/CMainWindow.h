@@ -45,13 +45,15 @@ public:
   */
   void setLoadImage(QUrl url);
 
+
+  void setWorkflow(AWorkflow* workflow);
 private:
   Ui::CMainWindow *ui;
   std::unique_ptr<AWorkflow> mWorkflow;
   CContextDataStore* mDataStore = nullptr;
   std::unique_ptr<CResultContext> mCurrentResultContext;
 
-  void setWorkflow(AWorkflow* workflow);
+  
 
 private slots:
   void onLoadImages();

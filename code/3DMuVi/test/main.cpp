@@ -19,6 +19,7 @@
 #include "workflow/CTestCWorkflowmanager.h"
 #include "workflow/CTestCContextDataStore.h"
 #include "workflow/CTestCWorkflow.h"
+#include "gui/CTestCImageTab.h"
 
 #include "components/CTestAlgorithmSettings.h"
 #include "components/CTestAlgorithmExecution.h"
@@ -49,7 +50,7 @@ int main(int argc, char* argv[])
   CTestCWorkflowmanager workflowmanager;
   CTestCContextDataStore datastore;
   CTestCWorkflow workflow;
-
+  CTestCImageTab imageTab;
   CTestAlgorithmSettings algorithmSettings;
   CTestAlgorithmExecution algorithmExecution;
   CTestGlobalParameterSL globalParameterSL;
@@ -75,6 +76,9 @@ int main(int argc, char* argv[])
   failCounter += QTest::qExec(&algorithmcontroller, argc, argv);
   failCounter += QTest::qExec(&globalcontroller, argc, argv);
 
+  //failCounter += QTest::qExec(&datastore, argc, argv);
+  //failCounter += QTest::qExec(&workflow, argc, argv);
+  failCounter += QTest::qExec(&imageTab, argc, argv);
   failCounter += QTest::qExec(&pluginmanager, argc, argv);
   failCounter += QTest::qExec(&workflowmanager, argc, argv);
   failCounter += QTest::qExec(&datastore, argc, argv);

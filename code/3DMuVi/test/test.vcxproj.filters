@@ -532,6 +532,24 @@
     <ClCompile Include="Release\moc_CTestCWorkflow.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="gui\CTestCImageTab.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCImageTab.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCImageTab.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="settings\CTestCAlgorithmSettingController.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_CTestCAlgorithmSettingController.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_CTestCAlgorithmSettingController.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="components\CTestAlgorithmExecution.h">
@@ -540,9 +558,6 @@
     <CustomBuild Include="components\CTestAlgorithmSettings.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
-    <ClInclude Include="settings\CTestCAlgorithmSettingController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <CustomBuild Include="settings\CTestCGlobalSettingController.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -657,6 +672,12 @@
     <CustomBuild Include="workflow\CTestCWorkflow.h">
       <Filter>Generated Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="gui\CTestCImageTab.h">
+      <Filter>Generated Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="settings\CTestCAlgorithmSettingController.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <None Include="io\data\testInputDataSet\0.png">
@@ -695,6 +716,9 @@
     <None Include="io\data\testText.txt" />
     <None Include="io\data\testImage.png" />
     <None Include="io\data\testText.txt" />
+    <None Include="io\data\testImage.png" />
+    <None Include="io\data\testText.txt" />
+    <None Include="settings\test.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="io\data\testImage.png">

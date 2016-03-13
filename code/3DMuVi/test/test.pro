@@ -33,6 +33,7 @@ INCLUDEPATH += ../
 HEADERS += gui/CTestCLogWidget.h \
            gui/CTestCMainWindow.h \
            gui/CTestCSettingsDialog.h \
+		   gui/CTestCImageTab.h \
            io/CTestCImageIo.h \
            io/CTestCTextIo.h \
            io/CTestCInputDataSet.h \
@@ -103,6 +104,7 @@ HEADERS += gui/CTestCLogWidget.h \
 SOURCES += gui/CTestCLogWidget.cpp \
            gui/CTestCMainWindow.cpp \
            gui/CTestCSettingsDialog.cpp \
+		   gui/CTestCImageTab.cpp \
            io/CTestCImageIo.cpp \
            io/CTestCTextIo.cpp \
            io/CTestCInputDataSet.cpp \
