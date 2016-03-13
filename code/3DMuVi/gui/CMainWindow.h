@@ -49,6 +49,7 @@ private:
   Ui::CMainWindow *ui;
   std::unique_ptr<AWorkflow> mWorkflow;
   CContextDataStore* mDataStore = nullptr;
+  std::unique_ptr<CResultContext> mCurrentResultContext;
 
   void setWorkflow(AWorkflow* workflow);
 
@@ -58,6 +59,7 @@ private slots:
   void onSettings();
   void onAbout();
 
+  void onWorkflowRunning(bool isRunning);
   void onDataStoreFinished(CContextDataStore* dataStorage);
 };
 

@@ -43,6 +43,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
           &QAction::setDisabled);
   connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, ui->algorithmSettingsView,
           &CAlgorithmSettingsView::setDisabled);
+  connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, this,
+          &CMainWindow::onWorkflowRunning);
 
   connect(ui->algorithmSelector, &CAlgorithmSelector::algorithmChanged, ui->algorithmSettingsView,
           &CAlgorithmSettingsView::onAlgorithmChanged);
@@ -133,13 +135,25 @@ void CMainWindow::onAbout()
                                            "Schneider, Laurenz Thiel and Stefan Wolf.");
 }
 
+void CMainWindow::onWorkflowRunning(bool isRunning)
+{
+  if(isRunning)
+  {
+    CGlobalSettingController settings;
+    auto result = new CResultContext(settings.getSetting("resultDirectory"),
+                                     ui->algorithmSettingsView->getAlgorithmController(),
+                                     &settings);
+
+    mCurrentResultContext.reset(result);
+  }
+}
+
 void CMainWindow::onDataStoreFinished(CContextDataStore* dataStorage)
 {
-  CGlobalSettingController settings;
-  CResultContext resultContext(settings.getSetting("resultDirectory"),
-                               ui->algorithmSettingsView->getAlgorithmController(), &settings);
-
   ui->dataViewTabContainer->applyDataStorage(dataStorage);
 
-  dataStorage->Serialize(&resultContext);
+  if(mCurrentResultContext)
+  {
+    dataStorage->Serialize(mCurrentResultContext.get());
+  }
 }
