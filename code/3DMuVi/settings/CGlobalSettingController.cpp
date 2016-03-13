@@ -33,7 +33,7 @@ void CGlobalSettingController::import(QUrl directory, QString name) {
     QUrl url;
     QString file;
     if (directory.fileName() != name) {
-        url = QUrl(directory.path() + "/" + name + ".json");
+        url = QUrl(directory.url() + "/" + name + ".json");
         directory = url;
     }
     file = io.load(directory);
@@ -44,8 +44,8 @@ void CGlobalSettingController::import(QUrl directory, QString name) {
 void CGlobalSettingController::exportTo(QUrl directory) const{
     QJsonDocument docu = QJsonDocument(settings);
     QString file = QString(docu.toJson());
-    directory = QUrl(directory.url() + "/globalconfig.json");
-    io.save(directory, file);
+    QUrl url = QUrl(directory.url() + "/globalconfig.json");
+    io.save(url, file);
 }
 
 void CGlobalSettingController::resetToDefault() {

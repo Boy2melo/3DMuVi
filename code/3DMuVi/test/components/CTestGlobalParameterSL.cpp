@@ -12,9 +12,9 @@ cgsc.setSetting("resultDirectory",test1);
 cgsc.setSetting("minLogLevel",test2);
 cgsc.setSetting("logWindowEnabled",test3);
 cgsc.setSetting("logDataEnabled",test4);
-QUrl dir("results");
+QUrl dir(":/results");
 cgsc.exportTo(dir);
-cgsc = CGlobalSettingController();
+cgsc.resetToDefault();
 cgsc.import(dir,"globalconfig");
 
 QCOMPARE(cgsc.getSetting("resultDirectory"),test1);
