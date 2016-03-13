@@ -23,7 +23,9 @@ void CTestCGlobalSettingController::testsetSetting()
 
 void CTestCGlobalSettingController::testexport()
 {
-    QUrl url = QUrl(":/data");
+    QDir current = QDir::current();
+    current.cdUp();
+    QUrl url = QUrl(current.absolutePath());
     controller.setSetting("resultDirectory", "Hallo");
     controller.exportTo(url);
     controller.resetToDefault();

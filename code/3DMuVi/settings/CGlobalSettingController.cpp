@@ -2,6 +2,7 @@
 #include <QJsonDocument>
 #include "io/CTextIo.h"
 #include <QFileInfo>
+#include <QDir>
 
 CGlobalSettingController::CGlobalSettingController() {
     QUrl directory;
@@ -33,7 +34,7 @@ void CGlobalSettingController::import(QUrl directory, QString name) {
     QUrl url;
     QString file;
     if (directory.fileName() != name) {
-        url = QUrl(directory.url() + "/" + name + ".json");
+        url = QUrl(directory.path() + QDir::separator() + name + ".json");
         directory = url;
     }
     file = io.load(directory);
@@ -44,7 +45,7 @@ void CGlobalSettingController::import(QUrl directory, QString name) {
 void CGlobalSettingController::exportTo(QUrl directory) const{
     QJsonDocument docu = QJsonDocument(settings);
     QString file = QString(docu.toJson());
-    QUrl url = QUrl(directory.url() + "/globalconfig.json");
+    QUrl url = QUrl(directory.path() + QDir::separator() + "globalconfig.json");
     io.save(url, file);
 }
 
