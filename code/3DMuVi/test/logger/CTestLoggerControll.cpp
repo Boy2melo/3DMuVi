@@ -8,11 +8,12 @@ void CTestLoggerControll::testgetHistory(){
     //clear History (Singleton in QT Unitests..)
     CLogController::instance().getHistory().clearHistory();
     CLogHistory h = CLogController::instance().getHistory();
+    h.addHistory("X","Y","");
     std::vector<std::tuple<QString,QString,QString>>  historylist =  h.getHistory();
 
-    QCOMPARE(historylist.size(),0);
+    QCOMPARE(historylist.empty(),false);
     //clear History (Singleton in QT Unitests..)
-    CLogController::instance().getHistory().clearHistory();
+    h.clearHistory();
 }
 void CTestLoggerControll::testmanageNewLogMessage(){
     //clear History (Singleton in QT Unitests..)
@@ -28,8 +29,6 @@ void CTestLoggerControll::testmanageNewLogMessage(){
     QString type[3] = {"INFO","INFO","DEBUG"};
 
     std::vector<std::tuple<QString,QString,QString>>  historylist =  h.getHistory();
-
-    QCOMPARE(historylist.size(),3);
 
         for (int j = 0; j < 3; j++){
     QCOMPARE(std::get<0> (historylist[j]),text[j]);
