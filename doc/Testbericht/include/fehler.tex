@@ -1,3 +1,4 @@
 \begin{itemize}
 \item\fehler{Fehlerbeschreibung}{Grund für den Fehler}{Behebung des Fehlers}
+\item\fehler{Der Test T3.2 (CTestCImageTab) stürzt mit einem Speicherzugriffsfehler ab.}{In CMainWindow wird beim Wechsel des Workflows die interne Referenz auf den aktuellen Data Store nicht gelöscht, jedoch wird beim Löschen des alten Workflows der alte Data Store aus dem Speicher entfernt. Als Folge greift CMainWindow beim Erstellen eines neuen Data Stores auf den alten und mittlerweile nicht mehr im Speicher liegenden Data Store zu.}{Vor dem Wechsel des Workflows wird der alte Data Store ordnungsgemäß gelöscht, alle Referenzen in CMainWindow zurück gesetzt und alle Views werden geleert.}
 \end{itemize}
