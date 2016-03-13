@@ -28,7 +28,7 @@ void CResultContext::addDataPacket(std::shared_ptr<IDataPacket> data) {
     {
       streamProvider->setDestination(folder);
       data->serialize(streamProvider);
-      delete(streamProvider);
+      data->cleanUpStreamProvider();
     }
 
     folder.cdUp();

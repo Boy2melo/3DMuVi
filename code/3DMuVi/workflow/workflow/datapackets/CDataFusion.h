@@ -45,6 +45,11 @@ public:
   AStreamProvider* getStreamProvider() override;
 
   /*!
+   * \brief Cleans up the last returned stream provider.
+   */
+  void cleanUpStreamProvider() override;
+
+  /*!
    * \brief Serializes the data of this object into the given stream.
    * \param stream The stream in which the data is written.
    */

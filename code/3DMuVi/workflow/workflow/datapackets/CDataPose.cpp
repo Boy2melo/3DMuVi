@@ -24,36 +24,52 @@ AStreamProvider* CDataPose::getStreamProvider() {
     return streamProvider;
 }
 
+void CDataPose::cleanUpStreamProvider()
+{
+  if (streamProvider != nullptr) {
+      delete(streamProvider);
+      streamProvider = nullptr;
+  }
+}
+
 void CDataPose::serialize(AStreamProvider *stream) {
     stream->setFileName(this->getId());
     auto dataStream = stream->getNextStream();
 
     //serialize featureMap
-    uint32_t value0;
-    float value1;
-    float value2;
-    float value3;
-    float value4;
-    *dataStream << static_cast<int>(featureMap->size());
-    for (auto data : *featureMap) {
-        std::tie(value0, value1, value2, value3, value4) = data;
-        *dataStream << static_cast<quint32>(value0) << value1 << value2 << value3 << value4;
+    if (featureMap) {
+        uint32_t value0;
+        float value1;
+        float value2;
+        float value3;
+        float value4;
+        *dataStream << static_cast<int>(featureMap->size());
+        for (auto data : *featureMap) {
+            std::tie(value0, value1, value2, value3, value4) = data;
+            *dataStream << static_cast<quint32>(value0) << value1 << value2 << value3 << value4;
+        }
+    } else {
+        *dataStream << static_cast<int>(0);
     }
 
     //serialize pose
-    *dataStream << static_cast<int>(pose->size());
-    for (auto p : *pose) {
-        *dataStream << static_cast<quint64>(p.cameraId) << p.translation << p.orientation << p.principalPoint;
+    if (pose) {
+        *dataStream << static_cast<int>(pose->size());
+        for (auto p : *pose) {
+            *dataStream << static_cast<quint64>(p.cameraId) << p.translation << p.orientation << p.principalPoint;
 
-        *dataStream << static_cast<int>(p.focalLength.size());
-        for (auto f : p.focalLength) {
-            *dataStream << f;
-        }
+            *dataStream << static_cast<int>(p.focalLength.size());
+            for (auto f : p.focalLength) {
+                *dataStream << f;
+            }
 
-        *dataStream << static_cast<int>(p.distortion.size());
-        for (auto d : p.distortion) {
-            *dataStream << d;
+            *dataStream << static_cast<int>(p.distortion.size());
+            for (auto d : p.distortion) {
+                *dataStream << d;
+            }
         }
+    } else {
+        *dataStream << static_cast<int>(0);
     }
 }
 

@@ -34,17 +34,30 @@ AStreamProvider* CDataFeature::getStreamProvider() {
     return streamProvider;
 }
 
+void CDataFeature::cleanUpStreamProvider()
+{
+    if (streamProvider != nullptr) {
+        delete(streamProvider);
+        streamProvider = nullptr;
+    }
+}
+
 void CDataFeature::serialize(AStreamProvider* stream) {
     stream->setFileName(this->getId());
     auto dataStream = stream->getNextStream();
-    uint64_t value0;
-    float value1;
-    float value2;
-    uint32_t value3;
-    *dataStream << (int)featureMatchData->size();
-    for (auto data : *featureMatchData) {
-        std::tie(value0, value1, value2, value3) = data;
-        *dataStream << static_cast<quint64>(value0) << value1 << value2 << static_cast<quint32>(value3);
+
+    if (featureMatchData) {
+        uint64_t value0;
+        float value1;
+        float value2;
+        uint32_t value3;
+        *dataStream << (int)featureMatchData->size();
+        for (auto data : *featureMatchData) {
+            std::tie(value0, value1, value2, value3) = data;
+            *dataStream << static_cast<quint64>(value0) << value1 << value2 << static_cast<quint32>(value3);
+        }
+    } else {
+        *dataStream << (int)0;
     }
 }
 

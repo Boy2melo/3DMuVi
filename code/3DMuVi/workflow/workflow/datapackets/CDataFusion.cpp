@@ -40,14 +40,22 @@ AStreamProvider* CDataFusion::getStreamProvider()
   return mpStream;
 }
 
+void CDataFusion::cleanUpStreamProvider()
+{
+  if(mpStream)
+  {
+    delete mpStream;
+    mpStream = nullptr;
+  }
+}
+
 void CDataFusion::serialize(AStreamProvider* stream)
 {
   QDir dir = stream->getDestination();
 
   if(mPointCloudData)
   {
-    pcl::io::savePCDFile(dir.absoluteFilePath("point_cloud.pcd").toStdString(),
-                         *mPointCloudData);
+    pcl::io::savePCDFile(dir.absoluteFilePath("point_cloud.pcd").toStdString(), *mPointCloudData);
   }
   if(mPolygonMeshData)
   {

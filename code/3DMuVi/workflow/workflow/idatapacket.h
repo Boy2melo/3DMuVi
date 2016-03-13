@@ -49,6 +49,11 @@ public:
     virtual AStreamProvider* getStreamProvider() = 0;
 
     /*!
+     * \brief Cleans up the last returned stream provider.
+     */
+    virtual void cleanUpStreamProvider() = 0;
+
+    /*!
     \brief Serialize the data packet. To get a AStreamProvider use getStreamProvider(). After you got the AStreamProvider, you have to the destination path.
     \param stream provides a stream in which the data get serialized.
     */

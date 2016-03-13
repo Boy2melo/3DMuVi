@@ -35,5 +35,5 @@ QString CInputDataSet::getDataType() const {
 
 AStreamProvider* CInputDataSet::getStreamProvider() {
     // do not save input images
-    return nullptr;
+  return nullptr;
 }

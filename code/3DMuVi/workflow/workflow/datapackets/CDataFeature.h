@@ -23,6 +23,7 @@ public:
 
     QString getDataType() const override;
     AStreamProvider* getStreamProvider() override;
+    void cleanUpStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
     void deserialize(AStreamProvider* stream) override;
 
