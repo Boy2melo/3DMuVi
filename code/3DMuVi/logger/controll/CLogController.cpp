@@ -5,6 +5,7 @@
 #include <QDir>
 #include <iostream>
 #include <ctime>
+#include <settings/CGlobalSettingController.h>
 using namespace QsLogging;
 
 
@@ -13,9 +14,12 @@ void CLogController::initilize() {
     mHistory = CLogHistory();
     mDestSet = false;
     mCurrentLogLevel = LOG_INFO;
-    mLogToWindow = true;
-    mLogToFile = true;
-    mMinLogLevel = LOG_INFO;
+    CGlobalSettingController settings;
+    uint ltw =  settings.getSetting("logWindowEnabled").toUInt();
+    uint ltf =  settings.getSetting("logDataEnabled").toUInt();
+    ltw == 0 ? mLogToWindow = true : mLogToWindow = false;
+    ltf == 0 ? mLogToFile = true : mLogToFile = false;
+    mMinLogLevel = static_cast<uchar>((settings.getSetting("minLogLevel").toUInt()));
 }
 
 /*
