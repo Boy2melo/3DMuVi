@@ -34,6 +34,20 @@ void CDepthMapView::activate()
 
 //============================================================
 /*!
+ * \brief CDepthMapView::clearData
+ */
+//============================================================
+
+void CDepthMapView::clearData()
+{
+    std::vector<std::tuple<uint32_t, QImage&>> clearList;
+    showImages(clearList);
+
+    appliedData = nullptr;
+}
+
+//============================================================
+/*!
 @param images
 */
 //============================================================
@@ -72,4 +86,3 @@ void CDepthMapView::updateView()
     showImages(updatedView);
   }
 }
-

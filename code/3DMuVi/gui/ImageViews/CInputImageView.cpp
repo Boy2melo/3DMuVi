@@ -36,6 +36,15 @@ void CInputImageView::activate()
   }
 }
 
+void CInputImageView::clearData()
+{
+
+  std::vector<std::tuple<uint32_t, QImage&>> clearList;
+  showImages(clearList);
+
+  appliedData = nullptr;
+}
+
 //============================================================
 /*!
 @param images

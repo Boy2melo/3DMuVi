@@ -20,6 +20,7 @@ class CDepthMapView : public CImageView, public IDataView {
 public:
   void applyData(const CDataDepth* packet) override;
   void activate() override;
+  void clearData() override;
 
 private:
   const CDataDepth* appliedData = nullptr;

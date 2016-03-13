@@ -47,6 +47,14 @@ void CFeatureView::activate()
 
 }
 
+void CFeatureView::clearData()
+{
+    std::vector<std::tuple<uint32_t, QImage&>> clearList;
+    showImages(clearList);
+
+    appliedFeatureData = nullptr;
+}
+
 //============================================================
 /*!
 @param images

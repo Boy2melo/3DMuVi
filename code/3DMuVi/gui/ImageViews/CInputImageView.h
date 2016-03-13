@@ -15,6 +15,7 @@ public:
   explicit CInputImageView();
   void applyData(const CInputDataSet* packet) override;
   void activate() override;
+  void clearData() override;
 
 private:
   const CInputDataSet* appliedData = nullptr;

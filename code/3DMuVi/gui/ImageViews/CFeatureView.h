@@ -18,6 +18,7 @@ public:
   void applyData(const CInputDataSet* packet) override;
   void applyData(const CDataFeature* packet) override;
   void activate() override;
+  void clearData() override;
 
 private:
 
