@@ -24,6 +24,7 @@
 #include "components/CTestAlgorithmExecution.h"
 #include "components/CTestGlobalParameterSL.h"
 #include "components/CTestResultDir.h"
+#include "components/CTestLoggerOutput.h"
 
 
 int main(int argc, char* argv[])
@@ -52,6 +53,7 @@ int main(int argc, char* argv[])
   CTestAlgorithmExecution algorithmExecution;
   CTestGlobalParameterSL globalParameterSL;
   CTestResultDir resultDir;
+  CTestLoggerOutput logoutput;
 
   QApplication app(argc, argv);
 
@@ -80,6 +82,7 @@ int main(int argc, char* argv[])
   failCounter += QTest::qExec(&algorithmExecution, argc, argv);
   failCounter += QTest::qExec(&globalParameterSL, argc, argv);
   //failCounter += QTest::qExec(&resultDir, argc, argv); Fehler in Datapackets führt zu einem seg fault.
+  failCounter += QTest::qExec(&logoutput, argc, argv);
 
   std::cout << "Total number of fails: " << failCounter << "\n";
   return 0;  
