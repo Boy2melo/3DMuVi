@@ -20,13 +20,14 @@ Der Nutzer führt folgende Schritte aus (Schritte \ref{TN3DModellBilderauswahl} 
 	\item Button zum Starten der Verarbeitung wird gedrückt.
 	\item \label{TN3DModellSpeichern} Ergebnisdaten werden abgespeichert.
 	\item Kopieren des 3D-Modells aus dem Verzeichnisbaum der Ergebnisse an den gewünschten Ort.
-\end{enumerate} 
-
-\textbf{Durchführung:} Erzeugen eines 3D-Modells \newline
-\textbf{zusätliche Vorrausetzungen:} Zusätzlich müssen Algorithmenplugins compiliert und für das Framework zur Verfügung gestellt werden.
-Nach dem starten, der Bilderauswahl. Können die Algorithmen wie erwartet ausgewählt und deren Parameter eingestellt werden. \newline
+\end{enumerate}
+\subsection{Durchführung: Erzeugen eines 3D-Modells}
+\textbf{zusätliche Vorrausetzungen:} Eine Menge von Eingabe Bilder muss zur Verfügung gestellt werden. Zusätzlich müssen Algorithmenplugins compiliert und für das Framework zur Verfügung gestellt werden.\newline
+Nach dem starten und Auswahl der EingabeBilder, können die Algorithmen für jeden Slot einzeln ausgewählt und deren Parameter eingestellt werden. \newline
+Durch das drücken des Startbuttons wird der durchlauf gestartet, die Parameter ausgegraut und durch die Anzeige "Runing.." der Aktuelle Zustand angezeigt.
 Nachdem die Algorithmen erfolgreich durchlaufen wurden, sind die Ergebnisse sowohl in der Ergebnisansicht visualisiert, als auch im entsprechenden Verzeichnis gespeichert. \newline
 Zusätzlich kann durch an und abwählen der Bilder, die Ergebnisansicht gesteuert werden.
+Die Ergebnisse umfassen eine Eingabebilderansicht, Tiefenkarten, Feature Matches und eine 3D-Ansicht des Modells.
 
 
 \section{Evaluierung von Algorithmen für Feature Extraktion / Matching}
@@ -50,10 +51,11 @@ Der Nutzer führt folgende Schritte aus (Alle Schritte ab \ref{TNEvalAlgoBilderA
 	\item Button zum Starten der Verarbeitung wird gedrückt.
 	\item Erneute Betrachtung der Ergebnisse.
 \end{enumerate}
-
-\textbf{Durchführung} Evaluation von Algorithmen \newline
-Nach erfolgreichem 1. Durchlauf, kann das Algorithmenplugin geändert werden und erneut gestartet werden.
-Known Bug: Die Settings des geänderten Algorithmenplugins können nicht angepasst werden. Das Geänderte Plugin kann nur mit Default-Parameter gestartet werden. 
+\subsection{Durchführung: Evaluation von Algorithmen}
+\textbf{zusätliche Vorrausetzungen:} Ein zweites Algorithmenplugin für einen Slot muss zur Verfügung gestellt werden.\newline
+Nach dem erfolgreichen 1. Durchlauf können beliebig viele Algorithmenplugins geändert werden (sofern diese vor dem Programmstart vorliegen)
+Im Algorithmen-Settingsfenster werden die Parameter für die neu gewählten Algorithmen aufgeführt.
+Nach optionaler Anpassung der Settings kann der Algorithmendurchlauf erneut gestartet werden.
 
 \section{Überprüfen des Logs von Algorithmen}
 \textbf{Vorbedingung:} Bilder eines Modells wurden erstellt. \newline
@@ -74,8 +76,8 @@ Der Nutzer führt folgende Schritte aus (Schritte \ref{TNLogBilderAuswahl} bis \
 	\item \label{TNLogSuchen} Auffälligkeiten in den Meldungen des Logs werden gesucht.
 	\item Algorithmen werden bei Bedarf überarbeitet.
 \end{enumerate}
-
-\textbf{Durchführung} Überprüfen von Logs \newline
+\subsection{Durchführung: Überprüfen von Logs}
+\textbf{zusätliche Vorrausetzungen:} Das Minimale Loglevel in den Optionen muss entsprechend eingestellt sein(Debug für alle Lognachrichten). Außerdem müssen die Algorithmenplugins Lognachrichten produzieren.\newline
 Nach dem Ausführen von 3D-Muvi und erfolgreichem Durchlauf eines Workflows. Sind die Lognachrichten sowohl als Datein im Ergebnisverzeichnis, als auch im Framework vorhanden und können durch die Checkboxen gefiltert werden.
 
 
@@ -100,7 +102,7 @@ Der Nutzer führt folgende Schritte aus (Alle Schritte ab \ref{TNOFeatureEntfBil
 	\item Button zum Starten der Verarbeitung ab dem Schritt Posenschätzung wird gedrückt.
 	\item Erneute Betrachtung der Ergebnisse.
 \end{enumerate}
-\textbf{Durchführung} Manipulation von Zwischenergebnissen \newline
+\subsection{Durchführung: Manipulation von Zwischenergebnissen}
 Das Manipulieren von Zwischenergebnissen wurde nicht Umgesetzt. Außerdem kann der Workflow nur von Anfang an gestartet werden. Somit ist dieser Prototypische Ablauf nur bis Punkt 5 möglich.
 
 \section{Evaluierung von Algorithmen für Feature Extraktion / Matching auf mehreren Datensätzen}
@@ -130,6 +132,5 @@ Der Nutzer führt folgende Schritte aus (Alle Schritte ab \ref{TNOEvalAlgoBilder
 	\item Datensatz von Modell1 wird gewählt.
 	\item Betrachtung der Ergebnisse.
 \end{enumerate}
-
-\textbf{Durchführung} Evaluation von Algorithmen auf mehren Datensätzen \newline
+\subsection{Durchführung: Evaluation von Algorithmen auf mehren Datensätzen}
 Das Kriterium mehre Datensätze zu erstellen wurde nicht umgesetzt. Der prototypische Workflow ist somit nicht in dieser Form umsetzbar. Allerdings kann nach dem erfolgreichen Durchlauf des Datensatzes neue Bilder geladen werden und der Workflow erneut ausgeführt werden.
