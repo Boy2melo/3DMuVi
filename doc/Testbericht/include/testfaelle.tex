@@ -143,14 +143,14 @@ Die Oberflächentests lassen sich mit der Qt Test-Suite ebenfalls automatisieren
 	\end{itemize}
 	\subitem \textbf{Ablauf:}\\ Es wird für jeden Schritt ein Algorithmus aus der ComboBox ausgewählt. Danach wird im Backend überprüft, ob der Algorithmus auch an die Kontrollschicht weitergegeben wurde und ob es der richtige ist.
 	\subitem\textbf{Ergebnis:}\\
-	Test fehlt.
+	Der Test wird erfolgreich durchgeführt, falls die entsprechenden Plugins kompiliert sind.
 	\\\item \textbf{Ausführung der Algorithmen}
 	\subitem \textbf{Dummies:}\begin{itemize}
 		\item Ein Algorithmus für jeden Verarbeitungsschritt, der etwa zwei Sekunden wartet. Daten sind egal.
 	\end{itemize}
 	\subitem \textbf{Ablauf:}\\ Im Backend werden die Dummy-Algorithmen aktiviert. In der GUI wird dann der Button "{}Start" gedrückt. Nun müssen alle Interaktiven Elemente, die Einfluss auf die Verarbeitung nehmen, deaktiviert sein. Bekannt sind die Einstellungen für den Algorithmus, die Bilderliste und die Auswahl der Algorithmen. Als nächstes wird geprüft, ob der Arbeitsindikator des ersten und zweiten Algorithmus funktionieren. Ist die Ausführung beim dritten Algorithmus angelangt, wird geprüft, ob die ersten beiden Schritte ihren Zustand in "{}Finished" geändert haben. Zudem wird die Ausführung angehalten. Sobald auch der dritte Algorithmus den Zustand "{}Finished" eingenommen hat, wird geprüft, ob der vierte Algorithmus wie gewünscht nicht gestartet wurde. Zuletzt wird noch geprüft, ob die Oberfläche wieder Interaktiv geschaltet wurde.
 	\subitem\textbf{Ergebnis:}\\
-	Der Test wird erfolgreich durchgeführt.
+	Der Test wird erfolgreich durchgeführt, falls die entsprechenden Plugins kompiliert sind.
 	\\\item \textbf{Einstellungen}
 	\subitem \textbf{Dummies:}\begin{itemize}
 		\item Ein Algorithmus mit verschiedenen Einstellungen und Validierungen, die dem Test bekannt sind.
