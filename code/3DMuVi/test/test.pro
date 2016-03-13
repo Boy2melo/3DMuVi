@@ -33,6 +33,7 @@ INCLUDEPATH += ../
 HEADERS += gui/CTestCLogWidget.h \
            gui/CTestCMainWindow.h \
            gui/CTestCSettingsDialog.h \
+           gui/CTestCImagePreviewWidget.h \
 		   gui/CTestCImageTab.h \
            io/CTestCImageIo.h \
            io/CTestCTextIo.h \
@@ -45,7 +46,9 @@ HEADERS += gui/CTestCLogWidget.h \
            components/CTestResultDir.h \
            components/CTestLoggerOutput.h \
            components/CTestAlgorithmControllerOutput.h \
-           components/CTestGlobalParameterSL.h \	
+           components/CTestGlobalParameterSL.h \
+           components/CTestAlgorithmSelection.h \
+           components/CTestTabLog.h \
            settings/CTestCGlobalSettingController.h\
            settings/CTestCAlgorithmSettingController.h\
            workflow/CTestCContextDataStore.h \
@@ -104,6 +107,7 @@ HEADERS += gui/CTestCLogWidget.h \
 SOURCES += gui/CTestCLogWidget.cpp \
            gui/CTestCMainWindow.cpp \
            gui/CTestCSettingsDialog.cpp \
+           gui/CTestCImagePreviewWidget.cpp \
 		   gui/CTestCImageTab.cpp \
            io/CTestCImageIo.cpp \
            io/CTestCTextIo.cpp \
@@ -117,6 +121,8 @@ SOURCES += gui/CTestCLogWidget.cpp \
            components/CTestLoggerOutput.cpp \
            components/CTestAlgorithmControllerOutput.cpp \
            components/CTestGlobalParameterSL.cpp \
+           components/CTestAlgorithmSelection.cpp \
+           components/CTestTabLog.cpp \
            settings/CTestCGlobalSettingController.cpp\
            settings/CTestCAlgorithmSettingController.cpp\
            workflow/CTestCContextDataStore.cpp \
