@@ -9,7 +9,7 @@ using DepthMaps = std::vector<std::tuple<uint32_t, QImage>>;
 
 void CTestResultDir::test(){
 
-QUrl path("/results");
+QUrl path("results");
 CAlgorithmSettingController asctr(path);
 CAlgorithmSettingController* algoSCT = &asctr;
 CGlobalSettingController gbs;
@@ -40,6 +40,7 @@ rConT.addDataPacket(std::make_shared<CDataDepth>(ddp));
 
 QDir dirx;
 QCOMPARE(dirx.cd(path.path()),true);
+dirx.cd(dirx.entryList(QDir::AllDirs).last());
 QCOMPARE(dirx.exists(dfp.getDataType()),true);
 QCOMPARE(dirx.exists(ddp.getDataType()),true);
 

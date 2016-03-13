@@ -27,6 +27,7 @@ void CTestCResultContext::test()
     bool dataTypeFolderFound = false;
 
     QStringList resultContextDirs = workingDir.entryList(QDir::AllDirs);
+    //three entries: ., .. and the real directory
     QVERIFY2(resultContextDirs.size() == 3,"Maybe there is no or too much resultcontext directories.");
 
     workingDir.cd(resultContextDirs.at(2));
@@ -43,7 +44,7 @@ void CTestCResultContext::test()
         if(entry == DT_FEATURE_MATCH){
             dataTypeFolderFound = true;
         }
-        if(entry == QString("nameOfLogFile")){
+        if(entry == QString("log.txt")){
             logFound = true;
         }
     }
