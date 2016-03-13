@@ -1,13 +1,28 @@
 %Statische Codeanalyse mit verschiedenen Tools (CppCheck, Compiler, ...)
-Statische Codeanalyse analysiert den Code ohne ihn dabei auszuführen. Sie hilft beim Finden von Mängeln im Code und verbessert so die Codequalität. Neben stilistischen Mängeln können so auch Fehler bspw. beim Speicherzugriff gefunden werden. Zur statischen Codea gibt es spezielle Tools, z. B. CppCheck. Des Weiteren zeigen bereits Compiler häufig Warnungen, falls mögliche Mängel entdeckt wurden. Auch wenn Warnungen unbegründet sind, sollten diese aus Gründen der Übersichtlichkeit behoben werden. \par
-Nachfolgend sind die Ergebnisse der Analysen mit verschiedenen Tools aufgeführt. Im Falle eines Fehlers oder einer Warnung ist zusätzlich beschrieben, wie der Fehler oder die Warnung behoben wurden.
+Statische Codeanalyse analysiert den Code ohne ihn dabei auszuführen. Sie hilft beim Finden von Mängeln im Code und verbessert so die Codequalität. Neben stilistischen Mängeln können so auch Fehler bspw. beim Speicherzugriff gefunden werden. Zur statischen Codeanalyse gibt es spezielle Tools, z. B. CppCheck. Des Weiteren zeigen bereits Compiler häufig Warnungen, falls mögliche Mängel entdeckt wurden. Auch wenn Warnungen unbegründet sind, sollten diese aus Gründen der Übersichtlichkeit behoben werden. \par
+Nachfolgend sind die Ergebnisse der Analysen mit verschiedenen Tools aufgeführt. Im Falle eines Fehlers oder einer Warnung ist zusätzlich beschrieben, warum der Fehler oder die Warnung nicht behoben wurde.
 
 \section{Clang++/LLVM Compiler}
+Clang++ ist ein Compiler und sollte, wie im Pflichtenheft notiert, für die Entwicklung dieses Projektes verwendet werden. Daher ist es besonders wichtig, dass das Kompilieren mit Clang++ ohne Fehler oder Warnungen erfolgt. Zum Testen wurde das Hauptprojekt und das Testprojekt kompiliert und alle Warnungen und Fehler notiert. Die Tests wurden mit den Optionen -Wall und -Wextra ausgeführt. Diese Optionen aktivieren alle sinnvollen Warnungen. Clang++ wurde in der Version 3.7.0 verwendet.
+Resultat: Es werden keine Warnungen oder Fehler mehr angezeigt.
 
 \section{G++/GNU Compiler Collection}
-
-\section{Microsoft Visual C++ Compiler}
+G++ ist ein weiterer weit verbreiteter Compiler. Zum Testen wurde das Hauptprojekt und das Testprojekt kompiliert und alle Warnungen und Fehler notiert. Die Tests wurden mit den Optionen -Wall und -Wextra ausgeführt. Diese Optionen aktivieren alle sinnvollen Warnungen. G++ wurde in der Version 5.3.1 verwendet.
+Resultat: Es werden keine Warnungen oder Fehler mehr angezeigt.
 
 \section{CppCheck}
+CppCheck ist ein Tool, das speziell zur statischen Codeanalyse entwickelt wurde und zeigt verschiedene Fehler, Warnungen und Empfehlungen für den Code. Der Ordner 3DMuVi mit den Quelldateien des Haupt- und Testprojekts wurde mit CppCheck geprüft. Dabei wurde CppCheck in Version 1.70 verwendet.
+Resultat: Folgender Meldungen werden noch angezeigt:
+\begin{itemize}
+\item \textbf{Meldung:} Variable 'res' is reassigned a value before the old one has been used.\newline
+Eine Behebung der Meldung ist jedoch nur aus Performancegründen sinnvoll und kann zu unschönerem Code führe. Von einer Behebung der Meldung wird daher abgesehen. Weitere Meldungen dieser Art werden im Folgenden nicht aufgeführt.
+\item \textbf{Meldung:} Non reentrant function 'localtime' called. For threadsafe applications it is recommended to use the reentrant replacement function 'localtime\_r'.\newline
+Die Standardfunktion localtime ist nicht thread-safe. CppCheck empfiehlt daher die Verwendung von localtime\_r, welche jedoch nur unter Posix-Systemen zur Verfügung steht. Die Alternative localtime\_s aus dem Standard C11 wird nur von wenigen Compilern umgesetzt. Aus Gründen der Plattformunabhängikeit wird daher weiterhin localtime verwendet.
+\item \textbf{Meldung:} The configuration 'QSLOG\_IS\_SHARED\_LIBRARY\_IMPORT' was not checked because its code equals another one.\newline
+Diese Meldung wird nicht durch 3D-MuVi sondern QsLog verursacht. Sie wird daher ignoriert. Weitere Meldungen, die nur QsLog betreffen, werden hier nicht weiter aufgeführt.
+\item \textbf{Meldung:} The class 'CTestCLogWidget' does not have a constructor although it has private member variables. Member variables of builtin types are left uninitialized when the class is instantiated. That may cause bugs or undefined behavior.\newline
+CTestCLogWidget ist eine Testklasse und ist nur für die Verwendung mit der Qt-Test-Suit gedacht. Diese ruft auf jeder zu testenden Klasse vor der Ausführung der Tests den Slot initTestCase auf. Die Testklasse hat in diesem Slot die Möglichkeit alle Variablen zu initialisieren. Ein Konstruktor ist daher nicht nötig. Weitere Meldungen dieser Art, die ebenfalls Testklassen betreffen, werden hier nicht weiter behandelt.
+\end{itemize}
 
 \section{Artistic Style}
+Artistic Style prüft die Formatierung des Codes an Hand gegebener Richtlinien und korrigiert die Formatierung, falls sie nicht korrekt ist. 
