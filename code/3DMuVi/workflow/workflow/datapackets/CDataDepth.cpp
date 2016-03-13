@@ -48,7 +48,7 @@ void CDataDepth::serialize(AStreamProvider *stream) {
         for (auto map : *depthMap) {
             std::tie(id, dMap) = map;
 
-            stream->setFileName(QString(QString(id) + ".png"));
+            stream->setFileName(QString::number(id) + ".png");
             dataStream = stream->getNextStream();
 
             //serialize a QImage
