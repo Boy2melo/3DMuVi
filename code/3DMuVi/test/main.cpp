@@ -68,7 +68,7 @@ int main(int argc, char* argv[])
   failCounter += QTest::qExec(&imageIo, argc, argv);
   failCounter += QTest::qExec(&textIo, argc, argv);
   failCounter += QTest::qExec(&inputDataSet, argc, argv);
-  //failCounter += QTest::qExec(&resultContext, argc, argv); Fehler in Datapackets führt zu einem seg fault.
+  failCounter += QTest::qExec(&resultContext, argc, argv);
 
   failCounter += QTest::qExec(&logControll, argc, argv);
   failCounter += QTest::qExec(&logHistory, argc, argv);
@@ -76,8 +76,8 @@ int main(int argc, char* argv[])
   failCounter += QTest::qExec(&algorithmcontroller, argc, argv);
   failCounter += QTest::qExec(&globalcontroller, argc, argv);
 
-  //failCounter += QTest::qExec(&datastore, argc, argv);
-  //failCounter += QTest::qExec(&workflow, argc, argv);
+  failCounter += QTest::qExec(&datastore, argc, argv);
+  failCounter += QTest::qExec(&workflow, argc, argv);
   failCounter += QTest::qExec(&imageTab, argc, argv);
   failCounter += QTest::qExec(&pluginmanager, argc, argv);
   failCounter += QTest::qExec(&workflowmanager, argc, argv);
@@ -87,7 +87,7 @@ int main(int argc, char* argv[])
   failCounter += QTest::qExec(&algorithmSettings, argc, argv);
   failCounter += QTest::qExec(&algorithmExecution, argc, argv);
   failCounter += QTest::qExec(&globalParameterSL, argc, argv);
-  //failCounter += QTest::qExec(&resultDir, argc, argv); Fehler in Datapackets führt zu einem seg fault.
+  failCounter += QTest::qExec(&resultDir, argc, argv);
   failCounter += QTest::qExec(&logoutput, argc, argv);
   failCounter += QTest::qExec(&algorithmoutput, argc, argv);
 

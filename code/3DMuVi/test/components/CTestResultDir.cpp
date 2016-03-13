@@ -9,6 +9,11 @@ using DepthMaps = std::vector<std::tuple<uint32_t, QImage>>;
 
 void CTestResultDir::test(){
 
+QDir currentDir;
+if(!currentDir.cd("results"))
+{
+  currentDir.mkdir("results");
+}
 QUrl path("results");
 CAlgorithmSettingController asctr(path);
 CAlgorithmSettingController* algoSCT = &asctr;
@@ -43,6 +48,7 @@ QCOMPARE(dirx.cd(path.path()),true);
 dirx.cd(dirx.entryList(QDir::AllDirs).last());
 QCOMPARE(dirx.exists(dfp.getDataType()),true);
 QCOMPARE(dirx.exists(ddp.getDataType()),true);
+dirx.removeRecursively();
 
 
 }
