@@ -23,6 +23,3 @@ Diese Meldung wird nicht durch 3D-MuVi sondern QsLog verursacht. Sie wird daher 
 \item \textbf{Meldung:} The class 'CTestCLogWidget' does not have a constructor although it has private member variables. Member variables of builtin types are left uninitialized when the class is instantiated. That may cause bugs or undefined behavior.\newline
 CTestCLogWidget ist eine Testklasse und ist nur für die Verwendung mit der Qt-Test-Suit gedacht. Diese ruft auf jeder zu testenden Klasse vor der Ausführung der Tests den Slot initTestCase auf. Die Testklasse hat in diesem Slot die Möglichkeit alle Variablen zu initialisieren. Ein Konstruktor ist daher nicht nötig. Weitere Meldungen dieser Art, die ebenfalls Testklassen betreffen, werden hier nicht weiter behandelt.
 \end{itemize}
-
-\section{Artistic Style}
-Artistic Style prüft die Formatierung des Codes an Hand gegebener Richtlinien und korrigiert die Formatierung, falls sie nicht korrekt ist. 
