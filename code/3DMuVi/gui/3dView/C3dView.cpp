@@ -3,7 +3,7 @@
 
 C3dView::C3dView(QWidget* parent) : CPclView(parent)
 {
-
+  showCoordinateSystem(true);
 }
 
 void C3dView::setModelTypeSelector(QComboBox* modelTypeComboBox)

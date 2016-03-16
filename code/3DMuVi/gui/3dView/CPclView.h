@@ -106,8 +106,9 @@ public:
                         const QString& id = QString("camera"));
 
   /*!
-  \brief Not implemented.
-  */
+   * \brief Shows or hides a coordinate system according to state.
+   * \param state Shows the coordinate system if this is true or hides it if this is false.
+   */
   void showCoordinateSystem(bool state);
 
   /*!
@@ -134,6 +135,7 @@ signals:
 private:
   std::unique_ptr<QVTKWidget> mpQVtkWidget;
   std::unique_ptr<pcl::visualization::PCLVisualizer> mpPclVisualizer;
+  bool mCoordinateSystemAdded = false;
 };
 
 #endif // CPCLVIEW_H
