@@ -53,10 +53,10 @@ void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
 
   // Step 2: extract parameters from mSettings
   auto upright = mSettings->value("Upright").toBool(false);
-  auto octaves = mSettings->value("Octaves").toInt(4);
-  auto intervals = mSettings->value("Levels").toInt(3);
+  auto octaves = mSettings->value("Octaves").toInt(5);
+  auto intervals = mSettings->value("Levels").toInt(4);
   auto init_sample = mSettings->value("Init Samples").toInt(2);
-  auto thres = mSettings->value("Threshold").toDouble(0.00001);
+  auto thres = mSettings->value("Threshold").toDouble(0.0004);
 
   // Step 3: run algorithm
   shared_ptr<FeatureTable> result(new FeatureTable);

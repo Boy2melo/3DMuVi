@@ -7,6 +7,8 @@
 QT       += core gui widgets
 
 TARGET = PluginSurf
+DESTDIR = ../../../Win32/Debug/plugins
+
 TEMPLATE = lib
 CONFIG += plugin
 QMAKE_CXXFLAGS += --std=c++11
@@ -14,7 +16,7 @@ QMAKE_CXXFLAGS += --std=c++11
 CONFIG += link_pkgconfig
 PKGCONFIG += opencv
 
-LIBS += -L$$PWD/OpenSURFcpp/ -lsurf
+LIBS += $$PWD/OpenSURFcpp/libsurf.a
 
 SOURCES += \
     plugin.cpp \
