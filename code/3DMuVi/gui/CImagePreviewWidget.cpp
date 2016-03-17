@@ -27,7 +27,7 @@ CImagePreviewWidget::~CImagePreviewWidget()
 */
 //============================================================
 void CImagePreviewWidget::setImages(std::vector<CImagePreviewItem*> images)
-{
+{ 
   mImages = images;
   clear();
   for(CImagePreviewItem* i : images)

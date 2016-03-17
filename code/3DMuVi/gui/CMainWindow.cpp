@@ -79,7 +79,9 @@ void CMainWindow::setLoadImage(QUrl url){
       {
         imageItems.push_back(new CImagePreviewItem(std::get<2>(i)));
       }
-
+      QString iFrameworkM = QString::number(imageItems.size());
+      iFrameworkM.append(" images have been loaded from the directory");
+      CLogController::instance().frameworkMessage(iFrameworkM);
       ui->imagePreviewWidget->setImages(imageItems);
       ui->algorithmSelector->setDataStore(dataStore->getId());
 
