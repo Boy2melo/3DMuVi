@@ -19,6 +19,9 @@ CPclView::CPclView(QWidget *parent) : QWidget(parent)
   mpQVtkWidget->SetRenderWindow(mpPclVisualizer->getRenderWindow());
   mpPclVisualizer->setupInteractor(mpQVtkWidget->GetInteractor(), mpQVtkWidget->GetRenderWindow());
   mpQVtkWidget->update();
+
+  mpPclVisualizer->setCameraPosition(0, 0, -1, 0, 0, 1, 0, -1, 0);
+  mpPclVisualizer->setCameraFieldOfView(0.95);
 }
 
 CPclView::~CPclView()
@@ -123,13 +126,22 @@ void CPclView::updateCameraMesh(const pcl::PointXYZ& position,
   addCameraMesh(position, rotation, id);
 }
 
-//Not implemented
-/*
 void CPclView::showCoordinateSystem(bool state)
 {
-
+  if(state && !mCoordinateSystemAdded)
+  {
+    mCoordinateSystemAdded = true;
+    mpPclVisualizer->addCoordinateSystem();
+  }
+  else if(!state && mCoordinateSystemAdded)
+  {
+    mCoordinateSystemAdded = false;
+    mpPclVisualizer->addCoordinateSystem();
+  }
 }
 
+//Not implemented
+/*
 void CPclView::setBackground(float red, float blue, float green)
 {
 
