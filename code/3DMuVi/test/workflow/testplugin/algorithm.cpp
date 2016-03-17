@@ -13,13 +13,12 @@ void TestAlgorithm::setLogger(CLogController *controller) {
     mLogger = controller;
 }
 
-void TestAlgorithm::setParameters(QJsonObject *settings) {
+void TestAlgorithm::setParameters(QJsonObject settings) {
     mSettings = settings;
 }
 
 TestAlgorithm::TestAlgorithm(QStringList inputTypes, QStringList outputTypes) {
     mIsBusy = false;
-    mSettings = nullptr;
     mLogger = nullptr;
 
     mInputTypes.append(inputTypes);
@@ -39,7 +38,7 @@ void TestAlgorithm::setValidateCallback(std::function<bool(const QJsonObject*)> 
 }
 
 void TestAlgorithm::run(CContextDataStore *dataStore, std::function<void(CContextDataStore *)> callback) {
-    if (!IsBusy() && ValidateParameters(mSettings)) {
+    if (!IsBusy() && ValidateParameters(&mSettings)) {
         executeAlgorithm(dataStore);
         callback(dataStore);
     }

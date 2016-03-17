@@ -4,13 +4,15 @@
 #include <workflow/workflow/cworkflowmanager.h>
 #include <workflow/plugin/cpluginmanager.h>
 
-QJsonObject* CTestAlgorithmSettings::mpSettings = nullptr;
+QJsonObject CTestAlgorithmSettings::mSettings;
+bool CTestAlgorithmSettings::mSettingsSet = false;
 const int CTestAlgorithmSettings::TEST_VALUE_VALID = 33;
 const int CTestAlgorithmSettings::TEST_VALUE_INVALID = 66;
 
-void CTestAlgorithmSettings::setParameters(QJsonObject* settings)
+void CTestAlgorithmSettings::setParameters(QJsonObject settings)
 {
-  mpSettings = settings;
+  mSettings = settings;
+  mSettingsSet = true;
 }
 
 void CTestAlgorithmSettings::test()
@@ -42,17 +44,14 @@ void CTestAlgorithmSettings::test()
     index = model->index(0, 0, settingsView->rootIndex());
     index = model->index(0, 1, index);
 
-    mpSettings = nullptr;
+    mSettingsSet = false;
     model->setData(index, QVariant(TEST_VALUE_VALID));
-    QVERIFY(mpSettings != nullptr);
-    if(mpSettings)
-    {
-      QCOMPARE(mpSettings->value("parameter").toInt(), TEST_VALUE_VALID);
-    }
+    QVERIFY(mSettingsSet);
+    QCOMPARE(mSettings.value("parameter").toInt(), TEST_VALUE_VALID);
 
-    mpSettings = nullptr;
+    mSettingsSet = false;
     model->setData(index, QVariant(TEST_VALUE_INVALID));
-    QCOMPARE(mpSettings, static_cast<QJsonObject*>(nullptr));
+    QVERIFY(!mSettingsSet);
 
     delete settingsView;
   }
