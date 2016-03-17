@@ -34,7 +34,7 @@ void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename) {
     }
     if (workflow->getStep(row)->ValidateParameters(&data)) {
         emit saveQJson(data, filename);
-        workflow->getStep(row)->getAlgorithm()->setParameters(&data);
+        workflow->getStep(row)->getAlgorithm()->setParameters(data);
     }
     else{
         QString pluginM = workflow->getStep(row)->Name();
@@ -60,7 +60,7 @@ void CAlgorithmSettingsModel::algorithmChanged(int step) {
     mRootItem->getChilds()->swap(step, mRootItem->getChilds()->size() - 1);
     mRootItem->getChilds()->removeLast();
     insertName(step);
-    workflow->getStep(step)->getAlgorithm()->setParameters(&object);
+    workflow->getStep(step)->getAlgorithm()->setParameters(object);
     QUrl url;
     url.setPassword("a" + object.keys().value(0));
     emit saveQJson(object, url);
@@ -86,7 +86,7 @@ bool CAlgorithmSettingsModel::setData(const QModelIndex& index, const QVariant& 
 
     if(plugin->ValidateParameters(&params))
     {
-      plugin->getAlgorithm()->setParameters(&params);
+      plugin->getAlgorithm()->setParameters(params);
     }else{
         QString pluginM = plugin->Name();
         pluginM.append(" parameter not Valid!");

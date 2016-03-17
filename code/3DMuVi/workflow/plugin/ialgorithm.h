@@ -26,7 +26,7 @@ public:
     /*!
      * \brief Setze die Parameter für den nächsten Durchlauf
      */
-    virtual void setParameters(QJsonObject *settings) = 0;
+    virtual void setParameters(QJsonObject settings) = 0;
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */

@@ -37,7 +37,7 @@ void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow) {
         model->loadQJson(object);
         model->insertName(i);
         if (plugin) {
-        plugin->getAlgorithm()->setParameters(&object);
+        plugin->getAlgorithm()->setParameters(object);
         }
         setIndexWidget(model->index(i, 1), new CAlgorithmSettingsSaveLoadWidget(this, i, *model));
     }
