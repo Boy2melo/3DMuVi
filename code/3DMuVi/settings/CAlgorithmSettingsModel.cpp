@@ -1,4 +1,5 @@
 #include "CAlgorithmSettingsModel.h"
+#include "logger/controll/CLogController.h"
 
 CAlgorithmSettingsModel::CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithmSettingController& controller) {
     connect(&controller, &CAlgorithmSettingController::loadQJson,
@@ -34,6 +35,11 @@ void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename) {
     if (workflow->getStep(row)->ValidateParameters(&data)) {
         emit saveQJson(data, filename);
         workflow->getStep(row)->getAlgorithm()->setParameters(&data);
+    }
+    else{
+        QString pluginM = workflow->getStep(row)->Name();
+        pluginM.append(" parameter not Valid!");
+        CLogController::instance().frameworkMessage(pluginM);
     }
 }
 
@@ -81,9 +87,14 @@ bool CAlgorithmSettingsModel::setData(const QModelIndex& index, const QVariant& 
     if(plugin->ValidateParameters(&params))
     {
       plugin->getAlgorithm()->setParameters(new QJsonObject(params));
+    }else{
+        QString pluginM = plugin->Name();
+        pluginM.append(" parameter not Valid!");
+        CLogController::instance().frameworkMessage(pluginM);
     }
     return true;
   }
+
   return false;
 }
 void CAlgorithmSettingsModel::insertName(int row)
