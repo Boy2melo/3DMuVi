@@ -131,6 +131,7 @@ void CAlgorithmSelector::startButtonPushed(bool isPushed) {
             emit workflowRunning(true);
             if (!mpWorkflow->run(mDataStoreId)) {
                 startStopButton->setText("Start");
+                mStatus->showMessage("Error occurred");
                 emit workflowRunning(false);
             }
         }
