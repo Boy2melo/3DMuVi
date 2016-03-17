@@ -21,11 +21,13 @@ bool AWorkflow::run(const QString storeId, bool multiThread) {
 
     if (!checkAvailableDataTypes()) {
         mMutex.unlock();
+        CLogController::instance().frameworkMessage("ERROR: Wrong Plugin Setup. Please Check Plugin Input/Output Types");
         return false;   //Workflow wrong configured
     }
 
     if (store == nullptr) {
         mMutex.unlock();
+        CLogController::instance().frameworkMessage("ERROR: Invalid DataStore");
         return false;   // Invalid store
     }
 

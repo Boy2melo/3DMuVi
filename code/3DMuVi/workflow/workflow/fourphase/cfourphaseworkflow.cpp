@@ -1,6 +1,6 @@
 #include "cfourphaseworkflow.h"
 #include "workflow/plugin/cpluginmanager.h"
-
+#include "logger/controll/CLogController.h"
 
 CFourPhaseWorkflow::CFourPhaseWorkflow() : AWorkflow() {
     mPlugins = new IPlugin*[getStepCount()];
@@ -73,33 +73,53 @@ void CFourPhaseWorkflow::executeAlgorithm(CContextDataStore* store) {
 
     if (!algorithm->IsBusy() && !store->IsAborted()) {
         store->incCalculationStep();
+        QString finishedM = mPlugins[0]->Name();
+        finishedM.append(" - plugin started");
+        CLogController::instance().frameworkMessage(finishedM);
         algorithm->run(store, [this](CContextDataStore *store) {
             IAlgorithm* algorithm = mPlugins[1]->getAlgorithm();
             algorithm->setLogger(&CLogController::instance());
 
             if (!algorithm->IsBusy() && !store->IsAborted()) {
                 store->incCalculationStep();
+                QString finishedM = mPlugins[1]->Name();
+                finishedM.append(" - plugin started");
+                CLogController::instance().frameworkMessage(finishedM);
                 algorithm->run(store, [this](CContextDataStore *store) {
                     IAlgorithm* algorithm = mPlugins[2]->getAlgorithm();
                     algorithm->setLogger(&CLogController::instance());
 
                     if (!algorithm->IsBusy() && !store->IsAborted()) {
                         store->incCalculationStep();
+                        QString finishedM = mPlugins[2]->Name();
+                        finishedM.append(" - plugin started");
+                        CLogController::instance().frameworkMessage(finishedM);
                         algorithm->run(store, [this](CContextDataStore *store) {
                             IAlgorithm* algorithm = mPlugins[3]->getAlgorithm();
                             algorithm->setLogger(&CLogController::instance());
                             if (!algorithm->IsBusy() && !store->IsAborted()) {
                                 store->incCalculationStep();
+                                QString finishedM = mPlugins[3]->Name();
+                                finishedM.append(" - plugin started");
+                                CLogController::instance().frameworkMessage(finishedM);
                                 algorithm->run(store, [this](CContextDataStore *store) {
                                     sigDataStoreFinished(store);
                                 });
-                            } else { sigDataStoreFinished(store); }
+                            } else { sigDataStoreFinished(store);
+
+                            }
                         });
-                    } else { sigDataStoreFinished(store); }
+                    } else { sigDataStoreFinished(store);
+
+                    }
                 });
-            } else { sigDataStoreFinished(store); }
+            } else { sigDataStoreFinished(store);
+
+            }
         });
-    } else { sigDataStoreFinished(store); };
+    } else { sigDataStoreFinished(store);
+
+    };
 #endif
 }
 
