@@ -18,6 +18,10 @@ void CLASS_GEN(Algorithm)::setParameters(QJsonObject *settings){
 }
 
 CLASS_GEN(Algorithm)::CLASS_GEN(Algorithm)() {
+    mIsBusy = false;
+    mSettings = nullptr;
+    mLogger = nullptr;
+
     OnInitialize();
 }
 
@@ -31,9 +35,7 @@ QStringList CLASS_GEN(Algorithm)::getOutputDataTypes() const {
 
 void CLASS_GEN(Algorithm)::run(CContextDataStore *dataStore, std::function<void (CContextDataStore *)> callback){
     if(!IsBusy() && mSettings != nullptr && mLogger != nullptr && ValidateParameters(mSettings)){
-        mIsBusy = true;
         executeAlgorithm(dataStore);
         callback(dataStore);
-        mIsBusy = false;
     }
 }
