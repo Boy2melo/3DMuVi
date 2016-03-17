@@ -24,8 +24,8 @@ void CTestAlgorithmControllerOutput::test()
         }
     }
     QVERIFY2(settingsfound, "could not find settings");
-    controller->requestQJson(QUrl(workingDir.path()));
-    QJsonObject* testdata = controller->getSetting(QString("settings"));
+    controller->requestQJson(QUrl(workingDir.filePath("settings.json")));
+    QJsonObject* testdata = controller->getSetting(QString("settings.json"));
     QCOMPARE(testdata->value("test"), data.value("test"));
     QCOMPARE(testdata->value("testint"), data.value("testint"));
     QCOMPARE(testdata->value("testbool"), data.value("testbool"));
