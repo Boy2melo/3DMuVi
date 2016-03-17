@@ -86,7 +86,7 @@ bool CAlgorithmSettingsModel::setData(const QModelIndex& index, const QVariant& 
 
     if(plugin->ValidateParameters(&params))
     {
-      plugin->getAlgorithm()->setParameters(new QJsonObject(params));
+      plugin->getAlgorithm()->setParameters(&params);
     }else{
         QString pluginM = plugin->Name();
         pluginM.append(" parameter not Valid!");
