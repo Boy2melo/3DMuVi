@@ -15,9 +15,10 @@ void CLASS_GEN(Algorithm)::setLogger(CLogController *controller) {
     mLogger = controller;
 }
 
-void CLASS_GEN(Algorithm)::setParameters(QJsonObject *settings){
+void CLASS_GEN(Algorithm)::setParameters(QJsonObject settings){
     CTestAlgorithmSettings::setParameters(settings);
-    mSettings = settings;
+    mQJson = settings;
+    mSettings = &mQJson;	
 }
 
 CLASS_GEN(Algorithm)::CLASS_GEN(Algorithm)() {
