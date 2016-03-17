@@ -32,6 +32,9 @@ bool CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
 
 void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
 
+    //--- need to be done in order to use '.' as decimal seperator in the conversion to string ---
+    std::setlocale(LC_ALL, "C");
+
     auto deg2Rad = [](float val){return (val / 180.f) * M_PI; };
 
     mPoseFileStream.close();
@@ -49,6 +52,7 @@ void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
       //--- if new line is read, parse pose. otherwise return. ---
         std::string line;
         std::string delimiter = mSettings->value("Delimiter").toString().toStdString();
+//        std::string delimiter = ",";
         if(std::getline(mPoseFileStream, line))
         {
           SPose newPose;
@@ -81,6 +85,14 @@ void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
           newPose.translation = QVector3D(poseVals[0], poseVals[1], poseVals[2]);
           newPose.eulerAngles = QVector3D(deg2Rad(poseVals[3]), deg2Rad(poseVals[4]), deg2Rad(poseVals[5]));
 
+          double qW, qX, qY, qZ;
+          cvtEulerToQuaternion(newPose.eulerAngles.x(), newPose.eulerAngles.y(),
+                               newPose.eulerAngles.z(), qW, qX, qY, qZ);
+          newPose.orientation.setScalar(qW);
+          newPose.orientation.setX(qX);
+          newPose.orientation.setY(qY);
+          newPose.orientation.setZ(qZ);
+
           poses->push_back(newPose);
        }
     }
@@ -95,6 +107,7 @@ void CLASS_GEN(Algorithm)::openFileStream()
 {
   //--- open file stream ---
   mPoseFileStream.open(mSettings->value("GtSrcFile").toString().toStdString(), std::ios_base::in);
+//  mPoseFileStream.open("/media/rufboi/DATA/Testdaten/3dmuvi/camera_track.txt", std::ios_base::in);
   if(!mPoseFileStream.is_open())
   {
     std::cout << "\033[33m"
@@ -103,4 +116,32 @@ void CLASS_GEN(Algorithm)::openFileStream()
               << "\033[0m"
               << std::endl;
   }
+}
+
+void CLASS_GEN(Algorithm)::cvtEulerToQuaternion(double const iAngleX, double const iAngleY,
+                                                double const iAngleZ,
+                                                double & oQW, double& oQX, double& oQY, double& oQZ)
+{
+  const double cosX = std::cos(iAngleX / 2.f);
+  const double cosY = std::cos(iAngleY / 2.f);
+  const double cosZ = std::cos(iAngleZ / 2.f);
+
+  const double sinX = std::sin(iAngleX / 2.f);
+  const double sinY = std::sin(iAngleY / 2.f);
+  const double sinZ = std::sin(iAngleZ / 2.f);
+
+
+  oQW = cosZ * cosY * cosX + sinZ * sinY * sinX;
+  oQX = cosZ * cosY * sinX - sinZ * sinY * cosX;
+  oQY = cosZ * sinY * cosX + sinZ * cosY * sinX;
+  oQZ = sinZ * cosY * cosX - cosZ * sinY * sinX;
+
+  // compute norm
+  double norm = std::pow(oQW, 2) + std::pow(oQX, 2) + std::pow(oQY, 2) + std::pow(oQZ, 2);
+
+  // normalize quaternion
+  oQX /= norm;
+  oQY /= norm;
+  oQZ /= norm;
+  oQW /= norm;
 }

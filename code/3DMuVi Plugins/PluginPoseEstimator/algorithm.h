@@ -67,6 +67,9 @@ protected:
 
 private:
     void openFileStream();
-};
 
+    void cvtEulerToQuaternion(double const iAngleX, double const iAngleY, double const iAngleZ,
+                              double & oQW, double& oQX, double& oQY, double& oQZ);
+
+};
 #endif // ALGORITHM_H
