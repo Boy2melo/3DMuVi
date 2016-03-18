@@ -28,6 +28,9 @@ void CAlgorithmSettingsView::reset(){
     for (int i = 0; i < stepcount; i++) {
     setIndexWidget(model->index(i, 1), new CAlgorithmSettingsSaveLoadWidget(this, i, *model));
    }
+    if(stepcount >= 1){
+        model->validateAll();
+    }
     this->show();
 }
 void CAlgorithmSettingsView::onStart(){

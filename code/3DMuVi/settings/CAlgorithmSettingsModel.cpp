@@ -26,6 +26,10 @@ bool CAlgorithmSettingsModel::validateAll(){
        CQJsonTreeItem* parentItem = mRootItem->getChilds()->value(row);
        CQJsonTreeItem* tempItem;
        int size = parentItem->getChilds()->size();
+       int size2 = workflow->getStepCount();
+       if(size =! size2){
+         return false;
+       }
        for(int i = 0; i < size; i++)
        {
          tempItem= parentItem->getChilds()->value(i);
