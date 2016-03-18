@@ -91,7 +91,7 @@ void CDataViewTabContainer::clearData()
 
 void CDataViewTabContainer::onCurrentChanged(int index)
 {
-  if(tabText(index) == "Input Images")
+  if(tabText(index) == "Input images")
   {
     mpInputImageView->activate();
   }
