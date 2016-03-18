@@ -39,5 +39,5 @@ void CAlgorithmSettingsSaveLoadWidget::savebutton()
 {
     QUrl url = QFileDialog::getSaveFileName(this, tr("Save File"), "",
                                              tr("QJason File(*.json);;All Files (*)"));
-    this->settingmodel->saveSettings(settingrow,url);
+    this->settingmodel->saveSettingsEx(settingrow,url);
 }

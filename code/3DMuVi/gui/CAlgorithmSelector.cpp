@@ -107,7 +107,7 @@ void CAlgorithmSelector::onCurrentIndexChanged(int index) {
 
 void CAlgorithmSelector::startButtonPushed(bool isPushed) {
     Q_UNUSED(isPushed);
-
+    emit start();
     QPushButton* startStopButton = nullptr;
 
     int steps = mpWorkflow->getStepCount();

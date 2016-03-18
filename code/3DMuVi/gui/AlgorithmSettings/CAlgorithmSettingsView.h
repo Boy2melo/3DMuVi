@@ -31,6 +31,7 @@ public:
     
 public slots:
   void onAlgorithmChanged(int step);
+  void onStart();
  private:
   void reset() override;
   QPointer<CAlgorithmSettingsModel> model;

@@ -38,6 +38,10 @@ public:
 
 signals:
   /*!
+   * \brief start signal workflow try. Check all Parameter in Settingsview
+   */
+  void start();
+  /*!
    * \brief This signal is emitted when the workflows execution state changes.
    * \param step
    */

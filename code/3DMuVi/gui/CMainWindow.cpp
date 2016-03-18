@@ -48,6 +48,8 @@ CMainWindow::CMainWindow(QWidget *parent) :
 
   connect(ui->algorithmSelector, &CAlgorithmSelector::algorithmChanged, ui->algorithmSettingsView,
           &CAlgorithmSettingsView::onAlgorithmChanged);
+  connect(ui->algorithmSelector, &CAlgorithmSelector::start, ui->algorithmSettingsView,
+          &CAlgorithmSettingsView::onStart);
 
   connect(ui->logDebugCheckBox, &QCheckBox::stateChanged, ui->logWidget,
           &CLogWidget::onStateChangedDebug);

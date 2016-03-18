@@ -30,6 +30,12 @@ void CAlgorithmSettingsView::reset(){
    }
     this->show();
 }
+void CAlgorithmSettingsView::onStart(){
+   if(model->validateAll()){
+       CLogController::instance().frameworkMessage("Alle Parameter Korrekt Validiert");
+   }
+
+}
 
 //============================================================
 /*!

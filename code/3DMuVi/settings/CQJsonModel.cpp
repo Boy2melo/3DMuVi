@@ -46,6 +46,11 @@ void CQJsonModel::saveSettings(int row, QUrl filename) {
     data = mRootItem->getChilds()->value(row)->toJson();
     emit saveQJson(data, filename);
 }
+void CQJsonModel::saveSettingsEx(int row, QUrl filename) {
+    QJsonObject data;
+    data = mRootItem->getChilds()->value(row)->toJson();
+    emit saveQJsonEx(data, filename);
+}
 
 void CQJsonModel::loadSettings(int row, QUrl filename) {
     emit requestQJson(filename);

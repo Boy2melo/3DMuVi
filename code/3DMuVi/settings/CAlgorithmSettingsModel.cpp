@@ -8,6 +8,8 @@ CAlgorithmSettingsModel::CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithm
             &controller, &CAlgorithmSettingController::requestQJson);
     connect(this, &CQJsonModel::saveQJson,
             &controller, &CAlgorithmSettingController::saveQJson);
+    connect(this, &CQJsonModel::saveQJsonEx,
+            &controller, &CAlgorithmSettingController::saveQJsonEx);
     this->workflow = &workflow;
     this->settingcontroller = &controller;
 }
@@ -15,6 +17,28 @@ CAlgorithmSettingsModel::CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithm
 CAlgorithmSettingsModel::CAlgorithmSettingsModel(QObject* parent, QVector<QJsonObject> list)
     : CQJsonModel(parent, list), workflow(nullptr), settingcontroller(nullptr) {
 
+}
+bool CAlgorithmSettingsModel::validateAll(){
+   int count = mRootItem->getChilds()->size();
+   for(int row = 0; row < count; row++)
+   {
+       QJsonObject data;
+       CQJsonTreeItem* parentItem = mRootItem->getChilds()->value(row);
+       CQJsonTreeItem* tempItem;
+       int size = parentItem->getChilds()->size();
+       for(int i = 0; i < size; i++)
+       {
+         tempItem= parentItem->getChilds()->value(i);
+         QJsonObject o = tempItem->toJson();
+         QString key = o.keys().at(0);
+         data.insert(key, o.take(key));
+       }
+        if (workflow->getStep(row)->ValidateParameters(&data) == false) {
+            CLogController::instance().frameworkMessage("Error: " + workflow->getStep(row)->Name() + " Invalid Parameter");
+         return false;
+        }
+   }
+   return true;
 }
 
 void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename) {
@@ -34,6 +58,31 @@ void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename) {
     }
     if (workflow->getStep(row)->ValidateParameters(&data)) {
         emit saveQJson(data, filename);
+        workflow->getStep(row)->getAlgorithm()->setParameters(data);
+    }
+    else{
+        QString pluginM = workflow->getStep(row)->Name();
+        pluginM.append(" parameter not Valid!");
+        CLogController::instance().frameworkMessage(pluginM);
+    }
+}
+void CAlgorithmSettingsModel::saveSettingsEx(int row, QUrl filename) {
+    QJsonObject data;
+    CQJsonTreeItem* parentItem = mRootItem->getChilds()->value(row);
+    CQJsonTreeItem* tempItem;
+    int size = parentItem->getChilds()->size();
+    for(int i = 0; i < size; i++)
+    {
+      tempItem= parentItem->getChilds()->value(i);
+      QJsonObject o = tempItem->toJson();
+      QString key = o.keys().at(0);
+      data.insert(key, o.take(key));
+    }
+    if (filename.isEmpty() == true) {
+        filename.setPassword("a" + workflow->getStep(row)->Name());
+    }
+    if (workflow->getStep(row)->ValidateParameters(&data)) {
+        emit saveQJsonEx(data, filename);
         workflow->getStep(row)->getAlgorithm()->setParameters(data);
     }
     else{

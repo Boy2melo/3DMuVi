@@ -115,8 +115,20 @@ void CAlgorithmSettingController::requestQJson(QUrl directory) {
     QJsonObject object = docu.object();
     emit loadQJson(object);
 }
-
 void CAlgorithmSettingController::saveQJson(QJsonObject data, QUrl directory) {
+    if (directory.password().startsWith("a")) {
+        QString temp = directory.password();
+        temp.remove(0, 1);
+        directory = QUrl(tempdirectory.url() + "/" + temp + ".json");
+        if (!algorithms.contains(temp)) {
+            algorithms.append(temp);
+            QJsonDocument docu = QJsonDocument(data);
+            QString file = QString(docu.toJson());
+            io.save(directory, file);
+        }
+    }
+}
+void CAlgorithmSettingController::saveQJsonEx(QJsonObject data, QUrl directory) {
 
     QJsonDocument docu = QJsonDocument(data);
     QString filetext = QString(docu.toJson());

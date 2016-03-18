@@ -33,6 +33,7 @@ public:
      * \param filename url for the file
      */
     virtual void saveSettings(int row, QUrl filename);
+    virtual void saveSettingsEx(int row, QUrl filename);
     /*!
      * \brief loadSettings loads an algorithmsettingform a Jsonfile
      * \param row where the new setting should go, delets the old ons
@@ -63,6 +64,7 @@ public slots:
     signals:
     void requestQJson(QUrl directory);
     void saveQJson(QJsonObject data, QUrl directory);
+    void saveQJsonEx(QJsonObject data, QUrl directory);
 
 protected:
     CQJsonTreeItem* backtrack(const QModelIndex& index);
