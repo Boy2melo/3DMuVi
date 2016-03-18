@@ -36,6 +36,8 @@ bool CAlgorithmSettingsModel::validateAll(){
         if (workflow->getStep(row)->ValidateParameters(&data) == false) {
             CLogController::instance().frameworkMessage("Error: " + workflow->getStep(row)->Name() + " Invalid Parameter");
          return false;
+        }else{
+            workflow->getStep(row)->getAlgorithm()->setParameters(data);
         }
    }
    return true;
