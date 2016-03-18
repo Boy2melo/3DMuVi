@@ -45,14 +45,28 @@ void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename) {
 
 void CAlgorithmSettingsModel::loadSettings(int row, QUrl filename) {
     if (filename.isEmpty() == true) {
-        filename.setPassword("a" + workflow->getStep(row)->Name());
+       return;
     }
     emit requestQJson(filename);
     int j = mRootItem->getChilds()->size() - 1;
+    CQJsonTreeItem* oItem = mRootItem->child(row);
+    CQJsonTreeItem* nItem = mRootItem->child(j);
+    int ois = oItem->childCount();
+    int nis = nItem->childCount();
+    if(ois != nis){
+      CLogController::instance().frameworkMessage("Error: Invalid Load Data");
+      return;
+    }
+
+    this->beginResetModel();
     mRootItem->getChilds()->swap(row, j);
     mRootItem->getChilds()->removeAt(j);
     insertName(row);
+    this->endResetModel();
+      CLogController::instance().frameworkMessage("File: " + filename.toString() + " loaded");
+
 }
+
 
 void CAlgorithmSettingsModel::algorithmChanged(int step) {
     QJsonObject object = workflow->getStep(step)->GetParameterJson();

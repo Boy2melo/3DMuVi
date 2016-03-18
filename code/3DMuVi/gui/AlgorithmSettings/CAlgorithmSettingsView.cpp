@@ -19,6 +19,17 @@ CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(pare
 CAlgorithmSettingsView::~CAlgorithmSettingsView() {
     temp.remove();
 }
+void CAlgorithmSettingsView::reset(){
+    QAbstractItemView::reset();
+    this->hide();
+    if(stepcount >= 1){
+     this->setModel(model);
+    }
+    for (int i = 0; i < stepcount; i++) {
+    setIndexWidget(model->index(i, 1), new CAlgorithmSettingsSaveLoadWidget(this, i, *model));
+   }
+    this->show();
+}
 
 //============================================================
 /*!
