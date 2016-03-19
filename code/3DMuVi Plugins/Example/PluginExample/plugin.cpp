@@ -53,7 +53,7 @@ bool CLASS_GEN(Plugin)::ValidateParameters(QJsonObject *params) const {
 }
 
 QString CLASS_GEN(Plugin)::GetPluginType() const {
-    return _PLUGIN_TYPE;
+    return PLUGIN_TYPE;
 }
 
 void CLASS_GEN(Plugin)::Initialize(QPluginLoader* loader) {
