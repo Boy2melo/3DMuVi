@@ -12,7 +12,10 @@ void CTestAlgorithmExecution::test(){
     QPushButton* startButton;
     bool featureMatcherFound = false, poseEstimatorFound = false;
     bool depthEstimatorFound = false, fusionPluginFound = false;
-
+    QComboBox* featureMatcherCB = nullptr, *poseEstimatorCB = nullptr;
+    QComboBox* depthEstimatorCB = nullptr, *fusionPluginCB = nullptr;
+    int featureMatcherIndex = -1, poseEstimatorIndex = -1;
+    int depthEstimatorIndex = -1, fusionPluginIndex = -1;
 
     for(QWidget* w : QApplication::allWidgets())
     {
@@ -32,21 +35,36 @@ void CTestAlgorithmExecution::test(){
 
       if(comboBox)
       {
-          if(setPluginIfValid(comboBox, "featureMatch_t34"))
+          int index = comboBox->findText("featureMatch_t34");
+          if(index > -1)
           {
             featureMatcherFound = true;
+            featureMatcherCB = comboBox;
+            featureMatcherIndex = index;
           }
-          if(setPluginIfValid(comboBox, "pose_t34"))
+
+          index = comboBox->findText("pose_t34");
+          if(index > -1)
           {
             poseEstimatorFound = true;
+            poseEstimatorCB = comboBox;
+            poseEstimatorIndex = index;
           }
-          if(setPluginIfValid(comboBox, "depthMap_t34"))
+
+          index = comboBox->findText("depthMap_t34");
+          if(index > -1)
           {
             depthEstimatorFound = true;
+            depthEstimatorCB = comboBox;
+            depthEstimatorIndex = index;
           }
-          if(setPluginIfValid(comboBox, "dummyFusion_t34"))
+
+          index = comboBox->findText("dummyFusion_t34");
+          if(index > -1)
           {
             fusionPluginFound = true;
+            fusionPluginCB = comboBox;
+            fusionPluginIndex = index;
           }
       }
     }
@@ -55,6 +73,11 @@ void CTestAlgorithmExecution::test(){
     QVERIFY2(poseEstimatorFound, "Dummy pose estimator plugin not found.");
     QVERIFY2(depthEstimatorFound, "Dummy depth estimator plugin not found.");
     QVERIFY2(fusionPluginFound, "Dummy fusion plugin not found.");
+
+    featureMatcherCB->setCurrentIndex(featureMatcherIndex);
+    poseEstimatorCB->setCurrentIndex(poseEstimatorIndex);
+    depthEstimatorCB->setCurrentIndex(depthEstimatorIndex);
+    fusionPluginCB->setCurrentIndex(fusionPluginIndex);
 
     //initial state
     QCOMPARE(statusBar->currentMessage() , QString("Choose Images"));
@@ -75,15 +98,4 @@ void CTestAlgorithmExecution::test(){
     //state finished
     QCOMPARE(statusBar->currentMessage() , QString("Workflow finished."));
     QCOMPARE(startButton->text(), QString("Start"));
-}
-
-bool CTestAlgorithmExecution::setPluginIfValid(QComboBox* comboBox, QString pluginName)
-{
-  int index = comboBox->findText(pluginName);
-  if(index > -1)
-  {
-    comboBox->setCurrentIndex(index);
-    return true;
-  }
-  return false;
 }

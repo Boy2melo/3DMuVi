@@ -24,9 +24,6 @@ private slots:
   \brief Runs the test.
   */
   void test();
-
-private:
-  static bool setPluginIfValid(QComboBox* comboBox, QString pluginName);
 };
 
 #endif // CTESTALGORITHMEXECUTION_H
