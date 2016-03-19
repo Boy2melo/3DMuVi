@@ -27,7 +27,7 @@ bool CAlgorithmSettingsModel::validateAll(){
        CQJsonTreeItem* tempItem;
        int size = parentItem->getChilds()->size();
        int size2 = workflow->getStepCount();
-       if(size =! size2){
+       if(size != size2){
          return false;
        }
        for(int i = 0; i < size; i++)
