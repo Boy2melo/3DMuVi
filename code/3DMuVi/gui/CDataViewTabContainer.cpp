@@ -65,6 +65,11 @@ void CDataViewTabContainer::setImagePreviewWidget(CImagePreviewWidget* imagePrev
           &CImagePreviewWidget::onRelevantImagesChanged);
   connect(imagePreview, &CImagePreviewWidget::imagesSelected, mpDepthMapView,
           &CDepthMapView::onImagesSelected);
+
+#ifdef PCL
+  connect(mp3dView, &C3dView::relevantImagesChanged, imagePreview,
+          &CImagePreviewWidget::onRelevantImagesChanged);
+#endif
 }
 
 void CDataViewTabContainer::applyDataStorage(CContextDataStore* dataStorage)
