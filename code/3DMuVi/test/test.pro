@@ -65,6 +65,8 @@ HEADERS += gui/CTestCLogWidget.h \
            ../gui/ImageViews/CImageView.h \
            ../gui/ImageViews/CInputImageView.h \
            ../gui/CAlgorithmSelector.h \
+           ../gui/CDatasetSelector.h \
+           ../gui/CDatasetSelectorItem.h \
            ../gui/CDataViewTabContainer.h \
            ../gui/CImagePreviewItem.h \
            ../gui/CImagePreviewWidget.h \
@@ -139,6 +141,8 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../gui/ImageViews/CImageView.cpp \
            ../gui/ImageViews/CInputImageView.cpp \
            ../gui/CAlgorithmSelector.cpp \
+           ../gui/CDatasetSelector.cpp \
+           ../gui/CDatasetSelectorItem.cpp \
            ../gui/CDataViewTabContainer.cpp \
            ../gui/CImagePreviewItem.cpp \
            ../gui/CImagePreviewWidget.cpp \
@@ -188,7 +192,8 @@ PCL{
 }
 
 FORMS += ../gui/forms/CMainWindow.ui \
-         ../gui/forms/CSettingsDialog.ui
+         ../gui/forms/CSettingsDialog.ui \
+         ../gui/forms/CDatasetSelector.ui
 
 DISTFILES += \
     io/data/testImage.png \
