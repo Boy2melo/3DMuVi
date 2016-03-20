@@ -76,6 +76,8 @@ void CDataViewTabContainer::applyDataStorage(CContextDataStore* dataStorage)
 #ifdef PCL
   dataStorage->ApplyToDataView(mp3dView);
 #endif
+
+  onCurrentChanged(currentIndex());
 }
 
 void CDataViewTabContainer::clearData()

@@ -33,18 +33,19 @@ void CFeatureView::applyData(const CInputDataSet* packet)
 //============================================================
 void CFeatureView::activate()
 {
+  std::vector<uint32_t> images;
+
   if(appliedFeatureData)
   {
-    std::vector<uint32_t> images;
     for(std::tuple<uint64_t, float, float, uint32_t> i : *appliedFeatureData->getFeatureMatch())
     {
       if(std::find(images.begin(), images.end(), std::get<0>(i)) == images.end()) {
         images.push_back(std::get<0>(i));
       }
     }
-    emit relevantImagesChanged(images);
   }
 
+  emit relevantImagesChanged(images);
 }
 
 void CFeatureView::clearData()
