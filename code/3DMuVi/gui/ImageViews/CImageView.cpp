@@ -166,8 +166,8 @@ for(int i = 0; i < tablesize; i++){
 }
 
 //build ImageOffsetList
-for(int i = 0; i < tablesize; i++){
-    for(int j = 0;j < tablesize; j++ ) {
+for(int j = 0; j < tablesize; j++){
+    for(int i = 0;i < tablesize; i++ ) {
         if(iIndex < images.size()){
             uint32_t id = std::get<0> (images[iIndex]);
             QImage& iRef = std::get<1> (images[iIndex]);
