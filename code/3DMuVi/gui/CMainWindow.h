@@ -63,6 +63,10 @@ private slots:
 
   void onWorkflowRunning(bool isRunning);
   void onDataStoreFinished(CContextDataStore* dataStorage);
+
+  void onCurrentDataStoreChanged(CContextDataStore* dataStore);
+  void onDataStoreDeleted(CContextDataStore* dataStore);
+  void onNewDataStoreRequested();
 };
 
 #endif // CMAINWINDOW_H

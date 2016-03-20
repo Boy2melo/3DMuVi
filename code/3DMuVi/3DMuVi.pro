@@ -55,6 +55,7 @@ HEADERS += ./macros.h \
     ./gui/ImageViews/CInputImageView.h \
     ./gui/CAlgorithmSelector.h \
     ./gui/CDatasetSelector.h \
+    ./gui/CDatasetSelectorItem.h \
     ./gui/CDataViewTabContainer.h \
     ./gui/CImagePreviewItem.h \
     ./gui/CImagePreviewWidget.h \
@@ -103,6 +104,7 @@ SOURCES += ./main.cpp \
     ./gui/ImageViews/CInputImageView.cpp \
     ./gui/CAlgorithmSelector.cpp \
     ./gui/CDatasetSelector.cpp \
+    ./gui/CDatasetSelectorItem.cpp \
     ./gui/CDataViewTabContainer.cpp \
     ./gui/CImagePreviewItem.cpp \
     ./gui/CImagePreviewWidget.cpp \
@@ -141,8 +143,8 @@ PCL{
 }
 
 FORMS += ./gui/forms/CMainWindow.ui \
-    ./gui/forms/CSettingsDialog.ui
-    ./gui/forms/CAlgorithmSettingsSaveLoad.ui \
+    ./gui/forms/CSettingsDialog.ui \
+    ./gui/forms/CDatasetSelector.ui
 
 DISTFILES += \
     gui/forms/CAlgorithmSettingsSaveLoad.ui.qml \

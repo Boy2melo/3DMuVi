@@ -59,6 +59,13 @@ CMainWindow::CMainWindow(QWidget *parent) :
           &CLogWidget::onStateChangedInfo);
   connect(ui->logWarningCheckBox, &QCheckBox::stateChanged, ui->logWidget,
           &CLogWidget::onStateChangedWarning);
+
+  connect(ui->datasetSelector, &CDatasetSelector::currentDataStoreChanged,
+          this, &CMainWindow::onCurrentDataStoreChanged);
+  connect(ui->datasetSelector, &CDatasetSelector::newDataStoreRequested,
+          this, &CMainWindow::onNewDataStoreRequested);
+  connect(ui->datasetSelector, &CDatasetSelector::dataStoreDeleted,
+          this, &CMainWindow::onDataStoreDeleted);
 }
 
 CMainWindow::~CMainWindow()
@@ -67,34 +74,29 @@ CMainWindow::~CMainWindow()
 }
 
 void CMainWindow::setLoadImage(QUrl url){
-    if(!url.isEmpty() && mWorkflow)
+  if(!url.isEmpty() && mWorkflow)
+  {
+    CContextDataStore* dataStore = nullptr;
+    if(!mDataStore || mDataStore->getData<CInputDataSet>().get() != nullptr)
     {
-      CInputDataSet* dataSet = new CInputDataSet(url);
-      std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> const* images =
-        dataSet->getInputImages();
-      std::vector<CImagePreviewItem*> imageItems;
-      CContextDataStore* dataStore = mWorkflow->addDataStore();
-
-      dataStore->InitializeFromStorage(dataSet);
-
-      for(std::tuple<uint32_t, QImage, CImagePreviewItem> i : *images)
-      {
-        imageItems.push_back(new CImagePreviewItem(std::get<2>(i)));
-      }
-      QString iFrameworkM = QString::number(imageItems.size());
-      iFrameworkM.append(" images have been loaded from the directory");
-      CLogController::instance().frameworkMessage(iFrameworkM);
-      ui->imagePreviewWidget->setImages(imageItems);
-      ui->algorithmSelector->setDataStore(dataStore->getId());
-
-      ui->dataViewTabContainer->applyDataStorage(dataStore);
-
-      if(mDataStore)
-      {
-        mWorkflow->removeDataStore(mDataStore->getId());
-      }
-      mDataStore = dataStore;
+      dataStore = mWorkflow->addDataStore();
+      ui->datasetSelector->newContextStore(dataStore);
     }
+    else
+    {
+      dataStore = mDataStore;
+    }
+
+    CInputDataSet* dataSet = new CInputDataSet(url);
+    dataStore->InitializeFromStorage(dataSet);
+
+    QString iFrameworkM = QString::number(dataSet->getInputImages()->size());
+    iFrameworkM.append(" images have been loaded from the directory");
+    CLogController::instance().frameworkMessage(iFrameworkM);
+
+    mDataStore = dataStore;
+    onCurrentDataStoreChanged(dataStore);
+  }
 }
 
 void CMainWindow::setWorkflow(AWorkflow* workflow)
@@ -114,6 +116,7 @@ void CMainWindow::setWorkflow(AWorkflow* workflow)
 
 void CMainWindow::resetDataStore()
 {
+  ui->datasetSelector->clear();
   ui->imagePreviewWidget->setImages(std::vector<CImagePreviewItem*>());
   ui->algorithmSelector->setDataStore(QString());
 
@@ -179,4 +182,50 @@ void CMainWindow::onDataStoreFinished(CContextDataStore* dataStorage)
   {
     dataStorage->Serialize(mCurrentResultContext.get());
   }
+}
+
+void CMainWindow::onCurrentDataStoreChanged(CContextDataStore* dataStore)
+{
+  auto dataSet = dataStore ? dataStore->getData<CInputDataSet>() : nullptr;
+
+  std::vector<CImagePreviewItem*> imageItems;
+
+  if(dataSet)
+  {
+    std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> const* images =
+      dataSet->getInputImages();
+
+    for(std::tuple<uint32_t, QImage, CImagePreviewItem> i : *images)
+    {
+      imageItems.push_back(new CImagePreviewItem(std::get<2>(i)));
+    }
+  }
+
+  ui->imagePreviewWidget->setImages(imageItems);
+
+  if(dataStore)
+  {
+    ui->algorithmSelector->setDataStore(dataStore->getId());
+    ui->dataViewTabContainer->applyDataStorage(dataStore);
+  }
+  else
+  {
+    ui->algorithmSelector->setDataStore(QString());
+    ui->dataViewTabContainer->clearData();
+  }
+
+  mDataStore = dataStore;
+}
+
+void CMainWindow::onDataStoreDeleted(CContextDataStore* dataStore)
+{
+  if(dataStore)
+  {
+    mWorkflow->removeDataStore(dataStore->getId());
+  }
+}
+
+void CMainWindow::onNewDataStoreRequested()
+{
+  ui->datasetSelector->newContextStore(mWorkflow->addDataStore());
 }
