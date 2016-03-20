@@ -83,7 +83,7 @@ void CMainWindow::setLoadImage(QUrl url){
     if(!mDataStore || mDataStore->getData<CInputDataSet>().get() != nullptr)
     {
       dataStore = mWorkflow->addDataStore();
-      ui->datasetSelector->newContextStore(dataStore);
+      ui->datasetSelector->newDataStore(dataStore);
     }
     else
     {
@@ -230,5 +230,5 @@ void CMainWindow::onDataStoreDeleted(CContextDataStore* dataStore)
 
 void CMainWindow::onNewDataStoreRequested()
 {
-  ui->datasetSelector->newContextStore(mWorkflow->addDataStore());
+  ui->datasetSelector->newDataStore(mWorkflow->addDataStore());
 }

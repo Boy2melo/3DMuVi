@@ -19,7 +19,7 @@ CDatasetSelector::~CDatasetSelector()
   delete ui;
 }
 
-void CDatasetSelector::newContextStore(CContextDataStore* dataStore)
+void CDatasetSelector::newDataStore(CContextDataStore* dataStore)
 {
   auto item = new CDatasetSelectorItem(dataStore, dataStore->getId());
   ui->datasetListWidget->addItem(item);

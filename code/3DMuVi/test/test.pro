@@ -30,7 +30,8 @@ unix:QMAKE_LFLAGS += -rdynamic
 
 INCLUDEPATH += ../
 
-HEADERS += gui/CTestCLogWidget.h \
+HEADERS += gui/CTestCDatasetSelector.h \
+           gui/CTestCLogWidget.h \
            gui/CTestCMainWindow.h \
            gui/CTestCSettingsDialog.h \
            #gui/CTestCImagePreviewWidget.h \
@@ -106,7 +107,8 @@ HEADERS += gui/CTestCLogWidget.h \
            ../workflow/workflow/idataview.h
 		
 
-SOURCES += gui/CTestCLogWidget.cpp \
+SOURCES += gui/CTestCDatasetSelector.cpp \
+           gui/CTestCLogWidget.cpp \
            gui/CTestCMainWindow.cpp \
            gui/CTestCSettingsDialog.cpp \
            #gui/CTestCImagePreviewWidget.cpp \
