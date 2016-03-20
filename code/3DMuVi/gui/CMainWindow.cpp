@@ -43,6 +43,9 @@ CMainWindow::CMainWindow(QWidget *parent) :
           &QAction::setDisabled);
   connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, ui->algorithmSettingsView,
           &CAlgorithmSettingsView::setDisabled);
+  connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning,ui->datasetSelector,
+          &CDatasetSelector::setDisabled);
+
   connect(ui->algorithmSelector, &CAlgorithmSelector::workflowRunning, this,
           &CMainWindow::onWorkflowRunning);
 
