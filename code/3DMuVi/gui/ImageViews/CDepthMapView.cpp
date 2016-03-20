@@ -21,15 +21,17 @@ void CDepthMapView::applyData(const CDataDepth* packet)
 //============================================================
 void CDepthMapView::activate()
 {
+  std::vector<uint32_t> images;
+
   if(appliedData)
   {
-    std::vector<uint32_t> images;
     for(std::tuple<uint32_t, QImage> i : *appliedData->getDepthMap())
     {
       images.push_back(std::get<0>(i));
     }
-    emit relevantImagesChanged(images);
   }
+
+  emit relevantImagesChanged(images);
 }
 
 //============================================================
