@@ -12,92 +12,108 @@
 #include <macros.h>
 
 /*!
-   \class CContextDataStore
+ * \class CContextDataStore
  * \brief The CContextDataStore class
  * \author Nathanael Schneider
  *
- * Enthält die Daten, welche für einen Bestimmten [Workflow](@ref AWorkflow) zur Verfügung gestellt werden. Jeder Datentyp kann genau einmal im Store vorkommen. Für mehrere gleiche Daten an unterschiedlichen Schritten sind unterschiedliche Klassen anzulegen.
+ * Enthält die Daten, welche für einen bestimmten [Workflow](@ref AWorkflow) zur Verfügung gestellt
+ * werden. Jeder Datentyp kann genau einmal im Store vorkommen. Für mehrere gleiche Daten an
+ * unterschiedlichen Schritten sind unterschiedliche Klassen anzulegen.
  */
-class EXPORTED CContextDataStore {
-private:
-    QString mContextId;
-    qint32 mCalculationStep;
-    bool mAborted;
-    QList<std::shared_ptr<IDataPacket>> mDataPackets;
-protected:
+class EXPORTED CContextDataStore
+{
 public:
-    ~CContextDataStore();
+  /*!
+   * \brief Leerer Destruktor zum Überschreiben durch abgeleitete Klassen.
+   */
+  ~CContextDataStore();
 
-    /*!
-     * \brief Erstelle einen neuen DataStore
-     */
-    CContextDataStore();
+  /*!
+   * \brief Erstelle einen neuen Datastore.
+   */
+  CContextDataStore();
 
-    /*!
-     * \brief Initialisiert den Context aus einem Data Store
-     */
-    void InitializeFromStorage(CInputDataSet *inputData);
-    /*!
-     * \brief Gibt Daten vom Typ T zurück, sofern vorhanden.
-     * \return Daten vom Typ T oder 0 falls nicht vorhanden
-     */
-    template<typename T>
-    std::shared_ptr<T> getData();
+  /*!
+   * \brief Initialisiert den Context aus einem Datastore.
+   * \param inputData Die Eingabebilder, die in den Context übernommen werden sollen.
+   */
+  void InitializeFromStorage(CInputDataSet* inputData);
+  /*!
+   * \brief Gibt Daten vom Typ T zurück, sofern vorhanden.
+   * \return Das Datenpacket vom Typ T oder nullptr, falls nicht vorhanden.
+   */
+  template<typename T>
+  std::shared_ptr<T> getData();
 
-    /*!
-    \brief Fügt daten vom Typ T hinzu und gibt den Pointer auf das Packet zurück
-    \param overwrite Ob die Daten, falls sie existieren, ersetzt werden sollen. Ansonsten wird bei vorhandensein nichts gemacht
-    */
-    template<typename T>
-    std::shared_ptr<T> createData(bool overwrite = true);
+  /*!
+   * \brief Fügt Daten vom Typ T hinzu und gibt den Pointer auf das Packet zurück.
+   * \param overwrite Ob die Daten, falls sie existieren, ersetzt werden sollen. Ansonsten wird bei
+   * Vorhandensein nichts gemacht.
+   * \return Pointer auf das erstellte Datenpacket.
+   */
+  template<typename T>
+  std::shared_ptr<T> createData(bool overwrite = true);
 
-    /*!
-    \brief Fügt Daten vom Typ T hinzu
-    \param data Die Daten auf dem Heap
-    \param overwrite Ob die Daten, falls sie existieren, ersetzt werden sollen. Ansonsten wird bei vorhandensein nichts gemacht
-    \return True, falls das Packet hinzugefügt wurde
-    */
-    template<typename T>
-    bool appendData(std::shared_ptr<T> data, bool overwrite = true);
+  /*!
+   * \brief Fügt Daten vom Typ T hinzu.
+   * \param data Die Daten auf dem Heap.
+   * \param overwrite Ob die Daten, falls sie existieren, ersetzt werden sollen. Ansonsten wird bei
+   * Vorhandensein nichts gemacht.
+   * \return True, falls das Packet hinzugefügt wurde. False andernfalls.
+   */
+  template<typename T>
+  bool appendData(std::shared_ptr<T> data, bool overwrite = true);
 
-    /*!
-     * \brief Wendet die Daten des Stores auf einen DataView an.
-     */
-    void ApplyToDataView(IDataView *view) const;
-    /*!
-     * \brief Die ID des Datenkontext
-     * \return Die ID des Datenkontext
-     */
-    QString getId() const;
-    /*!
-     * \brief Schreibe den Context auf die Festplatte
-     */
-    void Serialize(CResultContext *context);
-    /*!
-     * \brief Der aktuelle Verarbeitungsschritt im Workflow, in dem der Context sich befindet
-     * \return Der aktuelle Verarbeitungsschritt
-     */
-    qint32 getCurrentCalculationStep() const;
+  /*!
+   * \brief Wendet die Daten des Stores auf einen DataView an.
+   * \param view Die View, auf welche die Daten angewendet werden sollen.
+   */
+  void ApplyToDataView(IDataView* view) const;
+  /*!
+   * \brief Gibt die ID des Datenkontext zurück.
+   * \return Die ID des Datenkontext.
+   */
+  QString getId() const;
+  /*!
+   * \brief Schreibe den Context auf die Festplatte.
+   * \param context Der Resultcontext, in den die Datenpackete geschrieben werden sollen.
+   */
+  void Serialize(CResultContext* context);
+  /*!
+   * \brief Gibt den aktuellen Verarbeitungsschritt im Workflow zurück.
+   * \return Der aktuelle Verarbeitungsschritt, in dem der Context sich befindet.
+   */
+  qint32 getCurrentCalculationStep() const;
 
-    /*!
-    \brief Reset the current calculation step counter*/
-    void resetCalculationStep();
+  /*!
+   * \brief Setzt den aktuellen Verarbeitungsschritt zurück.
+   */
+  void resetCalculationStep();
 
-    /*!
-    \brief Increment the current calculation step
-    */
-    void incCalculationStep();
+  /*!
+   * \brief Erhöht den aktuellen Verarbeitungsschritt um eins.
+   */
+  void incCalculationStep();
 
-    /*!
-    \brief Whether this data store should not be passed to the next algorithm
-    */
-    bool IsAborted() const;
+  /*!
+   * \brief Gibt zurück, ob die Ausführung abgebrochen werden soll.
+   * \return True, wenn der nächste Algorithmus nicht mehr ausgeführt werden soll. False
+   * andernfalls.
+   */
+  bool IsAborted() const;
 
-    /*!
-    \brief Set whether the data should be passed to the next algorithm
-    */
-    void SetIsAborted(bool abort);
+  /*!
+   * \brief Bricht die Ausführung vor dem nächsten Algorithmus ab.
+   * \param abort True, falls der nächste Algorithmus nicht mehr ausgeführt werden soll. False
+   * andernfalls.
+   */
+  void SetIsAborted(bool abort);
 
+private:
+  QString mContextId;
+  qint32 mCalculationStep;
+  bool mAborted;
+  QList<std::shared_ptr<IDataPacket>> mDataPackets;
 
 #define DT_FEATURE_MATCH "FeatureMatch Data"
 #define DT_POSE "Pose Data"

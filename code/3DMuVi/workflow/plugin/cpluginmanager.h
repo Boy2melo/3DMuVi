@@ -7,7 +7,7 @@
 #include "iplugin.h"
 
 /*!
-   \class CPluginManager
+ * \class CPluginManager
  * \brief The CPluginManager class
  * \author Nathanael Schneider
  *
@@ -16,53 +16,52 @@
 class CPluginManager
 {
 private:
-    CPluginManager();
+  CPluginManager();
 
-    static CPluginManager* mInstance;
-    QVector<IPlugin*> mPlugins;
-    QDir mPluginsDir;
+  static CPluginManager* mInstance;
+  QVector<IPlugin*> mPlugins;
+  QDir mPluginsDir;
 
 public:
-    /*!
-     * \brief Gibt die Instanz des Plugin Managers zurück
-     * \return Gibt die Instanz des Plugin Managers zurück
-     */
-    static CPluginManager* Instance();
-    /*!
-     * \brief Initialisiert den Manager und lädt alle Plugins
-     * \return Ein Standard returncode
-     */
-    qint32 Initialize();
-    /*!
-     * \brief Gibt eine Liste aller Plugins zurück
-     * \return Eine Liste aller Plugins
-     */
-    QVector<IPlugin*> getPlugins() const;
-    /*!
-     * \brief Gibt einer Liste aller Plugins von einem gegebenen Typ zurück.
-     * \param type Der Typ von Plugins, der gesucht wird
-     * \return Alle Plugins vom spezifizierten Typ
-     */
-    QVector<IPlugin*> getPlugins(QString type) const;
+  /*!
+   * \brief Gibt die Instanz des Plugin Managers zurück.
+   * \return Die Instanz des Plugin Managers.
+   */
+  static CPluginManager* Instance();
+  /*!
+   * \brief Initialisiert den Manager und lädt alle Plugins.
+   * \return Ein Standard returncode.
+   */
+  qint32 Initialize();
+  /*!
+   * \brief Gibt eine Liste aller Plugins zurück.
+   * \return Eine Liste aller Plugins.
+   */
+  QVector<IPlugin*> getPlugins() const;
+  /*!
+   * \brief Gibt einer Liste aller Plugins von einem gegebenen Typ zurück.
+   * \param type Der Typ von Plugins, der gesucht wird.
+   * \return Alle Plugins vom spezifizierten Typ.
+   */
+  QVector<IPlugin*> getPlugins(QString type) const;
 
-    // Plugin Types:
+  // Plugin Types:
 
-
-    /*!
-    * \brief Feature Matcher Plugin
-    */
+  /*!
+  * \brief Feature Matcher Plugin
+  */
 #define PT_FeatureMatcher "Feature Matcher"
-    /*!
-    * \brief Tiefenschätzer Plugin
-    */
+  /*!
+  * \brief Tiefenschätzer Plugin
+  */
 #define PT_DepthEstimator "Depth Estimator"
-    /*!
-    * \brief Posenschätzung Plugin
-    */
+  /*!
+  * \brief Posenschätzer Plugin
+  */
 #define PT_PoseEstimator "Pose Estimator"
-    /*!
-    * \brief PCL Rekonstruktionsplugin
-    */
+  /*!
+  * \brief 3D Fusionsplugin
+  */
 #define PT_Fusion "Fusion"
 };
 
