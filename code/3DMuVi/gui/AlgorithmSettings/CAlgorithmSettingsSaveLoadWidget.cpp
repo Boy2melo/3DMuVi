@@ -1,6 +1,8 @@
 #include "CAlgorithmSettingsSaveLoadWidget.h"
 #include <QPushButton>
 #include <QHBoxLayout>
+#include <QFileDialog>
+#include <QFile>
 //============================================================
 /*!
 @param row row of the algorithm
@@ -29,9 +31,13 @@ CAlgorithmSettingsSaveLoadWidget::~CAlgorithmSettingsSaveLoadWidget()
 }
 void CAlgorithmSettingsSaveLoadWidget::loadbutton()
 {
-    //this->settingmodel->loadSettings(settingrow, QUrl());
+    QUrl url = QFileDialog::getOpenFileUrl(this, "Select Parameterfile");
+    this->settingmodel->loadSettings(settingrow, url);
+  ;
 }
 void CAlgorithmSettingsSaveLoadWidget::savebutton()
 {
-    this->settingmodel->saveSettings(settingrow,QUrl());
+    QUrl url = QFileDialog::getSaveFileName(this, tr("Save File"), "",
+                                             tr("QJason File(*.json);;All Files (*)"));
+    this->settingmodel->saveSettingsEx(settingrow,url);
 }

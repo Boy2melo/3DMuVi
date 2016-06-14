@@ -19,6 +19,31 @@ CAlgorithmSettingsView::CAlgorithmSettingsView(QWidget* parent) : QTreeView(pare
 CAlgorithmSettingsView::~CAlgorithmSettingsView() {
     temp.remove();
 }
+void CAlgorithmSettingsView::reset(){
+    QAbstractItemView::reset();
+    this->hide();
+
+    for(auto w : findChildren<CAlgorithmSettingsSaveLoadWidget*>()) {
+        delete w;
+    }
+
+    if(stepcount >= 1){
+        this->setModel(model);
+    }
+    for (int i = 0; i < stepcount; i++) {
+        setIndexWidget(model->index(i, 1), new CAlgorithmSettingsSaveLoadWidget(this, i, *model));
+    }
+    if(stepcount >= 1){
+        model->validateAll();
+    }
+    this->show();
+}
+void CAlgorithmSettingsView::onStart(){
+   if(model->validateAll()){
+       CLogController::instance().frameworkMessage("Alle Parameter Korrekt Validiert");
+   }
+
+}
 
 //============================================================
 /*!
@@ -37,10 +62,11 @@ void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow) {
         model->loadQJson(object);
         model->insertName(i);
         if (plugin) {
-        plugin->getAlgorithm()->setParameters(&object);
+            plugin->getAlgorithm()->setParameters(object);
         }
-        setIndexWidget(model->index(i, 1), new CAlgorithmSettingsSaveLoadWidget(this, i, *model));
     }
+
+    this->reset();
     this->show();
 }
 

@@ -136,6 +136,8 @@ private:
   std::unique_ptr<QVTKWidget> mpQVtkWidget;
   std::unique_ptr<pcl::visualization::PCLVisualizer> mpPclVisualizer;
   bool mCoordinateSystemAdded = false;
+
+  static void initzializeCameraMeshCloud(pcl::PCLPointCloud2* cloud);
 };
 
 #endif // CPCLVIEW_H

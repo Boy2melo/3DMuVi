@@ -107,7 +107,7 @@ void CAlgorithmSelector::onCurrentIndexChanged(int index) {
 
 void CAlgorithmSelector::startButtonPushed(bool isPushed) {
     Q_UNUSED(isPushed);
-
+    emit start();
     QPushButton* startStopButton = nullptr;
 
     int steps = mpWorkflow->getStepCount();
@@ -131,6 +131,7 @@ void CAlgorithmSelector::startButtonPushed(bool isPushed) {
             emit workflowRunning(true);
             if (!mpWorkflow->run(mDataStoreId)) {
                 startStopButton->setText("Start");
+                mStatus->showMessage("Error occurred");
                 emit workflowRunning(false);
             }
         }

@@ -35,6 +35,10 @@ void CLogWidget::onNewLogMessage(QString message, QString time, QString type)
   {
     appendPlainText(time + ": " + type + ": " + message);
   }
+  else if(type == "FRAMEWORK")
+  {
+    appendPlainText(time + ": " + type + ": " + message);
+  }
 }
 
 void CLogWidget::onStateChangedDebug(int state)

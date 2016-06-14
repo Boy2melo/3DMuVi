@@ -30,7 +30,8 @@ unix:QMAKE_LFLAGS += -rdynamic
 
 INCLUDEPATH += ../
 
-HEADERS += gui/CTestCLogWidget.h \
+HEADERS += gui/CTestCDatasetSelector.h \
+           gui/CTestCLogWidget.h \
            gui/CTestCMainWindow.h \
            gui/CTestCSettingsDialog.h \
            #gui/CTestCImagePreviewWidget.h \
@@ -65,6 +66,8 @@ HEADERS += gui/CTestCLogWidget.h \
            ../gui/ImageViews/CImageView.h \
            ../gui/ImageViews/CInputImageView.h \
            ../gui/CAlgorithmSelector.h \
+           ../gui/CDatasetSelector.h \
+           ../gui/CDatasetSelectorItem.h \
            ../gui/CDataViewTabContainer.h \
            ../gui/CImagePreviewItem.h \
            ../gui/CImagePreviewWidget.h \
@@ -104,7 +107,8 @@ HEADERS += gui/CTestCLogWidget.h \
            ../workflow/workflow/idataview.h
 		
 
-SOURCES += gui/CTestCLogWidget.cpp \
+SOURCES += gui/CTestCDatasetSelector.cpp \
+           gui/CTestCLogWidget.cpp \
            gui/CTestCMainWindow.cpp \
            gui/CTestCSettingsDialog.cpp \
            #gui/CTestCImagePreviewWidget.cpp \
@@ -139,6 +143,8 @@ SOURCES += gui/CTestCLogWidget.cpp \
            ../gui/ImageViews/CImageView.cpp \
            ../gui/ImageViews/CInputImageView.cpp \
            ../gui/CAlgorithmSelector.cpp \
+           ../gui/CDatasetSelector.cpp \
+           ../gui/CDatasetSelectorItem.cpp \
            ../gui/CDataViewTabContainer.cpp \
            ../gui/CImagePreviewItem.cpp \
            ../gui/CImagePreviewWidget.cpp \
@@ -188,7 +194,8 @@ PCL{
 }
 
 FORMS += ../gui/forms/CMainWindow.ui \
-         ../gui/forms/CSettingsDialog.ui
+         ../gui/forms/CSettingsDialog.ui \
+         ../gui/forms/CDatasetSelector.ui
 
 DISTFILES += \
     io/data/testImage.png \
@@ -198,6 +205,6 @@ RESOURCES += \
     test.qrc
 
 globalconfig_install.path = $$OUT_PWD
-globalconfig_install.files = $$PWD/../settings/globalconfig.json
+globalconfig_install.files = $$PWD/../settings/globalconfig.json $$PWD/../settings/defaultglobalconfig.json
 
 INSTALLS += globalconfig_install

@@ -5,5 +5,6 @@
         <file>io/data/testInputDataSet/0.png</file>
         <file>io/data/testInputDataSet/1.png</file>
         <file>io/data/testInputDataSet/2.png</file>
+        <file>settings/test.json</file>
     </qresource>
 </RCC>

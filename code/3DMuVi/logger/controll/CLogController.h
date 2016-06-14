@@ -62,8 +62,15 @@ public:
      * \param type
      * write into history and in data if the Windowlog and Datalog is enabled
      * only writes in data if url is set before by setLog
-     */
+     */        
     void manageNewLogMessage(QString message, QString time, QString type);
+    /*!
+     * \brief frameworkMessage possibility to Log Framework Errors, Infos etc to the Main Window Log
+     * does not Log to Data. Logs if Window Log is disabled.
+     * Logs Message with current time and Type "FRAMEWORK"
+     * \param message
+     */
+    void frameworkMessage(QString message);
     /*!
      * \brief operator <<
      * \param logger

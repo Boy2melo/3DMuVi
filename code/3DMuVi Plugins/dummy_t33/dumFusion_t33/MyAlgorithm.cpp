@@ -14,6 +14,7 @@ void _CLASS_GEN(Algorithm)::OnInitialize(){
 }
 
 bool _CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
+    Q_UNUSED(params);
     return true;
 }
 

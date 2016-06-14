@@ -10,8 +10,6 @@ class CTestAlgorithmSelection : public QObject
 {
     Q_OBJECT
 
-private:
-    static bool setPluginIfValid(QComboBox* comboBox, QString pluginName);
 private slots:
     void test();
 };

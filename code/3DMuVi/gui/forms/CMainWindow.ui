@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>3D-MuVi</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="autoFillBackground">
@@ -129,7 +129,10 @@
         <attribute name="title">
          <string>Images</string>
         </attribute>
-        <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,4">
+         <item>
+          <widget class="CDatasetSelector" name="datasetSelector" native="true"/>
+         </item>
          <item>
           <widget class="CImagePreviewWidget" name="imagePreviewWidget">
            <property name="minimumSize">
@@ -307,6 +310,12 @@
    <class>CLogWidget</class>
    <extends>QPlainTextEdit</extends>
    <header location="global">gui/CLogWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CDatasetSelector</class>
+   <extends>QWidget</extends>
+   <header location="global">gui/CDatasetSelector.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

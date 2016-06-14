@@ -24,7 +24,7 @@ public:
   IAlgorithm::setParameters is called. It copys the settings pointer to a private static variable
   in this class.
   */
-  static void setParameters(QJsonObject* settings);
+  static void setParameters(QJsonObject settings);
 
 private slots:
   /*!
@@ -39,7 +39,8 @@ private slots:
   void test();
 
 private:
-  static QJsonObject* mpSettings;
+  static QJsonObject mSettings;
+  static bool mSettingsSet;
   static const int TEST_VALUE_VALID;
   static const int TEST_VALUE_INVALID;
 };

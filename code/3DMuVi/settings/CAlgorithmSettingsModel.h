@@ -26,13 +26,18 @@ public:
     CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithmSettingController& controller);
     CAlgorithmSettingsModel(QObject *parent, QVector<QJsonObject> list);
     void saveSettings(int row, QUrl filename) override;
+    void saveSettingsEx(int row, QUrl filename) override;
     void loadSettings(int row, QUrl filename) override;
     /*!
      * \brief algorithmChanged changes the model, if an algorithm is changed
      * \param step number of the algorithm
      */
     void algorithmChanged(int step);
-
+    /*!
+     * \brief validateAll Plugins
+     * \return true if all correct
+     */
+    bool validateAll();
     bool setData(const QModelIndex &index, const QVariant &value, int role) override;
 
     /*!

@@ -3,7 +3,7 @@
 #include "CTestCAlgorithmSettingController.h"
 void CTestCAlgorithmSettingController::initTestCase()
 {
-    testurl = QUrl(":/data");
+    testurl = QUrl(":/data/settings");
     controller = new CAlgorithmSettingController(testurl);
     testdata = QJsonObject();
     testdata.insert("test", QJsonValue("deadbeef"));

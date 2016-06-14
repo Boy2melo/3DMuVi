@@ -32,6 +32,20 @@ CLogController::CLogController() {
     mMinLogLevel = LOG_INFO;
 }
 */
+
+void CLogController::frameworkMessage(QString message){
+    QString mtime = "";
+    time_t rawtime;
+    struct tm *timeinfo = nullptr;
+    char buffer[80];
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+    strftime(buffer, 80, "%A, %B %d, %Y %I:%M:%S %p", timeinfo);
+    mtime = buffer;
+    mHistory.addHistory(message, mtime, "FRAMEWORK");
+    emit(newLogMessage(message, mtime, "FRAMEWORK"));
+}
+
 void CLogController::activateWindowlog() {
     mLogToWindow = true;
 }

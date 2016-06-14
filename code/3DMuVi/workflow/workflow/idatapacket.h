@@ -12,58 +12,67 @@ class IDataView;
 /*!
  * \class IDataPacket
  * \brief The IDataPacket interface
- * \author ???
+ * \author Nathanael Schneider
  *
  * Interface for DataPackets.
  */
-class IDataPacket {
+class IDataPacket
+{
 private:
-    QUuid mUuid;
+  QUuid mUuid;
 
 public:
-    virtual ~IDataPacket() {}
-    IDataPacket();
+  /*!
+  \brief Empty destructor. To be overriden by derived classes.
+  */
+  virtual ~IDataPacket() {}
+  /*!
+  \brief Creates the ID of this packet.
+  */
+  IDataPacket();
 
-    /*!
-    \brief Provide the id of the data packet.
-    \return QString id of the data type.
-    */
-    QString getId() const;
+  /*!
+  \brief Provide the ID of the data packet.
+  \return ID of the data packet.
+  */
+  QString getId() const;
 
-    /*!
-    \brief Provide the name of the data type.
-    \return QString Name of the data type.
-    */
-    virtual QString getDataType() const = 0;
+  /*!
+  \brief Provide the name of the data type.
+  \return Name of the data type.
+  */
+  virtual QString getDataType() const = 0;
 
-    /*!
-    \brief ???
-    \param *dataView ???
-    */
-    void ApplyToDataview(IDataView *dataView) const;
+  /*!
+  \brief Apply this packet on the given data view.
+  \param dataView The data view to apply this packet.
+  */
+  void ApplyToDataview(IDataView* dataView) const;
 
-    /*!
-    \brief Provides an AStreamProvider.
-    \return AStreamProvider
-    */
-    virtual AStreamProvider* getStreamProvider() = 0;
+  /*!
+  \brief Provides a stream provider.
+  \return A stream provider in which this packet can be serialized.
+  */
+  virtual AStreamProvider* getStreamProvider() = 0;
 
-    /*!
-     * \brief Cleans up the last returned stream provider.
-     */
-    virtual void cleanUpStreamProvider() = 0;
+  /*!
+   * \brief Cleans up the last returned stream provider.
+   */
+  virtual void cleanUpStreamProvider() = 0;
 
-    /*!
-    \brief Serialize the data packet. To get a AStreamProvider use getStreamProvider(). After you got the AStreamProvider, you have to the destination path.
-    \param stream provides a stream in which the data get serialized.
-    */
-    virtual void serialize(AStreamProvider* stream) = 0;
+  /*!
+  \brief Serialize the data packet. To get a AStreamProvider use getStreamProvider(). After you got
+  the AStreamProvider, you have to set the destination path.
+  \param stream Provides a stream in which the data gets serialized.
+  */
+  virtual void serialize(AStreamProvider* stream) = 0;
 
-    /*!
-    \brief Deserialize the data packet.
-    \param stream provides a stream in which the data get serialized.
-    */
-    virtual void deserialize(AStreamProvider* stream) = 0;
+  //TODO: Is AStreamProvider able to deserialize a packet?
+  /*!
+  \brief Deserialize the data packet.
+  \param stream Provides a stream in which the data gets serialized.
+  */
+  virtual void deserialize(AStreamProvider* stream) = 0;
 };
 
 #endif // IDATAPACKET_H

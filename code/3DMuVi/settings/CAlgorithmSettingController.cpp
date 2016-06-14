@@ -1,7 +1,8 @@
 #include "CAlgorithmSettingController.h"
 #include "QJsonDocument"
 #include "CQJsonModel.h"
-
+#include "logger/controll/CLogController.h"
+#include "io/CTextIo.h"
 
 CAlgorithmSettingController::CAlgorithmSettingController(QUrl directory) {
     tempdirectory = QUrl(directory);
@@ -46,7 +47,7 @@ QJsonObject* CAlgorithmSettingController::getSetting(QString name) const {
     QString file;
     QJsonDocument docu;
     if (algorithms.contains(name)) {
-        url = QUrl(tempdirectory.url() + name);
+        url = QUrl(tempdirectory.path() + QDir::separator() + name);
         file = io.load(url);
         docu = QJsonDocument().fromJson(file.toUtf8());
         QJsonObject* object = new QJsonObject(docu.object());
@@ -114,7 +115,6 @@ void CAlgorithmSettingController::requestQJson(QUrl directory) {
     QJsonObject object = docu.object();
     emit loadQJson(object);
 }
-
 void CAlgorithmSettingController::saveQJson(QJsonObject data, QUrl directory) {
     if (directory.password().startsWith("a")) {
         QString temp = directory.password();
@@ -127,4 +127,17 @@ void CAlgorithmSettingController::saveQJson(QJsonObject data, QUrl directory) {
             io.save(directory, file);
         }
     }
+}
+void CAlgorithmSettingController::saveQJsonEx(QJsonObject data, QUrl directory) {
+
+    QJsonDocument docu = QJsonDocument(data);
+    QString filetext = QString(docu.toJson());
+    QFile file(directory.isLocalFile() ? directory.toLocalFile() : directory.path());
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)){
+        CLogController::instance().frameworkMessage("Error: Save Parameter Failed Please Choose Same Disk as Framework");
+        return;
+    }
+    QTextStream out(&file);
+    CLogController::instance().frameworkMessage("File: " + directory.toString() + " successfully saved");
+    out << filetext;
 }

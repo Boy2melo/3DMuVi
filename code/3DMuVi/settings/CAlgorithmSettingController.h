@@ -79,6 +79,12 @@ public slots:
      * \param directory where the file should go
      */
     void saveQJson(QJsonObject data, QUrl directory);
+    /*!
+     * \brief saveQJson saves a QJsonObject in a directoryExtern
+     * \param data the QJsonObject
+     * \param directory where the file should go
+     */
+    void saveQJsonEx(QJsonObject data, QUrl directory);
 };
 
 #endif //CALGORITHMSETTINGCONTROLLER_H

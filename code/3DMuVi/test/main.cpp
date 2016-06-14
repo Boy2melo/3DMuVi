@@ -1,5 +1,6 @@
 #include <QTest>
 
+#include "gui/CTestCDatasetSelector.h"
 #include "gui/CTestCLogWidget.h"
 #include "gui/CTestCMainWindow.h"
 #include "gui/CTestCSettingsDialog.h"
@@ -33,6 +34,7 @@
 
 int main(int argc, char* argv[])
 {
+  CTestCDatasetSelector datasetSelector;
   CTestCLogWidget logWidget;
   CTestCMainWindow mainWindow;
   CTestCSettingsDialog settingsDialog;
@@ -65,6 +67,7 @@ int main(int argc, char* argv[])
   QApplication app(argc, argv);
 
   int failCounter = 0;
+  failCounter += QTest::qExec(&datasetSelector, argc, argv);
   failCounter += QTest::qExec(&logWidget, argc, argv);
   failCounter += QTest::qExec(&mainWindow, argc, argv);
   failCounter += QTest::qExec(&settingsDialog, argc, argv);

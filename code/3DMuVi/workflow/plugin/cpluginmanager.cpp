@@ -7,61 +7,71 @@ CPluginManager* CPluginManager::mInstance = nullptr;
 
 CPluginManager::CPluginManager() {}
 
-CPluginManager* CPluginManager::Instance() {
-    if (mInstance == nullptr) {
-        mInstance = new CPluginManager();
-        mInstance->Initialize();
-    }
+CPluginManager* CPluginManager::Instance()
+{
+  if(mInstance == nullptr)
+  {
+    mInstance = new CPluginManager();
+    mInstance->Initialize();
+  }
 
-    return mInstance;
+  return mInstance;
 }
 
-QVector<IPlugin*> CPluginManager::getPlugins() const {
-    return mPlugins;
+QVector<IPlugin*> CPluginManager::getPlugins() const
+{
+  return mPlugins;
 }
 
-qint32 CPluginManager::Initialize() {
-    mPlugins.clear();
-    
-    mPluginsDir = QDir(qApp->applicationDirPath());
+qint32 CPluginManager::Initialize()
+{
+  mPlugins.clear();
+
+  mPluginsDir = QDir(qApp->applicationDirPath());
 #if defined(Q_OS_WIN)
-    if(mPluginsDir.dirName() == "debug" || mPluginsDir.dirName() == "release") {
-        mPluginsDir.cdUp();
-    }
+  if(mPluginsDir.dirName() == "debug" || mPluginsDir.dirName() == "release")
+  {
+    mPluginsDir.cdUp();
+  }
 #elif defined(Q_OS_MAC)
-    if(mPluginsDir.dirName() == "MacOS") {
-        mPluginsDir.cdUp();
-        mPluginsDir.cdUp();
-        mPluginsDir.cdUp();
-    }
+  if(mPluginsDir.dirName() == "MacOS")
+  {
+    mPluginsDir.cdUp();
+    mPluginsDir.cdUp();
+    mPluginsDir.cdUp();
+  }
 #endif
-    mPluginsDir.cd("plugins");
+  mPluginsDir.cd("plugins");
 
-    for(QString fileName : mPluginsDir.entryList(QDir::Files)) {
-        QPluginLoader loader(mPluginsDir.absoluteFilePath(fileName));
-        QObject *plugin = loader.instance();
-        auto plugin_ptr = qobject_cast<IPlugin *>(plugin);
+  for(QString fileName : mPluginsDir.entryList(QDir::Files))
+  {
+    QPluginLoader loader(mPluginsDir.absoluteFilePath(fileName));
+    QObject* plugin = loader.instance();
+    auto pPlugin = qobject_cast<IPlugin*>(plugin);
 
-        if(plugin_ptr != nullptr) {
-            plugin_ptr->Initialize(&loader);
-            mPlugins.push_back(plugin_ptr);
-        }
-
+    if(pPlugin != nullptr)
+    {
+      pPlugin->Initialize(&loader);
+      mPlugins.push_back(pPlugin);
     }
+  }
 
-    auto size = mPlugins.size();
-    return size;
+  auto size = mPlugins.size();
+  return size;
 }
 
-QVector<IPlugin*> CPluginManager::getPlugins(QString type) const {
-    QVector<IPlugin*> result;
+QVector<IPlugin*> CPluginManager::getPlugins(QString type) const
+{
+  QVector<IPlugin*> result;
 
-    for(IPlugin *plugin : mPlugins) {
-        auto pluginType = plugin->GetPluginType();
-        if(pluginType == type) {
-            result.push_back(plugin);
-        }
+  for(IPlugin* plugin : mPlugins)
+  {
+    auto pluginType = plugin->GetPluginType();
+    if(pluginType == type)
+    {
+      result.push_back(plugin);
     }
+  }
 
-    return result;
+  return result;
 }

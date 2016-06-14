@@ -12,6 +12,7 @@ class CLASS_GEN(Algorithm) : public IAlgorithm
 private:
     bool mIsBusy;
     CLogController *mLogger;
+    QJsonObject mQJson;
     QJsonObject *mSettings;
     QStringList mInputTypes;
     QStringList mOutputTypes;
@@ -26,7 +27,7 @@ public:
     /*!
      * \brief Setze die Parameter für den nächsten Durchlauf
      */
-    void setParameters(QJsonObject *settings) override;
+    void setParameters(QJsonObject settings) override;
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */

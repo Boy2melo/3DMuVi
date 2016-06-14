@@ -65,6 +65,11 @@ void CDataViewTabContainer::setImagePreviewWidget(CImagePreviewWidget* imagePrev
           &CImagePreviewWidget::onRelevantImagesChanged);
   connect(imagePreview, &CImagePreviewWidget::imagesSelected, mpDepthMapView,
           &CDepthMapView::onImagesSelected);
+
+#ifdef PCL
+  connect(mp3dView, &C3dView::relevantImagesChanged, imagePreview,
+          &CImagePreviewWidget::onRelevantImagesChanged);
+#endif
 }
 
 void CDataViewTabContainer::applyDataStorage(CContextDataStore* dataStorage)
@@ -76,6 +81,8 @@ void CDataViewTabContainer::applyDataStorage(CContextDataStore* dataStorage)
 #ifdef PCL
   dataStorage->ApplyToDataView(mp3dView);
 #endif
+
+  onCurrentChanged(currentIndex());
 }
 
 void CDataViewTabContainer::clearData()
@@ -91,7 +98,7 @@ void CDataViewTabContainer::clearData()
 
 void CDataViewTabContainer::onCurrentChanged(int index)
 {
-  if(tabText(index) == "Input Images")
+  if(tabText(index) == "Input images")
   {
     mpInputImageView->activate();
   }

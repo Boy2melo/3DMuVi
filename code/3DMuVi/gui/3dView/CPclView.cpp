@@ -6,7 +6,6 @@
 #include "CPclView.h"
 
 #define CAMERA_SHAPE_N_VERTICES 5
-#define CAMERA_SHAPE_N_LINES 8
 
 CPclView::CPclView(QWidget *parent) : QWidget(parent)
 {
@@ -48,11 +47,11 @@ void CPclView::addTextureMesh(const pcl::TextureMesh &mesh, const QString& id)
 void CPclView::addCameraMesh(const pcl::PointXYZ& position, const Eigen::Quaternionf& rotation,
                              const QString& id)
 {
-  Eigen::Vector3f cameraBasePos(position.x, position.y, position.z);
-  Eigen::Quaternionf quat = rotation.normalized();
-  Eigen::Matrix3f rotationMatrix = quat.toRotationMatrix();
+  pcl::PolygonMesh cameraMesh;
+
+  initzializeCameraMeshCloud(&cameraMesh.cloud);
+
   Eigen::Vector3f cameraShapeVertices[CAMERA_SHAPE_N_VERTICES];
-  pcl::PointXYZ pclCameraPoints[CAMERA_SHAPE_N_VERTICES];
 
   cameraShapeVertices[0] = Eigen::Vector3f( 0.f,  0.f, 0.f);
   cameraShapeVertices[1] = Eigen::Vector3f(-1.f, -1.f, 1.f);
@@ -60,23 +59,44 @@ void CPclView::addCameraMesh(const pcl::PointXYZ& position, const Eigen::Quatern
   cameraShapeVertices[3] = Eigen::Vector3f( 1.f, -1.f, 1.f);
   cameraShapeVertices[4] = Eigen::Vector3f( 1.f,  1.f, 1.f);
 
+  Eigen::Vector3f cameraBasePos(position.x, position.y, position.z);
+  Eigen::Quaternionf quat = rotation.normalized();
+  Eigen::Matrix3f rotationMatrix = quat.toRotationMatrix();
+
   for(int i = 0; i < CAMERA_SHAPE_N_VERTICES; i++)
   {
     cameraShapeVertices[i] = rotationMatrix * cameraShapeVertices[i];
     cameraShapeVertices[i] += cameraBasePos;
 
-    pclCameraPoints[i] = pcl::PointXYZ(cameraShapeVertices[i](0), cameraShapeVertices[i](1),
-                                       cameraShapeVertices[i](2));
+    for(unsigned int j = 0; j < 3; j++)
+    {
+      reinterpret_cast<float*>(cameraMesh.cloud.data.data())[i * 3 + j] = cameraShapeVertices[i][j];
+    }
   }
 
-  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[1], id.toStdString() + "_0");
-  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[2], id.toStdString() + "_1");
-  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[3], id.toStdString() + "_2");
-  mpPclVisualizer->addLine(pclCameraPoints[0], pclCameraPoints[4], id.toStdString() + "_3");
-  mpPclVisualizer->addLine(pclCameraPoints[1], pclCameraPoints[2], id.toStdString() + "_4");
-  mpPclVisualizer->addLine(pclCameraPoints[1], pclCameraPoints[3], id.toStdString() + "_5");
-  mpPclVisualizer->addLine(pclCameraPoints[2], pclCameraPoints[4], id.toStdString() + "_6");
-  mpPclVisualizer->addLine(pclCameraPoints[3], pclCameraPoints[4], id.toStdString() + "_7");
+  pcl::Vertices v;
+
+  v.vertices.push_back(1);
+  v.vertices.push_back(2);
+  v.vertices.push_back(4);
+  v.vertices.push_back(3);
+  cameraMesh.polygons.push_back(v);
+
+  v.vertices.clear();
+  v.vertices.push_back(0);
+  v.vertices.push_back(1);
+  v.vertices.push_back(3);
+  v.vertices.push_back(0);
+  cameraMesh.polygons.push_back(v);
+
+  v.vertices.clear();
+  v.vertices.push_back(0);
+  v.vertices.push_back(2);
+  v.vertices.push_back(4);
+  v.vertices.push_back(0);
+  cameraMesh.polygons.push_back(v);
+
+  mpPclVisualizer->addPolylineFromPolygonMesh(cameraMesh, id.toStdString());
 }
 
 void CPclView::removePointCloud(const QString& id)
@@ -96,10 +116,7 @@ void CPclView::removeTextureMesh(const QString& id)
 
 void CPclView::removeCameraMesh(const QString& id)
 {
-  for(int i = 0; i < CAMERA_SHAPE_N_LINES; i++)
-  {
-    mpPclVisualizer->removeShape(id.toStdString() + std::to_string(i));
-  }
+  mpPclVisualizer->removeShape(id.toStdString());
 }
 
 void CPclView::updatePointCloud(pcl::PointCloud<pcl::PointXYZRGB>::ConstPtr pointCloud,
@@ -152,4 +169,31 @@ void CPclView::centerOnPoint(const pcl::PointXYZ& point)
 
 }
 */
+
+void CPclView::initzializeCameraMeshCloud(pcl::PCLPointCloud2* cloud)
+{
+  pcl::PCLPointField field;
+
+  field.datatype = pcl::PCLPointField::FLOAT32;
+  field.count = 1;
+
+  field.name = "x";
+  field.offset = 0;
+  cloud->fields.push_back(field);
+
+  field.name = "y";
+  field.offset = 4;
+  cloud->fields.push_back(field);
+
+  field.name = "z";
+  field.offset = 8;
+  cloud->fields.push_back(field);
+
+  cloud->width = CAMERA_SHAPE_N_VERTICES;
+  cloud->height = 1;
+  cloud->point_step = 3 * sizeof(float);
+  cloud->row_step = CAMERA_SHAPE_N_VERTICES * 3 * sizeof(float);
+  cloud->is_dense = true;
+  cloud->data.resize(CAMERA_SHAPE_N_VERTICES * 3 * sizeof(float));
+}
 #endif
