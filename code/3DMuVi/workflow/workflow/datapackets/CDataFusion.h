@@ -17,7 +17,7 @@ using PointCloud = pcl::PointCloud<pcl::PointXYZRGB>;
  * \brief The CDataFusion class
  * \author Stefan Wolf
  */
-class EXPORTED CDataFusion : public IDataPacket
+class EXPORTED CDataFusion : public IDataPacket, public std::enable_shared_from_this<CDataFusion>
 {
 public:
   /*!
@@ -96,6 +96,8 @@ public:
    * \return The texture mesh which is kept by this data packet.
    */
   pcl::TextureMesh::Ptr getTextureMesh() const;
+
+  void applyToDataview(IDataView* dataView) const override;
 
 private:
   PointCloud::Ptr mPointCloudData;

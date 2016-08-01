@@ -8,7 +8,7 @@
 @param packet
 */
 //============================================================
-void CDepthMapView::applyData(const CDataDepth* packet)
+void CDepthMapView::applyData(std::shared_ptr<CDataDepth const> packet)
 {
   appliedData = packet;
 

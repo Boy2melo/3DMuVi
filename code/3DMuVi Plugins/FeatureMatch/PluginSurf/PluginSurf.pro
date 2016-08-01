@@ -19,10 +19,9 @@ PKGCONFIG += opencv
 LIBS += $$PWD/OpenSURFcpp/libsurf.a
 
 SOURCES += \
-    plugin.cpp \
-    algorithm.cpp \
     MyAlgorithm.cpp \
-    surfmatch-algorithm.cpp
+    surfmatch-algorithm.cpp \
+    pluginsurf.cpp
 
 INCLUDEPATH += ../../../3DMuVi \
     OpenSURFcpp/src
@@ -31,11 +30,8 @@ DEFINES += BUILD_NAME=\\\"plugins/$${TARGET}\\\"
 
 HEADERS += \
     ../../../3DMuVi/workflow/plugin/ialgorithm.h \
-    ../../../3DMuVi/workflow/plugin/iplugin.h \
-    plugin.h \
-    algorithm.h \
-    plugin_config.h \
-    surfmatch-algorithm.h
+    surfmatch-algorithm.h \
+    pluginsurf.h
 OTHER_FILES += \
     Plugin.json
 

@@ -15,8 +15,8 @@ class CFeatureView : public CImageView, public IDataView
   Q_OBJECT
 
 public:
-  void applyData(const CInputDataSet* packet) override;
-  void applyData(const CDataFeature* packet) override;
+  void applyData(std::shared_ptr<CInputDataSet const> packet) override;
+  void applyData(std::shared_ptr<CDataFeature const> packet) override;
   void activate() override;
   void clearData() override;
 
@@ -24,8 +24,8 @@ private:
 
   std::vector<uint32_t> mDataID;
   std::vector<QImage*> mImageList;
-  const CInputDataSet* appliedInputData = nullptr;
-  const CDataFeature* appliedFeatureData = nullptr;
+  std::shared_ptr<CInputDataSet const> appliedInputData = nullptr;
+  std::shared_ptr<CDataFeature const> appliedFeatureData = nullptr;
 
 
   void updateView();

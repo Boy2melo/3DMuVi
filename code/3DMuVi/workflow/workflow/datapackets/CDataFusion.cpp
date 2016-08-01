@@ -132,4 +132,9 @@ pcl::TextureMesh::Ptr CDataFusion::getTextureMesh() const
 {
   return mTextureMeshData;
 }
+
+void CDataFusion::applyToDataview(IDataView* dataView) const
+{
+  dataView->applyData(shared_from_this());
+}
 #endif

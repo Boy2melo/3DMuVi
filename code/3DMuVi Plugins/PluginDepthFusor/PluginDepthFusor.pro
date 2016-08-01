@@ -10,7 +10,8 @@ TARGET = PluginDepthFusion
 TEMPLATE = lib
 CONFIG += plugin
 
-DESTDIR = $$[QT_INSTALL_PLUGINS]/generic
+#DESTDIR = $$[QT_INSTALL_PLUGINS]/generic
+DESTDIR = ../../Win32/Debug/plugins
 
 QMAKE_CXXFLAGS += -std=c++11
 QMAKE_CXXFLAGS_RELEASE += -O3
@@ -22,9 +23,8 @@ CONFIG(debug, debug|release) {
 }
 
 SOURCES += \
-    plugin.cpp \
-    algorithm.cpp \
-    MyAlgorithm.cpp
+    MyAlgorithm.cpp \
+    cplugindepthfusor.cpp
 
 INCLUDEPATH += ../../3DMuVi
 
@@ -32,10 +32,8 @@ DEFINES += BUILD_NAME=\\\"plugins/$${TARGET}\\\"
 
 HEADERS += \
     ../../3DMuVi/workflow/plugin/ialgorithm.h \
-    ../../3DMuVi/workflow/plugin/iplugin.h \
-    plugin.h \
-    algorithm.h \
-    plugin_config.h
+    cplugindepthfusor.h
+
 OTHER_FILES += \
     PluginDepthFusor.json
 
@@ -52,10 +50,10 @@ unix {
     CONFIG += link_pkgconfig
     PKGCONFIG += pcl_io-1.8
 
-    INCLUDEPATH += /home/rufboi/3rd_party/PCL_1.7.2_gcc4.8/include/
-    DEPENDPATH += /home/rufboi/3rd_party/PCL_1.7.2_gcc4.8/include/
+    #INCLUDEPATH += /home/rufboi/3rd_party/PCL_1.7.2_gcc4.8/include/
+    #DEPENDPATH += /home/rufboi/3rd_party/PCL_1.7.2_gcc4.8/include/
 
-    LIBS += -L/home/rufboi/3rd_party/PCL_1.7.2_gcc4.8/lib/
+    #LIBS += -L/home/rufboi/3rd_party/PCL_1.7.2_gcc4.8/lib/
     LIBS += -lpcl_common
     LIBS += -lpcl_io
 }

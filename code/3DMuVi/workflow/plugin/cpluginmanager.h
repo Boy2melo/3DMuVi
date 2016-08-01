@@ -1,15 +1,24 @@
 #ifndef CPLUGINMANAGER_H
 #define CPLUGINMANAGER_H
 
+#include <memory>
+
 #include <QVector>
 #include <QDir>
 #include <QPluginLoader>
-#include "iplugin.h"
+
+namespace boost
+{
+  namespace dll
+  {
+    class shared_library;
+  }
+}
 
 /*!
  * \class CPluginManager
  * \brief The CPluginManager class
- * \author Nathanael Schneider
+ * \author Nathanael Schneider, Stefan Wolf
  *
  * Verwaltet alle [Plugins](@ref APlugin), die vom System gefunden wurden.
  */
@@ -19,7 +28,7 @@ private:
   CPluginManager();
 
   static CPluginManager* mInstance;
-  QVector<IPlugin*> mPlugins;
+  std::vector<boost::dll::shared_library*> mLibs;
   QDir mPluginsDir;
 
 public:
@@ -33,36 +42,20 @@ public:
    * \return Ein Standard returncode.
    */
   qint32 Initialize();
-  /*!
-   * \brief Gibt eine Liste aller Plugins zurück.
-   * \return Eine Liste aller Plugins.
-   */
-  QVector<IPlugin*> getPlugins() const;
-  /*!
-   * \brief Gibt einer Liste aller Plugins von einem gegebenen Typ zurück.
-   * \param type Der Typ von Plugins, der gesucht wird.
-   * \return Alle Plugins vom spezifizierten Typ.
-   */
-  QVector<IPlugin*> getPlugins(QString type) const;
-
-  // Plugin Types:
 
   /*!
-  * \brief Feature Matcher Plugin
-  */
-#define PT_FeatureMatcher "Feature Matcher"
-  /*!
-  * \brief Tiefenschätzer Plugin
-  */
-#define PT_DepthEstimator "Depth Estimator"
-  /*!
-  * \brief Posenschätzer Plugin
-  */
-#define PT_PoseEstimator "Pose Estimator"
-  /*!
-  * \brief 3D Fusionsplugin
-  */
-#define PT_Fusion "Fusion"
+   * \brief Gibt alle Plugins zurück, die dem durch den Templateparameter T definierten Typ
+   * entsprechen.
+   * \return Eine Liste von Plugins.
+   *
+   * Der Templateparameter T definiert den Typ des Plugins. T muss eine Variable T::symbol besitzen,
+   * die den Namen des Symbols der Factory Methode im Plugin definiert. Des Weiteren muss der Typ
+   * der Factory Methode als T::Factory definiert sein.
+   */
+  template<typename T>
+  std::vector<std::shared_ptr<T>> getPlugins() const;
 };
+
+#include "cpluginmanager_impl.h"
 
 #endif // CPLUGINMANAGER_H

@@ -19,7 +19,7 @@ CContextDataStore::CContextDataStore()
   mAborted = false;
 }
 
-void CContextDataStore::InitializeFromStorage(CInputDataSet* inputData)
+void CContextDataStore::initializeFromStorage(CInputDataSet* inputData)
 {
   appendData(std::shared_ptr<CInputDataSet>(inputData));
 }
@@ -34,7 +34,7 @@ qint32 CContextDataStore::getCurrentCalculationStep() const
   return mCalculationStep;
 }
 
-void CContextDataStore::Serialize(CResultContext* context)
+void CContextDataStore::serialize(CResultContext* context)
 {
   for(auto packet : mDataPackets)
   {
@@ -42,12 +42,12 @@ void CContextDataStore::Serialize(CResultContext* context)
   }
 }
 
-bool CContextDataStore::IsAborted() const
+bool CContextDataStore::isAborted() const
 {
   return mAborted;
 }
 
-void CContextDataStore::SetIsAborted(bool abort)
+void CContextDataStore::setIsAborted(bool abort)
 {
   mAborted = abort;
 }
@@ -62,12 +62,12 @@ void CContextDataStore::incCalculationStep()
   mCalculationStep++;
 }
 
-void CContextDataStore::ApplyToDataView(IDataView* view) const
+void CContextDataStore::applyToDataView(IDataView* view) const
 {
   view->clearData();
   for(auto packet : mDataPackets)
   {
-    packet->ApplyToDataview(view);
+    packet->applyToDataview(view);
   }
 }
 

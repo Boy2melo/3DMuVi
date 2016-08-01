@@ -1,4 +1,7 @@
 #include "CAlgorithmSettingsView.h"
+
+#include "workflow/plugin/ialgorithm.h"
+
 #include "CAlgorithmSettingsSaveLoadWidget.h"
 #include <QModelIndex>
 #include <QUrl>
@@ -57,12 +60,12 @@ void CAlgorithmSettingsView::setWorkflow(AWorkflow& workflow) {
     stepcount = workflow.getStepCount();
 
     for (int i = 0; i < stepcount; i++) {
-        IPlugin* plugin = workflow.getStep(i);
-        QJsonObject object = plugin ? plugin->GetParameterJson() : QJsonObject();
+        std::shared_ptr<IAlgorithm> plugin = workflow.getStep(i);
+        QJsonObject object = plugin ? plugin->getParameterJson() : QJsonObject();
         model->loadQJson(object);
         model->insertName(i);
         if (plugin) {
-            plugin->getAlgorithm()->setParameters(object);
+            plugin->setParameters(object);
         }
     }
 

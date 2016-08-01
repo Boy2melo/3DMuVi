@@ -74,12 +74,12 @@ void CDataViewTabContainer::setImagePreviewWidget(CImagePreviewWidget* imagePrev
 
 void CDataViewTabContainer::applyDataStorage(CContextDataStore* dataStorage)
 {
-  dataStorage->ApplyToDataView(mpInputImageView);
-  dataStorage->ApplyToDataView(mpFeatureView);
-  dataStorage->ApplyToDataView(mpDepthMapView);
+  dataStorage->applyToDataView(mpInputImageView);
+  dataStorage->applyToDataView(mpFeatureView);
+  dataStorage->applyToDataView(mpDepthMapView);
 
 #ifdef PCL
-  dataStorage->ApplyToDataView(mp3dView);
+  dataStorage->applyToDataView(mp3dView);
 #endif
 
   onCurrentChanged(currentIndex());

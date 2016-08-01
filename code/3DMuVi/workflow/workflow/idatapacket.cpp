@@ -10,8 +10,3 @@ QString IDataPacket::getId() const
 {
   return mUuid.toString();
 }
-
-void IDataPacket::ApplyToDataview(IDataView* dataView) const
-{
-  dataView->applyData(this);
-}

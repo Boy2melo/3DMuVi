@@ -1,20 +1,23 @@
 #include "cfourphaseworkflow.h"
+#include "workflow/plugin/ifeaturematcher.h"
+#include "workflow/plugin/iposeestimator.h"
+#include "workflow/plugin/idepthestimator.h"
+#include "workflow/plugin/ifusor.h"
 #include "workflow/plugin/cpluginmanager.h"
 #include "logger/controll/CLogController.h"
 
+using namespace std;
+
 CFourPhaseWorkflow::CFourPhaseWorkflow() : AWorkflow()
 {
-  mPlugins = new IPlugin*[getStepCount()];
-
-  for(quint32 i = 0; i < getStepCount(); i++)
-  {
-    mPlugins[i] = nullptr;
-  }
+  mfeatureMatchers = CPluginManager::Instance()->getPlugins<IFeatureMatcher>();
+  mPoseEstimators = CPluginManager::Instance()->getPlugins<IPoseEstimator>();
+  mDepthEstimators = CPluginManager::Instance()->getPlugins<IDepthEstimator>();
+  mFusors = CPluginManager::Instance()->getPlugins<IFusor>();
 }
 
 CFourPhaseWorkflow::~CFourPhaseWorkflow()
 {
-  delete [] mPlugins;
 }
 
 
@@ -28,19 +31,19 @@ QString CFourPhaseWorkflow::getAlgorithmType(const quint32 step) const
   switch(step)
   {
     case 0:
-      return PT_FeatureMatcher;
+      return IFeatureMatcher::name;
     case 1:
-      return PT_PoseEstimator;
+      return IPoseEstimator::name;
     case 2:
-      return PT_DepthEstimator;
+      return IDepthEstimator::name;
     case 3:
-      return PT_Fusion;
+      return IFusor::name;
     default:
       return "";
   }
 }
 
-bool CFourPhaseWorkflow::trySetStep(const quint32 step, IPlugin* plugin)
+bool CFourPhaseWorkflow::trySetStep(const quint32 step, const QString& plugin)
 {
   if(step >= getStepCount())
   {
@@ -48,152 +51,168 @@ bool CFourPhaseWorkflow::trySetStep(const quint32 step, IPlugin* plugin)
   }
   else
   {
-    if(plugin == nullptr || plugin->GetPluginType() == getAlgorithmType(step))
+    switch (step)
     {
-      mPlugins[step] = plugin;
-      return true;
+      case 0:
+      {
+        auto featureMatcher = getPluginByName(mfeatureMatchers, plugin);
+        if(featureMatcher)
+        {
+          mCurrentFeatureMatcher = featureMatcher;
+          return true;
+        }
+      }
+      break;
+      case 1:
+      {
+        auto poseEstimator = getPluginByName(mPoseEstimators, plugin);
+        if(poseEstimator)
+        {
+          mCurrentPoseEstimator = poseEstimator;
+          return true;
+        }
+      }
+      break;
+      case 2:
+      {
+        auto depthEstimator = getPluginByName(mDepthEstimators, plugin);
+        if(depthEstimator)
+        {
+          mCurrentDepthEstimator = depthEstimator;
+          return true;
+        }
+      }
+      break;
+      case 3:
+      {
+        auto fusor = getPluginByName(mFusors, plugin);
+        if(fusor)
+        {
+          mCurrentFusor = fusor;
+          return true;
+        }
+      }
+      break;
     }
-    else
-    {
-      return false;
-    }
+
+    return false;
   }
 }
 
-IPlugin* CFourPhaseWorkflow::getStep(const quint32 step) const
+QStringList CFourPhaseWorkflow::getAvailablePlugins(const quint32 step)
 {
-  if(step >= getStepCount())
+  switch(step)
   {
-    return nullptr;
+    case 0:
+      return getPluginNames(mfeatureMatchers);
+    case 1:
+      return getPluginNames(mPoseEstimators);
+    case 2:
+      return getPluginNames(mDepthEstimators);
+    case 3:
+      return getPluginNames(mFusors);
+    default:
+      return QStringList();
   }
-  else
+}
+
+std::shared_ptr<IAlgorithm> CFourPhaseWorkflow::getStep(const quint32 step) const
+{
+  switch(step)
   {
-    return mPlugins[step];
+    case 0:
+    {
+      return mCurrentFeatureMatcher;
+    }
+    break;
+
+    case 1:
+    {
+      return mCurrentPoseEstimator;
+    }
+    break;
+
+    case 2:
+    {
+      return mCurrentDepthEstimator;
+    }
+    break;
+
+    case 3:
+    {
+      return mCurrentFusor;
+    }
+    break;
   }
+
+  return std::shared_ptr<IAlgorithm>();
 }
 
 void CFourPhaseWorkflow::executeAlgorithm(CContextDataStore* store)
 {
-  if(mPlugins[0]->getAlgorithm()->IsBusy())
+  if(store->getData<CInputDataSet>() == nullptr)
   {
+    emit sigDataStoreFinished(store);
     return;
   }
 
-  /* TODO: Remove the rolled out code. Maybe, we should get rid of the callback system and execute
-   * the workflow step by step.
-   */
-#define DEBUG_MACRO
-#ifndef DEBUG_MACRO
-  __RUN_ALGORITHM(mPlugins[0],
-    __RUN_ALGORITHM(mPlugins[1],
-      __RUN_ALGORITHM(mPlugins[2],
-        __RUN_ALGORITHM(mPlugins[3], emit sigDataStoreFinished(store);))));
-#else
-  IAlgorithm* algorithm = mPlugins[0]->getAlgorithm();
-  algorithm->setLogger(&CLogController::instance());
-
-  if(!algorithm->IsBusy() && !store->IsAborted())
+  mCurrentFeatureMatcher->setImages(store->getData<CInputDataSet>());
+  if(!executeSingleAlgorithm(mCurrentFeatureMatcher, store))
   {
-    store->incCalculationStep();
-    QString finishedM = mPlugins[0]->Name();
-    finishedM.append(" - plugin started");
-    CLogController::instance().frameworkMessage(finishedM);
-    algorithm->run(store, [this](CContextDataStore * store)
-    {
-      IAlgorithm* algorithm = mPlugins[1]->getAlgorithm();
-      algorithm->setLogger(&CLogController::instance());
-
-      if(!algorithm->IsBusy() && !store->IsAborted())
-      {
-        store->incCalculationStep();
-        QString finishedM = mPlugins[1]->Name();
-        finishedM.append(" - plugin started");
-        CLogController::instance().frameworkMessage(finishedM);
-        algorithm->run(store, [this](CContextDataStore * store)
-        {
-          IAlgorithm* algorithm = mPlugins[2]->getAlgorithm();
-          algorithm->setLogger(&CLogController::instance());
-
-          if(!algorithm->IsBusy() && !store->IsAborted())
-          {
-            store->incCalculationStep();
-            QString finishedM = mPlugins[2]->Name();
-            finishedM.append(" - plugin started");
-            CLogController::instance().frameworkMessage(finishedM);
-            algorithm->run(store, [this](CContextDataStore * store)
-            {
-              IAlgorithm* algorithm = mPlugins[3]->getAlgorithm();
-              algorithm->setLogger(&CLogController::instance());
-              if(!algorithm->IsBusy() && !store->IsAborted())
-              {
-                store->incCalculationStep();
-                QString finishedM = mPlugins[3]->Name();
-                finishedM.append(" - plugin started");
-                CLogController::instance().frameworkMessage(finishedM);
-                algorithm->run(store, [this](CContextDataStore * store)
-                {
-                  sigDataStoreFinished(store);
-                });
-              }
-              else
-              {
-                sigDataStoreFinished(store);
-
-              }
-            });
-          }
-          else
-          {
-            sigDataStoreFinished(store);
-
-          }
-        });
-      }
-      else
-      {
-        sigDataStoreFinished(store);
-
-      }
-    });
+    return;
   }
-  else
-  {
-    sigDataStoreFinished(store);
+  store->appendData(mCurrentFeatureMatcher->getFeatureMatches());
 
-  };
-#endif
+  mCurrentPoseEstimator->setImages(store->getData<CInputDataSet>());
+  mCurrentPoseEstimator->setFeatureMatches(store->getData<CDataFeature>());
+  if(!executeSingleAlgorithm(mCurrentPoseEstimator, store))
+  {
+    return;
+  }
+  store->appendData(mCurrentPoseEstimator->getPoses());
+
+  mCurrentDepthEstimator->setImages(store->getData<CInputDataSet>());
+  mCurrentDepthEstimator->setPoses(store->getData<CDataPose>());
+  if(!executeSingleAlgorithm(mCurrentDepthEstimator, store))
+  {
+    return;
+  }
+  store->appendData(mCurrentDepthEstimator->getDepthMaps());
+
+  mCurrentFusor->setImages(store->getData<CInputDataSet>());
+  mCurrentFusor->setDepthMaps(store->getData<CDataDepth>());
+  if(!executeSingleAlgorithm(mCurrentFusor, store))
+  {
+    return;
+  }
+  store->appendData(mCurrentFusor->getFusion());
+
+  emit sigDataStoreFinished(store);
 }
 
-bool CFourPhaseWorkflow::checkAvailableDataTypes() const
+template<typename T>
+shared_ptr<T> CFourPhaseWorkflow::getPluginByName(const vector<shared_ptr<T>>& pluginList,
+                                                  const QString& name)
 {
-  QStringList dataTypes;
-  dataTypes.push_back(DT_INPUTIMAGES);
-
-  for(uint i = 0; i < getStepCount(); i++)
+  for(auto p : pluginList)
   {
-    IPlugin* plugin = mPlugins[i];
-
-    if(plugin == nullptr)
+    if(p->getName() == name)
     {
-      continue;
-    }
-
-    auto input = plugin->getAlgorithm()->getInputDataTypes();
-    auto output = plugin->getAlgorithm()->getOutputDataTypes();
-
-    for(QString type : input)
-    {
-      if(!dataTypes.contains(type))
-      {
-        return false;
-      }
-    }
-
-    for(QString type : output)
-    {
-      dataTypes.push_back(type);
+      return p;
     }
   }
+  return nullptr;
+}
 
-  return true;
+template<typename T>
+QStringList CFourPhaseWorkflow::getPluginNames(const std::vector<std::shared_ptr<T>>& pluginList)
+{
+  QStringList names;
+
+  for(auto p : pluginList)
+  {
+    names += p->getName();
+  }
+
+  return names;
 }

@@ -91,7 +91,7 @@ void CMainWindow::setLoadImage(QUrl url){
     }
 
     CInputDataSet* dataSet = new CInputDataSet(url);
-    dataStore->InitializeFromStorage(dataSet);
+    dataStore->initializeFromStorage(dataSet);
 
     QString iFrameworkM = QString::number(dataSet->getInputImages()->size());
     iFrameworkM.append(" images have been loaded from the directory");
@@ -183,7 +183,7 @@ void CMainWindow::onDataStoreFinished(CContextDataStore* dataStorage)
 
   if(mCurrentResultContext)
   {
-    dataStorage->Serialize(mCurrentResultContext.get());
+    dataStorage->serialize(mCurrentResultContext.get());
   }
 }
 

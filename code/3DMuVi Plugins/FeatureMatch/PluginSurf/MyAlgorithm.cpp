@@ -1,4 +1,4 @@
-#include "algorithm.h"
+#include "pluginsurf.h"
 
 #include <vector>
 #include <tuple>
@@ -12,7 +12,6 @@
 
 #include "surfmatch-algorithm.h"
 
-#include "workflow/workflow/ccontextdatastore.h"
 #include "io/CInputDataSet.h"
 #include "workflow/workflow/datapackets/CDataFeature.h"
 
@@ -23,21 +22,19 @@ using namespace cv;
 // Adjust these functions to your needs
 //----------------------------------------
 
-void CLASS_GEN(Algorithm)::OnInitialize(){
-    mInputTypes.push_back(DT_INPUTIMAGES);
-    mOutputTypes.push_back(DT_FEATURE_MATCH);
+void PluginSurf::setImages(std::shared_ptr<CInputDataSet> images)
+{
+  mImages = images;
 }
 
-bool CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
-    // First level typechecks are already done, see plugin.cpp
-    Q_UNUSED(params);
-    return true;
+std::shared_ptr<CDataFeature> PluginSurf::getFeatureMatches()
+{
+  return mFeatures;
 }
 
-
-void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
-  // Step 1: extract data from dataStore
-  std::shared_ptr<CInputDataSet> pInputPacket = store->getData<CInputDataSet>();
+void PluginSurf::executeAlgorithm(){
+  // Step 1: get input data
+  std::shared_ptr<CInputDataSet> pInputPacket = mImages;
 
   if (pInputPacket == nullptr) return;
 
@@ -52,18 +49,18 @@ void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
   });
 
   // Step 2: extract parameters from mSettings
-  auto upright = mSettings->value("Upright").toBool(false);
-  auto octaves = mSettings->value("Octaves").toInt(5);
-  auto intervals = mSettings->value("Levels").toInt(4);
-  auto init_sample = mSettings->value("Init Samples").toInt(2);
-  auto thres = mSettings->value("Threshold").toDouble(0.0004);
+  auto upright = mSettings.value("Upright").toBool(false);
+  auto octaves = mSettings.value("Octaves").toInt(5);
+  auto intervals = mSettings.value("Levels").toInt(4);
+  auto init_sample = mSettings.value("Init Samples").toInt(2);
+  auto thres = mSettings.value("Threshold").toDouble(0.0004);
 
   // Step 3: run algorithm
   shared_ptr<FeatureTable> result(new FeatureTable);
   *result = findSurfMatches(imgs, upright, octaves, intervals, init_sample, thres);
 
-  // Step 4: append result data to dataStore
+  // Step 4: store result
   auto resultPacket = std::make_shared<CDataFeature>();
   resultPacket->setFeatureMatch(result);
-  store->appendData(resultPacket, true);
+  mFeatures = resultPacket;
 }

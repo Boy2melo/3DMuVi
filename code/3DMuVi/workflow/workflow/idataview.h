@@ -24,31 +24,26 @@ public:
   */
   virtual void clearData() {}
   /**
-  @brief Castet das packet und ruft die spezialisierte Methode auf.
-  @param data Das Packet, das auf diese View angewendet werden soll.
-  */
-  void applyData(IDataPacket const* data);
-  /**
   @brief Wendet Daten vom Typ [CInputDataSet](@ref CInputDataSet) an.
   */
-  virtual void applyData(CInputDataSet const*) {}
+  virtual void applyData(std::shared_ptr<CInputDataSet const>) {}
   /**
   @brief Wendet Daten vom Typ [CDataFeature](@ref CDataFeature) an.
   */
-  virtual void applyData(CDataFeature const*) {}
+  virtual void applyData(std::shared_ptr<CDataFeature const>) {}
   /**
   @brief Wendet Daten vom Typ [CDataDepth](@ref CDataDepth) an.
   */
-  virtual void applyData(CDataDepth const*) {}
+  virtual void applyData(std::shared_ptr<CDataDepth const>) {}
   /**
   @brief Wendet Daten vom Typ [CDataPose](@ref CDataPose) an.
   */
-  virtual void applyData(CDataPose const*) {}
+  virtual void applyData(std::shared_ptr<CDataPose const>) {}
 #ifdef PCL
   /**
   @brief Wendet Daten vom Typ [CDataFusion](@ref CDataFusion) an.
   */
-  virtual void applyData(CDataFusion const*) {}
+  virtual void applyData(std::shared_ptr<CDataFusion const>) {}
 #endif
 };
 

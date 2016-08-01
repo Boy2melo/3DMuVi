@@ -58,12 +58,12 @@ void CAlgorithmSelector::setWorkflow(AWorkflow& workflow) {
     }
 
     for (uint i = 0; i < steps; i++) {
-        const QVector<IPlugin*> plugins = CPluginManager::Instance()->getPlugins(workflow.getAlgorithmType(i));
+        QStringList plugins = workflow.getAvailablePlugins(i);
 
         QGroupBox* groupBox = new QGroupBox(workflow.getAlgorithmType(i), this);
         CStepComboBox* comboBox = new CStepComboBox(i, groupBox);
-        for (IPlugin* p : plugins) {
-            comboBox->addItem(p->Name(), QVariant::fromValue((void*)p));
+        for (QString p : plugins) {
+            comboBox->addItem(p);
         }
         groupBox->setLayout(new QVBoxLayout);
         groupBox->layout()->addWidget(comboBox);
@@ -72,7 +72,7 @@ void CAlgorithmSelector::setWorkflow(AWorkflow& workflow) {
                 static_cast<void(CStepComboBox::*)(int)>(&CStepComboBox::currentIndexChanged), this,
                 &CAlgorithmSelector::onCurrentIndexChanged);
         if (plugins.size() > 0) {
-            workflow.trySetStep(i, plugins.at(0));
+            workflow.trySetStep(i, comboBox->currentText());
         }
     }
 
@@ -94,14 +94,11 @@ void CAlgorithmSelector::setDataStore(const QString& storeId) {
 void CAlgorithmSelector::onCurrentIndexChanged(int index) {
     CStepComboBox* sendingComboBox = qobject_cast<CStepComboBox*>(sender());
     int step = sendingComboBox->getStep();
-    IPlugin* plugin = static_cast<IPlugin*>(sendingComboBox->itemData(index).value<void*>());
 
-    if (plugin) {
-        bool success = mpWorkflow->trySetStep(step, plugin);
+    bool success = mpWorkflow->trySetStep(step, sendingComboBox->itemText(index));
 
-        if (success) {
-            emit algorithmChanged(step);
-        }
+    if (success) {
+      emit algorithmChanged(step);
     }
 }
 
@@ -147,7 +144,7 @@ void CAlgorithmSelector::onDataStoreFinished(CContextDataStore* dataStore) {
         emit workflowRunning(false);
     }
 
-    if(dataStore->IsAborted())
+    if(dataStore->isAborted())
     {
       mStatus->showMessage("Error: Failed to compute the workflow");
     }

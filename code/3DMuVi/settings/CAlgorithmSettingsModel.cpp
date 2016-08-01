@@ -1,4 +1,6 @@
 #include "CAlgorithmSettingsModel.h"
+
+#include "workflow/plugin/ialgorithm.h"
 #include "logger/controll/CLogController.h"
 
 CAlgorithmSettingsModel::CAlgorithmSettingsModel(AWorkflow& workflow, CAlgorithmSettingController& controller) {
@@ -37,12 +39,13 @@ bool CAlgorithmSettingsModel::validateAll(){
          QString key = o.keys().at(0);
          data.insert(key, o.take(key));
        }
-        if (workflow->getStep(row)->ValidateParameters(&data) == false) {
-            CLogController::instance().frameworkMessage("Error: " + workflow->getStep(row)->Name() + " Invalid Parameter");
+       if (workflow->getStep(row)->validateParameters(data) == false) {
+           CLogController::instance().frameworkMessage("Error: " + workflow->getStep(row)->getName()
+                                                       + " Invalid Parameter");
          return false;
-        }else{
-            workflow->getStep(row)->getAlgorithm()->setParameters(data);
-        }
+       }else{
+         workflow->getStep(row)->setParameters(data);
+       }
    }
    return true;
 }
@@ -60,14 +63,14 @@ void CAlgorithmSettingsModel::saveSettings(int row, QUrl filename) {
       data.insert(key, o.take(key));
     }
     if (filename.isEmpty() == true) {
-        filename.setPassword("a" + workflow->getStep(row)->Name());
+        filename.setPassword("a" + workflow->getStep(row)->getName());
     }
-    if (workflow->getStep(row)->ValidateParameters(&data)) {
+    if (workflow->getStep(row)->validateParameters(data)) {
         emit saveQJson(data, filename);
-        workflow->getStep(row)->getAlgorithm()->setParameters(data);
+        workflow->getStep(row)->setParameters(data);
     }
     else{
-        QString pluginM = workflow->getStep(row)->Name();
+        QString pluginM = workflow->getStep(row)->getName();
         pluginM.append(" parameter not Valid!");
         CLogController::instance().frameworkMessage(pluginM);
     }
@@ -85,14 +88,14 @@ void CAlgorithmSettingsModel::saveSettingsEx(int row, QUrl filename) {
       data.insert(key, o.take(key));
     }
     if (filename.isEmpty() == true) {
-        filename.setPassword("a" + workflow->getStep(row)->Name());
+        filename.setPassword("a" + workflow->getStep(row)->getName());
     }
-    if (workflow->getStep(row)->ValidateParameters(&data)) {
+    if (workflow->getStep(row)->validateParameters(data)) {
         emit saveQJsonEx(data, filename);
-        workflow->getStep(row)->getAlgorithm()->setParameters(data);
+        workflow->getStep(row)->setParameters(data);
     }
     else{
-        QString pluginM = workflow->getStep(row)->Name();
+        QString pluginM = workflow->getStep(row)->getName();
         pluginM.append(" parameter not Valid!");
         CLogController::instance().frameworkMessage(pluginM);
     }
@@ -124,12 +127,12 @@ void CAlgorithmSettingsModel::loadSettings(int row, QUrl filename) {
 
 
 void CAlgorithmSettingsModel::algorithmChanged(int step) {
-    QJsonObject object = workflow->getStep(step)->GetParameterJson();
+    QJsonObject object = workflow->getStep(step)->getParameterJson();
     loadQJson(object);
     mRootItem->getChilds()->swap(step, mRootItem->getChilds()->size() - 1);
     mRootItem->getChilds()->removeLast();
     insertName(step);
-    workflow->getStep(step)->getAlgorithm()->setParameters(object);
+    workflow->getStep(step)->setParameters(object);
     QUrl url;
     url.setPassword("a" + object.keys().value(0));
     emit saveQJson(object, url);
@@ -141,7 +144,7 @@ bool CAlgorithmSettingsModel::setData(const QModelIndex& index, const QVariant& 
   {
     CQJsonTreeItem* parentItem = backtrack(index);
     QJsonObject params;
-    IPlugin* plugin = workflow->getStep(parentItem->row());
+    std::shared_ptr<IAlgorithm> plugin = workflow->getStep(parentItem->row());
 
     CQJsonTreeItem* tempItem;
     int size = parentItem->getChilds()->size();
@@ -153,11 +156,11 @@ bool CAlgorithmSettingsModel::setData(const QModelIndex& index, const QVariant& 
       params.insert(key, o.take(key));
     }
 
-    if(plugin->ValidateParameters(&params))
+    if(plugin->validateParameters(params))
     {
-      plugin->getAlgorithm()->setParameters(params);
+      plugin->setParameters(params);
     }else{
-        QString pluginM = plugin->Name();
+        QString pluginM = plugin->getName();
         pluginM.append(" parameter not Valid!");
         CLogController::instance().frameworkMessage(pluginM);
     }
@@ -169,6 +172,6 @@ bool CAlgorithmSettingsModel::setData(const QModelIndex& index, const QVariant& 
 void CAlgorithmSettingsModel::insertName(int row)
 {
     CQJsonTreeItem* temp = mRootItem->getChilds()->value(row);
-    IPlugin* plugin = workflow->getStep(row);
-    temp->setKey(plugin ? plugin->Name() : "No plugin loaded");
+    std::shared_ptr<IAlgorithm> plugin = workflow->getStep(row);
+    temp->setKey(plugin ? plugin->getName() : "No plugin loaded");
 }

@@ -1,7 +1,7 @@
 ﻿#ifndef ALGORITHM_H
 #define ALGORITHM_H
-#include "workflow/plugin/ialgorithm.h"
-#include "plugin_config.h"
+#include "workflow/plugin/ifusor.h"
+#include "workflow/plugin/aalgorithmconfig.h"
 #include <QJsonObject>
 #include <QObject>
 #include <fstream>
@@ -11,15 +11,16 @@
 #include <pcl/io/pcd_io.h>
 #include <pcl/io/ply_io.h>
 
-class CLASS_GEN(Algorithm) : public IAlgorithm
+class CPluginDepthFusor : public AAlgorithmConfig<CPluginDepthFusor, IFusor>
 {
 private:
     bool mIsBusy;
     CLogController *mLogger;
-    QJsonObject mQJson;
-    QJsonObject *mSettings;
-    QStringList mInputTypes;
-    QStringList mOutputTypes;
+    QJsonObject mSettings;
+
+    std::shared_ptr<CInputDataSet> mImages;
+    std::shared_ptr<CDataDepth> mDepthMaps;
+    std::shared_ptr<CDataFusion> mFusion;
 
     /*!
      * \brief File stream of groundtruth poses.
@@ -27,7 +28,13 @@ private:
     std::fstream  mPoseFileStream;
 
 public:
-    CLASS_GEN(Algorithm)();
+    static constexpr auto author = "Boitumelo Ruf";
+    static constexpr auto name = "DepthFusor";
+    static constexpr auto date = "2016-02-18";
+    static constexpr int32_t version = 1;
+    static constexpr auto jsonPath = "PluginDepthFusor.json";
+
+    CPluginDepthFusor();
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */
@@ -39,43 +46,34 @@ public:
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */
-    virtual void run(CContextDataStore* dataStore, std::function<void (CContextDataStore*)> callback) override;
+    virtual bool run() override;
 
     /*!
     \brief Gibt zurück, ob der Algorithmus zur Zeit mit einer Ausführung beschäftigt ist
     */
     virtual bool IsBusy() const override;
 
-    /*!
-    * \brief Eine Liste aller Daten, die als Eingabe benötigt werden.
-    * \return Eine Liste aller Daten, die als Eingabe benötigt werden.
-    */
-    virtual QStringList getInputDataTypes() const override;
-    /*!
-    * \brief Eine Liste aller Daten, die als Ausgabe erzeugt werden.
-    * \return Eine Liste aller Daten, die als Ausgabe erzeugt werden.
-    */
-    virtual QStringList getOutputDataTypes() const override;
+    void setImages(std::shared_ptr<CInputDataSet> images) override;
+    void setDepthMaps(std::shared_ptr<CDataDepth> depthMaps) override;
+
+    std::shared_ptr<CDataFusion> getFusion() override;
 
     /*!
     \brief Prüfe alle Parameter auf gültige Werte
     \return True falls alle Werte sich in gültigen Grenzen befinden, False andernfalls
     */
-    bool ValidateParameters(const QJsonObject*) const;
+    virtual bool validateParameters(QJsonObject settings) const override;
+
+    static std::shared_ptr<IFusor> newFusor();
+
 protected:
     /*!
      * \brief Führe die Konkrete implementierung des Algorithmus aus
      * \param store Der Datastore
      */
-    void executeAlgorithm(CContextDataStore* store);
-
-    /*!
-     * \brief Wird im Konstruktor aufgerufen. Fülle mInputTypes und mOutputTypes
-     */
-    virtual void OnInitialize();
+    void executeAlgorithm();
 
 private:
-
     /*!
      * \brief Method to load pcl polygon mesh from ply.
      * \param iFilePath Path to file.

@@ -7,7 +7,7 @@
 @param packet
 */
 //============================================================
-void CInputImageView::applyData(const CInputDataSet* packet)
+void CInputImageView::applyData(std::shared_ptr<CInputDataSet const> packet)
 {
     appliedData = packet;
 

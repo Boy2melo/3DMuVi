@@ -13,12 +13,12 @@ class CInputImageView : public CImageView, public IDataView
 
 public:
   explicit CInputImageView();
-  void applyData(const CInputDataSet* packet) override;
+  void applyData(std::shared_ptr<CInputDataSet const> packet) override;
   void activate() override;
   void clearData() override;
 
 private:
-  const CInputDataSet* appliedData = nullptr;
+  std::shared_ptr<CInputDataSet const> appliedData = nullptr;
   std::vector<uint32_t> mDataID;
   std::vector<QImage*> mImageList;
 

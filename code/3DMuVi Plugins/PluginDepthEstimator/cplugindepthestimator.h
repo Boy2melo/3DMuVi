@@ -1,19 +1,21 @@
 ﻿#ifndef ALGORITHM_H
 #define ALGORITHM_H
-#include "workflow/plugin/ialgorithm.h"
-#include "plugin_config.h"
+#include "workflow/plugin/idepthestimator.h"
+#include "workflow/plugin/aalgorithmconfig.h"
 #include <QJsonObject>
 #include <QObject>
 
-class CLASS_GEN(Algorithm) : public IAlgorithm
+class CPluginDepthEstimator : public AAlgorithmConfig<CPluginDepthEstimator, IDepthEstimator>
 {
 private:
     bool mIsBusy;
     CLogController *mLogger;
     QJsonObject mQJson;
-    QJsonObject *mSettings;
-    QStringList mInputTypes;
-    QStringList mOutputTypes;
+    QJsonObject mSettings;
+
+    std::shared_ptr<CInputDataSet> mImages;
+    std::shared_ptr<CDataPose> mPoses;
+    std::shared_ptr<CDataDepth> mDepthMaps;
 
     /*!
      * \brief List containing paths to groundtruth files within source directory.
@@ -26,7 +28,13 @@ private:
     QStringList::iterator     mFileItr;
 
 public:
-    CLASS_GEN(Algorithm)();
+    static constexpr auto author = "Boitumelo Ruf";
+    static constexpr auto name = "DepthEstimator";
+    static constexpr auto date = "2016-02-18";
+    static constexpr int32_t version = 1;
+    static constexpr auto jsonPath = "PluginDepthEstimator.json";
+
+    CPluginDepthEstimator();
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */
@@ -38,7 +46,7 @@ public:
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */
-    virtual void run(CContextDataStore* dataStore, std::function<void (CContextDataStore*)> callback) override;
+    virtual bool run() override;
 
     /*!
     \brief Gibt zurück, ob der Algorithmus zur Zeit mit einer Ausführung beschäftigt ist
@@ -46,32 +54,24 @@ public:
     virtual bool IsBusy() const override;
 
     /*!
-    * \brief Eine Liste aller Daten, die als Eingabe benötigt werden.
-    * \return Eine Liste aller Daten, die als Eingabe benötigt werden.
-    */
-    virtual QStringList getInputDataTypes() const override;
-    /*!
-    * \brief Eine Liste aller Daten, die als Ausgabe erzeugt werden.
-    * \return Eine Liste aller Daten, die als Ausgabe erzeugt werden.
-    */
-    virtual QStringList getOutputDataTypes() const override;
-
-    /*!
     \brief Prüfe alle Parameter auf gültige Werte
     \return True falls alle Werte sich in gültigen Grenzen befinden, False andernfalls
     */
-    bool ValidateParameters(const QJsonObject*) const;
+    virtual bool validateParameters(QJsonObject params) const override;
+
+    void setImages(std::shared_ptr<CInputDataSet> images) override;
+    void setPoses(std::shared_ptr<CDataPose> poses) override;
+
+    std::shared_ptr<CDataDepth> getDepthMaps() override;
+
+    static std::shared_ptr<IDepthEstimator> newDepthEstimator();
+
 protected:
     /*!
      * \brief Führe die Konkrete implementierung des Algorithmus aus
      * \param store Der Datastore
      */
-    void executeAlgorithm(CContextDataStore* store);
-
-    /*!
-     * \brief Wird im Konstruktor aufgerufen. Fülle mInputTypes und mOutputTypes
-     */
-    virtual void OnInitialize();
+    void executeAlgorithm();
 };
 
 #endif // ALGORITHM_H

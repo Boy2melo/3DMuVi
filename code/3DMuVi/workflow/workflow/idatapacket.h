@@ -47,7 +47,7 @@ public:
   \brief Apply this packet on the given data view.
   \param dataView The data view to apply this packet.
   */
-  void ApplyToDataview(IDataView* dataView) const;
+  virtual void applyToDataview(IDataView* dataView) const = 0;
 
   /*!
   \brief Provides a stream provider.

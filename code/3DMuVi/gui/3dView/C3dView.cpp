@@ -43,7 +43,7 @@ void C3dView::clearData()
   updateView();
 }
 
-void C3dView::applyData(CDataFusion const* packet)
+void C3dView::applyData(std::shared_ptr<CDataFusion const> packet)
 {
   mPointCloud = packet->getPointCloud();
   mPolygonMesh = packet->getPolygonMesh();
@@ -52,7 +52,7 @@ void C3dView::applyData(CDataFusion const* packet)
   updateView();
 }
 
-void C3dView::applyData(CDataPose const* packet)
+void C3dView::applyData(std::shared_ptr<CDataPose const> packet)
 {
   std::vector<SPose> poses = *packet->getPose();
 

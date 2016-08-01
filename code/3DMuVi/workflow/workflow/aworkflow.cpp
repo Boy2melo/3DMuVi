@@ -1,5 +1,8 @@
 #include "aworkflow.h"
+
 #include <QTimer>
+
+#include <workflow/plugin/ialgorithm.h>
 
 AWorkflow::~AWorkflow()
 {
@@ -24,14 +27,6 @@ bool AWorkflow::run(const QString storeId, bool multiThread)
   // do a basic check
   CContextDataStore* store = FindStore(storeId);
 
-  if(!checkAvailableDataTypes())
-  {
-    mMutex.unlock();
-    CLogController::instance().frameworkMessage("ERROR: Wrong Plugin Setup. Please Check Plugin " \
-                                                "Input/Output Types");
-    return false;   //Workflow wrong configured
-  }
-
   if(store == nullptr)
   {
     mMutex.unlock();
@@ -45,7 +40,7 @@ bool AWorkflow::run(const QString storeId, bool multiThread)
     return false;   // Store already in use
   }
 
-  store->SetIsAborted(false);
+  store->setIsAborted(false);
   store->resetCalculationStep();
 
   if(multiThread)
@@ -120,7 +115,7 @@ void AWorkflow::stop(const QString storeId) const
 
   if(store != nullptr)
   {
-    store->SetIsAborted(true);
+    store->setIsAborted(true);
   }
 }
 
@@ -136,4 +131,27 @@ CContextDataStore* AWorkflow::FindStore(QString id) const
   }
 
   return nullptr;
+}
+
+bool AWorkflow::executeSingleAlgorithm(std::shared_ptr<IAlgorithm> algorithm,
+                                                CContextDataStore* store)
+{
+  if(algorithm == nullptr)
+  {
+    return false;
+  }
+
+  algorithm->setLogger(&CLogController::instance());
+  if(algorithm->IsBusy() || store->isAborted())
+  {
+    emit sigDataStoreFinished(store);
+    return false;
+  }
+  CLogController::instance().frameworkMessage(algorithm->getName() + " - plugin started");
+  if(!algorithm->run())
+  {
+    emit sigDataStoreFinished(store);
+    return false;
+  }
+  return true;
 }

@@ -10,7 +10,8 @@ TARGET = PluginPoseEstimator
 TEMPLATE = lib
 CONFIG += plugin
 
-DESTDIR = $$[QT_INSTALL_PLUGINS]/generic
+#DESTDIR = $$[QT_INSTALL_PLUGINS]/generic
+DESTDIR = ../../Win32/Debug/plugins
 
 QMAKE_CXXFLAGS += -std=c++11
 QMAKE_CXXFLAGS_RELEASE += -O3
@@ -22,9 +23,8 @@ CONFIG(debug, debug|release) {
 }
 
 SOURCES += \
-    plugin.cpp \
-    algorithm.cpp \
-    MyAlgorithm.cpp
+    MyAlgorithm.cpp \
+    cpluginposeestimator.cpp
 
 INCLUDEPATH += ../../3DMuVi
 
@@ -32,10 +32,8 @@ DEFINES += BUILD_NAME=\\\"plugins/$${TARGET}\\\"
 
 HEADERS += \
     ../../3DMuVi/workflow/plugin/ialgorithm.h \
-    ../../3DMuVi/workflow/plugin/iplugin.h \
-    plugin.h \
-    algorithm.h \
-    plugin_config.h
+    cpluginposeestimator.h
+
 OTHER_FILES += \
     PluginPoseEstimator.json
 

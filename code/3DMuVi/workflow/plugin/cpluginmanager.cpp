@@ -1,7 +1,15 @@
+#include <boost/filesystem/path.hpp>
+#include <boost/dll/shared_library.hpp>
+
 #include "cpluginmanager.h"
 #include <QtCore/qcoreapplication.h>
 
 //TODO: store plugins as shared_ptr and make them reloadable
+
+#include <iostream>
+
+using namespace boost::filesystem;
+using namespace boost::dll;
 
 CPluginManager* CPluginManager::mInstance = nullptr;
 
@@ -18,14 +26,9 @@ CPluginManager* CPluginManager::Instance()
   return mInstance;
 }
 
-QVector<IPlugin*> CPluginManager::getPlugins() const
-{
-  return mPlugins;
-}
-
 qint32 CPluginManager::Initialize()
 {
-  mPlugins.clear();
+  mLibs.clear();
 
   mPluginsDir = QDir(qApp->applicationDirPath());
 #if defined(Q_OS_WIN)
@@ -45,33 +48,15 @@ qint32 CPluginManager::Initialize()
 
   for(QString fileName : mPluginsDir.entryList(QDir::Files))
   {
-    QPluginLoader loader(mPluginsDir.absoluteFilePath(fileName));
-    QObject* plugin = loader.instance();
-    auto pPlugin = qobject_cast<IPlugin*>(plugin);
+    path libPath(mPluginsDir.absoluteFilePath(fileName).toStdString());
+    auto lib = new shared_library(libPath);
 
-    if(pPlugin != nullptr)
+    if(lib->is_loaded())
     {
-      pPlugin->Initialize(&loader);
-      mPlugins.push_back(pPlugin);
+      mLibs.push_back(lib);
     }
   }
 
-  auto size = mPlugins.size();
+  auto size = mLibs.size();
   return size;
-}
-
-QVector<IPlugin*> CPluginManager::getPlugins(QString type) const
-{
-  QVector<IPlugin*> result;
-
-  for(IPlugin* plugin : mPlugins)
-  {
-    auto pluginType = plugin->GetPluginType();
-    if(pluginType == type)
-    {
-      result.push_back(plugin);
-    }
-  }
-
-  return result;
 }

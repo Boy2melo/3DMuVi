@@ -79,3 +79,8 @@ std::shared_ptr<std::vector<std::tuple<uint32_t, QImage>>> CDataDepth::getDepthM
 void CDataDepth::setDepthMap(std::shared_ptr<std::vector<std::tuple<uint32_t, QImage>>> depthMaps) {
     depthMap = depthMaps;
 }
+
+void CDataDepth::applyToDataview(IDataView* dataView) const
+{
+  dataView->applyData(shared_from_this());
+}

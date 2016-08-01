@@ -20,7 +20,8 @@ using FeatureMap = std::vector<std::tuple<uint32_t, float, float, float, float>>
  * Datapacket which contains the FeatureMap and Pose data.
  * It can be serialized into a stream and deserialized from a stream.
  */
-class EXPORTED CDataPose : public IDataPacket {
+class EXPORTED CDataPose : public IDataPacket,
+                           public std::enable_shared_from_this<CDataPose> {
 public:
     CDataPose();
     ~CDataPose();
@@ -53,6 +54,8 @@ public:
     \param map A shared pointer which point to a std::vector with SPoses.
     */
     void setPose(std::shared_ptr<std::vector<SPose>> poses);
+
+    void applyToDataview(IDataView* dataView) const override;
 
 private:
     AStreamProvider* streamProvider;

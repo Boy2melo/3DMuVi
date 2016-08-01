@@ -16,7 +16,8 @@ using FeatureMatch = std::vector<std::tuple<uint64_t, float, float, uint32_t>>;
  * Datapacket which contains the FeatureMatch data.
  * It can be serialized into a stream and deserialized from a stream.
  */
-class EXPORTED CDataFeature : public IDataPacket {
+class EXPORTED CDataFeature : public IDataPacket,
+                              public std::enable_shared_from_this<CDataFeature> {
 public:
     CDataFeature();
     ~CDataFeature();
@@ -37,6 +38,8 @@ public:
     \return std::shared_ptr<FeatureMatch> Returns a shared pointer to the FeatureMatch.
     */
     std::shared_ptr<FeatureMatch> getFeatureMatch() const;
+
+    void applyToDataview(IDataView* dataView) const override;
 private:
     std::shared_ptr<FeatureMatch> featureMatchData;
     AStreamProvider* streamProvider;

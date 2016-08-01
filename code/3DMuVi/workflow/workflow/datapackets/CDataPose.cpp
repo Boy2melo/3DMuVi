@@ -93,3 +93,8 @@ std::shared_ptr<std::vector<SPose>> CDataPose::getPose() const {
 void CDataPose::setPose(std::shared_ptr<std::vector<SPose>> poses) {
     pose = poses;
 }
+
+void CDataPose::applyToDataview(IDataView* dataView) const
+{
+  dataView->applyData(shared_from_this());
+}

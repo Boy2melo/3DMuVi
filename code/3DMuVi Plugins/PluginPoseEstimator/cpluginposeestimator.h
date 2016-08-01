@@ -1,25 +1,32 @@
 ﻿#ifndef ALGORITHM_H
 #define ALGORITHM_H
 #include <fstream>
-#include "workflow/plugin/ialgorithm.h"
+#include "workflow/plugin/iposeestimator.h"
+#include "workflow/plugin/aalgorithmconfig.h"
 #include <QJsonObject>
 #include <QObject>
-#include "plugin_config.h"
 
 
-class CLASS_GEN(Algorithm) : public IAlgorithm
+class CPluginPoseEstimator : public AAlgorithmConfig<CPluginPoseEstimator, IPoseEstimator>
 {
 private:
     bool mIsBusy;
     CLogController *mLogger;
-    QJsonObject mQJson;
-    QJsonObject *mSettings;
-    QStringList mInputTypes;
-    QStringList mOutputTypes;
+    QJsonObject mSettings;
     std::fstream mPoseFileStream;
 
+    std::shared_ptr<CInputDataSet> mImages;
+    std::shared_ptr<CDataFeature> mFeatures;
+    std::shared_ptr<CDataPose> mPoses;
+
 public:
-    CLASS_GEN(Algorithm)();
+    static constexpr auto name = "PoseEstimator";
+    static constexpr auto author = "Boitumelo Ruf";
+    static constexpr auto date = "2016-02-18";
+    static constexpr int32_t version = 1;
+    static constexpr auto jsonPath = "PluginPoseEstimator.json";
+
+    CPluginPoseEstimator();
     /*!
      * \brief Initialisiert einen Logger für den Algorithmus
      */
@@ -31,40 +38,32 @@ public:
     /*!
      * \brief Führe dem Algorithmus auf den dem Plugin bekannten Daten aus.
      */
-    virtual void run(CContextDataStore* dataStore, std::function<void (CContextDataStore*)> callback) override;
+    virtual bool run() override;
 
     /*!
     \brief Gibt zurück, ob der Algorithmus zur Zeit mit einer Ausführung beschäftigt ist
     */
     virtual bool IsBusy() const override;
 
-    /*!
-    * \brief Eine Liste aller Daten, die als Eingabe benötigt werden.
-    * \return Eine Liste aller Daten, die als Eingabe benötigt werden.
-    */
-    virtual QStringList getInputDataTypes() const override;
-    /*!
-    * \brief Eine Liste aller Daten, die als Ausgabe erzeugt werden.
-    * \return Eine Liste aller Daten, die als Ausgabe erzeugt werden.
-    */
-    virtual QStringList getOutputDataTypes() const override;
+    void setImages(std::shared_ptr<CInputDataSet> images) override;
+    void setFeatureMatches(std::shared_ptr<CDataFeature> featureMatches) override;
+
+    std::shared_ptr<CDataPose> getPoses() override;
 
     /*!
     \brief Prüfe alle Parameter auf gültige Werte
     \return True falls alle Werte sich in gültigen Grenzen befinden, False andernfalls
     */
-    bool ValidateParameters(const QJsonObject*) const;
+    virtual bool validateParameters(QJsonObject settings) const override;
+
+    static std::shared_ptr<IPoseEstimator> newPoseEstimator();
+
 protected:
     /*!
      * \brief Führe die Konkrete implementierung des Algorithmus aus
      * \param store Der Datastore
      */
-    void executeAlgorithm(CContextDataStore* store);
-
-    /*!
-     * \brief Wird im Konstruktor aufgerufen. Fülle mInputTypes und mOutputTypes
-     */
-    virtual void OnInitialize();
+    void executeAlgorithm();
 
 private:
     void openFileStream();

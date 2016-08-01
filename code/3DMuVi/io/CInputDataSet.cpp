@@ -37,3 +37,8 @@ AStreamProvider* CInputDataSet::getStreamProvider() {
     // do not save input images
   return nullptr;
 }
+
+void CInputDataSet::applyToDataview(IDataView* dataView) const
+{
+  dataView->applyData(shared_from_this());
+}

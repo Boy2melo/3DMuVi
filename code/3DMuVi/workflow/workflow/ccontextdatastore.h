@@ -37,7 +37,7 @@ public:
    * \brief Initialisiert den Context aus einem Datastore.
    * \param inputData Die Eingabebilder, die in den Context übernommen werden sollen.
    */
-  void InitializeFromStorage(CInputDataSet* inputData);
+  void initializeFromStorage(CInputDataSet* inputData);
   /*!
    * \brief Gibt Daten vom Typ T zurück, sofern vorhanden.
    * \return Das Datenpacket vom Typ T oder nullptr, falls nicht vorhanden.
@@ -68,7 +68,7 @@ public:
    * \brief Wendet die Daten des Stores auf einen DataView an.
    * \param view Die View, auf welche die Daten angewendet werden sollen.
    */
-  void ApplyToDataView(IDataView* view) const;
+  void applyToDataView(IDataView* view) const;
   /*!
    * \brief Gibt die ID des Datenkontext zurück.
    * \return Die ID des Datenkontext.
@@ -78,7 +78,7 @@ public:
    * \brief Schreibe den Context auf die Festplatte.
    * \param context Der Resultcontext, in den die Datenpackete geschrieben werden sollen.
    */
-  void Serialize(CResultContext* context);
+  void serialize(CResultContext* context);
   /*!
    * \brief Gibt den aktuellen Verarbeitungsschritt im Workflow zurück.
    * \return Der aktuelle Verarbeitungsschritt, in dem der Context sich befindet.
@@ -100,14 +100,14 @@ public:
    * \return True, wenn der nächste Algorithmus nicht mehr ausgeführt werden soll. False
    * andernfalls.
    */
-  bool IsAborted() const;
+  bool isAborted() const;
 
   /*!
    * \brief Bricht die Ausführung vor dem nächsten Algorithmus ab.
    * \param abort True, falls der nächste Algorithmus nicht mehr ausgeführt werden soll. False
    * andernfalls.
    */
-  void SetIsAborted(bool abort);
+  void setIsAborted(bool abort);
 
 private:
   QString mContextId;

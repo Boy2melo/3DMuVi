@@ -8,7 +8,7 @@
 @param packet
 */
 //============================================================
-void CFeatureView::applyData(const CDataFeature* packet)
+void CFeatureView::applyData(std::shared_ptr<CDataFeature const> packet)
 {
   appliedFeatureData = packet;
 
@@ -20,7 +20,7 @@ void CFeatureView::applyData(const CDataFeature* packet)
 @param packet
 */
 //============================================================
-void CFeatureView::applyData(const CInputDataSet* packet)
+void CFeatureView::applyData(std::shared_ptr<CInputDataSet const> packet)
 {
   appliedInputData = packet;
 

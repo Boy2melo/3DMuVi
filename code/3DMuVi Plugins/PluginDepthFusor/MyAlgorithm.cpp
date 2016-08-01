@@ -1,4 +1,4 @@
-#include "algorithm.h"
+#include "cplugindepthfusor.h"
 #include "workflow/workflow/datapackets/CDataFeature.h"
 #include "workflow/workflow/datapackets/CDataPose.h"
 #include "workflow/workflow/datapackets/SPose.h"
@@ -11,43 +11,53 @@
 // Adjust these functions to your needs
 //----------------------------------------
 
-void CLASS_GEN(Algorithm)::OnInitialize(){
-    mInputTypes.push_back(DT_INPUTIMAGES);
-    mInputTypes.push_back(DT_POSE);
-    mInputTypes.push_back(DT_DEPTH);
-
-    mOutputTypes.push_back(DT_FUSION);
+void CPluginDepthFusor::setImages(std::shared_ptr<CInputDataSet> images)
+{
+  mImages = images;
 }
 
-bool CLASS_GEN(Algorithm)::ValidateParameters(const QJsonObject *params) const{
-    // First level typechecks are already done, see plugin.cpp
+void CPluginDepthFusor::setDepthMaps(std::shared_ptr<CDataDepth> depthMaps)
+{
+  mDepthMaps = depthMaps;
+}
+
+std::shared_ptr<CDataFusion> CPluginDepthFusor::getFusion()
+{
+  return mFusion;
+}
+
+bool CPluginDepthFusor::validateParameters(const QJsonObject params) const{
+    if(!AAlgorithmConfig::validateParameters(params))
+    {
+        return false;
+    }
 
     // check if files exists
-    if (!QFile(params->value("PcSrcFile").toString()).exists()) return false;
-    if (!QFile(params->value("MeshSrcFile").toString()).exists()) return false;
-    if (!QFile(params->value("TexMeshSrcFile").toString()).exists()) return false;
+    if (!QFile(params.value("PcSrcFile").toString()).exists()) return false;
+    if (!QFile(params.value("MeshSrcFile").toString()).exists()) return false;
+    if (!QFile(params.value("TexMeshSrcFile").toString()).exists()) return false;
 
     return true;
 }
 
-void CLASS_GEN(Algorithm)::executeAlgorithm(CContextDataStore *store){
+void CPluginDepthFusor::executeAlgorithm(){
 
     // get input files
-    auto pInputImages = store->getData<CInputDataSet>();
+    auto pInputImages = mImages;
 
-    pcl::PointCloud<pcl::PointXYZRGB>::Ptr pPointCloud = loadPointCoudFromPcd(mSettings->value("PcSrcFile").toString().toStdString());
-    pcl::PolygonMesh::Ptr pMesh = loadMeshFromPly(mSettings->value("MeshSrcFile").toString().toStdString());
-    pcl::PolygonMesh::Ptr pTexMesh = loadMeshFromPly(mSettings->value("TexMeshSrcFile").toString().toStdString());
+    pcl::PointCloud<pcl::PointXYZRGB>::Ptr pPointCloud = loadPointCoudFromPcd(mSettings.value("PcSrcFile").toString().toStdString());
+    pcl::PolygonMesh::Ptr pMesh = loadMeshFromPly(mSettings.value("MeshSrcFile").toString().toStdString());
+    pcl::PolygonMesh::Ptr pTexMesh = loadMeshFromPly(mSettings.value("TexMeshSrcFile").toString().toStdString());
 
     auto fusionData = new CDataFusion;
-    fusionData->setPointCloud(loadPointCoudFromPcd(mSettings->value("PcSrcFile").toString().toStdString()));
-    fusionData->setPolygonMesh(loadMeshFromPly(mSettings->value("MeshSrcFile").toString().toStdString()));
-//    fusionData->setTextureMesh(loadMeshFromPly(mSettings->value("TexMeshSrcFile").toString().toStdString()));
+    fusionData->setPointCloud(loadPointCoudFromPcd(mSettings.value("PcSrcFile").toString().toStdString()));
+    fusionData->setPolygonMesh(loadMeshFromPly(mSettings.value("MeshSrcFile").toString().toStdString()));
+//    fusionData->setTextureMesh(loadMeshFromPly(mSettings.value("TexMeshSrcFile").toString().toStdString()));
 
-    store->appendData<CDataFusion>(std::shared_ptr<CDataFusion>(fusionData), true);
+    mFusion = std::shared_ptr<CDataFusion>(fusionData);
 }
 
-pcl::PolygonMesh::Ptr CLASS_GEN(Algorithm)::loadMeshFromPly(const std::string &iFilePath) {
+pcl::PolygonMesh::Ptr CPluginDepthFusor::loadMeshFromPly(const std::string &iFilePath) {
   pcl::PolygonMesh::Ptr pPolyMesh = pcl::PolygonMesh::Ptr(new pcl::PolygonMesh());
 
   if(pcl::io::loadPLYFile(iFilePath, *pPolyMesh) == -1)
@@ -57,7 +67,7 @@ pcl::PolygonMesh::Ptr CLASS_GEN(Algorithm)::loadMeshFromPly(const std::string &i
 }
 
 //TODO: Changed PointXYZRGBA to PointXYZRGB since 3D-MuVi only supports PointXYZRGB. Do we have to support more types?
-pcl::PointCloud<pcl::PointXYZRGB>::Ptr CLASS_GEN(Algorithm)::loadPointCoudFromPcd(const std::string &iFilePath)
+pcl::PointCloud<pcl::PointXYZRGB>::Ptr CPluginDepthFusor::loadPointCoudFromPcd(const std::string &iFilePath)
 {
   pcl::PointCloud<pcl::PointXYZRGB>::Ptr pPointCloud = pcl::PointCloud<pcl::PointXYZRGB>::Ptr(new pcl::PointCloud<pcl::PointXYZRGB>);
 

@@ -12,18 +12,18 @@
  *
  */
 
-class CDataDeptht;
+class CDataDepth;
 
 class CDepthMapView : public CImageView, public IDataView {
   Q_OBJECT
 
 public:
-  void applyData(const CDataDepth* packet) override;
+  void applyData(std::shared_ptr<CDataDepth const> packet) override;
   void activate() override;
   void clearData() override;
 
 private:
-  const CDataDepth* appliedData = nullptr;
+  std::shared_ptr<CDataDepth const> appliedData = nullptr;
   std::vector<uint32_t> mDataID;
   std::vector<QImage*> mImageList;
 

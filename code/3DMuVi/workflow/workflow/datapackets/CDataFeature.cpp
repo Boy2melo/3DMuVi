@@ -23,7 +23,12 @@ void CDataFeature::setFeatureMatch(std::shared_ptr<FeatureMatch> match) {
 }
 
 std::shared_ptr<FeatureMatch> CDataFeature::getFeatureMatch() const {
-    return featureMatchData;
+  return featureMatchData;
+}
+
+void CDataFeature::applyToDataview(IDataView* dataView) const
+{
+  dataView->applyData(shared_from_this());
 }
 
 AStreamProvider* CDataFeature::getStreamProvider() {

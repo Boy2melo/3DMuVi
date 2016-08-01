@@ -1,23 +1,13 @@
 #ifndef AWORKFLOW_H
 #define AWORKFLOW_H
 
-#include "workflow/plugin/iplugin.h"
 #include "ccontextdatastore.h"
 #include <QVector>
 #include <QSet>
 #include <QMutex>
 #include <QThread>
 
-// Führe ein Plugin auf einem Store aus mit frei wählbarem Callback bei Abschluss.
-#define __RUN_ALGORITHM(PLUGIN, CALLBACK) \
-  IAlgorithm* algorithm = PLUGIN->getAlgorithm(); \
-  algorithm->setLogger(&CLogController::instance()); \
-  if(!algorithm->IsBusy() && !store->IsAborted()){ \
-    store->incCalculationStep(); \
-    algorithm->run(store, [this](CContextDataStore *store){CALLBACK}); \
-  } else { \
-    emit sigDataStoreFinished(store); \
-  }
+class IAlgorithm;
 
 /*!
 \class AWorkflow
@@ -41,12 +31,14 @@ public:
   \return Die Anzahl an verfügbaren Ausführungsschritten bzw. Algorithmenslots.
   */
   virtual quint32 getStepCount() const = 0;
+
   /*!
   \brief Gibt den erforderlichen Plugintyp für einen gegebenen Slot zurück.
   \param step Der Schritt, für den der Plugintyp zurückgegeben werden soll.
   \return Der Plugintyp, der für den angegeben Schritt erforderlich ist.
   */
   virtual QString getAlgorithmType(const quint32 step) const = 0;
+
   /*!
   \brief Versucht ein Plugin einem Schritt zuzuweisen.
   \param step Der Schritt, dem das Plugin zugewiesen werden soll.
@@ -54,13 +46,16 @@ public:
   \return True, falls der Typ des Plugins zum Schritt passt und das Plugin gesetzt wurde. False
   andernfalls.
   */
-  virtual bool trySetStep(const quint32 step, IPlugin* plugin) = 0;
+  virtual bool trySetStep(const quint32 step, const QString& plugin) = 0;
+
+  virtual QStringList getAvailablePlugins(const quint32 step) = 0;
+
   /*!
   \brief Gibt das gesetze Plugin für einem gegebenen Schritt zurück.
   \param step Der Schritt, für den das Plugin zurück gegeben werden soll.
   \return Das gesetzte Plugin.
   */
-  virtual IPlugin* getStep(const quint32 step) const = 0;
+  virtual std::shared_ptr<IAlgorithm> getStep(const quint32 step) const = 0;
   /*!
   \brief Gibt eine Liste aller Datastores zurück, die in diesem Workflow angelegt wurden.
   \return Eine Liste aller Datastore, die in diesem Workflow angelegt wurden.
@@ -97,12 +92,6 @@ public:
   \param storeId Die ID des Datastores, dessen Ausführung angehalten werden soll.
   */
   void stop(const QString storeId) const;
-  /*!
-  \brief Prüfe, ob alle benötigten Daten für die Algorithmen durch den Workflow bereitgestellt
-  werden.
-  \return True, falls die benötigten Daten stimmen. False andernfalls.
-  */
-  virtual bool checkAvailableDataTypes() const = 0;
 
   /*!
   \brief Initialisiert den Workflow.
@@ -126,6 +115,8 @@ protected:
   \return Der gesucht Datastore oder nullptr, falls er nicht gefunden wurde.
   */
   CContextDataStore* FindStore(QString id) const;
+
+  bool executeSingleAlgorithm(std::shared_ptr<IAlgorithm> algorithm, CContextDataStore* store);
 
 protected slots:
   /*!

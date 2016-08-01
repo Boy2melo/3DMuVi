@@ -6,7 +6,7 @@ TEMPLATE = app
 TARGET = 3DMuVi
 DESTDIR = ../Win32/Debug
 QT += core opengl widgets gui
-CONFIG += debug c++11
+CONFIG += c++11
 DEFINES += QT_DLL QT_OPENGL_LIB QT_WIDGETS_LIB
 INCLUDEPATH += ./GeneratedFiles \
     . \
@@ -27,6 +27,9 @@ PCL{
 win32:DEFINES += EXPORTING_3DMUVI
 unix:QMAKE_LFLAGS += -rdynamic
 
+LIBS += -lboost_filesystem
+unix:LIBS += -ldl
+
 DEPENDPATH += .
 MOC_DIR += ./GeneratedFiles/debug
 OBJECTS_DIR += debug
@@ -39,9 +42,14 @@ HEADERS += ./macros.h \
     ./workflow/workflow/cworkflowmanager.h \
     ./workflow/workflow/idatapacket.h \
     ./workflow/workflow/idataview.h \
-    ./workflow/plugin/iplugin.h \
     ./workflow/plugin/cpluginmanager.h \
     ./workflow/plugin/ialgorithm.h \
+    ./workflow/plugin/ifeaturematcher.h \
+    ./workflow/plugin/iposeestimator.h \
+    ./workflow/plugin/idepthestimator.h \
+    ./workflow/plugin/ifusor.h \
+    ./workflow/plugin/cpluginmanager_impl.h \
+    ./workflow/plugin/aalgorithmconfig.h \
     ./workflow/workflow/fourphase/cfourphaseworkflow.h\
     ./workflow/workflow/datapackets/CDataFeature.h \
     ./workflow/workflow/datapackets/CDataPose.h \

@@ -8,7 +8,6 @@
 #include <QDir>
 #include <QStringList>
 #include <tuple>
-#include <iostream>
 #include <QBitmap>
 #include <workflow/workflow/datapackets/CDataFeature.h>
 
@@ -19,7 +18,8 @@
  *
  * Stellt Bilder aus einem Ordner für den Workflow als Eingabedaten bereit.
  */
-class CInputDataSet : public IDataPacket {
+class CInputDataSet : public IDataPacket,
+                      public std::enable_shared_from_this<CInputDataSet> {
     std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> inputData;
 public:
     /*!
@@ -45,6 +45,8 @@ public:
     void cleanUpStreamProvider() override {}
     void serialize(AStreamProvider*) override {}
     void deserialize(AStreamProvider*) override {}
+
+    void applyToDataview(IDataView* dataView) const override;
 };
 
 #endif // INPUTDATASET_H
