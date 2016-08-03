@@ -23,13 +23,8 @@ using FeatureMap = std::vector<std::tuple<uint32_t, float, float, float, float>>
 class EXPORTED CDataPose : public IDataPacket,
                            public std::enable_shared_from_this<CDataPose> {
 public:
-    CDataPose();
-    ~CDataPose();
-
-
     QString getDataType() const override;
-    AStreamProvider* getStreamProvider() override;
-    void cleanUpStreamProvider() override;
+    std::unique_ptr<AStreamProvider> getStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
     void deserialize(AStreamProvider *stream) override;
 
@@ -58,7 +53,6 @@ public:
     void applyToDataview(IDataView* dataView) const override;
 
 private:
-    AStreamProvider* streamProvider;
     std::shared_ptr<FeatureMap> featureMap;
     std::shared_ptr<std::vector<SPose>> pose;
 };

@@ -8,45 +8,14 @@
 
 #include "CDataFusion.h"
 
-CDataFusion::CDataFusion()
-{
-
-}
-
-CDataFusion::~CDataFusion()
-{
-  if(mpStream)
-  {
-    delete mpStream;
-    mpStream = nullptr;
-  }
-}
-
 QString CDataFusion::getDataType() const
 {
   return DT_FUSION;
 }
 
-AStreamProvider* CDataFusion::getStreamProvider()
+std::unique_ptr<AStreamProvider> CDataFusion::getStreamProvider()
 {
-  if(mpStream)
-  {
-    delete mpStream;
-    mpStream = nullptr;
-  }
-
-  mpStream = new CSFStreamProvider();
-
-  return mpStream;
-}
-
-void CDataFusion::cleanUpStreamProvider()
-{
-  if(mpStream)
-  {
-    delete mpStream;
-    mpStream = nullptr;
-  }
+  return std::unique_ptr<AStreamProvider>(new CSFStreamProvider);
 }
 
 void CDataFusion::serialize(AStreamProvider* stream)

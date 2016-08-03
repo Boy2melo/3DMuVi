@@ -23,12 +23,11 @@ void CResultContext::addDataPacket(std::shared_ptr<IDataPacket> data) {
         folder.cd(dataType);
     }
 
-    AStreamProvider* streamProvider = data->getStreamProvider();
+    auto streamProvider = data->getStreamProvider();
     if(streamProvider)
     {
       streamProvider->setDestination(folder);
-      data->serialize(streamProvider);
-      data->cleanUpStreamProvider();
+      data->serialize(streamProvider.get());
     }
 
     folder.cdUp();

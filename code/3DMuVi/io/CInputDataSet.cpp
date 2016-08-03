@@ -33,7 +33,7 @@ QString CInputDataSet::getDataType() const {
     return DT_INPUTIMAGES;
 }
 
-AStreamProvider* CInputDataSet::getStreamProvider() {
+std::unique_ptr<AStreamProvider> CInputDataSet::getStreamProvider() {
     // do not save input images
   return nullptr;
 }

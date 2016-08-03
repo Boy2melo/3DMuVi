@@ -25,7 +25,7 @@ public:
   /*!
   \brief Empty destructor. To be overriden by derived classes.
   */
-  virtual ~IDataPacket() {}
+  virtual ~IDataPacket();
   /*!
   \brief Creates the ID of this packet.
   */
@@ -53,12 +53,7 @@ public:
   \brief Provides a stream provider.
   \return A stream provider in which this packet can be serialized.
   */
-  virtual AStreamProvider* getStreamProvider() = 0;
-
-  /*!
-   * \brief Cleans up the last returned stream provider.
-   */
-  virtual void cleanUpStreamProvider() = 0;
+  virtual std::unique_ptr<AStreamProvider> getStreamProvider() = 0;
 
   /*!
   \brief Serialize the data packet. To get a AStreamProvider use getStreamProvider(). After you got

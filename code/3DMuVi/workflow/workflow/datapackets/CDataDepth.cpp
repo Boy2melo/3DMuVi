@@ -1,33 +1,11 @@
 #include "CDataDepth.h"
 
-CDataDepth::CDataDepth() {
-    streamProvider = nullptr;
-}
-
-CDataDepth::~CDataDepth() {
-    if (streamProvider != nullptr) {
-        delete(streamProvider);
-    }
-}
-
 QString CDataDepth::getDataType() const {
     return DT_DEPTH;
 }
 
-AStreamProvider* CDataDepth::getStreamProvider() {
-    if (streamProvider != nullptr) {
-        delete(streamProvider);
-    }
-    streamProvider = new CMFStreamProvider;
-    return streamProvider;
-}
-
-void CDataDepth::cleanUpStreamProvider()
-{
-    if (streamProvider != nullptr) {
-        delete(streamProvider);
-        streamProvider = nullptr;
-    }
+std::unique_ptr<AStreamProvider> CDataDepth::getStreamProvider() {
+    return std::unique_ptr<AStreamProvider>(new CMFStreamProvider);
 }
 
 void CDataDepth::serialize(AStreamProvider *stream) {

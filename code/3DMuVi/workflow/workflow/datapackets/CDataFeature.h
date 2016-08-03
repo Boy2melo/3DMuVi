@@ -19,12 +19,8 @@ using FeatureMatch = std::vector<std::tuple<uint64_t, float, float, uint32_t>>;
 class EXPORTED CDataFeature : public IDataPacket,
                               public std::enable_shared_from_this<CDataFeature> {
 public:
-    CDataFeature();
-    ~CDataFeature();
-
     QString getDataType() const override;
-    AStreamProvider* getStreamProvider() override;
-    void cleanUpStreamProvider() override;
+    std::unique_ptr<AStreamProvider> getStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
     void deserialize(AStreamProvider* stream) override;
 
@@ -42,7 +38,6 @@ public:
     void applyToDataview(IDataView* dataView) const override;
 private:
     std::shared_ptr<FeatureMatch> featureMatchData;
-    AStreamProvider* streamProvider;
 };
 
 #endif // CDATAFEATURE_H

@@ -2,18 +2,6 @@
 #include "workflow/workflow/ccontextdatastore.h"
 #include <tuple>
 
-///////////////////////////// Erster Entwurf - Komplett ungetestet /////////////////////
-
-CDataFeature::CDataFeature() {
-    streamProvider = nullptr;
-}
-
-CDataFeature::~CDataFeature() {
-    if (streamProvider != nullptr) {
-        delete(streamProvider);
-    }
-}
-
 QString CDataFeature::getDataType() const {
     return DT_FEATURE_MATCH;
 }
@@ -31,20 +19,8 @@ void CDataFeature::applyToDataview(IDataView* dataView) const
   dataView->applyData(shared_from_this());
 }
 
-AStreamProvider* CDataFeature::getStreamProvider() {
-    if (streamProvider != nullptr) {
-        delete(streamProvider);
-    }
-    streamProvider = new CSFStreamProvider();
-    return streamProvider;
-}
-
-void CDataFeature::cleanUpStreamProvider()
-{
-    if (streamProvider != nullptr) {
-        delete(streamProvider);
-        streamProvider = nullptr;
-    }
+std::unique_ptr<AStreamProvider> CDataFeature::getStreamProvider() {
+    return std::unique_ptr<AStreamProvider>(new CSFStreamProvider);
 }
 
 void CDataFeature::serialize(AStreamProvider* stream) {

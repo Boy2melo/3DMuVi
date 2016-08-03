@@ -23,12 +23,8 @@
 class EXPORTED CDataDepth : public IDataPacket,
                             public std::enable_shared_from_this<CDataDepth> {
 public:
-    CDataDepth();
-    ~CDataDepth();
-
     QString getDataType() const override;
-    AStreamProvider* getStreamProvider() override;
-    void cleanUpStreamProvider() override;
+    std::unique_ptr<AStreamProvider> getStreamProvider() override;
     void serialize(AStreamProvider* stream) override;
     void deserialize(AStreamProvider *stream) override;
 

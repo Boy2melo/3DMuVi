@@ -41,8 +41,7 @@ public:
     std::vector<std::tuple<uint32_t, QImage, CImagePreviewItem>> const* getInputImages() const;
 
     QString getDataType() const override;
-    AStreamProvider* getStreamProvider() override;
-    void cleanUpStreamProvider() override {}
+    std::unique_ptr<AStreamProvider> getStreamProvider() override;
     void serialize(AStreamProvider*) override {}
     void deserialize(AStreamProvider*) override {}
 

@@ -21,18 +21,6 @@ class EXPORTED CDataFusion : public IDataPacket, public std::enable_shared_from_
 {
 public:
   /*!
-   * \brief Default constructor.
-   *
-   * This constructor is empty.
-   */
-  CDataFusion();
-
-  /*!
-   * \brief Frees allocated memory.
-   */
-  virtual ~CDataFusion();
-
-  /*!
    * \brief Returns DT_FUSION as the data type of this object.
    * \return DT_FUSION.
    */
@@ -42,12 +30,7 @@ public:
    * \brief Returns a new stream provider.
    * \return A new stream provider.
    */
-  AStreamProvider* getStreamProvider() override;
-
-  /*!
-   * \brief Cleans up the last returned stream provider.
-   */
-  void cleanUpStreamProvider() override;
+  std::unique_ptr<AStreamProvider> getStreamProvider() override;
 
   /*!
    * \brief Serializes the data of this object into the given stream.

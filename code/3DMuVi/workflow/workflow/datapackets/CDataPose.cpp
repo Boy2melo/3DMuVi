@@ -1,35 +1,11 @@
 #include "CDataPose.h"
 
-//Erster Entwurf - Komplett ungetestet.
-
-CDataPose::CDataPose() {
-    streamProvider = nullptr;
-}
-
-CDataPose::~CDataPose() {
-    if (streamProvider != nullptr) {
-        delete(streamProvider);
-    }
-}
-
 QString CDataPose::getDataType() const {
     return DT_POSE;
 }
 
-AStreamProvider* CDataPose::getStreamProvider() {
-    if (streamProvider != nullptr) {
-        delete(streamProvider);
-    }
-    streamProvider = new CSFStreamProvider();
-    return streamProvider;
-}
-
-void CDataPose::cleanUpStreamProvider()
-{
-  if (streamProvider != nullptr) {
-      delete(streamProvider);
-      streamProvider = nullptr;
-  }
+std::unique_ptr<AStreamProvider> CDataPose::getStreamProvider() {
+    return std::unique_ptr<AStreamProvider>(new CSFStreamProvider);
 }
 
 void CDataPose::serialize(AStreamProvider *stream) {
