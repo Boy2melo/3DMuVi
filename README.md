@@ -2,20 +2,6 @@
 *3D Reconstruction Framework from Multi-View Images*
 <hr/>
 
-**Betreuung:**
-
-Bastian Erdnüß - <bastien.erdnuess@iosb.fraunhofer.de> <br>
-Boitumelo Ruf - <boitumelo.ruf@iosb.fraunhofer.de> <br>
-Fraunhofer Institut für Optronik, Systemtechnik und Bildauswertung (IOSB) - Abteilung Videoauswertesysteme (VID)
-<hr/>
-
-## \*\*\* NEWS \*\*\* ##
-
-- **04.11.2015: Das erste Treffen findet am Donnerstag (05.11.2015) um 9:00 Uhr am Fraunhofer IOSB (Fraunhoferstr. 1) statt. BITTE bringen Sie ihre Ausweise mit und melden Sie sich bei Ankunft an der Pforte. Sie werden dann Besucherausweise erhalten.**<br/><br/>
-- 03.11.2015: Zur Terminfindung für das erste Treffen bitte in Doodle eintragen: http://doodle.com/poll/xs6rtf234xue76g5 <br/>Termin wird dann hier bekannt gegeben.
-
-<hr/>
-
 ## Kurzbeschriebung ##
 In der bildbasierten 3D-Datenverarbeitung werden aus 2D-Bildmaterial (Foto/Video) 3D-Informationen gewonnen und verarbeitet. Hierzu soll eine intuitiv bedienbare GUI (C++/Qt5) mit Plugin System erstellt werden, die es erlaubt, die Zusammenarbeit verschiedener Algorithmen untereinander zu evaluieren.
 <hr/>
